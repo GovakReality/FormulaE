@@ -1,6 +1,6 @@
 <script setup>
   import { onMounted, onUnmounted, ref, computed, watch } from 'vue';
-  import { PerspectiveCamera, Scene, WebGLRenderer, Mesh, BoxGeometry, MeshBasicMaterial, Vector3, PlaneGeometry, DoubleSide, SphereGeometry, TextureLoader} from 'three';
+  import { PerspectiveCamera, Scene, WebGLRenderer, Mesh, BoxGeometry, MeshBasicMaterial, MeshStandardMaterial, Vector3, PlaneGeometry, DoubleSide, SphereGeometry, TextureLoader, DirectionalLight} from 'three';
   import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
   const webGl = ref();
@@ -14,10 +14,11 @@
   let renderer;
   let scene;
   let controls;
+  let light;
 
-  let car1Pos = new Vector3(0, 0, 0);
-  let car2Pos = new Vector3(5, 0, -5);
-  let car3Pos = new Vector3(0, 0, -10);
+  const car1Pos = new Vector3(0, 0, 0);
+  const car2Pos = new Vector3(5, 0, -5);
+  const car3Pos = new Vector3(0, 0, -10);
 
   const setCanvas = () => {
     // Create Scene
@@ -44,25 +45,35 @@
     // Create Cars
     const geometry = new BoxGeometry(1, 1, 2);
 
-    const material1 = new MeshBasicMaterial({color: 0xccaa22});
+    // Car 1
+    const material1 = new MeshStandardMaterial({color: 0xccaa22});
     const car1Obj = new Mesh(geometry, material1);
     car1Obj.position.copy(car1Pos);
     scene.add(car1Obj);
 
-    const material2 = new MeshBasicMaterial({color: 0xcc0000});
+    // Car 2
+    const material2 = new MeshStandardMaterial({color: 0xcc0000});
     const car2Obj = new Mesh(geometry, material2);
     car2Obj.position.copy(car2Pos);
     scene.add(car2Obj);
 
-    const material3 = new MeshBasicMaterial({color: 0x0CCCA2});
+    // Car 3
+    const material3 = new MeshStandardMaterial({color: 0x0CCCA2});
     const car3Obj = new Mesh(geometry, material3);
     car3Obj.position.copy(car3Pos);
     scene.add(car3Obj);
+
+    // Lights
+    light = new DirectionalLight(0xffffff, 5);
+    light.position.set(20, 20, 20);
+    //light.target = car1Obj;
+    scene.add(light);
 
     // Camera
     camera = new PerspectiveCamera(45, aspectRatio.value, 0.1, 100);
     camera.position.set(10,10,20);
     scene.add(camera);
+    camera.add(light);
     updateCamera();
 
     // Renderer

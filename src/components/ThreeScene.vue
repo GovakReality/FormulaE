@@ -24,8 +24,8 @@
     scene = new Scene();
 
     // Create 360 sphere
-    const bgGeometry = new SphereGeometry(5,60,40);
-    bgGeometry.scale(10, 10, 10);
+    const bgGeometry = new SphereGeometry(4,60,40);
+    bgGeometry.scale(12, 12, 12);
     const bgMaterial = new MeshBasicMaterial({
         map: new TextureLoader().load("/background.jpg"),
         side: DoubleSide
@@ -73,6 +73,12 @@
     // Controls
     controls = new OrbitControls(camera, canvas);
     controls.enableDamping = true;
+    // Controls limit
+    controls.minDistance = 3;
+    controls.maxDistance = 45;
+    controls.maxPolarAngle = (Math.PI/2) - 0.01;
+    controls.enablePan = false;
+
     controls.target.copy(car1Pos);
     controls.update();
   };

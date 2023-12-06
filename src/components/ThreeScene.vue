@@ -1,13 +1,13 @@
 <script setup>
-  import { onMounted, ref, computed, watch } from 'vue';
+  import { onMounted, onUnmounted, ref, computed, watch } from 'vue';
   import { PerspectiveCamera, Scene, WebGLRenderer, Mesh, BoxGeometry, MeshBasicMaterial, Vector3, PlaneGeometry, DoubleSide, SphereGeometry, TextureLoader} from 'three';
   import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
   const webGl = ref();
-  const width = window.innerWidth;
-  const height = window.innerHeight;
+  const windowWidth = ref(window.innerWidth);
+  const windowHeight = ref(window.innerHeight);
   const aspectRatio = computed(() => {
-    return width / height;
+    return windowWidth.value / windowHeight.value;
   });
 
   let camera;
@@ -63,12 +63,12 @@
     camera = new PerspectiveCamera(45, aspectRatio.value, 0.1, 100);
     camera.position.set(10,10,20);
     scene.add(camera);
+    updateCamera();
 
     // Renderer
     const canvas = webGl.value;
     renderer = new WebGLRenderer({ canvas, antialias: true });
-    renderer.setSize(width, height);
-    renderer.render(scene, camera);
+    updateRenderer();
 
     // Controls
     controls = new OrbitControls(camera, canvas);
@@ -89,16 +89,16 @@
   };
 
   const updateRenderer = () => {
-    renderer.setSize(width, height);
+    renderer.setSize(windowWidth.value, windowHeight.value);
     renderer.render(scene, camera);
   };
 
-/*   watch(aspectRatio, (val) => {
-    if (val) {
-      updateCamera();
-      updateRenderer();
-    }
-  }); */
+  const handleResize = () => {
+    windowWidth.value = window.innerWidth;
+    windowHeight.value = window.innerHeight;
+    updateCamera();
+    updateRenderer();
+  };
 
   const animate = () => {
     controls.update();
@@ -107,10 +107,14 @@
   };
 
   onMounted(() => {
+    window.addEventListener('resize', handleResize);
     setCanvas(); 
     animate();   
   });
 
+  onUnmounted(() => {
+    window.removeEventListener('resize', handleResize);
+  })
 
 </script>
 

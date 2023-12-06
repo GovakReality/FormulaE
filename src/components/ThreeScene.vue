@@ -1,6 +1,6 @@
 <script setup>
   import { onMounted, ref, computed, watch } from 'vue';
-  import { PerspectiveCamera, Scene, WebGLRenderer, Mesh, BoxGeometry, MeshBasicMaterial, Vector3, PlaneGeometry, DoubleSide} from 'three';
+  import { PerspectiveCamera, Scene, WebGLRenderer, Mesh, BoxGeometry, MeshBasicMaterial, Vector3, PlaneGeometry, DoubleSide, SphereGeometry, TextureLoader} from 'three';
   import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
   const webGl = ref();
@@ -22,6 +22,17 @@
   const setCanvas = () => {
     // Create Scene
     scene = new Scene();
+
+    // Create 360 sphere
+    const bgGeometry = new SphereGeometry(5,60,40);
+    bgGeometry.scale(10, 10, 10);
+    const bgMaterial = new MeshBasicMaterial({
+        map: new TextureLoader().load("/background.jpg"),
+        side: DoubleSide
+      });
+    const bgSphere = new Mesh(bgGeometry, bgMaterial);
+    scene.add(bgSphere);
+
 
     // Create floor
     const floorGeometry = new PlaneGeometry(50, 50);

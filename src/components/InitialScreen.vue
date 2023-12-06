@@ -1,0 +1,3 @@
+<template>
+  initial screen
+</template>

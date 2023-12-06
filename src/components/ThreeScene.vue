@@ -1,48 +1,108 @@
 <script setup>
-  import { onMounted, ref } from 'vue';
-  import {PerspectiveCamera, Scene, WebGLRenderer, Mesh, BoxGeometry, MeshBasicMaterial} from 'three';
+  import { onMounted, ref, computed, watch } from 'vue';
+  import { PerspectiveCamera, Scene, WebGLRenderer, Mesh, BoxGeometry, MeshBasicMaterial, Vector3, PlaneGeometry, DoubleSide} from 'three';
+  import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
   const webGl = ref();
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+  const aspectRatio = computed(() => {
+    return width / height;
+  });
+
+  let camera;
+  let renderer;
+  let scene;
+  let controls;
+
+  let car1Pos = new Vector3(0, 0, 0);
+  let car2Pos = new Vector3(5, 0, -5);
+  let car3Pos = new Vector3(0, 0, -10);
 
   const setCanvas = () => {
     // Create Scene
-    const scene = new Scene();
+    scene = new Scene();
 
-    // Create Object
-    const boxWidth = 1;
-    const boxHeight = 1;
-    const boxDepth = 1;
-    const geometry = new BoxGeometry(boxWidth, boxHeight, boxDepth);
-    const material = new MeshBasicMaterial({color: 0xccaa22});
-    const mesh = new Mesh(geometry, material);
-    scene.add(mesh);
+    // Create floor
+    const floorGeometry = new PlaneGeometry(50, 50);
+    const floorMaterial = new MeshBasicMaterial({color: 0xdddddd, side: DoubleSide});
+    const floor = new Mesh(floorGeometry, floorMaterial);
+    floor.rotateX( - Math.PI / 2);
+    scene.add(floor);
+
+    // Create Cars
+    const geometry = new BoxGeometry(1, 1, 2);
+
+    const material1 = new MeshBasicMaterial({color: 0xccaa22});
+    const car1Obj = new Mesh(geometry, material1);
+    car1Obj.position.copy(car1Pos);
+    scene.add(car1Obj);
+
+    const material2 = new MeshBasicMaterial({color: 0xcc0000});
+    const car2Obj = new Mesh(geometry, material2);
+    car2Obj.position.copy(car2Pos);
+    scene.add(car2Obj);
+
+    const material3 = new MeshBasicMaterial({color: 0x0CCCA2});
+    const car3Obj = new Mesh(geometry, material3);
+    car3Obj.position.copy(car3Pos);
+    scene.add(car3Obj);
 
     // Camera
-    const camera = new PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
-    camera.position.z = 30;
+    camera = new PerspectiveCamera(45, aspectRatio.value, 0.1, 100);
+    camera.position.set(10,10,20);
     scene.add(camera);
 
     // Renderer
     const canvas = webGl.value;
-    const renderer = new WebGLRenderer({ canvas, antialias: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer = new WebGLRenderer({ canvas, antialias: true });
+    renderer.setSize(width, height);
     renderer.render(scene, camera);
 
+    // Controls
+    controls = new OrbitControls(camera, canvas);
+    controls.enableDamping = true;
+    controls.target.copy(car1Pos);
+    controls.update();
+  };
+
+  const updateCamera = () => {
+    camera.aspect = aspectRatio.value;
+    camera.updateProjectionMatrix();
+  };
+
+  const updateRenderer = () => {
+    renderer.setSize(width, height);
+    renderer.render(scene, camera);
+  };
+
+/*   watch(aspectRatio, (val) => {
+    if (val) {
+      updateCamera();
+      updateRenderer();
+    }
+  }); */
+
+  const animate = () => {
+    controls.update();
+    renderer.render(scene, camera);
+    requestAnimationFrame(animate);
   };
 
   onMounted(() => {
-    setCanvas();    
+    setCanvas(); 
+    animate();   
   });
 
 
 </script>
 
 <template>
-  <canvas ref="webGl" />
+  <canvas ref="webGl" class="webGl" />
 </template>
 
 <style scoped>
-.read-the-docs {
-  color: #888;
+.webGl {
+  width: 100%;
 }
 </style>

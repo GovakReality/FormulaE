@@ -2,6 +2,7 @@
   import { onMounted, onUnmounted, ref, computed, watch } from 'vue';
   import { PerspectiveCamera, Scene, WebGLRenderer, Mesh, BoxGeometry, MeshBasicMaterial, MeshStandardMaterial, Vector3, PlaneGeometry, DoubleSide, SphereGeometry, TextureLoader, DirectionalLight} from 'three';
   import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+  import { gsap } from 'gsap';
 
   const webGl = ref();
   const windowWidth = ref(window.innerWidth);
@@ -19,6 +20,21 @@
   const car1Pos = new Vector3(0, 0, 0);
   const car2Pos = new Vector3(5, 0, -5);
   const car3Pos = new Vector3(0, 0, -10);
+
+  const initialPos = new Vector3(6,8,15); // on intial screen
+  const initialTarget = new Vector3(2.5, 0, -5); // on intial screen
+
+  // car 1
+  const car1Pos1 = new Vector3(-5, 5, 5);
+  const car1Target1 = car1Pos;
+
+  // car 2 
+  const car2Pos1 = new Vector3(10, 5, 0);
+  const car2Target1 = car2Pos;
+
+  // car 3
+  const car3Pos1 = new Vector3(-5, 5, -5);
+  const car3Target1 = car3Pos;
 
   const setCanvas = () => {
     // Create Scene
@@ -71,7 +87,7 @@
 
     // Camera
     camera = new PerspectiveCamera(45, aspectRatio.value, 0.1, 100);
-    camera.position.set(10,10,20);
+    camera.position.copy(initialPos);
     scene.add(camera);
     camera.add(light);
     updateCamera();
@@ -90,7 +106,7 @@
     controls.maxPolarAngle = (Math.PI/2) - 0.01;
     controls.enablePan = false;
 
-    controls.target.copy(car1Pos);
+    controls.target.copy(initialTarget);
     controls.update();
   };
 
@@ -102,6 +118,35 @@
   const updateRenderer = () => {
     renderer.setSize(windowWidth.value, windowHeight.value);
     renderer.render(scene, camera);
+  };
+
+  const cameraMovement = (toPos, toTarget) => {
+    gsap.to(camera.position, {
+      x: toPos.x,
+      y: toPos.y,
+      z: toPos.z,
+      duration: 1,
+      ease: "power1.inOut",
+      onUpdate: function () {
+        //camera.lookAt(car2Pos);
+        },
+      onComplete: function () {
+        //controls.target.copy(car2Pos);
+        }      
+    });
+    gsap.to(controls.target, {
+    x: toTarget.x,
+    y: toTarget.y,
+    z: toTarget.z,
+    duration: 1,
+    ease: "power1.inOut",
+    onUpdate: function () {
+      //camera.lookAt(car2Pos);
+      },
+    onComplete: function () {
+      //controls.target.copy(car2Pos);
+      }      
+    })  
   };
 
   const handleResize = () => {
@@ -117,6 +162,26 @@
     requestAnimationFrame(animate);
   };
 
+  let c = 0;
+  const onClick = (event) => {
+    c++;
+    switch (c) {
+      case 1:
+        cameraMovement(car1Pos1, car1Target1);
+        break;
+      case 2:
+        cameraMovement(car2Pos1, car2Target1);
+        break;
+      case 3:
+        cameraMovement(car3Pos1, car3Target1);
+        c = 0;
+        break;        
+      default:
+        console.log('no way');
+    }
+    
+  };
+
   onMounted(() => {
     window.addEventListener('resize', handleResize);
     setCanvas(); 
@@ -130,11 +195,23 @@
 </script>
 
 <template>
+  <button  class="btn-test" @click="onClick"> Start Animation </button>
   <canvas ref="webGl" class="webGl" />
 </template>
 
 <style scoped>
 .webGl {
   width: 100%;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;  
+  z-index: 0;
 }
+.btn-test {
+  position: relative;
+  z-index: 20;
+}
+
 </style>

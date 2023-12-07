@@ -4,11 +4,6 @@ import InitialScreen from './components/InitialScreen.vue';
 </script>
 
 <template>
-  <InitialScreen />
-  <InitialScreen />
-  <InitialScreen />
-  <InitialScreen />
-  <InitialScreen />
   <ThreeScene />
 </template>
 

@@ -8,10 +8,6 @@
 
   const positionStore = usePositionStore();
   const { positionIndex } = storeToRefs(positionStore);
-  watch(positionIndex, () => {
-    console.log('ee')
-    console.log(positionIndex.value)
-  })
 
   const webGl = ref();
   const windowWidth = ref(window.innerWidth);
@@ -26,6 +22,7 @@
   let controls;
   let light;
 
+  // set positions
   const car1Pos = new Vector3(0, 0, 0);
   const car2Pos = new Vector3(5, 0, -5);
   const car3Pos = new Vector3(0, 0, -10);
@@ -33,7 +30,7 @@
   const initialPos = new Vector3(6,8,15); // on intial screen
   const initialTarget = new Vector3(2.5, 0, -5); // on intial screen
 
-  // car 1
+  // car 1 points
   const car1Pos1 = new Vector3(-5, 5, 5);
   const car1Target1 = car1Pos;
   const car1Pos2 = new Vector3(5, 5, 5);
@@ -41,7 +38,7 @@
   const car1Pos3 = new Vector3(-5, 5, 5);
   const car1Target3 = car1Pos;
 
-  // car 2 
+  // car 2 points
   const car2Pos1 = new Vector3(10, 5, 0);
   const car2Target1 = car2Pos;
   const car2Pos2 = new Vector3(0, 5, 0);
@@ -49,7 +46,7 @@
   const car2Pos3 = new Vector3(10, 5, 0);
   const car2Target3 = car2Pos;
 
-  // car 3
+  // car 3 points
   const car3Pos1 = new Vector3(-5, 5, -5);
   const car3Target1 = car3Pos;
   const car3Pos2 = new Vector3(5, 5, -5);
@@ -183,25 +180,43 @@
     requestAnimationFrame(animate);
   };
 
-/*   let c = 0;
-  const onClick = (event) => {
-    c++;
-    switch (c) {
+  watch(positionIndex, () => {
+    switch (positionIndex.value) {
+      case 0:
+        break;      
       case 1:
         cameraMovement(car1Pos1, car1Target1);
         break;
       case 2:
-        cameraMovement(car2Pos1, car2Target1);
+        cameraMovement(car1Pos2, car1Target2);
         break;
       case 3:
+        cameraMovement(car1Pos3, car1Target3);
+        break;                
+      case 4:
+        cameraMovement(car2Pos1, car2Target1);
+        break;
+      case 5:
+        cameraMovement(car2Pos2, car2Target2);
+        break;
+      case 6:
+        cameraMovement(car2Pos3, car2Target3);
+        break;                
+      case 7:
         cameraMovement(car3Pos1, car3Target1);
-        c = 0;
-        break;        
+        break;   
+      case 8:
+        cameraMovement(car3Pos2, car3Target2);
+        break;  
+      case 9:
+        cameraMovement(car3Pos3, car3Target3);
+        break;                       
       default:
+        cameraMovement(initialPos, initialTarget);
+        positionStore.reset();
         console.log('no way');
     }
-    
-  }; */
+  })
 
   onMounted(() => {
     window.addEventListener('resize', handleResize);

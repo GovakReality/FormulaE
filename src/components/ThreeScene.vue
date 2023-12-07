@@ -2,6 +2,7 @@
   import { onMounted, onUnmounted, ref, computed, watch } from 'vue';
   import { PerspectiveCamera, Scene, WebGLRenderer, Mesh, BoxGeometry, MeshBasicMaterial, MeshStandardMaterial, Vector3, PlaneGeometry, DoubleSide, SphereGeometry, TextureLoader, DirectionalLight} from 'three';
   import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+  import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
   import { gsap } from 'gsap';
   import { usePositionStore } from '/src/stores/PositionStore';
   import { storeToRefs } from 'pinia';
@@ -62,7 +63,7 @@
     const bgGeometry = new SphereGeometry(4,60,40);
     bgGeometry.scale(12, 12, 12);
     const bgMaterial = new MeshBasicMaterial({
-        map: new TextureLoader().load("/background.jpg"),
+        map: new TextureLoader().load('/textures/background.jpg'),
         side: DoubleSide
       });
     const bgSphere = new Mesh(bgGeometry, bgMaterial);
@@ -77,6 +78,37 @@
     scene.add(floor);
 
     // Create Cars
+    const modelLoader = new GLTFLoader();
+
+    // Car 1
+    modelLoader.load( '/models/box.glb', function ( gltf ) {
+      const car1Obj = gltf.scene;
+      car1Obj.position.copy(car1Pos);
+      scene.add(car1Obj);
+    }, undefined, function ( error ) {
+      console.error( 'car1 modelLoader error' + error );
+    });
+
+    // Car 2
+     modelLoader.load( '/models/box.glb', function ( gltf ) {
+      const car2Obj = gltf.scene;
+      car2Obj.position.copy(car2Pos);
+      scene.add(car2Obj);
+    }, undefined, function ( error ) {
+      console.error( 'car2 modelLoader error' + error );
+    });
+
+    // Car 3
+    modelLoader.load( '/models/box.glb', function ( gltf ) {
+      const car3Obj = gltf.scene;
+      car3Obj.position.copy(car3Pos);
+      scene.add(car3Obj);
+    }, undefined, function ( error ) {
+      console.error( 'car3 modelLoader error' + error );
+    });
+
+/*  // cars with box geometry
+
     const geometry = new BoxGeometry(1, 1, 2);
 
     // Car 1
@@ -95,7 +127,7 @@
     const material3 = new MeshStandardMaterial({color: 0x0CCCA2});
     const car3Obj = new Mesh(geometry, material3);
     car3Obj.position.copy(car3Pos);
-    scene.add(car3Obj);
+    scene.add(car3Obj); */
 
     // Lights
     light = new DirectionalLight(0xffffff, 5);
@@ -144,7 +176,7 @@
       y: toPos.y,
       z: toPos.z,
       duration: 1,
-      ease: "power1.inOut",
+      ease: 'power1.inOut',
       onUpdate: function () {
         //camera.lookAt(car2Pos);
         },
@@ -157,7 +189,7 @@
     y: toTarget.y,
     z: toTarget.z,
     duration: 1,
-    ease: "power1.inOut",
+    ease: 'power1.inOut',
     onUpdate: function () {
       //camera.lookAt(car2Pos);
       },

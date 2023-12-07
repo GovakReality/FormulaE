@@ -3,6 +3,15 @@
   import { PerspectiveCamera, Scene, WebGLRenderer, Mesh, BoxGeometry, MeshBasicMaterial, MeshStandardMaterial, Vector3, PlaneGeometry, DoubleSide, SphereGeometry, TextureLoader, DirectionalLight} from 'three';
   import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
   import { gsap } from 'gsap';
+  import { usePositionStore } from '/src/stores/PositionStore';
+  import { storeToRefs } from 'pinia';
+
+  const positionStore = usePositionStore();
+  const { positionIndex } = storeToRefs(positionStore);
+  watch(positionIndex, () => {
+    console.log('ee')
+    console.log(positionIndex.value)
+  })
 
   const webGl = ref();
   const windowWidth = ref(window.innerWidth);
@@ -27,14 +36,26 @@
   // car 1
   const car1Pos1 = new Vector3(-5, 5, 5);
   const car1Target1 = car1Pos;
+  const car1Pos2 = new Vector3(5, 5, 5);
+  const car1Target2 = car1Pos;
+  const car1Pos3 = new Vector3(-5, 5, 5);
+  const car1Target3 = car1Pos;
 
   // car 2 
   const car2Pos1 = new Vector3(10, 5, 0);
   const car2Target1 = car2Pos;
+  const car2Pos2 = new Vector3(0, 5, 0);
+  const car2Target2 = car2Pos;
+  const car2Pos3 = new Vector3(10, 5, 0);
+  const car2Target3 = car2Pos;
 
   // car 3
   const car3Pos1 = new Vector3(-5, 5, -5);
   const car3Target1 = car3Pos;
+  const car3Pos2 = new Vector3(5, 5, -5);
+  const car3Target2 = car3Pos;
+  const car3Pos3 = new Vector3(-5, 5, -5);
+  const car3Target3 = car3Pos;    
 
   const setCanvas = () => {
     // Create Scene
@@ -162,7 +183,7 @@
     requestAnimationFrame(animate);
   };
 
-  let c = 0;
+/*   let c = 0;
   const onClick = (event) => {
     c++;
     switch (c) {
@@ -180,7 +201,7 @@
         console.log('no way');
     }
     
-  };
+  }; */
 
   onMounted(() => {
     window.addEventListener('resize', handleResize);
@@ -195,7 +216,6 @@
 </script>
 
 <template>
-  <button  class="btn-test" @click="onClick"> Start Animation </button>
   <canvas ref="webGl" class="webGl" />
 </template>
 
@@ -208,10 +228,6 @@
 	right: 0;
 	left: 0;  
   z-index: 0;
-}
-.btn-test {
-  position: relative;
-  z-index: 20;
 }
 
 </style>

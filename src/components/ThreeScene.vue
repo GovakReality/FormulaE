@@ -179,25 +179,21 @@
       duration: 1,
       ease: 'power1.inOut',
       onUpdate: function () {
-        //camera.lookAt(car2Pos);
         },
       onComplete: function () {
-        //controls.target.copy(car2Pos);
         controls.enabled = true;
         }      
     });
     gsap.to(controls.target, {
-    x: toTarget.x,
-    y: toTarget.y,
-    z: toTarget.z,
-    duration: 1,
-    ease: 'power1.inOut',
-    onUpdate: function () {
-      //camera.lookAt(car2Pos);
-      },
-    onComplete: function () {
-      //controls.target.copy(car2Pos);
-      }      
+      x: toTarget.x,
+      y: toTarget.y,
+      z: toTarget.z,
+      duration: 1,
+      ease: 'power1.inOut',
+      onUpdate: function () {
+        },
+      onComplete: function () {
+        }      
     })  
   };
 

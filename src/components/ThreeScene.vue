@@ -69,7 +69,6 @@
     const bgSphere = new Mesh(bgGeometry, bgMaterial);
     scene.add(bgSphere);
 
-
     // Create floor
     const floorGeometry = new PlaneGeometry(50, 50);
     const floorMaterial = new MeshBasicMaterial({color: 0xdddddd, side: DoubleSide});
@@ -152,8 +151,9 @@
     controls.enableDamping = true;
     // Controls limit
     controls.minDistance = 3;
-    controls.maxDistance = 45;
+    controls.maxDistance = 40;
     controls.maxPolarAngle = (Math.PI/2) - 0.01;
+    //controls.maxAzimuthAngle = (Math.PI/2); // radians
     controls.enablePan = false;
 
     controls.target.copy(initialTarget);

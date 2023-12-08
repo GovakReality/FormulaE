@@ -6,16 +6,16 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { EXRLoader } from 'three/addons/loaders/EXRLoader.js';
 import { gsap } from 'gsap';
 import { usePositionStore } from '/src/stores/PositionStore';
-  import { useLoadingStore } from '../stores/LoadingStore';
+import { useLoadingStore } from '../stores/LoadingStore';
 import { storeToRefs } from 'pinia';
 
-  // get stores
+// get stores
 const positionStore = usePositionStore();
 const { positionIndex } = storeToRefs(positionStore);
-  const loadingStore = useLoadingStore();
-  const { loadStart, loadComplete, loadError, loadProgress } = storeToRefs(loadingStore);
+const loadingStore = useLoadingStore();
+const { loadStart, loadComplete, loadError, loadProgress } = storeToRefs(loadingStore);
 
-  // global variables
+// global variables
 const webGl = ref();
 const windowWidth = ref(window.innerWidth);
 const windowHeight = ref(window.innerHeight);
@@ -27,19 +27,19 @@ let camera;
 let renderer;
 let scene;
 let controls;
-let light;
 
 // create loaders
-const modelLoader = new GLTFLoader(); // cars
-const envLoader = new EXRLoader(); // environment map (.EXR)
+const manager = new LoadingManager();
+const modelLoader = new GLTFLoader(manager); // cars
+const envLoader = new EXRLoader(manager); // environment map (.EXR)
 
 // set positions
 const car1Pos = new Vector3(0, 0, 0);
 const car2Pos = new Vector3(5, 0, -5);
 const car3Pos = new Vector3(0, 0, -10);
 
-  const initialPos = new Vector3(8,8,15); // on intial screen
-  const initialTarget = new Vector3(0, 0, 0); // on intial screen
+const initialPos = new Vector3(8,8,15); // on intial screen
+const initialTarget = new Vector3(0, 0, 0); // on intial screen
 
 // car 1 points
 const car1Pos1 = new Vector3(-5, 5, 5);
@@ -65,9 +65,7 @@ const car3Target2 = car3Pos;
 const car3Pos3 = new Vector3(-5, 5, -5);
 const car3Target3 = car3Pos;
 
-  // Loader
-  const manager = new LoadingManager();
-
+  // Loader manager functions
   manager.onStart = function (item, loaded, total) {
     // console.log('Loading started');
     loadStart.value = true;
@@ -170,21 +168,21 @@ const setCanvas = () => {
 
   // Lights
   // Ambient Light
-    const ambLight = new AmbientLight(0x404040 , 8); // soft white light
-    scene.add(ambLight);
+  const ambLight = new AmbientLight(0x404040 , 8); // soft white light
+  scene.add(ambLight);
 
-    // Directional Light
-    const light1 = new DirectionalLight(0xffffff, 5);
+  // Directional Light
+  const light1 = new DirectionalLight(0xffffff, 5);
   light1.position.set(20, 20, 20);
   //light1.target = car1Obj;
   //scene.add(light1);
 
-    // Camera
-    camera = new PerspectiveCamera(45, aspectRatio.value, 0.1, 100);
-    camera.position.copy(initialPos);
-    scene.add(camera);
-    camera.add(light1);
-    updateCamera();
+  // Camera
+  camera = new PerspectiveCamera(45, aspectRatio.value, 0.1, 100);
+  camera.position.copy(initialPos);
+  scene.add(camera);
+  camera.add(light1);
+  updateCamera();
 
   // Renderer
   const canvas = webGl.value;
@@ -215,32 +213,32 @@ const updateRenderer = () => {
   renderer.render(scene, camera);
 };
 
-  const cameraMovement = (toPos, toTarget) => {
-    controls.enabled = false;
-    gsap.to(camera.position, {
-      x: toPos.x,
-      y: toPos.y,
-      z: toPos.z,
-      duration: 1,
-      ease: 'power1.inOut',
-      onUpdate: function () {
-        },
-      onComplete: function () {
-        controls.enabled = true;
-        }      
-    });
-    gsap.to(controls.target, {
-      x: toTarget.x,
-      y: toTarget.y,
-      z: toTarget.z,
-      duration: 1,
-      ease: 'power1.inOut',
-      onUpdate: function () {
-        },
-      onComplete: function () {
-        }      
-    })  
-  };
+const cameraMovement = (toPos, toTarget) => {
+  controls.enabled = false;
+  gsap.to(camera.position, {
+    x: toPos.x,
+    y: toPos.y,
+    z: toPos.z,
+    duration: 1,
+    ease: 'power1.inOut',
+    onUpdate: function () {
+      },
+    onComplete: function () {
+      controls.enabled = true;
+      }      
+  });
+  gsap.to(controls.target, {
+    x: toTarget.x,
+    y: toTarget.y,
+    z: toTarget.z,
+    duration: 1,
+    ease: 'power1.inOut',
+    onUpdate: function () {
+      },
+    onComplete: function () {
+      }      
+  })  
+};
 
 const handleResize = () => {
   windowWidth.value = window.innerWidth;
@@ -255,43 +253,43 @@ const animate = () => {
   requestAnimationFrame(animate);
 };
 
-  watch(positionIndex, () => {
-    switch (positionIndex.value) {
-      case 0:
-        cameraMovement(initialPos, initialTarget);
-        break;      
-      case 1:
-        cameraMovement(car1Pos1, car1Target1);
-        break;
-      case 2:
-        cameraMovement(car1Pos2, car1Target2);
-        break;
-      case 3:
-        cameraMovement(car1Pos3, car1Target3);
-        break;                
-      case 4:
-        cameraMovement(car2Pos1, car2Target1);
-        break;
-      case 5:
-        cameraMovement(car2Pos2, car2Target2);
-        break;
-      case 6:
-        cameraMovement(car2Pos3, car2Target3);
-        break;                
-      case 7:
-        cameraMovement(car3Pos1, car3Target1);
-        break;   
-      case 8:
-        cameraMovement(car3Pos2, car3Target2);
-        break;  
-      case 9:
-        cameraMovement(car3Pos3, car3Target3);
-        break;                       
-      default:
-        positionStore.reset();
-        console.log('no way');
-    }
-  });
+watch(positionIndex, () => {
+  switch (positionIndex.value) {
+    case 0:
+      cameraMovement(initialPos, initialTarget);
+      break;      
+    case 1:
+      cameraMovement(car1Pos1, car1Target1);
+      break;
+    case 2:
+      cameraMovement(car1Pos2, car1Target2);
+      break;
+    case 3:
+      cameraMovement(car1Pos3, car1Target3);
+      break;                
+    case 4:
+      cameraMovement(car2Pos1, car2Target1);
+      break;
+    case 5:
+      cameraMovement(car2Pos2, car2Target2);
+      break;
+    case 6:
+      cameraMovement(car2Pos3, car2Target3);
+      break;                
+    case 7:
+      cameraMovement(car3Pos1, car3Target1);
+      break;   
+    case 8:
+      cameraMovement(car3Pos2, car3Target2);
+      break;  
+    case 9:
+      cameraMovement(car3Pos3, car3Target3);
+      break;                       
+    default:
+      positionStore.reset();
+      console.log('no way');
+  }
+});
 
 onMounted(() => {
   window.addEventListener('resize', handleResize);

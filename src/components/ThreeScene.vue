@@ -171,6 +171,7 @@
   };
 
   const cameraMovement = (toPos, toTarget) => {
+    controls.enabled = false;
     gsap.to(camera.position, {
       x: toPos.x,
       y: toPos.y,
@@ -182,6 +183,7 @@
         },
       onComplete: function () {
         //controls.target.copy(car2Pos);
+        controls.enabled = true;
         }      
     });
     gsap.to(controls.target, {
@@ -215,6 +217,7 @@
   watch(positionIndex, () => {
     switch (positionIndex.value) {
       case 0:
+        cameraMovement(initialPos, initialTarget);
         break;      
       case 1:
         cameraMovement(car1Pos1, car1Target1);
@@ -244,7 +247,6 @@
         cameraMovement(car3Pos3, car3Target3);
         break;                       
       default:
-        cameraMovement(initialPos, initialTarget);
         positionStore.reset();
         console.log('no way');
     }

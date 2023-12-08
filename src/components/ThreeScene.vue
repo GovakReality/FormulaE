@@ -1,15 +1,20 @@
 <script setup>
   import { onMounted, onUnmounted, ref, computed, watch } from 'vue';
-  import { PerspectiveCamera, Scene, WebGLRenderer, Mesh, BoxGeometry, MeshBasicMaterial, MeshStandardMaterial, Vector3, PlaneGeometry, DoubleSide, SphereGeometry, TextureLoader, DirectionalLight} from 'three';
+  import { PerspectiveCamera, Scene, WebGLRenderer, Mesh, BoxGeometry, MeshBasicMaterial, MeshStandardMaterial, Vector3, PlaneGeometry, DoubleSide, SphereGeometry, TextureLoader, DirectionalLight, LoadingManager} from 'three';
   import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
   import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
   import { gsap } from 'gsap';
   import { usePositionStore } from '/src/stores/PositionStore';
+  import { useLoadingStore } from '../stores/LoadingStore';
   import { storeToRefs } from 'pinia';
 
+  // get stores
   const positionStore = usePositionStore();
   const { positionIndex } = storeToRefs(positionStore);
+  const loadingStore = useLoadingStore();
+  const { loadStart, loadComplete, loadError, loadProgress } = storeToRefs(loadingStore);
 
+  // global variables
   const webGl = ref();
   const windowWidth = ref(window.innerWidth);
   const windowHeight = ref(window.innerHeight);
@@ -28,8 +33,8 @@
   const car2Pos = new Vector3(5, 0, -5);
   const car3Pos = new Vector3(0, 0, -10);
 
-  const initialPos = new Vector3(6,8,15); // on intial screen
-  const initialTarget = new Vector3(2.5, 0, -5); // on intial screen
+  const initialPos = new Vector3(8,8,15); // on intial screen
+  const initialTarget = new Vector3(0, 0, 0); // on intial screen
 
   // car 1 points
   const car1Pos1 = new Vector3(-5, 5, 5);
@@ -55,6 +60,31 @@
   const car3Pos3 = new Vector3(-5, 5, -5);
   const car3Target3 = car3Pos;    
 
+  // Loader
+  const manager = new LoadingManager();
+
+  manager.onStart = function (item, loaded, total) {
+    // console.log('Loading started');
+    loadStart.value = true;
+  };
+
+  manager.onLoad = function () {
+    // console.log('Loading complete');   
+    loadComplete.value = true;    
+  };
+
+  manager.onProgress = function (item, loaded, total) {            
+    // console.log(item, loaded, total);
+    // console.log('Loaded:', Math.round(loaded / total * 100, 2) + '%')
+    loadProgress.value = Math.round(loaded / total * 100, 2);
+  };
+
+  manager.onError = function (url) {
+    // console.log('Error loading');
+    loadError.value = true;
+  };
+
+  // Start scene
   const setCanvas = () => {
     // Create Scene
     scene = new Scene();
@@ -63,7 +93,7 @@
     const bgGeometry = new SphereGeometry(4,60,40);
     bgGeometry.scale(12, 12, 12);
     const bgMaterial = new MeshBasicMaterial({
-        map: new TextureLoader().load('/textures/background.jpg'),
+        map: new TextureLoader(manager).load('/textures/background.jpg'),
         side: DoubleSide
       });
     const bgSphere = new Mesh(bgGeometry, bgMaterial);
@@ -77,7 +107,7 @@
     scene.add(floor);
 
     // Create Cars
-    const modelLoader = new GLTFLoader();
+    const modelLoader = new GLTFLoader(manager);
 
     // Car 1
     modelLoader.load( '/models/box.glb', function ( gltf ) {
@@ -246,7 +276,7 @@
         positionStore.reset();
         console.log('no way');
     }
-  })
+  });
 
   onMounted(() => {
     window.addEventListener('resize', handleResize);

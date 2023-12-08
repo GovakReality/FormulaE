@@ -38,7 +38,7 @@ const car1Pos = new Vector3(0, 0, 0);
 const car2Pos = new Vector3(5, 0, -5);
 const car3Pos = new Vector3(0, 0, -10);
 
-const initialPos = new Vector3(8,8,15); // on intial screen
+const initialPos = new Vector3(8, 8, 15); // on intial screen
 const initialTarget = new Vector3(0, 0, 0); // on intial screen
 
 // car 1 points
@@ -65,29 +65,29 @@ const car3Target2 = car3Pos;
 const car3Pos3 = new Vector3(-5, 5, -5);
 const car3Target3 = car3Pos;
 
-  // Loader manager functions
-  manager.onStart = function (item, loaded, total) {
-    // console.log('Loading started');
-    loadStart.value = true;
-  };
+// Loader manager functions
+manager.onStart = function (item, loaded, total) {
+  // console.log('Loading started');
+  loadStart.value = true;
+};
 
-  manager.onLoad = function () {
-    // console.log('Loading complete');   
-    loadComplete.value = true;    
-  };
+manager.onLoad = function () {
+  // console.log('Loading complete');   
+  loadComplete.value = true;
+};
 
-  manager.onProgress = function (item, loaded, total) {            
-    // console.log(item, loaded, total);
-    // console.log('Loaded:', Math.round(loaded / total * 100, 2) + '%')
-    loadProgress.value = Math.round(loaded / total * 100, 2);
-  };
+manager.onProgress = function (item, loaded, total) {
+  // console.log(item, loaded, total);
+  // console.log('Loaded:', Math.round(loaded / total * 100, 2) + '%')
+  loadProgress.value = Math.round(loaded / total * 100, 2);
+};
 
-  manager.onError = function (url) {
-    // console.log('Error loading');
-    loadError.value = true;
-  };
+manager.onError = function (url) {
+  // console.log('Error loading');
+  loadError.value = true;
+};
 
-  // Start scene
+// Start scene
 const setCanvas = () => {
   // Create Scene
   scene = new Scene();
@@ -118,7 +118,7 @@ const setCanvas = () => {
   scene.add(floor);
 
   // Car 1
-  modelLoader.load('/models/box.glb', function (gltf) {
+  modelLoader.load('/models/Gen3-uncompressed.glb', function (gltf) {
     const car1Obj = gltf.scene;
     car1Obj.position.copy(car1Pos);
     scene.add(car1Obj);
@@ -168,7 +168,7 @@ const setCanvas = () => {
 
   // Lights
   // Ambient Light
-  const ambLight = new AmbientLight(0x404040 , 8); // soft white light
+  const ambLight = new AmbientLight(0x404040, 8); // soft white light
   scene.add(ambLight);
 
   // Directional Light
@@ -222,10 +222,10 @@ const cameraMovement = (toPos, toTarget) => {
     duration: 1,
     ease: 'power1.inOut',
     onUpdate: function () {
-      },
+    },
     onComplete: function () {
       controls.enabled = true;
-      }      
+    }
   });
   gsap.to(controls.target, {
     x: toTarget.x,
@@ -234,10 +234,10 @@ const cameraMovement = (toPos, toTarget) => {
     duration: 1,
     ease: 'power1.inOut',
     onUpdate: function () {
-      },
+    },
     onComplete: function () {
-      }      
-  })  
+    }
+  })
 };
 
 const handleResize = () => {
@@ -257,7 +257,7 @@ watch(positionIndex, () => {
   switch (positionIndex.value) {
     case 0:
       cameraMovement(initialPos, initialTarget);
-      break;      
+      break;
     case 1:
       cameraMovement(car1Pos1, car1Target1);
       break;
@@ -266,7 +266,7 @@ watch(positionIndex, () => {
       break;
     case 3:
       cameraMovement(car1Pos3, car1Target3);
-      break;                
+      break;
     case 4:
       cameraMovement(car2Pos1, car2Target1);
       break;
@@ -275,16 +275,16 @@ watch(positionIndex, () => {
       break;
     case 6:
       cameraMovement(car2Pos3, car2Target3);
-      break;                
+      break;
     case 7:
       cameraMovement(car3Pos1, car3Target1);
-      break;   
+      break;
     case 8:
       cameraMovement(car3Pos2, car3Target2);
-      break;  
+      break;
     case 9:
       cameraMovement(car3Pos3, car3Target3);
-      break;                       
+      break;
     default:
       positionStore.reset();
       console.log('no way');

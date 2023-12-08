@@ -1,6 +1,6 @@
 <script setup>
   import { onMounted, onUnmounted, ref, computed, watch } from 'vue';
-  import { PerspectiveCamera, Scene, WebGLRenderer, Mesh, BoxGeometry, MeshBasicMaterial, MeshStandardMaterial, Vector3, PlaneGeometry, DoubleSide, SphereGeometry, TextureLoader, DirectionalLight, LoadingManager} from 'three';
+  import { PerspectiveCamera, Scene, WebGLRenderer, Mesh, BoxGeometry, MeshBasicMaterial, MeshStandardMaterial, Vector3, PlaneGeometry, DoubleSide, SphereGeometry, TextureLoader, DirectionalLight, LoadingManager, AmbientLight} from 'three';
   import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
   import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
   import { gsap } from 'gsap';
@@ -26,7 +26,6 @@
   let renderer;
   let scene;
   let controls;
-  let light;
 
   // set positions
   const car1Pos = new Vector3(0, 0, 0);
@@ -159,16 +158,21 @@
     scene.add(car3Obj); */
 
     // Lights
-    light = new DirectionalLight(0xffffff, 5);
-    light.position.set(20, 20, 20);
-    //light.target = car1Obj;
-    scene.add(light);
+    // Ambient Light
+    const ambLight = new AmbientLight(0x404040 , 8); // soft white light
+    scene.add(ambLight);
+
+    // Directional Light
+    const light1 = new DirectionalLight(0xffffff, 5);
+    light1.position.set(20, 20, 20);
+    //light1.target = car1Obj;
+    //scene.add(light1);
 
     // Camera
     camera = new PerspectiveCamera(45, aspectRatio.value, 0.1, 100);
     camera.position.copy(initialPos);
     scene.add(camera);
-    camera.add(light);
+    camera.add(light1);
     updateCamera();
 
     // Renderer

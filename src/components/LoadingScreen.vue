@@ -5,42 +5,38 @@
 
   const loadingStore = useLoadingStore();
   const { loadStart, loadComplete, loadError, loadProgress } = storeToRefs(loadingStore);
-  const isShow = ref(true);
+  const loading = ref(true);
 
   watch(loadComplete, (val) => {
     if (loadComplete.value) {
-      //setTimeout(() => isShow.value = false, 2500);
-      isShow.value = false;
+      setTimeout(() => isShow.value = false, 2500);
+      loading.value = false;
     }
   });
 
 </script>
 
 <template>
-  <div v-show="isShow" class="container">
-    <div class="wrapper">
-        <div class="loader" id="loader">
-            loading...
-        </div>
-    </div>
-  </div>   
+  <div class="text-center">
+    <v-overlay
+      :model-value="loading"
+      persistent
+      fullscreen
+      full-width
+      content-class="loading-dialog"
+      class="align-center justify-center"
+    >
+      <v-container fill-height>
+        <v-layout row justify-center align-center>
+          <v-progress-circular indeterminate size="70" width="7" color="primary"></v-progress-circular>
+        </v-layout>
+      </v-container>    
+    </v-overlay>
+  </div>
 </template>
 
 <style scoped>
-.container {
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	right: 0;
-	left: 0;
-  overflow: hidden;
-  z-index: 100;
-  background-color: aliceblue;  
-}
-.wrapper { 
-	display: flex; 
-	justify-content: center;
-	align-items: center;
-	height: 100%;
-} 
+  .loading-dialog {
+    background-color: #303030; 
+  }
 </style>

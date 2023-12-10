@@ -6,9 +6,15 @@ import LoadingScreen from './components/LoadingScreen.vue';
 </script>
 
 <template>
-  <PositionButton />
-  <ThreeScene />
-  <LoadingScreen />
+  <v-app>
+    <v-app-bar flat color="transparent"></v-app-bar>
+    <v-main>
+      <PositionButton />
+      <ThreeScene />
+      <LoadingScreen />
+    </v-main>
+  </v-app>
+
 </template>
 
 <style scoped>

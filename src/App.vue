@@ -1,6 +1,7 @@
 <script setup>
 import ThreeScene from './components/ThreeScene.vue'
 import TopBar from './components/TopBar/TopBar.vue';
+import QuizCards from './components/QuizCards/QuizCards.vue';
 import PositionButton from './components/PositionButton.vue';
 import LoadingScreen from './components/LoadingScreen.vue';
 </script>
@@ -11,6 +12,7 @@ import LoadingScreen from './components/LoadingScreen.vue';
     <v-main class="overflow-hidden">
       <PositionButton />
       <ThreeScene />
+      <QuizCards />
       <LoadingScreen />
     </v-main>
   </v-app>

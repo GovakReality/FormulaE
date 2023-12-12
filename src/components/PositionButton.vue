@@ -11,13 +11,14 @@
 </script>
 
 <template>
-  <button  class="btn-test" @click="onClick"> Animate Camera</button>
+  <v-btn class="btn-test" @click="onClick"> Animate Camera</v-btn>
 </template>
 
 <style scoped>
 .btn-test {
-  position: relative;
+  position: absolute;
   z-index: 20;
+  margin: 20px;
 }
 
 </style>

@@ -4,7 +4,6 @@
 
 <template>
   <WelcomeCard />
-  <WelcomeCard />
 </template>
 
 <style scoped>

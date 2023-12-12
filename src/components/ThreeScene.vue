@@ -3,6 +3,7 @@ import { onMounted, onUnmounted, ref, computed, watch } from 'vue';
 import { PerspectiveCamera, Scene, WebGLRenderer, Mesh, BoxGeometry, MeshBasicMaterial, MeshStandardMaterial, Vector3, PlaneGeometry, DoubleSide, SphereGeometry, TextureLoader, DirectionalLight, LoadingManager, AmbientLight, EquirectangularReflectionMapping } from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { EXRLoader } from 'three/addons/loaders/EXRLoader.js';
 import { gsap } from 'gsap';
 import { usePositionStore } from '/src/stores/PositionStore';
@@ -30,8 +31,15 @@ let controls;
 
 // create loaders
 const manager = new LoadingManager();
-const modelLoader = new GLTFLoader(manager); // cars
+const gltfLoader = new GLTFLoader(manager); // cars
+const dracoLoader = new DRACOLoader(); // cars
 const envLoader = new EXRLoader(manager); // environment map (.EXR)
+
+// setup draco decoder module
+dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/');
+dracoLoader.setDecoderConfig({ type: 'js' });
+dracoLoader.preload();
+gltfLoader.setDRACOLoader(dracoLoader);
 
 // set positions
 const car1Pos = new Vector3(0, 0, 0);
@@ -97,7 +105,6 @@ const setCanvas = () => {
     environmentMap.mapping = EquirectangularReflectionMapping
     scene.background = environmentMap;
     scene.environment = environmentMap;
-    console.log(environmentMap);
   });
 
   // Create 360 sphere
@@ -117,31 +124,40 @@ const setCanvas = () => {
   floor.rotateX(- Math.PI / 2);
   scene.add(floor);
 
-  // Car 1
-  modelLoader.load('/models/Gen3-uncompressed.glb', function (gltf) {
+  // Car 1 - Uncompressed no Draco
+  // gltfLoader.load('/models/Gen3-uncompressed.glb', function (gltf) {
+  //   const car1Obj = gltf.scene;
+  //   car1Obj.position.copy(car1Pos);
+  //   scene.add(car1Obj);
+  // }, undefined, function (error) {
+  //   console.error('car1 gltfLoader error' + error);
+  // });
+
+  // Car 1 (with Draco)
+  gltfLoader.load('/models/Gen3.glb', function (gltf) {
     const car1Obj = gltf.scene;
     car1Obj.position.copy(car1Pos);
     scene.add(car1Obj);
   }, undefined, function (error) {
-    console.error('car1 modelLoader error' + error);
+    console.error('car1 gltfLoader error' + error);
   });
 
   // Car 2
-  modelLoader.load('/models/box.glb', function (gltf) {
+  gltfLoader.load('/models/box.glb', function (gltf) {
     const car2Obj = gltf.scene;
     car2Obj.position.copy(car2Pos);
     scene.add(car2Obj);
   }, undefined, function (error) {
-    console.error('car2 modelLoader error' + error);
+    console.error('car2 gltfLoader error' + error);
   });
 
   // Car 3
-  modelLoader.load('/models/box.glb', function (gltf) {
+  gltfLoader.load('/models/box.glb', function (gltf) {
     const car3Obj = gltf.scene;
     car3Obj.position.copy(car3Pos);
     scene.add(car3Obj);
   }, undefined, function (error) {
-    console.error('car3 modelLoader error' + error);
+    console.error('car3 gltfLoader error' + error);
   });
 
   /*  // cars with box geometry

@@ -9,7 +9,7 @@
 
   watch(loadComplete, (val) => {
     if (loadComplete.value) {
-      setTimeout(() => loading.value = false, 2500);
+      //setTimeout(() => loading.value = false, 2500);
       loading.value = false;
     }
   });

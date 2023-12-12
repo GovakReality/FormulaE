@@ -1,19 +1,48 @@
 <script setup>
-  import { usePositionStore } from '/src/stores/PositionStore';
-  import { ref } from 'vue';
+  import { useCardsStore } from '/src/stores/CardsStore';
+  import { useLoadingStore } from '/src/stores/LoadingStore';
+  import { ref, watch, onMounted} from 'vue';
+  import { storeToRefs } from 'pinia';
 
-  const positionStore = usePositionStore();
-  const expand = ref(true);
+  const cardsStore = useCardsStore();
+  const { cardIndex } = storeToRefs(cardsStore);
+  const loadingStore = useLoadingStore();
+  const { loadStart, loadComplete, loadError, loadProgress } = storeToRefs(loadingStore);
+  const expand = ref(false);
+  const show = ref(false);
+
+  watch(loadComplete, (val) => {
+    if (loadComplete.value) {
+      expand.value = true;
+    }
+  });
+
+  watch(cardIndex, () => {
+    if (cardIndex.value == 0) {
+      expand.value = true;
+    } else {
+      expand.value = false;
+    }
+  });
 
   const onClick = (event) => {
     expand.value = false;
-    positionStore.increment();
   };
+
+  const onAfterLeave = (el) => {
+    show.value = false;
+    cardsStore.increment();
+  }  
+
+  onMounted(() => {
+    show.value = true;
+  });  
+ 
 </script>
 
 <template>
-  <v-sheet class="d-flex align-end justify-end h-100 pa-10">
-    <v-slide-y-reverse-transition>
+  <v-sheet v-if="show" class="d-flex align-end justify-end h-100 pa-10">
+    <v-slide-y-reverse-transition @after-leave="onAfterLeave">
       <v-card
       v-if="expand"
       class="g-card py-5 pe-2 rounded-xl"

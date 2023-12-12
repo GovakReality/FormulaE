@@ -1,9 +1,11 @@
 <script setup>
-	import WelcomeCard from './WelcomeCard.vue';
+	import DifficultyCard from './DifficultyCard.vue';
+  import WelcomeCard from './WelcomeCard.vue';
 </script>
 
 <template>
   <WelcomeCard />
+  <DifficultyCard />
 </template>
 
 <style scoped>

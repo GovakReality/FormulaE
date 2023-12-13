@@ -51,7 +51,7 @@
       >
         <v-card-item class="text-center">
           <v-img
-          src="/textures/logoipsum-321.svg"
+          src="/images/SaudiaLogo.png"
           width="200"
           class="text-center justify-center mx-auto"
           ></v-img>

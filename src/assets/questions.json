@@ -1,0 +1,38 @@
+[
+  {
+    "question": "What is",
+    "answer1": "option1",
+    "answer2": "option2",
+    "answer3": "option3",
+    "answer4": "option4",
+    "correct": 2,
+    "difficulty": ["easy", "medium"]  
+  },
+  {
+    "question": "What is",
+    "answer1": "option1",
+    "answer2": "option2",
+    "answer3": "option3",
+    "answer4": "option4",
+    "correct": 2,
+    "difficulty": ["hard", "medium"]  
+  },
+  {
+    "question": "What is",
+    "answer1": "option1",
+    "answer2": "option2",
+    "answer3": "option3",
+    "answer4": "option4",
+    "correct": 2,
+    "difficulty": ["easy", "hard"]  
+  },
+  {
+    "question": "What is",
+    "answer1": "option1",
+    "answer2": "option2",
+    "answer3": "option3",
+    "answer4": "option4",
+    "correct": 2,
+    "difficulty": ["easy", "medium"]  
+  }    
+]

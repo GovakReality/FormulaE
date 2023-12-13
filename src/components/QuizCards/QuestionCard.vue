@@ -5,34 +5,43 @@
   import { storeToRefs } from 'pinia';
 
   const positionStore = usePositionStore();
+  const { positionIndex } = storeToRefs(positionStore);
   const cardsStore = useCardsStore();
-  const { difficulty, cardIndex } = storeToRefs(cardsStore);
+  const { cardIndex, question } = storeToRefs(cardsStore);
   const expand = ref(false);
   const show = ref(true);
-  const keepQuiz = ref(true);
+  const round = ref(0);
 
   watch(cardIndex, () => {
     if (cardIndex.value == 2) {
       show.value = true;
-      setTimeout(() => expand.value = true, 100);
+      showCard();
     } else {
       expand.value = false;
     }
   });
 
+  const showCard = () => {
+    round.value++;
+    cardsStore.newQuestion();
+    setTimeout(() => expand.value = true, 100);
+  };
+
   const onClick = (val, event) => {
     expand.value = false;
   };
-
+  
   const onAfterLeave = (el) => {
-/*     if (!keepQuiz){
-      show.value = false;
-    } */
-    console.log('ee')
-    setTimeout(() => expand.value = true, 100);
-    cardsStore.increment();
     positionStore.increment();
-  }    
+    if (positionIndex.value == 10){
+      show.value = false;
+    } else {
+      showCard();
+      cardsStore.incrementCardIndex();
+    }
+  }   
+  
+  
 </script>
 
 <template>
@@ -46,24 +55,24 @@
       >
         <v-card-item class="text-center">
           <div class="text-h4 mb-1 pa-6">
-            Round 1
+            Round {{ round }}
           </div>
           <div class="text-h6 mb-1 pa-3">
-            What is the theoretical top speed for Gen3 Formula E cars?
+            {{ question.question }}
           </div>                     
         </v-card-item>
         <v-card-actions class="text-center justify-center">
           <v-btn rounded="lg" variant="tonal" @click="onClick(1)">
-            311 KM/H
+            {{ question.answer1 }}
           </v-btn>
           <v-btn rounded="lg" variant="tonal" @click="onClick(2)">
-            287 KM/H
+            {{ question.answer2 }}
           </v-btn>
           <v-btn rounded="lg" variant="tonal" @click="onClick(3)">
-            322 KM/H
+            {{ question.answer3 }}
           </v-btn> 
           <v-btn rounded="lg" variant="tonal" @click="onClick(4)">
-            297 KM/H
+            {{ question.answer4 }}
           </v-btn>                              
         </v-card-actions>
       </v-card>

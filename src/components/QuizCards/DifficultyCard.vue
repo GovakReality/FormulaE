@@ -6,7 +6,7 @@
 
   const positionStore = usePositionStore();
   const cardsStore = useCardsStore();
-  const { difficulty, cardIndex } = storeToRefs(cardsStore);
+  const { cardIndex } = storeToRefs(cardsStore);
   const expand = ref(false);
   const show = ref(true);
 
@@ -23,22 +23,22 @@
     expand.value = false;
     switch (val) {
       case 1:
-        difficulty.value = 'easy';
+        cardsStore.setDificulty('easy');
         break;
       case 2:
-        difficulty.value = 'medium';
+        cardsStore.setDificulty('medium');
         break;
       case 3:
-        difficulty.value = 'hard';
+        cardsStore.setDificulty('hard');
         break;
       default:
-        difficulty.value = 'easy';
+        cardsStore.setDificulty('easy');
     }
   };
 
   const onAfterLeave = (el) => {
     show.value = false;
-    cardsStore.increment();
+    cardsStore.incrementCardIndex();
     positionStore.increment();
   }    
 </script>

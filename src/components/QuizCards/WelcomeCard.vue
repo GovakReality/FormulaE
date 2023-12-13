@@ -31,7 +31,7 @@
 
   const onAfterLeave = (el) => {
     show.value = false;
-    cardsStore.increment();
+    cardsStore.incrementCardIndex();
   }  
 
   onMounted(() => {

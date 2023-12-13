@@ -29,6 +29,7 @@
 <style scoped>
 .g-lang {
 	color: white !important;
+  pointer-events: auto;
 }
 .v-select--active-menu .g-icon {
   transform: rotate(180deg);

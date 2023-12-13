@@ -27,6 +27,7 @@
 
 <style scoped>
 .g-bt-menu {
+  pointer-events: auto;
 	background-color: #cccccc42 !important;
 }
 </style>

@@ -4,22 +4,17 @@
 </script>
 
 <template>
-	<v-app-bar flat color="transparent">
-		<template v-slot:prepend>
-			<v-img
-			src="/textures/logoipsum-321.svg"
-			height="40"
-			width="300"
-			contain
-			></v-img>
-		</template>
-
+	<v-app-bar flat color="transparent" class="pt-1 g-bar">
 		<template v-slot:append>
-			<LanguageSwitcher />
-			<MainMenu />
+				<LanguageSwitcher />
+				<MainMenu />
 		</template>
 	</v-app-bar>
 </template>
 
 <style scoped>
+.g-bar {
+	pointer-events: none;
+}
+
 </style>

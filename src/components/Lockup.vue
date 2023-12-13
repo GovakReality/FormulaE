@@ -3,7 +3,7 @@
 
 <template>
   <v-img
-  src="/textures/Lockup-Shadows.png"
+  src="/images/Lockup-Shadows.png"
   class="g-lockup"
   ></v-img>
 </template>

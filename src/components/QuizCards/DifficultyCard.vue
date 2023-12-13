@@ -1,12 +1,15 @@
 <script setup>
   import { usePositionStore } from '/src/stores/PositionStore';
   import { useCardsStore } from '/src/stores/CardsStore';
+  import { useQuizStore } from '/src/stores/QuizStore';
   import { ref, watch } from 'vue';
   import { storeToRefs } from 'pinia';
 
   const positionStore = usePositionStore();
   const cardsStore = useCardsStore();
   const { cardIndex } = storeToRefs(cardsStore);
+  const quizStore = useQuizStore();
+
   const expand = ref(false);
   const show = ref(true);
 
@@ -23,16 +26,16 @@
     expand.value = false;
     switch (val) {
       case 1:
-        cardsStore.setDificulty('easy');
+        quizStore.setDificulty('easy');
         break;
       case 2:
-        cardsStore.setDificulty('medium');
+        quizStore.setDificulty('medium');
         break;
       case 3:
-        cardsStore.setDificulty('hard');
+        quizStore.setDificulty('hard');
         break;
       default:
-        cardsStore.setDificulty('easy');
+        quizStore.setDificulty('easy');
     }
   };
 

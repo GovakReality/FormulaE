@@ -1,13 +1,17 @@
 <script setup>
   import { usePositionStore } from '/src/stores/PositionStore';
   import { useCardsStore } from '/src/stores/CardsStore';
+  import { useQuizStore } from '/src/stores/QuizStore';
   import { ref, watch } from 'vue';
   import { storeToRefs } from 'pinia';
 
   const positionStore = usePositionStore();
   const { positionIndex } = storeToRefs(positionStore);
   const cardsStore = useCardsStore();
-  const { cardIndex, question } = storeToRefs(cardsStore);
+  const { cardIndex } = storeToRefs(cardsStore);
+  const quizStore = useQuizStore();
+  const { question } = storeToRefs(quizStore);
+
   const expand = ref(false);
   const show = ref(true);
   const round = ref(0);
@@ -23,7 +27,7 @@
 
   const showCard = () => {
     round.value++;
-    cardsStore.newQuestion();
+    quizStore.newQuestion();
     setTimeout(() => expand.value = true, 100);
   };
 

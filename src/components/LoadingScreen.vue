@@ -28,7 +28,7 @@
     >
       <v-container fill-height>
         <v-layout row justify-center align-center>
-          <v-progress-circular indeterminate size="70" width="7" color="#026536"></v-progress-circular>
+          <v-progress-circular indeterminate size="70" width="7" color="#28673c"></v-progress-circular>
         </v-layout>
       </v-container>    
     </v-overlay>

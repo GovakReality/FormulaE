@@ -71,7 +71,7 @@
 
 <style scoped>
 .g-card{
-  background: linear-gradient(45deg, rgba(7,55,29,1) 0%, rgba(2,101,54,1) 100%);
+  background: linear-gradient(45deg, rgba(7, 54, 28, 1) 0%, rgba(2, 101, 54, 1) 100%);
   max-width: 100%;
   width: 400px;
 }

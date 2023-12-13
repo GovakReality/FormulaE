@@ -9,7 +9,7 @@
 
   watch(loadComplete, (val) => {
     if (loadComplete.value) {
-      //setTimeout(() => loading.value = false, 2500);
+      //setTimeout(() => loading.value = false, 22500);
       loading.value = false;
     }
   });
@@ -23,12 +23,12 @@
       persistent
       fullscreen
       full-width
-      content-class="loading-dialog"
       class="align-center justify-center"
+      scrim="white"
     >
       <v-container fill-height>
         <v-layout row justify-center align-center>
-          <v-progress-circular indeterminate size="70" width="7" color="primary"></v-progress-circular>
+          <v-progress-circular indeterminate size="70" width="7" color="#026536"></v-progress-circular>
         </v-layout>
       </v-container>    
     </v-overlay>
@@ -36,7 +36,7 @@
 </template>
 
 <style scoped>
-  .loading-dialog {
-    background-color: #303030; 
+  :deep(.v-overlay__scrim) {
+    opacity: 1 !important;
   }
 </style>

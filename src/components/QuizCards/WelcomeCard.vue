@@ -52,7 +52,7 @@
         <v-card-item class="text-center">
           <v-img
           src="/images/SaudiaLogo.png"
-          width="200"
+          width="150"
           class="text-center justify-center mx-auto"
           ></v-img>
           <div class="text-h6 mb-1 pa-6">
@@ -60,7 +60,7 @@
           </div>
         </v-card-item>
         <v-card-actions class="text-center justify-center">
-          <v-btn rounded="lg" variant="tonal" @click="onClick">
+          <v-btn rounded="xl" variant="tonal" slim="false" @click="onClick">
             Start Quiz
           </v-btn>
         </v-card-actions>

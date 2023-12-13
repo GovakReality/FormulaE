@@ -13,7 +13,7 @@
   const { question } = storeToRefs(quizStore);
 
   const expand = ref(false);
-  const show = ref(true);
+  const show = ref(false);
   const round = ref(0);
 
   watch(cardIndex, () => {

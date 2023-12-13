@@ -11,7 +11,7 @@
   const quizStore = useQuizStore();
 
   const expand = ref(false);
-  const show = ref(true);
+  const show = ref(false);
 
   watch(cardIndex, () => {
     if (cardIndex.value == 1) {

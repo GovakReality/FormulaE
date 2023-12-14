@@ -34,9 +34,9 @@ let controls;
 // create loaders
 const manager = new LoadingManager();
 const gltfLoader = new GLTFLoader(manager); // cars
-const dracoLoader = new DRACOLoader(); // cars
+const dracoLoader = new DRACOLoader(manager); // cars
 const rgbeLoader = new RGBELoader(manager); // environment map (.HDR)
-const cubeTextureLoader = new CubeTextureLoader(); // environment map (cubemaps)
+const cubeTextureLoader = new CubeTextureLoader(manager); // environment map (cubemaps)
 
 // setup draco decoder module
 dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/');

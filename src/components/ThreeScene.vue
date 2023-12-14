@@ -10,6 +10,7 @@ import { LightProbeGenerator } from 'three/addons/lights/LightProbeGenerator.js'
 import { gsap } from 'gsap';
 import { usePositionStore } from '/src/stores/PositionStore';
 import { useLoadingStore } from '/src/stores/LoadingStore';
+import { useInspectorStore } from '/src/stores/InspectorStore';
 import { storeToRefs } from 'pinia';
 
 // get stores
@@ -17,6 +18,8 @@ const positionStore = usePositionStore();
 const { positionIndex } = storeToRefs(positionStore);
 const loadingStore = useLoadingStore();
 const { loadStart, loadComplete, loadError, loadProgress } = storeToRefs(loadingStore);
+const inspectorStore = useInspectorStore();
+const { lightIntensity } = storeToRefs(inspectorStore);
 
 // global variables
 const webGl = ref();
@@ -181,9 +184,10 @@ const setCanvas = () => {
   // scene.add(ambLight);
 
   // Directional Light
-  const light1 = new DirectionalLight(0xF0AC59, 10); // 0xF09D59 0xF0AC59
-  light1.position.set(20, 20, 20);
-  scene.add(light1);
+  const directionalLight = new DirectionalLight(0xF0AC59, 10); // 0xF09D59 0xF0AC59
+  directionalLight.intensity = lightIntensity.value;
+  directionalLight.position.set(20, 20, 20);
+  scene.add(directionalLight);
 
   // Camera
   camera = new PerspectiveCamera(45, aspectRatio.value, 0.1, 300);

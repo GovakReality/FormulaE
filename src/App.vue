@@ -6,10 +6,12 @@ import CongratsCard from './components/QuizCards/CongratsCard.vue';
 import LeaderboardCard from './components/QuizCards/LeaderboardCard.vue';
 import LoadingScreen from './components/LoadingScreen.vue';
 import Lockup from './components/Lockup.vue';
+import LiveInspector from './components/LiveInspector.vue';
 </script>
 
 <template>
   <v-app>
+    <LiveInspector />
     <TopBar />
     <v-main class="overflow-hidden">
       <Lockup />
@@ -20,9 +22,6 @@ import Lockup from './components/Lockup.vue';
       <LoadingScreen />
     </v-main>
   </v-app>
-
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

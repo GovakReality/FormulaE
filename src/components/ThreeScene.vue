@@ -6,7 +6,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { gsap } from 'gsap';
 import { usePositionStore } from '/src/stores/PositionStore';
-import { useLoadingStore } from '../stores/LoadingStore';
+import { useLoadingStore } from '/src/stores/LoadingStore';
 import { storeToRefs } from 'pinia';
 
 // get stores

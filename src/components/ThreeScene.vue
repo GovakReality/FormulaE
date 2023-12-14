@@ -6,6 +6,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
 import { LightProbeGenerator } from 'three/addons/lights/LightProbeGenerator.js';
+// import { LightProbeHelper } from 'three/addons/helpers/LightProbeHelper.js';
 import { gsap } from 'gsap';
 import { usePositionStore } from '/src/stores/PositionStore';
 import { useLoadingStore } from '/src/stores/LoadingStore';
@@ -35,6 +36,7 @@ const manager = new LoadingManager();
 const gltfLoader = new GLTFLoader(manager); // cars
 const dracoLoader = new DRACOLoader(); // cars
 const rgbeLoader = new RGBELoader(manager); // environment map (.HDR)
+const cubeTextureLoader = new CubeTextureLoader(); // environment map (cubemaps)
 
 // setup draco decoder module
 dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/');
@@ -49,7 +51,7 @@ const car1Pos = new Vector3(0, 0, 0);
 const car2Pos = new Vector3(5, 0, -5);
 const car3Pos = new Vector3(0, 0, -10);
 
-const initialPos = new Vector3(8, 8, 15); // on intial screen
+const initialPos = new Vector3(-4, 1.5, 7); // on intial screen
 const initialTarget = new Vector3(0, 0.4, 0.35); // on intial screen
 
 // car 1 points
@@ -111,11 +113,23 @@ const setCanvas = () => {
   const lightProbe = new LightProbe();
   scene.add(lightProbe);
 
-  // Create HDR equirretangular background
+  // Create LDR equirretangular background
+  cubeTextureLoader.load([
+    '/textures/px.jpg',
+    '/textures/nx.jpg',
+    '/textures/py.jpg',
+    '/textures/ny.jpg',
+    '/textures/pz.jpg',
+    '/textures/nz.jpg',
+  ], (backgroundMap) => {
+    scene.background = backgroundMap;
+  });
+
+  // Create HDR equirretangular environment map
   rgbeLoader.load('/textures/RaceTrack.hdr', (environmentMap) => {
     //Adding the environment map to the scene
     environmentMap.mapping = EquirectangularReflectionMapping
-    scene.background = environmentMap;
+    // scene.background = environmentMap;
     scene.environment = environmentMap;
 
     // Rendering the cube camera render target and applying it to the light probe

@@ -1,11 +1,12 @@
 <script setup>
 import { onMounted, onUnmounted, ref, computed, watch } from 'vue';
-import { PerspectiveCamera, Scene, WebGLRenderer, Mesh, BoxGeometry, MeshBasicMaterial, MeshStandardMaterial, Vector3, PlaneGeometry, DoubleSide, SphereGeometry, TextureLoader, DirectionalLight, LoadingManager, AmbientLight, EquirectangularReflectionMapping, CubeTextureLoader, SRGBColorSpace, LinearToneMapping, ReinhardToneMapping, ACESFilmicToneMapping, CineonToneMapping, LightProbe, WebGLCubeRenderTarget, CubeCamera } from 'three';
+import { PerspectiveCamera, Scene, WebGLRenderer, Mesh, BoxGeometry, MeshBasicMaterial, MeshStandardMaterial, Vector3, PlaneGeometry, DoubleSide, SphereGeometry, TextureLoader, DirectionalLight, LoadingManager, AmbientLight, EquirectangularReflectionMapping, CubeTextureLoader, SRGBColorSpace, LinearToneMapping, ReinhardToneMapping, ACESFilmicToneMapping, CineonToneMapping, LightProbe, WebGLCubeRenderTarget, CubeCamera, SphericalHarmonics3 } from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
 import { LightProbeGenerator } from 'three/addons/lights/LightProbeGenerator.js';
+import { LightProbeHelper } from 'three/addons/helpers/LightProbeHelper.js';
 import { gsap } from 'gsap';
 import { usePositionStore } from '/src/stores/PositionStore';
 import { useLoadingStore } from '/src/stores/LoadingStore';
@@ -51,7 +52,7 @@ const car2Pos = new Vector3(5, 0, -5);
 const car3Pos = new Vector3(0, 0, -10);
 
 const initialPos = new Vector3(8, 8, 15); // on intial screen
-const initialTarget = new Vector3(0, 0, 0); // on intial screen
+const initialTarget = new Vector3(0, 0.4, 0.35); // on intial screen
 
 // car 1 points
 const car1Pos1 = new Vector3(-5, 5, 5);
@@ -114,12 +115,16 @@ const setCanvas = () => {
 
   // Create HDR equirretangular background
   rgbeLoader.load('/textures/RaceTrack.hdr', (environmentMap) => {
+    //Adding the environment map to the scene
     environmentMap.mapping = EquirectangularReflectionMapping
     scene.background = environmentMap;
     scene.environment = environmentMap;
 
+    // Rendering the cube camera render target and applying it to the light probe
     cubeCamera.update(renderer, scene);
     lightProbe.copy(LightProbeGenerator.fromCubeRenderTarget(renderer, cubeRenderTarget));
+    // lightProbe.intensity = 1.1;
+    // scene.add(new LightProbeHelper(lightProbe, 5));
   });
 
 
@@ -211,7 +216,7 @@ const setCanvas = () => {
   // renderer.toneMapping = ACESFilmicToneMapping;
   // renderer.toneMapping = CustomToneMapping;
 
-  renderer.toneMappingExposure = 1;
+  renderer.toneMappingExposure = 1.1;
   updateRenderer();
 
   // Controls

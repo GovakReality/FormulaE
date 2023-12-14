@@ -213,10 +213,10 @@ const setCanvas = () => {
   // scene.add(ambLight);
 
   // Directional Light
-  // const light1 = new DirectionalLight(0xffffff, 5);
-  // light1.position.set(20, 20, 20);
-  //light1.target = car1Obj;
-  //scene.add(light1);
+  const light1 = new DirectionalLight(0xF5C78F, 10);
+  light1.position.set(20, 20, 20);
+  // light1.target = car1Obj;
+  scene.add(light1);
 
   // Camera
   camera = new PerspectiveCamera(45, aspectRatio.value, 0.1, 300);

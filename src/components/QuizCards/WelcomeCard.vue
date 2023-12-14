@@ -50,9 +50,9 @@
       >
         <v-card-item class="text-center">
           <v-img
-          src="/images/SaudiaLogo.png"
-          width="150"
-          class="text-center justify-center mx-auto"
+            src="/images/SaudiaLogo.png"
+            width="138"
+            class="text-center justify-center mx-auto"
           ></v-img>
           <h3 class="g-title font-weight-bold my-1 py-6 px-1">
             Take a quiz now and grab your chance to win exclusive prizes!
@@ -70,19 +70,20 @@
 
 <style scoped>
 .g-card{
-  background: linear-gradient(45deg, rgba(7, 54, 28, 1) 0%, rgba(2, 101, 54, 1) 100%);
+  background: linear-gradient(69deg, #07361C 9.61%, #07361C 9.61%, #026536 80.85%);
   max-width: 100%;
-  width: 340px;
+  width: 413px;
   color: #F0F0F0;
 }
 .g-title {
-  font-size: 26px;
+  font-size: 30px;
   line-height: 36px;
 }
 .g-bt-start {
-  font-size: 15px;
-  width: 180px;
+  font-size: 18px;
+  width: 183px;
   max-width: 100%;
+  line-height: normal;
 }
 
 :deep(.v-btn--variant-tonal .v-btn__underlay) {
@@ -90,6 +91,6 @@
 }
 
 :deep(.v-btn.v-btn--density-default) {
-  height: 40px;
+  height: 46px;
 }
 </style>

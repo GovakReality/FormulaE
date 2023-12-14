@@ -57,21 +57,21 @@
         <v-card-item class="text-center">
           <v-img
           src="/images/SaudiaLogo.png"
-          width="150"
+          width="138"
           class="text-center justify-center mx-auto"
           ></v-img>
-          <h3 class="g-title font-weight-bold pa-6">
+          <h3 class="g-title font-weight-bold pa-8">
             Ready to test your knowledge?
           </h3>
-          <div class="g-text pb-5 px-6">
+          <div class="g-text pb-6 px-6">
             Get ready to answer questions about the Formula E racing cars.
           </div>    
-          <div class="g-text mb-1 pb-1 px-6">
+          <div class="g-text pb-4 px-6">
             Choose your difficulty below to start the quiz:
           </div>                 
         </v-card-item>
         <v-card-actions class="text-center justify-center">
-          <v-container fluid>
+          <v-container fluid class="pa-0">
             <v-row no-gutters>
               <v-col>
                 <v-btn rounded="xl" variant="tonal" :slim="false" class="g-bt-diff font-weight-black my-2" @click="onClick(1)">
@@ -93,10 +93,7 @@
                 </v-btn>  
               </v-col>
             </v-row>          
-          </v-container>
-
-        
-                  
+          </v-container>         
         </v-card-actions>
       </v-card>
     </v-slide-y-reverse-transition>
@@ -105,26 +102,27 @@
 
 <style scoped>
 .g-card{
-  background: linear-gradient(45deg, rgba(7, 54, 28, 1) 0%, rgba(2, 101, 54, 1) 100%);
+  background: linear-gradient(69deg, #07361C 9.61%, #07361C 9.61%, #026536 80.85%);
   max-width: 100%;
-  width: 340px;
+  width: 413px;
   color: #F0F0F0;
 }
 .g-title {
-  font-size: 26px;
+  font-size: 30px;
   line-height: 36px;
 }
 
 .g-text {
   font-family: Saudia Sans;
-  line-height: 30px;
+  line-height: normal;
   font-weight: 400;
-  font-size: 20px;
+  font-size: 24px;
 }
 .g-bt-diff {
-  font-size: 15px;
-  width: 180px;
+  font-size: 18px;
+  width: 183px;
   max-width: 100%;
+  line-height: normal;
 }
 
 :deep(.v-btn--variant-tonal .v-btn__underlay) {
@@ -132,6 +130,6 @@
 }
 
 :deep(.v-btn.v-btn--density-default) {
-  height: 40px;
+  height: 46px;
 }
 </style>

@@ -1,6 +1,6 @@
 [
   {
-    "question": "1-What is - easy medium question with more than 85 characters. The correct answer is 2",
+    "question": "1- Placeholder test - What is - easy medium question. The correct answer is 2",
     "answer1": "option1",
     "answer2": "option2",
     "answer3": "option3",
@@ -9,13 +9,13 @@
     "difficulty": ["easy", "medium"]  
   },
   {
-    "question": "2-What is-medium hard question. The correct answer is 4",
+    "question": "2-What is the theoretical top speed for Gen3 Formula E cars?-medium hard question. The correct answer is 4",
     "answer1": "option1",
     "answer2": "option2",
     "answer3": "option3",
     "answer4": "option4",
     "correct": 4,
-    "difficulty": ["hard", "medium"]  
+    "difficulty": ["easy", "medium"]  
   },
   {
     "question": "3-What is-easy hard question. The correct answer is 3",

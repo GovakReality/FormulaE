@@ -1,25 +1,24 @@
 <script setup>
 
   const menuItems = [
-    { title: 'Click Me' },
-    { title: 'Click Me' },
-    { title: 'Click Me' },
-    { title: 'Click Me 2' },
+    { title: 'Admin' },
+    { title: 'About' },
   ]
 </script>
 <template>
   <v-menu transition="scroll-y-transition">
     <template v-slot:activator="{ props }">
-      <v-btn icon="mdi-menu" v-bind="props" color="white" class="g-bt-menu"></v-btn>
+      <v-btn icon="mdi-menu" v-bind="props" size="large" color="white" class="g-bt-menu"></v-btn>
     </template>
   
-    <v-list>
+    <v-list width="150" class="mt-2 text-center">
       <v-list-item
         v-for="(item, i) in menuItems"
         :key="i"
+        :value="item"
       >
         <v-list-item-title>{{ item.title }}</v-list-item-title>
-      </v-list-item>
+      </v-list-item>     
     </v-list>
   </v-menu>
 </template>

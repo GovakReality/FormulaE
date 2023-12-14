@@ -4,7 +4,7 @@
 </script>
 
 <template>
-	<v-app-bar flat color="transparent" class="pt-1 g-bar">
+	<v-app-bar flat color="transparent" class="pt-5 pr-5 g-bar">
 		<template v-slot:append>
 				<LanguageSwitcher />
 				<MainMenu />

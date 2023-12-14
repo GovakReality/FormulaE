@@ -46,7 +46,6 @@
       <v-card
       v-if="expand"
       class="g-card py-5 pe-2 rounded-xl"
-      color="teal-darken-4"
       variant="elevated"
       >
         <v-card-item class="text-center">
@@ -55,12 +54,12 @@
           width="150"
           class="text-center justify-center mx-auto"
           ></v-img>
-          <div class="text-h6 mb-1 pa-6">
-            Take a quiz now and grab your chance to win exclusive prizes!
-          </div>
+          <h3 class="g-title font-weight-bold my-1 pa-6">
+            Take a quiz now<br>and grab your chance<br>to win exclusive prizes!
+          </h3>
         </v-card-item>
         <v-card-actions class="text-center justify-center">
-          <v-btn rounded="xl" variant="tonal" slim="false" @click="onClick">
+          <v-btn rounded="xl" variant="tonal" :slim="false" @click="onClick" class="g-bt-start font-weight-black">
             Start Quiz
           </v-btn>
         </v-card-actions>
@@ -74,5 +73,22 @@
   background: linear-gradient(45deg, rgba(7, 54, 28, 1) 0%, rgba(2, 101, 54, 1) 100%);
   max-width: 100%;
   width: 400px;
+  color: #F0F0F0;
+}
+.g-title {
+  font-size: 26px;
+}
+.g-bt-start {
+  font-size: 17px;
+  width: 190px;
+  max-width: 100%;
+}
+
+:deep(.v-btn--variant-tonal .v-btn__underlay) {
+  opacity: 0.4;
+}
+
+:deep(.v-btn.v-btn--density-default) {
+  height: 45px;
 }
 </style>

@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, onUnmounted, ref, computed, watch } from 'vue';
-import { PerspectiveCamera, Scene, WebGLRenderer, Mesh, BoxGeometry, MeshBasicMaterial, MeshStandardMaterial, Vector3, PlaneGeometry, DoubleSide, SphereGeometry, TextureLoader, DirectionalLight, LoadingManager, AmbientLight, EquirectangularReflectionMapping, CubeTextureLoader, SRGBColorSpace, ACESFilmicToneMapping, CineonToneMapping, LightProbe, WebGLCubeRenderTarget, CubeCamera } from 'three';
+import { PerspectiveCamera, Scene, WebGLRenderer, Mesh, BoxGeometry, MeshBasicMaterial, MeshStandardMaterial, Vector3, PlaneGeometry, DoubleSide, SphereGeometry, TextureLoader, DirectionalLight, LoadingManager, AmbientLight, EquirectangularReflectionMapping, CubeTextureLoader, SRGBColorSpace, LinearToneMapping, ReinhardToneMapping, ACESFilmicToneMapping, CineonToneMapping, LightProbe, WebGLCubeRenderTarget, CubeCamera } from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
@@ -35,7 +35,7 @@ const manager = new LoadingManager();
 const gltfLoader = new GLTFLoader(manager); // cars
 const dracoLoader = new DRACOLoader(); // cars
 // const cubeTextureLoader = new CubeTextureLoader(manager); // environment map (cubemaps)
-const rgbeLoader = new RGBELoader(manager); // environment map (.EXR)
+const rgbeLoader = new RGBELoader(manager); // environment map (.HDR)
 
 // setup draco decoder module
 dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/');
@@ -113,7 +113,7 @@ const setCanvas = () => {
   scene.add(lightProbe);
 
   // Create HDR equirretangular background
-  rgbeLoader.load('/textures/MR_INT-003_Kitchen_Pierre.hdr', (environmentMap) => {
+  rgbeLoader.load('/textures/RaceTrack.hdr', (environmentMap) => {
     environmentMap.mapping = EquirectangularReflectionMapping
     scene.background = environmentMap;
     scene.environment = environmentMap;
@@ -121,6 +121,17 @@ const setCanvas = () => {
     cubeCamera.update(renderer, scene);
     lightProbe.copy(LightProbeGenerator.fromCubeRenderTarget(renderer, cubeRenderTarget));
   });
+
+
+  // Create HDR equirretangular background
+  // rgbeLoader.load('/textures/MR_INT-003_Kitchen_Pierre.hdr', (environmentMap) => {
+  //   environmentMap.mapping = EquirectangularReflectionMapping
+  //   scene.background = environmentMap;
+  //   scene.environment = environmentMap;
+
+  //   cubeCamera.update(renderer, scene);
+  //   lightProbe.copy(LightProbeGenerator.fromCubeRenderTarget(renderer, cubeRenderTarget));
+  // });
 
   // Create LDR equirretangular background
   // cubeTextureLoader.load([
@@ -177,10 +188,10 @@ const setCanvas = () => {
   // scene.add(ambLight);
 
   // Directional Light
-  const light1 = new DirectionalLight(0xF5C78F, 10);
+  const light1 = new DirectionalLight(0xEDAE61, 11); // #f0b771 0xF5C78F
   light1.position.set(20, 20, 20);
   // light1.target = car1Obj;
-  // scene.add(light1);
+  scene.add(light1);
 
   // Camera
   camera = new PerspectiveCamera(45, aspectRatio.value, 0.1, 300);
@@ -193,9 +204,14 @@ const setCanvas = () => {
   const canvas = webGl.value;
   renderer = new WebGLRenderer({ canvas, antialias: true });
   renderer.outputColorSpace = SRGBColorSpace;
-  // renderer.toneMapping = ACESFilmicToneMapping;
+  // renderer.toneMapping = NoToneMapping;
+  // renderer.toneMapping = LinearToneMapping;
+  // renderer.toneMapping = ReinhardToneMapping;
   renderer.toneMapping = CineonToneMapping;
-  renderer.toneMappingExposure = 1.8;
+  // renderer.toneMapping = ACESFilmicToneMapping;
+  // renderer.toneMapping = CustomToneMapping;
+
+  renderer.toneMappingExposure = 1;
   updateRenderer();
 
   // Controls

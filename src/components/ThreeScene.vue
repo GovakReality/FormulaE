@@ -1,10 +1,10 @@
 <script setup>
 import { onMounted, onUnmounted, ref, computed, watch } from 'vue';
-import { PerspectiveCamera, Scene, WebGLRenderer, Mesh, BoxGeometry, MeshBasicMaterial, MeshStandardMaterial, Vector3, PlaneGeometry, DoubleSide, SphereGeometry, TextureLoader, DirectionalLight, LoadingManager, AmbientLight, EquirectangularReflectionMapping } from 'three';
+import { PerspectiveCamera, Scene, WebGLRenderer, Mesh, BoxGeometry, MeshBasicMaterial, MeshStandardMaterial, Vector3, PlaneGeometry, DoubleSide, SphereGeometry, TextureLoader, DirectionalLight, LoadingManager, AmbientLight, EquirectangularReflectionMapping, CubeTextureLoader } from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
-import { EXRLoader } from 'three/addons/loaders/EXRLoader.js';
+// import { EXRLoader } from 'three/addons/loaders/EXRLoader.js';
 import { gsap } from 'gsap';
 import { usePositionStore } from '/src/stores/PositionStore';
 import { useLoadingStore } from '../stores/LoadingStore';
@@ -33,7 +33,8 @@ let controls;
 const manager = new LoadingManager();
 const gltfLoader = new GLTFLoader(manager); // cars
 const dracoLoader = new DRACOLoader(); // cars
-const envLoader = new EXRLoader(manager); // environment map (.EXR)
+const cubeTextureLoader = new CubeTextureLoader(); // environment map (cubemaps)
+// const envLoader = new EXRLoader(manager); // environment map (.EXR)
 
 // setup draco decoder module
 dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/');
@@ -103,8 +104,21 @@ const setCanvas = () => {
   scene = new Scene();
 
   // Create HDR equirretangular background
-  envLoader.load('/textures/footprint_court_2k.exr', (environmentMap) => {
-    environmentMap.mapping = EquirectangularReflectionMapping
+  // envLoader.load('/textures/footprint_court_2k.exr', (environmentMap) => {
+  //   environmentMap.mapping = EquirectangularReflectionMapping
+  //   scene.background = environmentMap;
+  //   scene.environment = environmentMap;
+  // });
+
+  // Create LDR equirretangular background
+  cubeTextureLoader.load([
+    '/textures/px.png',
+    '/textures/nx.png',
+    '/textures/py.png',
+    '/textures/ny.png',
+    '/textures/pz.png',
+    '/textures/nz.png',
+  ], (environmentMap) => {
     scene.background = environmentMap;
     scene.environment = environmentMap;
   });

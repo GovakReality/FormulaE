@@ -19,7 +19,8 @@
 
   watch(cardIndex, () => {
     if (cardIndex.value == 0) {
-      expand.value = true;
+      show.value = true;
+      setTimeout(() => expand.value = true, 100);
     } else {
       expand.value = false;
     }

@@ -6,7 +6,6 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
 import { LightProbeGenerator } from 'three/addons/lights/LightProbeGenerator.js';
-import { LightProbeHelper } from 'three/addons/helpers/LightProbeHelper.js';
 import { gsap } from 'gsap';
 import { usePositionStore } from '/src/stores/PositionStore';
 import { useLoadingStore } from '/src/stores/LoadingStore';
@@ -35,7 +34,7 @@ let controls;
 const manager = new LoadingManager();
 const gltfLoader = new GLTFLoader(manager); // cars
 const dracoLoader = new DRACOLoader(); // cars
-const cubeTextureLoader = new CubeTextureLoader(manager); // environment map (cubemaps)
+// const cubeTextureLoader = new CubeTextureLoader(manager); // environment map (cubemaps)
 const rgbeLoader = new RGBELoader(manager); // environment map (.EXR)
 
 // setup draco decoder module
@@ -105,11 +104,11 @@ const setCanvas = () => {
   // Create Scene
   scene = new Scene();
 
-  // Create Cube Camera Render Target for Light Probe
+  // Create a cube camera render target for light probe
   const cubeRenderTarget = new WebGLCubeRenderTarget(256);
   const cubeCamera = new CubeCamera(1, 1000, cubeRenderTarget);
 
-  // Create Light Probe
+  // Create light probe
   const lightProbe = new LightProbe();
   scene.add(lightProbe);
 
@@ -121,10 +120,6 @@ const setCanvas = () => {
 
     cubeCamera.update(renderer, scene);
     lightProbe.copy(LightProbeGenerator.fromCubeRenderTarget(renderer, cubeRenderTarget));
-    scene.add(new LightProbeHelper(lightProbe, 5));
-
-    // lightProbe.copy(LightProbeGenerator.fromCubeTexture(environmentMap));
-    // lightProbe.copy( LightProbeGenerator.fromCubeTexture( cubeTexture ) );
   });
 
   // Create LDR equirretangular background
@@ -198,8 +193,8 @@ const setCanvas = () => {
   const canvas = webGl.value;
   renderer = new WebGLRenderer({ canvas, antialias: true });
   renderer.outputColorSpace = SRGBColorSpace;
-  renderer.toneMapping = ACESFilmicToneMapping;
-  // renderer.toneMapping = CineonToneMapping;
+  // renderer.toneMapping = ACESFilmicToneMapping;
+  renderer.toneMapping = CineonToneMapping;
   renderer.toneMappingExposure = 1.8;
   updateRenderer();
 

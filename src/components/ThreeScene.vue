@@ -1,9 +1,10 @@
 <script setup>
 import { onMounted, onUnmounted, ref, computed, watch } from 'vue';
-import { PerspectiveCamera, Scene, WebGLRenderer, Mesh, BoxGeometry, MeshBasicMaterial, MeshStandardMaterial, Vector3, PlaneGeometry, DoubleSide, SphereGeometry, TextureLoader, DirectionalLight, LoadingManager, AmbientLight, EquirectangularReflectionMapping, CubeTextureLoader } from 'three';
+import { PerspectiveCamera, Scene, WebGLRenderer, Mesh, BoxGeometry, MeshBasicMaterial, MeshStandardMaterial, Vector3, PlaneGeometry, DoubleSide, SphereGeometry, TextureLoader, DirectionalLight, LoadingManager, AmbientLight, EquirectangularReflectionMapping, CubeTextureLoader, SRGBColorSpace, ACESFilmicToneMapping } from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
+import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
 import { gsap } from 'gsap';
 import { usePositionStore } from '/src/stores/PositionStore';
 import { useLoadingStore } from '/src/stores/LoadingStore';
@@ -33,6 +34,7 @@ const manager = new LoadingManager();
 const gltfLoader = new GLTFLoader(manager); // cars
 const dracoLoader = new DRACOLoader(); // cars
 const cubeTextureLoader = new CubeTextureLoader(manager); // environment map (cubemaps)
+const rgbeLoader = new RGBELoader(manager); // environment map (.EXR)
 
 // setup draco decoder module
 dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/');
@@ -101,19 +103,25 @@ const setCanvas = () => {
   // Create Scene
   scene = new Scene();
 
-  // Create LDR equirretangular background
-  cubeTextureLoader.load([
-    '/textures/px.png',
-    '/textures/nx.png',
-    '/textures/py.png',
-    '/textures/ny.png',
-    '/textures/pz.png',
-    '/textures/nz.png',
-  ], (environmentMap) => {
+  // Create HDR equirretangular background
+  rgbeLoader.load('/textures/MR_INT-003_Kitchen_Pierre.hdr', (environmentMap) => {
+    environmentMap.mapping = EquirectangularReflectionMapping
     scene.background = environmentMap;
     scene.environment = environmentMap;
   });
 
+  // Create LDR equirretangular background
+  // cubeTextureLoader.load([
+  //   '/textures/px.png',
+  //   '/textures/nx.png',
+  //   '/textures/py.png',
+  //   '/textures/ny.png',
+  //   '/textures/pz.png',
+  //   '/textures/nz.png',
+  // ], (environmentMap) => {
+  //   scene.background = environmentMap;
+  //   scene.environment = environmentMap;
+  // });
 
   // Race Track (with Draco)
   gltfLoader.load('/models/RaceTrack.glb', function (gltf) {
@@ -160,7 +168,7 @@ const setCanvas = () => {
   const light1 = new DirectionalLight(0xF5C78F, 10);
   light1.position.set(20, 20, 20);
   // light1.target = car1Obj;
-  scene.add(light1);
+  // scene.add(light1);
 
   // Camera
   camera = new PerspectiveCamera(45, aspectRatio.value, 0.1, 300);
@@ -172,6 +180,9 @@ const setCanvas = () => {
   // Renderer
   const canvas = webGl.value;
   renderer = new WebGLRenderer({ canvas, antialias: true });
+  renderer.outputColorSpace = SRGBColorSpace;
+  renderer.toneMapping = ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.8;
   updateRenderer();
 
   // Controls

@@ -40,29 +40,29 @@
       points: '78,187'
     },
     {
-      name: 'Heather Reynolds',
+      name: 'Chloe Bennett',
       position: '6',
-      points: '80,317'
+      points: '77,125'
     },
     {
-      name: 'Heather Reynolds',
+      name: 'Desmond Thompson',
       position: '7',
-      points: '80,317'
+      points: '76,528'
     },
     {
-      name: 'Heather Reynolds',
+      name: 'Morgan Foster',
       position: '8',
-      points: '80,317'
+      points: '76,198'
     },
     {
-      name: 'Heather Reynolds',
+      name: 'Lily Morgan',
       position: '9',
-      points: '80,317'
+      points: '74,914'
     },
     {
-      name: 'Heather Reynolds',
+      name: 'Adrian Sanchez',
       position: '10',
-      points: '80,317'
+      points: '73,051'
     }
   ]
 
@@ -123,18 +123,38 @@
                   <tr
                     v-for="item in players"
                     :key="item.name"
-                    class="my-10"
                   >
                     <td class="g-pos px-1">{{ item.position }}</td>
                     <td class="g-name">{{ item.name }}</td>
+                    <td class="g-points">{{ item.points }} PTS</td>
                   </tr>
+                  <tr>
+                    <td colspan="3" class="g-top">TOP 10</td>
+                  </tr> 
+                  <tr>
+                    <td class="g-pos g-pl px-1">27</td>
+                    <td class="g-name g-pl">JOHN DOE</td>
+                    <td class="g-points g-pl">64,232 PTS</td>
+                  </tr>                                   
                 </tbody>
               </v-table>
             </v-card>
           </v-col>
           <v-col>
-            <v-card v-if="expand" variant="flat" class="rounded-0">
-jkljlk
+            <v-card v-if="expand" variant="flat" class="g-final-list rounded-0">
+              <v-table>
+                <tbody>
+                  <tr>
+                    <td class="g-final px-0">FINALIST</td>
+                  </tr> 
+                  <tr>
+                    <td class="g-final px-0">FINALIST</td>
+                  </tr> 
+                  <tr>
+                    <td class="g-final px-0">FINALIST</td>
+                  </tr>                                   
+                </tbody>
+              </v-table>
             </v-card>
           </v-col>          
         </v-row>
@@ -200,11 +220,44 @@ jkljlk
   text-transform: uppercase;
   line-height: normal;
   text-align: left;
+  font-weight: 700;
 }
-.g-points-list {
+.g-points {
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%),#F0F0F0;
-  max-width: 100%;
-  width: 175px;
   color: #000000;
+  font-size: 20px;
+  text-transform: uppercase;
+  line-height: normal;
+  text-align: left;
+  font-weight: 500;  
+  text-align: right;
+  width: 175px;
+}
+.g-top {
+  font-size: 20px;
+  text-transform: uppercase;
+  line-height: normal;
+  text-align: center;
+  font-weight: 700;
+  color:#F0F0F0;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.25) 100%), #F0F0F0;
+  width: 100%;
+}
+.g-pl {
+  color:#28673C;
+}
+.g-final-list {
+  background-color: #28673C;
+  max-width: 100%;
+  width: 90px;
+  color:#F0F0F0;
+}
+.g-final {
+  font-size: 15px;
+  line-height: normal;
+  text-align: center;
+  font-weight: 700;  
+  background-color: #28673C;
+  color:#F0F0F0;
 }
 </style>

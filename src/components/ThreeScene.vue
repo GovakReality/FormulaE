@@ -34,6 +34,8 @@ let renderer;
 let scene;
 let controls;
 
+let directionalLight;
+
 // create loaders
 const manager = new LoadingManager();
 const gltfLoader = new GLTFLoader(manager); // cars
@@ -184,8 +186,8 @@ const setCanvas = () => {
   // scene.add(ambLight);
 
   // Directional Light
-  const directionalLight = new DirectionalLight(0xF0AC59, 10); // 0xF09D59 0xF0AC59
-  directionalLight.intensity = lightIntensity.value;
+  directionalLight = new DirectionalLight(0xF0AC59, 10); // 0xF09D59 0xF0AC59
+  // directionalLight.intensity = lightIntensity.value;
   directionalLight.position.set(20, 20, 20);
   scene.add(directionalLight);
 
@@ -303,6 +305,10 @@ watch(positionIndex, () => {
       positionStore.reset();
       console.log('no way');
   }
+});
+
+watch(lightIntensity, () => {
+  directionalLight.intensity = lightIntensity.value;
 });
 
 onMounted(() => {

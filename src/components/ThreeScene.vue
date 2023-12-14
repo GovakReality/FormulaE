@@ -42,6 +42,8 @@ dracoLoader.preload();
 gltfLoader.setDRACOLoader(dracoLoader);
 
 // set positions
+const raceTrackPos = new Vector3(0, 0, 0);
+
 const car1Pos = new Vector3(0, 0, 0);
 const car2Pos = new Vector3(5, 0, -5);
 const car3Pos = new Vector3(0, 0, -10);
@@ -118,11 +120,11 @@ const setCanvas = () => {
   // scene.add(bgSphere);
 
   // Create floor
-  const floorGeometry = new PlaneGeometry(50, 50);
-  const floorMaterial = new MeshBasicMaterial({ color: 0xdddddd, side: DoubleSide });
-  const floor = new Mesh(floorGeometry, floorMaterial);
-  floor.rotateX(- Math.PI / 2);
-  scene.add(floor);
+  // const floorGeometry = new PlaneGeometry(50, 50);
+  // const floorMaterial = new MeshBasicMaterial({ color: 0xdddddd, side: DoubleSide });
+  // const floor = new Mesh(floorGeometry, floorMaterial);
+  // floor.rotateX(- Math.PI / 2);
+  // scene.add(floor);
 
   // Car 1 - Uncompressed no Draco
   // gltfLoader.load('/models/Gen3-uncompressed.glb', function (gltf) {
@@ -132,6 +134,15 @@ const setCanvas = () => {
   // }, undefined, function (error) {
   //   console.error('car1 gltfLoader error' + error);
   // });
+
+  // Race Track (with Draco)
+  gltfLoader.load('/models/RaceTrack.glb', function (gltf) {
+    const raceTrackObj = gltf.scene;
+    raceTrackObj.position.copy(raceTrackPos);
+    scene.add(raceTrackObj);
+  }, undefined, function (error) {
+    console.error('raceTrackObj gltfLoader error' + error);
+  });
 
   // Car 1 (with Draco)
   gltfLoader.load('/models/Gen3.glb', function (gltf) {
@@ -184,20 +195,20 @@ const setCanvas = () => {
 
   // Lights
   // Ambient Light
-  const ambLight = new AmbientLight(0x404040, 8); // soft white light
-  scene.add(ambLight);
+  // const ambLight = new AmbientLight(0x404040, 8); // soft white light
+  // scene.add(ambLight);
 
   // Directional Light
-  const light1 = new DirectionalLight(0xffffff, 5);
-  light1.position.set(20, 20, 20);
+  // const light1 = new DirectionalLight(0xffffff, 5);
+  // light1.position.set(20, 20, 20);
   //light1.target = car1Obj;
   //scene.add(light1);
 
   // Camera
-  camera = new PerspectiveCamera(45, aspectRatio.value, 0.1, 100);
+  camera = new PerspectiveCamera(45, aspectRatio.value, 0.1, 300);
   camera.position.copy(initialPos);
   scene.add(camera);
-  camera.add(light1);
+  // camera.add(light1);
   updateCamera();
 
   // Renderer

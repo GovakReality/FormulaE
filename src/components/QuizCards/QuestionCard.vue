@@ -17,32 +17,32 @@
   const round = ref(0);
 
   watch(cardIndex, () => {
-    if (cardIndex.value == 2) {
+    if (cardIndex.value >= 2 && cardIndex.value < 11) {
       show.value = true;
-      showCard();
+      expandCard();
     } else {
-      expand.value = false;
+      show.value = false;
     }
   });
 
-  const showCard = () => {
+  const expandCard = () => {
     round.value++;
     quizStore.newQuestion();
     setTimeout(() => expand.value = true, 100);
   };
 
-  const onClick = (val, event) => {
+  const contractCard = () => {
     expand.value = false;
+  };
+
+  const onClick = (val, event) => {
+    //logica da resposta correta e pontuaçao
+    contractCard();
   };
   
   const onAfterLeave = (el) => {
     positionStore.increment();
-    if (positionIndex.value == 10){
-      show.value = false;
-    } else {
-      showCard();
-      cardsStore.incrementCardIndex();
-    }
+    cardsStore.incrementCardIndex();
   }   
   
   

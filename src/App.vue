@@ -11,7 +11,7 @@ import LiveInspector from './components/LiveInspector.vue';
 
 <template>
   <v-app>
-    <LiveInspector />
+
     <TopBar />
     <v-main class="overflow-hidden">
       <Lockup />
@@ -20,6 +20,7 @@ import LiveInspector from './components/LiveInspector.vue';
       <CongratsCard />
       <LeaderboardCard />
       <LoadingScreen />
+      <LiveInspector />
     </v-main>
   </v-app>
 </template>

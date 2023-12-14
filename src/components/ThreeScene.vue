@@ -34,7 +34,11 @@ let renderer;
 let scene;
 let controls;
 
+// Graphic elements
 let directionalLight;
+
+// Graphic properties
+lightIntensity.value = 10 // Directional light intensity
 
 // create loaders
 const manager = new LoadingManager();
@@ -186,7 +190,7 @@ const setCanvas = () => {
   // scene.add(ambLight);
 
   // Directional Light
-  directionalLight = new DirectionalLight(0xF0AC59, 10); // 0xF09D59 0xF0AC59
+  directionalLight = new DirectionalLight(0xF0AC59, lightIntensity.value); // 0xF09D59 0xF0AC59
   // directionalLight.intensity = lightIntensity.value;
   directionalLight.position.set(20, 20, 20);
   scene.add(directionalLight);

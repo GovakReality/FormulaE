@@ -6,14 +6,12 @@ import { GUI } from 'three/addons/libs/lil-gui.module.min.js';
 const inspectorStore = useInspectorStore();
 const { lightIntensity } = storeToRefs(inspectorStore);
 
-// lightIntensity.value = 99;
-
 // gui
 const gui = new GUI({ title: 'Properties' });
 
 // rendering and lighting constants
 const API = {
-    directionalLightIntensity: 1,
+    directionalLightIntensity: lightIntensity.value,
 };
 
 gui.add(API, 'directionalLightIntensity', 0, 100, 0.02)

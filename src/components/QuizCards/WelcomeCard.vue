@@ -54,8 +54,8 @@
           width="150"
           class="text-center justify-center mx-auto"
           ></v-img>
-          <h3 class="g-title font-weight-bold my-1 pa-6">
-            Take a quiz now<br>and grab your chance<br>to win exclusive prizes!
+          <h3 class="g-title font-weight-bold my-1 py-6 px-1">
+            Take a quiz now and grab your chance to win exclusive prizes!
           </h3>
         </v-card-item>
         <v-card-actions class="text-center justify-center">
@@ -72,15 +72,16 @@
 .g-card{
   background: linear-gradient(45deg, rgba(7, 54, 28, 1) 0%, rgba(2, 101, 54, 1) 100%);
   max-width: 100%;
-  width: 400px;
+  width: 340px;
   color: #F0F0F0;
 }
 .g-title {
   font-size: 26px;
+  line-height: 36px;
 }
 .g-bt-start {
-  font-size: 17px;
-  width: 190px;
+  font-size: 15px;
+  width: 180px;
   max-width: 100%;
 }
 
@@ -89,6 +90,6 @@
 }
 
 :deep(.v-btn.v-btn--density-default) {
-  height: 45px;
+  height: 40px;
 }
 </style>

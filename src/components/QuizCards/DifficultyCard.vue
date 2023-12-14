@@ -52,35 +52,51 @@
       <v-card
       v-if="expand"
       class="g-card py-5 pe-2 rounded-xl"
-      color="teal-darken-4"
       variant="elevated"
       >
         <v-card-item class="text-center">
           <v-img
           src="/images/SaudiaLogo.png"
-          width="200"
+          width="150"
           class="text-center justify-center mx-auto"
           ></v-img>
-          <div class="text-h4 mb-1 pa-6">
+          <h3 class="g-title font-weight-bold pa-6">
             Ready to test your knowledge?
-          </div>
-          <div class="text-h6 mb-1 pa-3">
+          </h3>
+          <div class="g-text pb-5 px-6">
             Get ready to answer questions about the Formula E racing cars.
           </div>    
-          <div class="text-h6 mb-1 pa-3">
+          <div class="g-text mb-1 pb-1 px-6">
             Choose your difficulty below to start the quiz:
           </div>                 
         </v-card-item>
         <v-card-actions class="text-center justify-center">
-          <v-btn rounded="lg" variant="tonal" @click="onClick(1)">
-            Easy
-          </v-btn>
-          <v-btn rounded="lg" variant="tonal" @click="onClick(2)">
-            Medium
-          </v-btn>
-          <v-btn rounded="lg" variant="tonal" @click="onClick(3)">
-            Hard
-          </v-btn>                    
+          <v-container fluid>
+            <v-row no-gutters>
+              <v-col>
+                <v-btn rounded="xl" variant="tonal" :slim="false" class="g-bt-diff font-weight-black my-2" @click="onClick(1)">
+                  Easy
+                </v-btn>
+              </v-col>
+            </v-row>
+            <v-row no-gutters>
+              <v-col>
+                <v-btn rounded="xl" variant="tonal" :slim="false" class="g-bt-diff font-weight-black my-2" @click="onClick(2)">
+                  Medium
+                </v-btn>
+              </v-col>
+            </v-row>
+            <v-row no-gutters>
+              <v-col>
+                <v-btn rounded="xl" variant="tonal" :slim="false" class="g-bt-diff font-weight-black my-2" @click="onClick(3)">
+                  Hard
+                </v-btn>  
+              </v-col>
+            </v-row>          
+          </v-container>
+
+        
+                  
         </v-card-actions>
       </v-card>
     </v-slide-y-reverse-transition>
@@ -91,6 +107,31 @@
 .g-card{
   background: linear-gradient(45deg, rgba(7, 54, 28, 1) 0%, rgba(2, 101, 54, 1) 100%);
   max-width: 100%;
-  width: 400px;
+  width: 340px;
+  color: #F0F0F0;
+}
+.g-title {
+  font-size: 26px;
+  line-height: 36px;
+}
+
+.g-text {
+  font-family: Saudia Sans;
+  line-height: 30px;
+  font-weight: 400;
+  font-size: 20px;
+}
+.g-bt-diff {
+  font-size: 15px;
+  width: 180px;
+  max-width: 100%;
+}
+
+:deep(.v-btn--variant-tonal .v-btn__underlay) {
+  opacity: 0.4;
+}
+
+:deep(.v-btn.v-btn--density-default) {
+  height: 40px;
 }
 </style>

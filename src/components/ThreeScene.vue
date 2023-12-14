@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, onUnmounted, ref, computed, watch } from 'vue';
-import { PerspectiveCamera, Scene, WebGLRenderer, Mesh, BoxGeometry, MeshBasicMaterial, MeshStandardMaterial, Vector3, PlaneGeometry, DoubleSide, SphereGeometry, TextureLoader, DirectionalLight, LoadingManager, AmbientLight, EquirectangularReflectionMapping, CubeTextureLoader, SRGBColorSpace, LinearToneMapping, ReinhardToneMapping, ACESFilmicToneMapping, CineonToneMapping, LightProbe, WebGLCubeRenderTarget, CubeCamera } from 'three';
+import { PerspectiveCamera, Scene, WebGLRenderer, Mesh, BoxGeometry, MeshBasicMaterial, MeshStandardMaterial, Vector3, PlaneGeometry, DoubleSide, SphereGeometry, TextureLoader, DirectionalLight, LoadingManager, AmbientLight, EquirectangularReflectionMapping, CubeTextureLoader, SRGBColorSpace, LinearToneMapping, ReinhardToneMapping, ACESFilmicToneMapping, CineonToneMapping, LightProbe, WebGLCubeRenderTarget, CubeCamera, Color, Fog } from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
@@ -19,7 +19,7 @@ const { positionIndex } = storeToRefs(positionStore);
 const loadingStore = useLoadingStore();
 const { loadStart, loadComplete, loadError, loadProgress } = storeToRefs(loadingStore);
 const graphicsStore = useGraphicsStore();
-const { directionalLightIntensity } = storeToRefs(graphicsStore);
+const { directionalLightIntensity, directionalLightColor, ambientLightIntensity, ambientLightColor, lightProbeIntensity, backgroundIntensity, backgroundBlurriness, fogColor, fogNear, fogFar } = storeToRefs(graphicsStore);
 
 // global variables
 const webGl = ref();
@@ -36,9 +36,23 @@ let controls;
 
 // Graphic elements
 let directionalLight;
+let ambientLight;
+let lightProbe;
 
 // Graphic properties
+// Lighting
 directionalLightIntensity.value = 10 // Directional light intensity
+directionalLightColor.value = 0xF0AC59 // Directional light color
+ambientLightIntensity.value = 0 // Ambient light intensity
+ambientLightColor.value = 0x000000 // Ambient light color
+lightProbeIntensity.value = 1 // Light probe intensity
+// Environment
+backgroundIntensity.value = 1 // Background intensity
+backgroundBlurriness.value = 0 // Background blur
+// Fog
+fogColor.value = 0xF5C86E // Fog color
+fogNear.value = 100 // Fog near treshold
+fogFar.value = 500 // Fog far treshold
 
 // create loaders
 const manager = new LoadingManager();
@@ -119,7 +133,7 @@ const setCanvas = () => {
   const cubeCamera = new CubeCamera(1, 1000, cubeRenderTarget);
 
   // Create light probe
-  const lightProbe = new LightProbe();
+  lightProbe = new LightProbe();
   scene.add(lightProbe);
 
   // Create LDR equirretangular background
@@ -132,6 +146,8 @@ const setCanvas = () => {
     '/textures/nz.jpg',
   ], (backgroundMap) => {
     scene.background = backgroundMap;
+    scene.backgroundIntensity = backgroundIntensity.value;
+    scene.backgroundBlurriness = backgroundBlurriness.value;
   });
 
   // Create HDR equirretangular environment map
@@ -144,7 +160,7 @@ const setCanvas = () => {
     // Rendering the cube camera render target and applying it to the light probe
     cubeCamera.update(renderer, scene);
     lightProbe.copy(LightProbeGenerator.fromCubeRenderTarget(renderer, cubeRenderTarget));
-    lightProbe.intensity = 1;
+    lightProbe.intensity = lightProbeIntensity.value;
     // scene.add(new LightProbeHelper(lightProbe, 5));
   });
 
@@ -186,14 +202,17 @@ const setCanvas = () => {
 
   // Lights
   // Ambient Light
-  // const ambLight = new AmbientLight(0x404040, 8); // soft white light
-  // scene.add(ambLight);
+  ambientLight = new AmbientLight(ambientLightColor.value, ambientLightIntensity.value); // soft white light
+  scene.add(ambientLight);
 
   // Directional Light
-  directionalLight = new DirectionalLight(0xF0AC59, directionalLightIntensity.value); // 0xF09D59 0xF0AC59
-  // directionalLight.intensity = lightIntensity.value;
+  directionalLight = new DirectionalLight(directionalLightColor.value, directionalLightIntensity.value); // 0xF09D59 0xF0AC59
   directionalLight.position.set(20, 20, 20);
   scene.add(directionalLight);
+
+  // Fog
+  const fog = new Fog(fogColor.value, fogNear.value, fogFar.value);
+  scene.fog = fog;
 
   // Camera
   camera = new PerspectiveCamera(45, aspectRatio.value, 0.1, 300);
@@ -311,8 +330,48 @@ watch(positionIndex, () => {
   }
 });
 
+// Watching Graphic Properties
+// Lighting
 watch(directionalLightIntensity, () => {
   directionalLight.intensity = directionalLightIntensity.value;
+});
+
+watch(directionalLightColor, () => {
+  directionalLight.color.setHex(directionalLightColor.value);
+});
+
+watch(ambientLightIntensity, () => {
+  ambientLight.intensity = ambientLightIntensity.value;
+});
+
+watch(ambientLightColor, () => {
+  ambientLight.color.setHex(ambientLightColor.value);
+});
+
+watch(lightProbeIntensity, () => {
+  lightProbe.intensity = lightProbeIntensity.value;
+});
+
+// Environment
+watch(backgroundIntensity, () => {
+  scene.backgroundIntensity = backgroundIntensity.value;
+});
+
+watch(backgroundBlurriness, () => {
+  scene.backgroundBlurriness = backgroundBlurriness.value;
+});
+
+// Fog
+watch(fogColor, () => {
+  scene.fog.color.setHex(fogColor.value);
+});
+
+watch(fogNear, () => {
+  scene.fog.near = fogNear.value;
+});
+
+watch(fogFar, () => {
+  scene.fog.far = fogFar.value;
 });
 
 onMounted(() => {

@@ -4,10 +4,9 @@ import { PerspectiveCamera, Scene, WebGLRenderer, Mesh, BoxGeometry, MeshBasicMa
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
-// import { EXRLoader } from 'three/addons/loaders/EXRLoader.js';
 import { gsap } from 'gsap';
 import { usePositionStore } from '/src/stores/PositionStore';
-import { useLoadingStore } from '../stores/LoadingStore';
+import { useLoadingStore } from '/src/stores/LoadingStore';
 import { storeToRefs } from 'pinia';
 
 // get stores
@@ -33,8 +32,7 @@ let controls;
 const manager = new LoadingManager();
 const gltfLoader = new GLTFLoader(manager); // cars
 const dracoLoader = new DRACOLoader(); // cars
-const cubeTextureLoader = new CubeTextureLoader(); // environment map (cubemaps)
-// const envLoader = new EXRLoader(manager); // environment map (.EXR)
+const cubeTextureLoader = new CubeTextureLoader(manager); // environment map (cubemaps)
 
 // setup draco decoder module
 dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/');
@@ -103,13 +101,6 @@ const setCanvas = () => {
   // Create Scene
   scene = new Scene();
 
-  // Create HDR equirretangular background
-  // envLoader.load('/textures/footprint_court_2k.exr', (environmentMap) => {
-  //   environmentMap.mapping = EquirectangularReflectionMapping
-  //   scene.background = environmentMap;
-  //   scene.environment = environmentMap;
-  // });
-
   // Create LDR equirretangular background
   cubeTextureLoader.load([
     '/textures/px.png',
@@ -123,31 +114,6 @@ const setCanvas = () => {
     scene.environment = environmentMap;
   });
 
-  // Create 360 sphere
-  // const bgGeometry = new SphereGeometry(4, 60, 40);
-  // bgGeometry.scale(12, 12, 12);
-  // const bgMaterial = new MeshBasicMaterial({
-  //   map: new TextureLoader(manager).load('/textures/background.jpg'),
-  //   side: DoubleSide
-  // });
-  // const bgSphere = new Mesh(bgGeometry, bgMaterial);
-  // scene.add(bgSphere);
-
-  // Create floor
-  // const floorGeometry = new PlaneGeometry(50, 50);
-  // const floorMaterial = new MeshBasicMaterial({ color: 0xdddddd, side: DoubleSide });
-  // const floor = new Mesh(floorGeometry, floorMaterial);
-  // floor.rotateX(- Math.PI / 2);
-  // scene.add(floor);
-
-  // Car 1 - Uncompressed no Draco
-  // gltfLoader.load('/models/Gen3-uncompressed.glb', function (gltf) {
-  //   const car1Obj = gltf.scene;
-  //   car1Obj.position.copy(car1Pos);
-  //   scene.add(car1Obj);
-  // }, undefined, function (error) {
-  //   console.error('car1 gltfLoader error' + error);
-  // });
 
   // Race Track (with Draco)
   gltfLoader.load('/models/RaceTrack.glb', function (gltf) {
@@ -184,28 +150,6 @@ const setCanvas = () => {
   }, undefined, function (error) {
     console.error('car3 gltfLoader error' + error);
   });
-
-  /*  // cars with box geometry
-  
-      const geometry = new BoxGeometry(1, 1, 2);
-  
-      // Car 1
-      const material1 = new MeshStandardMaterial({color: 0xccaa22});
-      const car1Obj = new Mesh(geometry, material1);
-      car1Obj.position.copy(car1Pos);
-      scene.add(car1Obj);
-  
-      // Car 2
-      const material2 = new MeshStandardMaterial({color: 0xcc0000});
-      const car2Obj = new Mesh(geometry, material2);
-      car2Obj.position.copy(car2Pos);
-      scene.add(car2Obj);
-  
-      // Car 3
-      const material3 = new MeshStandardMaterial({color: 0x0CCCA2});
-      const car3Obj = new Mesh(geometry, material3);
-      car3Obj.position.copy(car3Pos);
-      scene.add(car3Obj); */
 
   // Lights
   // Ambient Light

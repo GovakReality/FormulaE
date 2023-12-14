@@ -1,23 +1,23 @@
 <script setup>
-import { useInspectorStore } from '/src/stores/InspectorStore';
+import { useGraphicsStore } from '/src/stores/GraphicsStore';
 import { storeToRefs } from 'pinia';
 import { GUI } from 'three/addons/libs/lil-gui.module.min.js';
 
-const inspectorStore = useInspectorStore();
-const { lightIntensity } = storeToRefs(inspectorStore);
+const graphicsStore = useGraphicsStore();
+const { directionalLightIntensity } = storeToRefs(graphicsStore);
 
 // gui
-const gui = new GUI({ title: 'Properties' });
+const gui = new GUI({ title: 'Graphics Properties' });
 
 // rendering and lighting constants
 const API = {
-    directionalLightIntensity: lightIntensity.value,
+    directionalLightIntensity: directionalLightIntensity.value,
 };
 
 gui.add(API, 'directionalLightIntensity', 0, 100, 0.02)
-    .name('directional light')
+    .name('Directional Light Intensity')
     .onChange(function () {
-        lightIntensity.value = API.directionalLightIntensity; // render();
+        directionalLightIntensity.value = API.directionalLightIntensity; // render();
     });
 
 const guiElement = document.querySelector('.lil-gui');

@@ -10,7 +10,7 @@ import { LightProbeGenerator } from 'three/addons/lights/LightProbeGenerator.js'
 import { gsap } from 'gsap';
 import { usePositionStore } from '/src/stores/PositionStore';
 import { useLoadingStore } from '/src/stores/LoadingStore';
-import { useInspectorStore } from '/src/stores/InspectorStore';
+import { useGraphicsStore } from '/src/stores/GraphicsStore';
 import { storeToRefs } from 'pinia';
 
 // get stores
@@ -18,8 +18,8 @@ const positionStore = usePositionStore();
 const { positionIndex } = storeToRefs(positionStore);
 const loadingStore = useLoadingStore();
 const { loadStart, loadComplete, loadError, loadProgress } = storeToRefs(loadingStore);
-const inspectorStore = useInspectorStore();
-const { lightIntensity } = storeToRefs(inspectorStore);
+const graphicsStore = useGraphicsStore();
+const { directionalLightIntensity } = storeToRefs(graphicsStore);
 
 // global variables
 const webGl = ref();
@@ -38,7 +38,7 @@ let controls;
 let directionalLight;
 
 // Graphic properties
-lightIntensity.value = 10 // Directional light intensity
+directionalLightIntensity.value = 10 // Directional light intensity
 
 // create loaders
 const manager = new LoadingManager();
@@ -190,7 +190,7 @@ const setCanvas = () => {
   // scene.add(ambLight);
 
   // Directional Light
-  directionalLight = new DirectionalLight(0xF0AC59, lightIntensity.value); // 0xF09D59 0xF0AC59
+  directionalLight = new DirectionalLight(0xF0AC59, directionalLightIntensity.value); // 0xF09D59 0xF0AC59
   // directionalLight.intensity = lightIntensity.value;
   directionalLight.position.set(20, 20, 20);
   scene.add(directionalLight);
@@ -311,8 +311,8 @@ watch(positionIndex, () => {
   }
 });
 
-watch(lightIntensity, () => {
-  directionalLight.intensity = lightIntensity.value;
+watch(directionalLightIntensity, () => {
+  directionalLight.intensity = directionalLightIntensity.value;
 });
 
 onMounted(() => {

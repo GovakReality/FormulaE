@@ -12,7 +12,7 @@ import LiveInspector from './components/LiveInspector.vue';
 <template>
   <v-app>
     <LiveInspector />
-    <!-- <TopBar /> -->
+    <TopBar />
     <v-main class="overflow-hidden">
       <Lockup />
       <ThreeScene />

@@ -21,6 +21,8 @@ gui.add(API, 'directionalLightIntensity', 0, 100, 0.02)
     .onChange(function () {
         lightIntensity.value = API.directionalLightIntensity; // render();
     });
-</script>
 
-<style scoped></style>
+const guiElement = document.querySelector('.lil-gui');
+guiElement.style.zIndex = "1100";
+
+</script>

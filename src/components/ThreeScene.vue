@@ -1,10 +1,12 @@
 <script setup>
 import { onMounted, onUnmounted, ref, computed, watch } from 'vue';
-import { PerspectiveCamera, Scene, WebGLRenderer, Mesh, BoxGeometry, MeshBasicMaterial, MeshStandardMaterial, Vector3, PlaneGeometry, DoubleSide, SphereGeometry, TextureLoader, DirectionalLight, LoadingManager, AmbientLight, EquirectangularReflectionMapping, CubeTextureLoader, SRGBColorSpace, ACESFilmicToneMapping } from 'three';
+import { PerspectiveCamera, Scene, WebGLRenderer, Mesh, BoxGeometry, MeshBasicMaterial, MeshStandardMaterial, Vector3, PlaneGeometry, DoubleSide, SphereGeometry, TextureLoader, DirectionalLight, LoadingManager, AmbientLight, EquirectangularReflectionMapping, CubeTextureLoader, SRGBColorSpace, ACESFilmicToneMapping, CineonToneMapping, LightProbe, WebGLCubeRenderTarget, CubeCamera } from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
+import { LightProbeGenerator } from 'three/addons/lights/LightProbeGenerator.js';
+import { LightProbeHelper } from 'three/addons/helpers/LightProbeHelper.js';
 import { gsap } from 'gsap';
 import { usePositionStore } from '/src/stores/PositionStore';
 import { useLoadingStore } from '/src/stores/LoadingStore';
@@ -103,11 +105,26 @@ const setCanvas = () => {
   // Create Scene
   scene = new Scene();
 
+  // Create Cube Camera Render Target for Light Probe
+  const cubeRenderTarget = new WebGLCubeRenderTarget(256);
+  const cubeCamera = new CubeCamera(1, 1000, cubeRenderTarget);
+
+  // Create Light Probe
+  const lightProbe = new LightProbe();
+  scene.add(lightProbe);
+
   // Create HDR equirretangular background
   rgbeLoader.load('/textures/MR_INT-003_Kitchen_Pierre.hdr', (environmentMap) => {
     environmentMap.mapping = EquirectangularReflectionMapping
     scene.background = environmentMap;
     scene.environment = environmentMap;
+
+    cubeCamera.update(renderer, scene);
+    lightProbe.copy(LightProbeGenerator.fromCubeRenderTarget(renderer, cubeRenderTarget));
+    scene.add(new LightProbeHelper(lightProbe, 5));
+
+    // lightProbe.copy(LightProbeGenerator.fromCubeTexture(environmentMap));
+    // lightProbe.copy( LightProbeGenerator.fromCubeTexture( cubeTexture ) );
   });
 
   // Create LDR equirretangular background
@@ -182,6 +199,7 @@ const setCanvas = () => {
   renderer = new WebGLRenderer({ canvas, antialias: true });
   renderer.outputColorSpace = SRGBColorSpace;
   renderer.toneMapping = ACESFilmicToneMapping;
+  // renderer.toneMapping = CineonToneMapping;
   renderer.toneMappingExposure = 1.8;
   updateRenderer();
 

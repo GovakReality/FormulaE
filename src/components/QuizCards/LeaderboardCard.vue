@@ -11,7 +11,7 @@
   const quizStore = useQuizStore();
 
   const expand = ref(false);
-  const show = ref(true);///////////
+  const show = ref(false);
 
   const players = [
     {
@@ -80,10 +80,10 @@
   };
 
   const onAfterLeave = (el) => {
-    //show.value = false;
-    //cardsStore.reset();
-    //positionStore.reset();
-    //quizStore.reset();
+    show.value = false;
+    cardsStore.reset();
+    positionStore.reset();
+    quizStore.reset();
   }    
 </script>
 

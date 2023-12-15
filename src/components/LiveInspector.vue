@@ -47,6 +47,11 @@ const API = {
     cameraTargetZ: cameraTargetZ.value,
 };
 
+// messages
+const messages = {
+    cameraMessage: "Press B to print positions"
+}
+
 // Lighting
 const folder1 = gui.addFolder('Lighting');
 
@@ -133,6 +138,8 @@ folder4.add(API, 'toneMappingExposure', 0, 10, 0.02)
 
 // Camera Coordinates
 const folder5 = gui.addFolder('Camera Coordinates');
+
+folder5.add(messages, "cameraMessage");
 
 folder5.add(API, 'cameraTargetX', -20, 20, 0.02)
     .name('Camera Target X')

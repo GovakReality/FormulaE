@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, onUnmounted, ref, computed, watch } from 'vue';
-import { PerspectiveCamera, Scene, WebGLRenderer, Mesh, BoxGeometry, MeshBasicMaterial, MeshStandardMaterial, Vector3, PlaneGeometry, DoubleSide, SphereGeometry, TextureLoader, DirectionalLight, LoadingManager, AmbientLight, EquirectangularReflectionMapping, CubeTextureLoader, SRGBColorSpace, LinearToneMapping, ReinhardToneMapping, ACESFilmicToneMapping, CineonToneMapping, LightProbe, WebGLCubeRenderTarget, CubeCamera, Color, Fog } from 'three';
+import { PerspectiveCamera, Scene, WebGLRenderer, Mesh, BoxGeometry, MeshBasicMaterial, MeshStandardMaterial, Vector3, PlaneGeometry, DoubleSide, SphereGeometry, TextureLoader, DirectionalLight, LoadingManager, AmbientLight, EquirectangularReflectionMapping, CubeTextureLoader, SRGBColorSpace, NoToneMapping, LinearToneMapping, ReinhardToneMapping, CineonToneMapping, ACESFilmicToneMapping, CustomToneMapping, LightProbe, WebGLCubeRenderTarget, CubeCamera, Color, Fog } from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
@@ -19,7 +19,7 @@ const { positionIndex } = storeToRefs(positionStore);
 const loadingStore = useLoadingStore();
 const { loadStart, loadComplete, loadError, loadProgress } = storeToRefs(loadingStore);
 const graphicsStore = useGraphicsStore();
-const { directionalLightIntensity, directionalLightColor, ambientLightIntensity, ambientLightColor, lightProbeIntensity, backgroundIntensity, backgroundBlurriness, fogColor, fogNear, fogFar } = storeToRefs(graphicsStore);
+const { directionalLightIntensity, directionalLightColor, ambientLightIntensity, ambientLightColor, lightProbeIntensity, backgroundIntensity, backgroundBlurriness, fogColor, fogNear, fogFar, toneMapping, toneMappingExposure } = storeToRefs(graphicsStore);
 
 // global variables
 const webGl = ref();
@@ -53,6 +53,9 @@ backgroundBlurriness.value = 0 // Background blur
 fogColor.value = 0xF5C86E // Fog color
 fogNear.value = 100 // Fog near treshold
 fogFar.value = 500 // Fog far treshold
+// Renderer
+toneMapping.value = CineonToneMapping // Tone mapping type
+toneMappingExposure.value = 1 // Tone mapping exposure
 
 // create loaders
 const manager = new LoadingManager();
@@ -210,10 +213,10 @@ const setCanvas = () => {
 
   // Renderer
   const canvas = webGl.value;
-  renderer = new WebGLRenderer({ canvas, antialias: true });
+  renderer = new WebGLRenderer({ canvas, antialias: true, alpha: true });
   renderer.outputColorSpace = SRGBColorSpace;
-  renderer.toneMapping = CineonToneMapping; // https://threejs.org/docs/#api/en/constants/Renderer
-  renderer.toneMappingExposure = 1;
+  renderer.toneMapping = toneMapping.value; // https://threejs.org/docs/#api/en/constants/Renderer
+  renderer.toneMappingExposure = toneMappingExposure.value;
   updateRenderer();
 
   // Create HDR equirretangular environment map
@@ -374,6 +377,39 @@ watch(fogNear, () => {
 
 watch(fogFar, () => {
   scene.fog.far = fogFar.value;
+});
+
+// Renderer
+watch(toneMapping, () => {
+  switch (toneMapping.value) {
+    case "NoToneMapping":
+      renderer.toneMapping = NoToneMapping;
+      break;
+    case "LinearToneMapping":
+      renderer.toneMapping = LinearToneMapping;
+      break;
+    case "ReinhardToneMapping":
+      renderer.toneMapping = ReinhardToneMapping;
+      break;
+    case "CineonToneMapping":
+      renderer.toneMapping = CineonToneMapping;
+      break;
+    case "ACESFilmicToneMapping":
+      renderer.toneMapping = ACESFilmicToneMapping;
+      break;
+    case "CustomToneMapping":
+      renderer.toneMapping = CustomToneMapping;
+      break;
+    default:
+      renderer.toneMapping = CineonToneMapping;
+  }
+  updateRenderer();
+  console.log(toneMapping.value);
+  console.log(renderer.toneMapping);
+});
+
+watch(toneMappingExposure, () => {
+  renderer.toneMappingExposure = toneMappingExposure.value;
 });
 
 onMounted(() => {

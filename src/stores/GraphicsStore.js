@@ -13,6 +13,8 @@ export const useGraphicsStore = defineStore('graphics', () => {
   const fogColor = ref(7);
   const fogNear = ref(8);
   const fogFar = ref(9);
+  const toneMapping = ref(10);
+  const toneMappingExposure = ref(11);
 
-  return { directionalLightIntensity, directionalLightColor, ambientLightIntensity, ambientLightColor, lightProbeIntensity, backgroundIntensity, backgroundBlurriness, fogColor, fogNear, fogFar };
+  return { directionalLightIntensity, directionalLightColor, ambientLightIntensity, ambientLightColor, lightProbeIntensity, backgroundIntensity, backgroundBlurriness, fogColor, fogNear, fogFar, toneMapping, toneMappingExposure };
 })

@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, onUnmounted, ref, computed, watch } from 'vue';
-import { PerspectiveCamera, Scene, WebGLRenderer, Mesh, BoxGeometry, MeshBasicMaterial, MeshStandardMaterial, Vector3, PlaneGeometry, DoubleSide, SphereGeometry, TextureLoader, DirectionalLight, LoadingManager, AmbientLight, EquirectangularReflectionMapping, CubeTextureLoader, SRGBColorSpace, LinearToneMapping, ReinhardToneMapping, ACESFilmicToneMapping, CineonToneMapping, LightProbe, WebGLCubeRenderTarget, CubeCamera, Color, Fog } from 'three';
+import { PerspectiveCamera, Scene, WebGLRenderer, Mesh, BoxGeometry, MeshBasicMaterial, MeshStandardMaterial, Vector3, PlaneGeometry, DoubleSide, SphereGeometry, TextureLoader, DirectionalLight, LoadingManager, AmbientLight, EquirectangularReflectionMapping, CubeTextureLoader, SRGBColorSpace, NoToneMapping, LinearToneMapping, ReinhardToneMapping, CineonToneMapping, ACESFilmicToneMapping, CustomToneMapping, LightProbe, WebGLCubeRenderTarget, CubeCamera, Color, Fog } from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
@@ -19,7 +19,7 @@ const { positionIndex } = storeToRefs(positionStore);
 const loadingStore = useLoadingStore();
 const { loadStart, loadComplete, loadError, loadProgress } = storeToRefs(loadingStore);
 const graphicsStore = useGraphicsStore();
-const { directionalLightIntensity, directionalLightColor, ambientLightIntensity, ambientLightColor, lightProbeIntensity, backgroundIntensity, backgroundBlurriness, fogColor, fogNear, fogFar } = storeToRefs(graphicsStore);
+const { directionalLightIntensity, directionalLightColor, ambientLightIntensity, ambientLightColor, lightProbeIntensity, backgroundIntensity, backgroundBlurriness, fogColor, fogNear, fogFar, toneMapping, toneMappingExposure } = storeToRefs(graphicsStore);
 
 // global variables
 const webGl = ref();
@@ -41,18 +41,21 @@ let lightProbe;
 
 // Graphic properties
 // Lighting
-directionalLightIntensity.value = 10 // Directional light intensity
-directionalLightColor.value = 0xF0AC59 // Directional light color
+directionalLightIntensity.value = 13 // Directional light intensity
+directionalLightColor.value = 0xFEBF71 // Directional light color 0xF0AC59
 ambientLightIntensity.value = 0 // Ambient light intensity
 ambientLightColor.value = 0x000000 // Ambient light color
 lightProbeIntensity.value = 1 // Light probe intensity
 // Environment
-backgroundIntensity.value = 1 // Background intensity
+backgroundIntensity.value = 1.05 // Background intensity
 backgroundBlurriness.value = 0 // Background blur
 // Fog
-fogColor.value = 0xF5C86E // Fog color
-fogNear.value = 100 // Fog near treshold
-fogFar.value = 500 // Fog far treshold
+fogColor.value = 0xFFE9C2 // Fog color 0xFFEBC2
+fogNear.value = 10 // Fog near treshold
+fogFar.value = 435 // Fog far treshold
+// Renderer
+toneMapping.value = CineonToneMapping // Tone mapping type
+toneMappingExposure.value = 1 // Tone mapping exposure
 
 // create loaders
 const manager = new LoadingManager();
@@ -150,20 +153,6 @@ const setCanvas = () => {
     scene.backgroundBlurriness = backgroundBlurriness.value;
   });
 
-  // Create HDR equirretangular environment map
-  rgbeLoader.load('/textures/RaceTrack.hdr', (environmentMap) => {
-    //Adding the environment map to the scene
-    environmentMap.mapping = EquirectangularReflectionMapping
-    // scene.background = environmentMap;
-    scene.environment = environmentMap;
-
-    // Rendering the cube camera render target and applying it to the light probe
-    cubeCamera.update(renderer, scene);
-    lightProbe.copy(LightProbeGenerator.fromCubeRenderTarget(renderer, cubeRenderTarget));
-    lightProbe.intensity = lightProbeIntensity.value;
-    // scene.add(new LightProbeHelper(lightProbe, 5));
-  });
-
   // Race Track (with Draco)
   gltfLoader.load('/models/RaceTrack.glb', function (gltf) {
     const raceTrackObj = gltf.scene;
@@ -222,11 +211,25 @@ const setCanvas = () => {
 
   // Renderer
   const canvas = webGl.value;
-  renderer = new WebGLRenderer({ canvas, antialias: true });
+  renderer = new WebGLRenderer({ canvas, antialias: true, alpha: true });
   renderer.outputColorSpace = SRGBColorSpace;
-  renderer.toneMapping = CineonToneMapping; // https://threejs.org/docs/#api/en/constants/Renderer
-  renderer.toneMappingExposure = 1;
+  renderer.toneMapping = toneMapping.value; // https://threejs.org/docs/#api/en/constants/Renderer
+  renderer.toneMappingExposure = toneMappingExposure.value;
   updateRenderer();
+
+  // Create HDR equirretangular environment map
+  rgbeLoader.load('/textures/RaceTrack.hdr', (environmentMap) => {
+    //Adding the environment map to the scene
+    environmentMap.mapping = EquirectangularReflectionMapping
+    // scene.background = environmentMap;
+    scene.environment = environmentMap;
+
+    // Rendering the cube camera render target and applying it to the light probe
+    cubeCamera.update(renderer, scene);
+    lightProbe.copy(LightProbeGenerator.fromCubeRenderTarget(renderer, cubeRenderTarget));
+    lightProbe.intensity = lightProbeIntensity.value;
+    // scene.add(new LightProbeHelper(lightProbe, 5));
+  });
 
   // Controls
   controls = new OrbitControls(camera, canvas);
@@ -372,6 +375,39 @@ watch(fogNear, () => {
 
 watch(fogFar, () => {
   scene.fog.far = fogFar.value;
+});
+
+// Renderer
+watch(toneMapping, () => {
+  switch (toneMapping.value) {
+    case "NoToneMapping":
+      renderer.toneMapping = NoToneMapping;
+      break;
+    case "LinearToneMapping":
+      renderer.toneMapping = LinearToneMapping;
+      break;
+    case "ReinhardToneMapping":
+      renderer.toneMapping = ReinhardToneMapping;
+      break;
+    case "CineonToneMapping":
+      renderer.toneMapping = CineonToneMapping;
+      break;
+    case "ACESFilmicToneMapping":
+      renderer.toneMapping = ACESFilmicToneMapping;
+      break;
+    case "CustomToneMapping":
+      renderer.toneMapping = CustomToneMapping;
+      break;
+    default:
+      renderer.toneMapping = CineonToneMapping;
+  }
+  updateRenderer();
+  console.log(toneMapping.value);
+  console.log(renderer.toneMapping);
+});
+
+watch(toneMappingExposure, () => {
+  renderer.toneMappingExposure = toneMappingExposure.value;
 });
 
 onMounted(() => {

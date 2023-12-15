@@ -6,7 +6,6 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
 import { LightProbeGenerator } from 'three/addons/lights/LightProbeGenerator.js';
-// import { LightProbeHelper } from 'three/addons/helpers/LightProbeHelper.js';
 import { gsap } from 'gsap';
 import { usePositionStore } from '/src/stores/PositionStore';
 import { useLoadingStore } from '/src/stores/LoadingStore';
@@ -22,7 +21,7 @@ const { loadStart, loadComplete, loadError, loadProgress } = storeToRefs(loading
 const graphicsStore = useGraphicsStore();
 const { directionalLightIntensity, directionalLightColor, ambientLightIntensity, ambientLightColor, lightProbeIntensity, backgroundIntensity, backgroundBlurriness, fogColor, fogNear, fogFar, toneMapping, toneMappingExposure } = storeToRefs(graphicsStore);
 const cameraStore = useCameraStore();
-const { cameraPosX, cameraPosY, cameraPosZ, cameraTargetX, cameraTargetY, cameraTargetZ } = storeToRefs(cameraStore);
+const { cameraTargetX, cameraTargetY, cameraTargetZ } = storeToRefs(cameraStore);
 
 // global variables
 const webGl = ref();
@@ -61,9 +60,6 @@ toneMapping.value = CineonToneMapping // Tone mapping type
 toneMappingExposure.value = 1 // Tone mapping exposure
 
 // Camera Coordinates
-cameraPosX.value = 0;
-cameraPosY.value = 0;
-cameraPosZ.value = 0;
 cameraTargetX.value = 0;
 cameraTargetY.value = 0;
 cameraTargetZ.value = 0;
@@ -81,13 +77,7 @@ dracoLoader.setDecoderConfig({ type: 'js' });
 dracoLoader.preload();
 gltfLoader.setDRACOLoader(dracoLoader);
 
-// set positions
-const raceTrackPos = new Vector3(0, 0, 0);
-
-const car1Pos = new Vector3(0, 0, 0);
-const car2Pos = new Vector3(5, 0, -5);
-const car3Pos = new Vector3(0, 0, -10);
-
+// set camera positions
 const initialPos = new Vector3(-3.6, 1.4, 5.5); // on intial screen
 const initialTarget = new Vector3(0, 0.46, 0.35); // on intial screen
 
@@ -167,7 +157,6 @@ const setCanvas = () => {
   // Race Track (with Draco)
   gltfLoader.load('/models/RaceTrack.glb', function (gltf) {
     const raceTrackObj = gltf.scene;
-    raceTrackObj.position.copy(raceTrackPos);
     scene.add(raceTrackObj);
   }, undefined, function (error) {
     console.error('raceTrackObj gltfLoader error' + error);
@@ -176,7 +165,6 @@ const setCanvas = () => {
   // Car 1 (with Draco)
   gltfLoader.load('/models/Gen3.glb', function (gltf) {
     const car1Obj = gltf.scene;
-    car1Obj.position.copy(car1Pos);
     scene.add(car1Obj);
   }, undefined, function (error) {
     console.error('car1 gltfLoader error' + error);
@@ -185,7 +173,6 @@ const setCanvas = () => {
   // Car 2 (with Draco)
   gltfLoader.load('/models/Gen3Placeholder-1.glb', function (gltf) {
     const car2Obj = gltf.scene;
-    car2Obj.position.copy(car1Pos);
     scene.add(car2Obj);
   }, undefined, function (error) {
     console.error('car2 gltfLoader error' + error);
@@ -194,7 +181,6 @@ const setCanvas = () => {
   // Car 3 (with Draco)
   gltfLoader.load('/models/Gen3Placeholder-2.glb', function (gltf) {
     const car3Obj = gltf.scene;
-    car3Obj.position.copy(car1Pos);
     scene.add(car3Obj);
   }, undefined, function (error) {
     console.error('car3 gltfLoader error' + error);
@@ -239,7 +225,6 @@ const setCanvas = () => {
     cubeCamera.update(renderer, scene);
     lightProbe.copy(LightProbeGenerator.fromCubeRenderTarget(renderer, cubeRenderTarget));
     lightProbe.intensity = lightProbeIntensity.value;
-    // scene.add(new LightProbeHelper(lightProbe, 5));
   });
 
   // Controls
@@ -305,27 +290,6 @@ const animate = () => {
   renderer.render(scene, camera);
   requestAnimationFrame(animate);
 };
-
-function handleKeyDown(event) {
-  if (event.keyCode === 66) { //66 is "b"
-    window.isBDown = true;
-    console.log("Camera X: " + camera.position.x);
-    console.log("Camera Y: " + camera.position.y);
-    console.log("Camera Z: " + camera.position.z);
-    console.log("Target X: " + controls.target.x);
-    console.log("Target Y: " + controls.target.y);
-    console.log("Target Z: " + controls.target.z);
-  }
-}
-
-function handleKeyUp(event) {
-  if (event.keyCode === 66) {
-    window.isBDown = false;
-  }
-}
-
-window.addEventListener('keydown', handleKeyDown, false);
-window.addEventListener('keyup', handleKeyUp, false);
 
 watch(positionIndex, () => {
   switch (positionIndex.value) {
@@ -451,18 +415,6 @@ watch(toneMappingExposure, () => {
 });
 
 // Camera Coordinates
-watch(cameraPosX, () => {
-  camera.position.x = cameraPosX.value;
-});
-
-watch(cameraPosY, () => {
-  camera.position.y = cameraPosY.value;
-});
-
-watch(cameraPosZ, () => {
-  camera.position.z = cameraPosZ.value;
-});
-
 watch(cameraTargetX, () => {
   controls.target.x = cameraTargetX.value;
 });
@@ -474,6 +426,28 @@ watch(cameraTargetY, () => {
 watch(cameraTargetZ, () => {
   controls.target.z = cameraTargetZ.value;
 });
+
+// Press "B" to print camera and target positions
+function handleKeyDown(event) {
+  if (event.keyCode === 66) { //66 is "b"
+    window.isBDown = true;
+    console.log("Camera X: " + camera.position.x);
+    console.log("Camera Y: " + camera.position.y);
+    console.log("Camera Z: " + camera.position.z);
+    console.log("Target X: " + controls.target.x);
+    console.log("Target Y: " + controls.target.y);
+    console.log("Target Z: " + controls.target.z);
+  }
+}
+
+function handleKeyUp(event) {
+  if (event.keyCode === 66) {
+    window.isBDown = false;
+  }
+}
+
+window.addEventListener('keydown', handleKeyDown, false);
+window.addEventListener('keyup', handleKeyUp, false);
 
 onMounted(() => {
   window.addEventListener('resize', handleResize);

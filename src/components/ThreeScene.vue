@@ -45,7 +45,7 @@ directionalLightIntensity.value = 13 // Directional light intensity
 directionalLightColor.value = 0xFEBF71 // Directional light color 0xF0AC59
 ambientLightIntensity.value = 0 // Ambient light intensity
 ambientLightColor.value = 0x000000 // Ambient light color
-lightProbeIntensity.value = 1 // Light probe intensity
+lightProbeIntensity.value = 0.3 // Light probe intensity
 // Environment
 backgroundIntensity.value = 1.05 // Background intensity
 backgroundBlurriness.value = 0 // Background blur

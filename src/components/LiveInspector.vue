@@ -6,6 +6,13 @@ import { GUI } from 'three/addons/libs/lil-gui.module.min.js';
 const graphicsStore = useGraphicsStore();
 const { directionalLightIntensity, directionalLightColor, ambientLightIntensity, ambientLightColor, lightProbeIntensity, backgroundIntensity, backgroundBlurriness, fogColor, fogNear, fogFar, toneMapping, toneMappingExposure } = storeToRefs(graphicsStore);
 
+// Snippet to add an HDR preview sphere
+// const sphere = new SphereGeometry(0.5, 128, 128);
+// let material = new MeshStandardMaterial({ color: 0xffffff, roughness: 0, metalness: 1 });
+// let mesh = new Mesh(sphere, material);
+// mesh.position.set(0, 2.5, 0);
+// scene.add(mesh);
+
 // gui
 const gui = new GUI({ title: 'Graphics Properties' });
 

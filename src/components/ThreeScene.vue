@@ -153,8 +153,6 @@ const setCanvas = () => {
     scene.backgroundBlurriness = backgroundBlurriness.value;
   });
 
-
-
   // Race Track (with Draco)
   gltfLoader.load('/models/RaceTrack.glb', function (gltf) {
     const raceTrackObj = gltf.scene;

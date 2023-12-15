@@ -150,19 +150,7 @@ const setCanvas = () => {
     scene.backgroundBlurriness = backgroundBlurriness.value;
   });
 
-  // Create HDR equirretangular environment map
-  rgbeLoader.load('/textures/RaceTrack.hdr', (environmentMap) => {
-    //Adding the environment map to the scene
-    environmentMap.mapping = EquirectangularReflectionMapping
-    // scene.background = environmentMap;
-    scene.environment = environmentMap;
 
-    // Rendering the cube camera render target and applying it to the light probe
-    cubeCamera.update(renderer, scene);
-    lightProbe.copy(LightProbeGenerator.fromCubeRenderTarget(renderer, cubeRenderTarget));
-    lightProbe.intensity = lightProbeIntensity.value;
-    // scene.add(new LightProbeHelper(lightProbe, 5));
-  });
 
   // Race Track (with Draco)
   gltfLoader.load('/models/RaceTrack.glb', function (gltf) {
@@ -227,6 +215,20 @@ const setCanvas = () => {
   renderer.toneMapping = CineonToneMapping; // https://threejs.org/docs/#api/en/constants/Renderer
   renderer.toneMappingExposure = 1;
   updateRenderer();
+
+  // Create HDR equirretangular environment map
+  rgbeLoader.load('/textures/RaceTrack.hdr', (environmentMap) => {
+    //Adding the environment map to the scene
+    environmentMap.mapping = EquirectangularReflectionMapping
+    // scene.background = environmentMap;
+    scene.environment = environmentMap;
+
+    // Rendering the cube camera render target and applying it to the light probe
+    cubeCamera.update(renderer, scene);
+    lightProbe.copy(LightProbeGenerator.fromCubeRenderTarget(renderer, cubeRenderTarget));
+    lightProbe.intensity = lightProbeIntensity.value;
+    // scene.add(new LightProbeHelper(lightProbe, 5));
+  });
 
   // Controls
   controls = new OrbitControls(camera, canvas);

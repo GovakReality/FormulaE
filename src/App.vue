@@ -20,7 +20,7 @@ import LiveInspector from './components/LiveInspector.vue';
       <CongratsCard />
       <LeaderboardCard />
       <LoadingScreen />
-      <!-- <LiveInspector /> -->
+      <LiveInspector />
     </v-main>
   </v-app>
 </template>

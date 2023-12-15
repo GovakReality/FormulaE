@@ -41,18 +41,18 @@ let lightProbe;
 
 // Graphic properties
 // Lighting
-directionalLightIntensity.value = 10 // Directional light intensity
-directionalLightColor.value = 0xF0AC59 // Directional light color
+directionalLightIntensity.value = 13 // Directional light intensity
+directionalLightColor.value = 0xFEBF71 // Directional light color 0xF0AC59
 ambientLightIntensity.value = 0 // Ambient light intensity
 ambientLightColor.value = 0x000000 // Ambient light color
 lightProbeIntensity.value = 1 // Light probe intensity
 // Environment
-backgroundIntensity.value = 1 // Background intensity
+backgroundIntensity.value = 1.05 // Background intensity
 backgroundBlurriness.value = 0 // Background blur
 // Fog
-fogColor.value = 0xFFEBC2 // Fog color
-fogNear.value = 30 // Fog near treshold
-fogFar.value = 450 // Fog far treshold
+fogColor.value = 0xFFE9C2 // Fog color 0xFFEBC2
+fogNear.value = 10 // Fog near treshold
+fogFar.value = 435 // Fog far treshold
 // Renderer
 toneMapping.value = CineonToneMapping // Tone mapping type
 toneMappingExposure.value = 1 // Tone mapping exposure

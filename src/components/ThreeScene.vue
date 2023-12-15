@@ -171,19 +171,19 @@ const setCanvas = () => {
     console.error('car1 gltfLoader error' + error);
   });
 
-  // Car 2
-  gltfLoader.load('/models/box.glb', function (gltf) {
+  // Car 2 (with Draco)
+  gltfLoader.load('/models/Gen3Placeholder-1.glb', function (gltf) {
     const car2Obj = gltf.scene;
-    car2Obj.position.copy(car2Pos);
+    car2Obj.position.copy(car1Pos);
     scene.add(car2Obj);
   }, undefined, function (error) {
     console.error('car2 gltfLoader error' + error);
   });
 
-  // Car 3
-  gltfLoader.load('/models/box.glb', function (gltf) {
+  // Car 3 (with Draco)
+  gltfLoader.load('/models/Gen3Placeholder-2.glb', function (gltf) {
     const car3Obj = gltf.scene;
-    car3Obj.position.copy(car3Pos);
+    car3Obj.position.copy(car1Pos);
     scene.add(car3Obj);
   }, undefined, function (error) {
     console.error('car3 gltfLoader error' + error);

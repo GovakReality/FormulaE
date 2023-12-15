@@ -11,6 +11,7 @@ import { gsap } from 'gsap';
 import { usePositionStore } from '/src/stores/PositionStore';
 import { useLoadingStore } from '/src/stores/LoadingStore';
 import { useGraphicsStore } from '/src/stores/GraphicsStore';
+import { useCameraStore } from '/src/stores/CameraStore';
 import { storeToRefs } from 'pinia';
 
 // get stores
@@ -20,6 +21,8 @@ const loadingStore = useLoadingStore();
 const { loadStart, loadComplete, loadError, loadProgress } = storeToRefs(loadingStore);
 const graphicsStore = useGraphicsStore();
 const { directionalLightIntensity, directionalLightColor, ambientLightIntensity, ambientLightColor, lightProbeIntensity, backgroundIntensity, backgroundBlurriness, fogColor, fogNear, fogFar, toneMapping, toneMappingExposure } = storeToRefs(graphicsStore);
+const cameraStore = useCameraStore();
+const { cameraPosX, cameraPosY, cameraPosZ, cameraTargetX, cameraTargetY, cameraTargetZ } = storeToRefs(cameraStore);
 
 // global variables
 const webGl = ref();
@@ -57,6 +60,14 @@ fogFar.value = 435 // Fog far treshold
 toneMapping.value = CineonToneMapping // Tone mapping type
 toneMappingExposure.value = 1 // Tone mapping exposure
 
+// Camera Coordinates
+cameraPosX.value = 0;
+cameraPosY.value = 0;
+cameraPosZ.value = 0;
+cameraTargetX.value = 0;
+cameraTargetY.value = 0;
+cameraTargetZ.value = 0;
+
 // create loaders
 const manager = new LoadingManager();
 const gltfLoader = new GLTFLoader(manager); // cars
@@ -77,32 +88,32 @@ const car1Pos = new Vector3(0, 0, 0);
 const car2Pos = new Vector3(5, 0, -5);
 const car3Pos = new Vector3(0, 0, -10);
 
-const initialPos = new Vector3(-4, 1.5, 7); // on intial screen
-const initialTarget = new Vector3(0, 0.4, 0.35); // on intial screen
+const initialPos = new Vector3(-3.6, 1.4, 5.5); // on intial screen
+const initialTarget = new Vector3(0, 0.46, 0.35); // on intial screen
 
 // car 1 points
-const car1Pos1 = new Vector3(-5, 5, 5);
-const car1Target1 = car1Pos;
-const car1Pos2 = new Vector3(5, 5, 5);
-const car1Target2 = car1Pos;
-const car1Pos3 = new Vector3(-5, 5, 5);
-const car1Target3 = car1Pos;
+const car1Pos1 = new Vector3(2.34, 0.38, 3.51);
+const car1Target1 = new Vector3(1, 0.3, 1.6);
+const car1Pos2 = new Vector3(-0.60, 0.94, 1.43);
+const car1Target2 = new Vector3(0, 0.8, 0.4);
+const car1Pos3 = new Vector3(-2.39, 0.57, -5.02);
+const car1Target3 = new Vector3(-0.32, 0.16, -1.79);
 
 // car 2 points
-const car2Pos1 = new Vector3(10, 5, 0);
-const car2Target1 = car2Pos;
-const car2Pos2 = new Vector3(0, 5, 0);
-const car2Target2 = car2Pos;
-const car2Pos3 = new Vector3(10, 5, 0);
-const car2Target3 = car2Pos;
+const car2Pos1 = new Vector3(2.75, 1.86, -2.72);
+const car2Target1 = new Vector3(6.9, 0.36, -7.69);
+const car2Pos2 = new Vector3(10.2, 1.69, -2.10);
+const car2Target2 = new Vector3(6.9, 0.36, -7.69);
+const car2Pos3 = new Vector3(5.3, 1.6, -14);
+const car2Target3 = new Vector3(6.9, 0.36, -7.69);
 
 // car 3 points
-const car3Pos1 = new Vector3(-5, 5, -5);
-const car3Target1 = car3Pos;
-const car3Pos2 = new Vector3(5, 5, -5);
-const car3Target2 = car3Pos;
-const car3Pos3 = new Vector3(-5, 5, -5);
-const car3Target3 = car3Pos;
+const car3Pos1 = new Vector3(2.68, 1.8, -8.6);
+const car3Target1 = new Vector3(0, 0.36, -14.9);
+const car3Pos2 = new Vector3(-6.7, 1.87, -14.94);
+const car3Target2 = new Vector3(0, 0.36, -14.9);
+const car3Pos3 = new Vector3(4.8, 3.0, -19.10);
+const car3Target3 = new Vector3(0, 0.36, -14.9);
 
 // Loader manager functions
 manager.onStart = function (item, loaded, total) {
@@ -235,8 +246,8 @@ const setCanvas = () => {
   controls = new OrbitControls(camera, canvas);
   controls.enableDamping = true;
   // Controls limit
-  controls.minDistance = 3;
-  controls.maxDistance = 40;
+  controls.minDistance = 3.5;
+  controls.maxDistance = 7;
   controls.maxPolarAngle = (Math.PI / 2) - 0.01;
   //controls.maxAzimuthAngle = (Math.PI/2); // radians
   controls.enablePan = false;
@@ -295,37 +306,68 @@ const animate = () => {
   requestAnimationFrame(animate);
 };
 
+function handleKeyDown(event) {
+  if (event.keyCode === 66) { //66 is "b"
+    window.isBDown = true;
+    console.log("Camera X: " + camera.position.x);
+    console.log("Camera Y: " + camera.position.y);
+    console.log("Camera Z: " + camera.position.z);
+    console.log("Target X: " + controls.target.x);
+    console.log("Target Y: " + controls.target.y);
+    console.log("Target Z: " + controls.target.z);
+  }
+}
+
+function handleKeyUp(event) {
+  if (event.keyCode === 66) {
+    window.isBDown = false;
+  }
+}
+
+window.addEventListener('keydown', handleKeyDown, false);
+window.addEventListener('keyup', handleKeyUp, false);
+
 watch(positionIndex, () => {
   switch (positionIndex.value) {
     case 0:
       cameraMovement(initialPos, initialTarget);
+      controls.minDistance = 3.5;
       break;
     case 1:
       cameraMovement(car1Pos1, car1Target1);
+      controls.minDistance = 1.2;
       break;
     case 2:
       cameraMovement(car1Pos2, car1Target2);
+      controls.minDistance = 1.2;
       break;
     case 3:
       cameraMovement(car1Pos3, car1Target3);
+      controls.minDistance = 1.2;
       break;
     case 4:
       cameraMovement(car2Pos1, car2Target1);
+      controls.minDistance = 3.5;
       break;
     case 5:
       cameraMovement(car2Pos2, car2Target2);
+      controls.minDistance = 3.5;
       break;
     case 6:
       cameraMovement(car2Pos3, car2Target3);
+      controls.minDistance = 3.5;
       break;
     case 7:
       cameraMovement(car3Pos1, car3Target1);
+      controls.minDistance = 3.5;
       break;
     case 8:
       cameraMovement(car3Pos2, car3Target2);
+      controls.minDistance = 3.5;
       break;
     case 9:
       cameraMovement(car3Pos3, car3Target3);
+      controls.minDistance = 3.5;
       break;
     default:
       positionStore.reset();
@@ -402,12 +444,35 @@ watch(toneMapping, () => {
       renderer.toneMapping = CineonToneMapping;
   }
   updateRenderer();
-  console.log(toneMapping.value);
-  console.log(renderer.toneMapping);
 });
 
 watch(toneMappingExposure, () => {
   renderer.toneMappingExposure = toneMappingExposure.value;
+});
+
+// Camera Coordinates
+watch(cameraPosX, () => {
+  camera.position.x = cameraPosX.value;
+});
+
+watch(cameraPosY, () => {
+  camera.position.y = cameraPosY.value;
+});
+
+watch(cameraPosZ, () => {
+  camera.position.z = cameraPosZ.value;
+});
+
+watch(cameraTargetX, () => {
+  controls.target.x = cameraTargetX.value;
+});
+
+watch(cameraTargetY, () => {
+  controls.target.y = cameraTargetY.value;
+});
+
+watch(cameraTargetZ, () => {
+  controls.target.z = cameraTargetZ.value;
 });
 
 onMounted(() => {

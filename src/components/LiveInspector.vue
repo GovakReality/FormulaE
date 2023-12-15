@@ -1,10 +1,13 @@
 <script setup>
 import { useGraphicsStore } from '/src/stores/GraphicsStore';
+import { useCameraStore } from '/src/stores/CameraStore';
 import { storeToRefs } from 'pinia';
 import { GUI } from 'three/addons/libs/lil-gui.module.min.js';
 
 const graphicsStore = useGraphicsStore();
 const { directionalLightIntensity, directionalLightColor, ambientLightIntensity, ambientLightColor, lightProbeIntensity, backgroundIntensity, backgroundBlurriness, fogColor, fogNear, fogFar, toneMapping, toneMappingExposure } = storeToRefs(graphicsStore);
+const cameraStore = useCameraStore();
+const { cameraPosX, cameraPosY, cameraPosZ, cameraTargetX, cameraTargetY, cameraTargetZ } = storeToRefs(cameraStore);
 
 // Snippet to add an HDR preview sphere
 // const sphere = new SphereGeometry(0.5, 128, 128);
@@ -39,6 +42,12 @@ const API = {
     fogFar: fogFar.value,
     toneMapping: toneMappingOptions[toneMapping.value],
     toneMappingExposure: toneMappingExposure.value,
+    cameraPosX: cameraPosX.value,
+    cameraPosY: cameraPosY.value,
+    cameraPosZ: cameraPosZ.value,
+    cameraTargetX: cameraTargetX.value,
+    cameraTargetY: cameraTargetY.value,
+    cameraTargetZ: cameraTargetZ.value,
 };
 
 // Lighting
@@ -123,6 +132,48 @@ folder4.add(API, 'toneMappingExposure', 0, 10, 0.02)
     .name('Tone Mapping Exposure')
     .onChange(function () {
         toneMappingExposure.value = API.toneMappingExposure;
+    });
+
+// Camera Coordinates
+const folder5 = gui.addFolder('Camera Coordinates');
+
+folder5.add(API, 'cameraPosX', -10, 10, 0.02)
+    .name('Camera Pos X')
+    .onChange(function () {
+        cameraPosX.value = API.cameraPosX;
+        console.log(cameraPosX);
+        console.log(cameraPosX.value);
+    })
+    .listen();
+
+folder5.add(API, 'cameraPosY', -10, 10, 0.02)
+    .name('Camera Pos Y')
+    .onChange(function () {
+        cameraPosY.value = API.cameraPosY;
+    });
+
+folder5.add(API, 'cameraPosZ', -10, 10, 0.02)
+    .name('Camera Pos Z')
+    .onChange(function () {
+        cameraPosZ.value = API.cameraPosZ;
+    });
+
+folder5.add(API, 'cameraTargetX', -20, 20, 0.02)
+    .name('Camera Target X')
+    .onChange(function () {
+        cameraTargetX.value = API.cameraTargetX;
+    });
+
+folder5.add(API, 'cameraTargetY', -20, 20, 0.02)
+    .name('Camera Target Y')
+    .onChange(function () {
+        cameraTargetY.value = API.cameraTargetY;
+    });
+
+folder5.add(API, 'cameraTargetZ', -20, 20, 0.02)
+    .name('Camera Target Z')
+    .onChange(function () {
+        cameraTargetZ.value = API.cameraTargetZ;
     });
 
 // Forcing GUI Z-Index

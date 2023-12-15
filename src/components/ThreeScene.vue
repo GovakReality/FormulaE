@@ -50,9 +50,9 @@ lightProbeIntensity.value = 1 // Light probe intensity
 backgroundIntensity.value = 1 // Background intensity
 backgroundBlurriness.value = 0 // Background blur
 // Fog
-fogColor.value = 0xF5C86E // Fog color
-fogNear.value = 100 // Fog near treshold
-fogFar.value = 500 // Fog far treshold
+fogColor.value = 0xFFEBC2 // Fog color
+fogNear.value = 30 // Fog near treshold
+fogFar.value = 450 // Fog far treshold
 // Renderer
 toneMapping.value = CineonToneMapping // Tone mapping type
 toneMappingExposure.value = 1 // Tone mapping exposure

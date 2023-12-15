@@ -45,7 +45,7 @@ directionalLightIntensity.value = 13 // Directional light intensity
 directionalLightColor.value = 0xFEBF71 // Directional light color 0xF0AC59
 ambientLightIntensity.value = 0 // Ambient light intensity
 ambientLightColor.value = 0x000000 // Ambient light color
-lightProbeIntensity.value = 1 // Light probe intensity
+lightProbeIntensity.value = 0.3 // Light probe intensity
 // Environment
 backgroundIntensity.value = 1.05 // Background intensity
 backgroundBlurriness.value = 0 // Background blur
@@ -171,19 +171,19 @@ const setCanvas = () => {
     console.error('car1 gltfLoader error' + error);
   });
 
-  // Car 2
-  gltfLoader.load('/models/box.glb', function (gltf) {
+  // Car 2 (with Draco)
+  gltfLoader.load('/models/Gen3Placeholder-1.glb', function (gltf) {
     const car2Obj = gltf.scene;
-    car2Obj.position.copy(car2Pos);
+    car2Obj.position.copy(car1Pos);
     scene.add(car2Obj);
   }, undefined, function (error) {
     console.error('car2 gltfLoader error' + error);
   });
 
-  // Car 3
-  gltfLoader.load('/models/box.glb', function (gltf) {
+  // Car 3 (with Draco)
+  gltfLoader.load('/models/Gen3Placeholder-2.glb', function (gltf) {
     const car3Obj = gltf.scene;
-    car3Obj.position.copy(car3Pos);
+    car3Obj.position.copy(car1Pos);
     scene.add(car3Obj);
   }, undefined, function (error) {
     console.error('car3 gltfLoader error' + error);

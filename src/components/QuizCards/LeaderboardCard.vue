@@ -133,7 +133,11 @@
                 </td>
               </tr>
               <tr>
-                <td colspan="3" class="g-top">TOP 10</td>
+                <td colspan="3" class="g-top">
+                  <v-icon icon="mdi-chevron-up" class="pr-10"></v-icon>
+                  <span>TOP 10</span>
+                  <v-icon icon="mdi-chevron-up" class="pl-10"></v-icon>
+                </td>
               </tr> 
               <tr>
                 <td class="g-pos g-pl px-1">27</td>
@@ -238,6 +242,14 @@
   color:#F0F0F0;
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.25) 100%), #F0F0F0;
   width: 100%;
+}
+.g-top i {
+  font-size: 45px;
+}
+.g-top span {
+  display: inline-block;
+  vertical-align: middle;
+  margin-top: 1px;
 }
 .g-pl {
   color:#28673C;

@@ -11,7 +11,7 @@
   const quizStore = useQuizStore();
 
   const expand = ref(false);
-  const show = ref(true);////////////////
+  const show = ref(false);
 
   const players = [
     {
@@ -71,7 +71,7 @@
 
   watch(cardIndex, () => {
     if (cardIndex.value == 12) {
-      //show.value = true;
+      show.value = true;
       setTimeout(() => expand.value = true, 100);
     } else {
       expand.value = false;
@@ -83,10 +83,10 @@
   };
 
   const onAfterLeave = (el) => {
-    //show.value = false;
-    //cardsStore.reset();
-    //positionStore.reset();
-    //quizStore.reset();
+    show.value = false;
+    cardsStore.reset();
+    positionStore.reset();
+    quizStore.reset();
   }    
 </script>
 
@@ -126,7 +126,10 @@
                 :key="item.name"
               >
                 <td class="g-pos px-1">{{ item.position }}</td>
-                <td class="g-name">{{ item.name }}</td>
+                <td class="g-name">
+                  {{ item.name }}
+                  <span v-if="item.finalist" class="g-flag"></span>
+                </td>
                 <td class="g-points">{{ item.points }} PTS</td>
                 <td v-if="item.finalist" class="g-final px-0">
                   <div class="px-3 py-2">finalist</div>
@@ -222,6 +225,17 @@
   font-weight: 700;
   background-color: #F0F0F0;
   color: #000000;
+  position: relative;
+}
+.g-flag {
+  display: inline-block;
+  background-image:url('/images/LeaderboardFlags.png');
+  background-size:100% 100%;
+  width: 17px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 .g-points {
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%),#F0F0F0;

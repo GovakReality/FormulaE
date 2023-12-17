@@ -138,7 +138,7 @@
   </v-sheet>
   <v-sheet v-if="show" class="g-hud">
     <v-slide-y-reverse-transition group>
-      <v-sheet v-if="expand">
+      <v-sheet v-if="expand" class="g-hud-w">
         <span class="g-hud-round px-5 py-2">ROUND 0{{ round }}/09</span>
         <span class="g-hud-points px-5 py-2">+{{timeLeftFixed}} PTS</span>
       </v-sheet>    
@@ -183,6 +183,9 @@
   max-width: 100%;
   bottom: 56px;
   right: 38px;
+}
+.g-hud-w {
+  background-color: transparent;
 }
 .g-hud-round {
   opacity: 0.9;

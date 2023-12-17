@@ -94,7 +94,7 @@
   <v-sheet v-if="show" class="d-flex align-center justify-center h-100 pa-10">
     <v-slide-y-reverse-transition @after-leave="onAfterLeave" group>
       <v-sheet v-if="expand" class="g-sheet" position="relative" color="transparent">
-        <v-card class="g-card py-5 rounded-s-xl" variant="flat">
+        <v-card class="g-card py-5 rounded-s-xl rounded-e-0" variant="flat">
           <v-card-item class="text-center">            
             <v-img src="/images/SaudiaLogo.png" width="138" class="text-center justify-center mx-auto" ></v-img>
             <h3 class="g-title font-weight-bold pt-8">
@@ -128,7 +128,7 @@
                 <td class="g-pos px-1">{{ item.position }}</td>
                 <td class="g-name">{{ item.name }}</td>
                 <td class="g-points">{{ item.points }} PTS</td>
-                <td v-if="item.finalist" class="g-final pl-0">
+                <td v-if="item.finalist" class="g-final px-0">
                   <div class="px-3 py-2">finalist</div>
                 </td>
               </tr>
@@ -153,10 +153,11 @@
   background-color: transparent;
 }
 .g-card{
+  color: #F0F0F0;
   background: linear-gradient(68deg, #07361C 9.84%, #28673C 76.17%);
   max-width: 100%;
   width: 413px;
-  color: #F0F0F0;
+  height: 624px;
 }
 .g-title {
   font-size: 26px;
@@ -197,7 +198,8 @@
 }
 .g-names-list {
   max-width: 100%;
-  width: 552px;
+  width: 642px;
+  height: 624px;
 }
 .g-pos {
   font-size: 18px;
@@ -226,7 +228,6 @@
   text-align: left;
   font-weight: 500;  
   text-align: right;
-  width: 175px;
 }
 .g-top {
   font-size: 20px;

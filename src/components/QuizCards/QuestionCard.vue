@@ -10,11 +10,10 @@
   const cardsStore = useCardsStore();
   const { cardIndex } = storeToRefs(cardsStore);
   const quizStore = useQuizStore();
-  const { question } = storeToRefs(quizStore);
+  const { question, round } = storeToRefs(quizStore);
 
   const expand = ref(false);
   const show = ref(false);
-  const round = ref(0);
 
   watch(cardIndex, () => {
     if (cardIndex.value >= 2 && cardIndex.value < 11) {
@@ -26,7 +25,7 @@
   });
 
   const expandCard = () => {
-    round.value++;
+    quizStore.incrementRound();
     quizStore.newQuestion();
     setTimeout(() => expand.value = true, 100);
   };

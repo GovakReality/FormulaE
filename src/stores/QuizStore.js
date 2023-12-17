@@ -5,12 +5,18 @@ import questionsData from '/src/assets/questions.json';
 export const useQuizStore = defineStore('quiz', () => {
 
   const question = ref();
+  const round = ref(0);
   let questionsList = [];
   let alreadyIdx = [];
+
+  function incrementRound() {
+    round.value++;
+  };
 
   function reset() {
     questionsList = [];
     alreadyIdx = [];
+    round.value = 0;
   };
 
   function setDificulty(val) {
@@ -42,5 +48,5 @@ export const useQuizStore = defineStore('quiz', () => {
     }
   }
 
-  return { question, reset, setDificulty, newQuestion };
+  return { question, round, incrementRound, reset, setDificulty, newQuestion };
 })

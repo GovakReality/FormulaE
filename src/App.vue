@@ -6,6 +6,7 @@ import CongratsCard from './components/QuizCards/CongratsCard.vue';
 import LeaderboardCard from './components/QuizCards/LeaderboardCard.vue';
 import LoadingScreen from './components/LoadingScreen.vue';
 import Lockup from './components/Lockup.vue';
+import GenInfo from './components/GenInfo.vue';
 import LiveInspector from './components/LiveInspector.vue';
 </script>
 
@@ -19,6 +20,7 @@ import LiveInspector from './components/LiveInspector.vue';
       <QuizCards />
       <CongratsCard />
       <LeaderboardCard />
+      <GenInfo />
       <LoadingScreen />
       <!-- <LiveInspector /> -->
     </v-main>

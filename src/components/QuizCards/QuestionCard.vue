@@ -2,7 +2,7 @@
   import { usePositionStore } from '/src/stores/PositionStore';
   import { useCardsStore } from '/src/stores/CardsStore';
   import { useQuizStore } from '/src/stores/QuizStore';
-  import { ref, watch } from 'vue';
+  import { ref, watch, computed } from 'vue';
   import { storeToRefs } from 'pinia';
 
   const positionStore = usePositionStore();
@@ -14,6 +14,9 @@
 
   const expand = ref(false);
   const show = ref(false);
+
+  const maxPoints = 6.000;
+  const timeLeft = ref(parseFloat(maxPoints));
 
   watch(cardIndex, () => {
     if (cardIndex.value >= 2 && cardIndex.value < 11) {
@@ -28,6 +31,34 @@
     quizStore.incrementRound();
     quizStore.newQuestion();
     setTimeout(() => expand.value = true, 100);
+    startTimer();
+  };
+
+  let interval;
+  const timer = () => {
+    clearInterval(interval);
+    interval = setInterval(() => {
+      timeLeft.value -= 0.01;
+      if(timeLeft.value <= 0){
+        timeLeft.value = 0.000;
+        clearInterval(interval);
+        contractCard();
+      }      
+    }, 10)
+  }; 
+
+  const timeLeftFixed = computed(() => {
+    return timeLeft.value.toFixed(3).replace(".",",");
+  });
+
+  const timeBar = computed(() => {
+    let x = normalizeToRange(timeLeft.value, 0, maxPoints, 0, 10);
+    return ((10 - x) * 10).toFixed(0);
+  });
+
+  const startTimer = () => {
+    timeLeft.value = maxPoints;
+    timer();
   };
 
   const contractCard = () => {
@@ -44,7 +75,7 @@
     cardsStore.incrementCardIndex();
   }   
   
-  
+  const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - oldMin) * (newMax - newMin)) / (oldMax - oldMin)) + newMin;
 </script>
 
 <template>
@@ -56,6 +87,15 @@
       color="#F0F0F0"
       variant="elevated"
       >
+      <template v-slot:loader="{ isActive }">
+        <v-progress-linear
+          :active="true"
+          :model-value="timeBar"
+          color="#28673c"
+          height="5"
+        ></v-progress-linear>
+      </template>
+
         <v-card-item>
           <div class="g-round mb-1 font-weight-bold">
             ROUND {{ round }}
@@ -100,7 +140,7 @@
     <v-slide-y-reverse-transition group>
       <v-sheet v-if="expand">
         <span class="g-hud-round px-5 py-2">ROUND 0{{ round }}/09</span>
-        <span class="g-hud-points px-5 py-2">+9,570 PTS</span>
+        <span class="g-hud-points px-5 py-2">+{{timeLeftFixed}} PTS</span>
       </v-sheet>    
     </v-slide-y-reverse-transition>        
   </v-sheet>  
@@ -160,5 +200,9 @@
   font-weight: 700;
   font-size: 18px;
   color: #F0F0F0;  
+}
+:deep(.v-card__loader) {
+  bottom: 0;
+  top: auto;
 }
 </style>

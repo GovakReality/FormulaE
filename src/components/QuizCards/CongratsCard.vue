@@ -1,15 +1,18 @@
 <script setup>
+  import { usePositionStore } from '/src/stores/PositionStore';
   import { useCardsStore } from '/src/stores/CardsStore';
   import { useQuizStore } from '/src/stores/QuizStore';
   import { ref, watch } from 'vue';
   import { storeToRefs } from 'pinia';
 
+  const positionStore = usePositionStore();
   const cardsStore = useCardsStore();
   const { cardIndex } = storeToRefs(cardsStore);
   const quizStore = useQuizStore();
 
   const expand = ref(false);
   const show = ref(false);
+  const shouldReset = ref(false);
 
   const terms = ref(false);
   const fullName = ref('');
@@ -33,6 +36,7 @@
 
   watch(cardIndex, () => {
     if (cardIndex.value == 11) {
+      shouldReset.value = false;
       show.value = true;
       setTimeout(() => expand.value = true, 100);
     } else {
@@ -46,10 +50,21 @@
     expand.value = false;
   }  
 
+  const tryAgainClick = (event) => {
+    expand.value = false;
+    shouldReset.value = true;
+  };
+
   const onAfterLeave = (el) => {
     show.value = false;
-    cardsStore.incrementCardIndex();
-  }    
+    if (shouldReset.value) {
+      cardsStore.reset();
+      positionStore.reset();
+      quizStore.reset();
+    } else {
+      cardsStore.incrementCardIndex();
+    }
+  };
 </script>
 
 <template>
@@ -73,7 +88,7 @@
             Your score is:
           </h3>          
           <div class="g-points font-weight-bold py-10 px-5">
-            64,2564 PTS
+            64,254 PTS
           </div>          
           <div class="g-text pb-6 px-7">
             Enter your information to win exclusive Formula E prizes and find your place on the leaderboard!
@@ -109,9 +124,16 @@
             <v-btn type="submit" rounded="xl" variant="tonal" :slim="false" class="g-bt font-weight-black my-2">CONTINUE</v-btn>
           </v-form>                 
         </v-card-item>
-      </v-card>
+      </v-card>     
     </v-slide-y-reverse-transition>
   </v-sheet>
+  <v-sheet v-if="show" class="g-try">
+    <v-slide-y-reverse-transition >
+      <v-btn v-if="expand" rounded="xl" variant="tonal" :slim="false" @click="tryAgainClick" class="g-try-bt font-weight-black">
+        TRY AGAIN
+      </v-btn>
+    </v-slide-y-reverse-transition>        
+  </v-sheet>  
 </template>
 
 <style scoped>
@@ -149,9 +171,28 @@
 
 :deep(.v-btn--variant-tonal .v-btn__underlay) {
   opacity: 0.4;
+  background-color: white;
 }
 
 :deep(.v-btn.v-btn--density-default) {
   height: 46px;
+}
+
+.g-try {
+  background-color: transparent;
+  position: absolute;
+  z-index: 90;
+  max-width: 100%;
+  bottom: 56px;
+  right: 38px;
+}
+.g-try-bt {
+  font-family: Saudia Sans;
+  line-height: normal;
+  font-size: 18px;
+  text-transform: uppercase;
+  color: #28673C; 
+  background-color: white;
+  width: 183px;
 }
 </style>

@@ -15,7 +15,7 @@
   const expand = ref(false);
   const show = ref(false);
 
-  const maxPoints = 10.000;
+  const maxPoints = 10.000; 
   const timeLeft = ref(parseFloat(maxPoints));
 
   watch(cardIndex, () => {
@@ -34,6 +34,21 @@
     startTimer();
   };
 
+  const contractCard = () => {
+    expand.value = false;
+  };
+
+  const onClick = (val, event) => {
+    //logica da resposta correta e pontuaçao
+    contractCard();
+  };
+  
+  const onAfterLeave = (el) => {
+    positionStore.increment();
+    cardsStore.incrementCardIndex();
+  }  
+   
+  // timer
   let interval;
   const timer = () => {
     clearInterval(interval);
@@ -60,21 +75,46 @@
     timeLeft.value = maxPoints;
     timer();
   };
+///////////////////
+  //let lastTime = (new Date()).getTime();
+	//let milliseconds = maxPoints.value;
+/*   let animFrame;
+  let now = performance.now();
 
-  const contractCard = () => {
-    expand.value = false;
+  const timer = () => {
+    let currentTime = performance.now();
+    let distance = (currentTime - now);
+    console.log(distance.toFixed(3))
+    animFrame = requestAnimationFrame(timer);
+		if (distance > 1000) {
+      lastTime = currentTime;
+      timeLeft.value--;
+      console.log(timeLeft.value)
+    } 
+     console.log(timeLeft.value)
+    if(distance <= 0){
+      timeLeft.value = 0.000;
+      //cancelAnimationFrame(animFrame);
+      //contractCard();
+    } else {
+      animFrame = requestAnimationFrame(timer);
+    } 
+  };*/
+
+/*   const startTimer = () => {
+    timeLeft.value = parseFloat(maxPoints);
+    timer();
   };
 
-  const onClick = (val, event) => {
-    //logica da resposta correta e pontuaçao
-    contractCard();
-  };
-  
-  const onAfterLeave = (el) => {
-    positionStore.increment();
-    cardsStore.incrementCardIndex();
-  }   
-  
+  const timeLeftFixed = computed(() => {
+    return timeLeft.value.toFixed(3).replace(".",",");
+  });
+
+  const timeBar = computed(() => {
+    let x = normalizeToRange(timeLeft.value, 0, maxPoints, 0, 100);
+    return x.toFixed(0);
+  }); */
+
   const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - oldMin) * (newMax - newMin)) / (oldMax - oldMin)) + newMin;
 </script>
 

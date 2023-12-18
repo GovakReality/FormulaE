@@ -8,4 +8,14 @@ export default defineConfig({
     vue(),
     //vuetify(),
   ],
+  server: {
+    proxy: {
+      "/leaderboard": {
+        target: "https://if040cyo8k.execute-api.eu-central-1.amazonaws.com/",
+        changeOrigin: true,
+        secure: false,
+        ws: true,
+      },
+    },
+  }  
 })

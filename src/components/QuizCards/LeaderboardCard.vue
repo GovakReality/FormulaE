@@ -2,6 +2,7 @@
   import { usePositionStore } from '/src/stores/PositionStore';
   import { useCardsStore } from '/src/stores/CardsStore';
   import { useQuizStore } from '/src/stores/QuizStore';
+  import { useAPIStore } from '/src/stores/APIStore';
   import { ref, watch } from 'vue';
   import { storeToRefs } from 'pinia';
 
@@ -9,6 +10,8 @@
   const cardsStore = useCardsStore();
   const { cardIndex } = storeToRefs(cardsStore);
   const quizStore = useQuizStore();
+  const APIStore = useAPIStore();
+  const { leaderboard } = storeToRefs(APIStore);
 
   const expand = ref(false);
   const show = ref(false);
@@ -71,6 +74,8 @@
 
   watch(cardIndex, () => {
     if (cardIndex.value == 12) {
+      //APIStore.fetchLeaderboard();
+      //console.log(leaderboard)
       show.value = true;
       setTimeout(() => expand.value = true, 100);
     } else {

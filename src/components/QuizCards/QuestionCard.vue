@@ -15,7 +15,7 @@
   const expand = ref(false);
   const show = ref(false);
 
-  const maxPoints = 6.000;
+  const maxPoints = 10.000;
   const timeLeft = ref(parseFloat(maxPoints));
 
   watch(cardIndex, () => {
@@ -93,6 +93,7 @@
           :model-value="timeBar"
           color="#28673c"
           height="5"
+          reverse
         ></v-progress-linear>
       </template>
 

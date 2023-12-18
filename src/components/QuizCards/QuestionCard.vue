@@ -53,7 +53,7 @@
 
   const timeBar = computed(() => {
     let x = normalizeToRange(timeLeft.value, 0, maxPoints, 0, 10);
-    return ((10 - x) * 10).toFixed(0);
+    return (x * 10).toFixed(0);
   });
 
   const startTimer = () => {
@@ -93,7 +93,6 @@
           :model-value="timeBar"
           color="#28673c"
           height="5"
-          reverse
         ></v-progress-linear>
       </template>
 

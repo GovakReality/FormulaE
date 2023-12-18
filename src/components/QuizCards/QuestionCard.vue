@@ -92,6 +92,7 @@
           :active="true"
           :model-value="timeBar"
           color="#28673c"
+          bg-color="#28673c"
           height="5"
         ></v-progress-linear>
       </template>
@@ -207,5 +208,8 @@
 :deep(.v-card__loader) {
   bottom: 0;
   top: auto;
+}
+:deep(.v-progress-linear__background) {
+  opacity: 0.3;
 }
 </style>

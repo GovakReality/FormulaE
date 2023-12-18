@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@mdi/font": "^7.3.67",
+    "axios": "^1.6.2",
     "gsap": "^3.12.3",
     "pinia": "^2.1.7",
     "three": "^0.159.0",

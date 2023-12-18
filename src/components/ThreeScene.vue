@@ -92,10 +92,11 @@ const car1Target3 = new Vector3(-0.32, 0.16, -1.79);
 // car 2 points
 const car2Pos1 = new Vector3(2.75, 1.86, -2.72);
 const car2Target1 = new Vector3(6.9, 0.36, -7.69);
-const car2Pos2 = new Vector3(10.2, 1.69, -2.10);
+const car2Pos2 = new Vector3(5.3, 1.6, -14);
 const car2Target2 = new Vector3(6.9, 0.36, -7.69);
-const car2Pos3 = new Vector3(5.3, 1.6, -14);
+const car2Pos3 = new Vector3(10.2, 1.69, -2.10);
 const car2Target3 = new Vector3(6.9, 0.36, -7.69);
+
 
 // car 3 points
 const car3Pos1 = new Vector3(2.68, 1.8, -8.6);

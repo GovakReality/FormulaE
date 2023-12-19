@@ -2,6 +2,7 @@
   import { usePositionStore } from '/src/stores/PositionStore';
   import { useCardsStore } from '/src/stores/CardsStore';
   import { useQuizStore } from '/src/stores/QuizStore';
+  import { useAPIStore } from '/src/stores/APIStore';
   import { ref, watch } from 'vue';
   import { storeToRefs } from 'pinia';
 
@@ -9,10 +10,14 @@
   const cardsStore = useCardsStore();
   const { cardIndex } = storeToRefs(cardsStore);
   const quizStore = useQuizStore();
+  const APIStore = useAPIStore();
+  const { APIStatus } = storeToRefs(APIStore);
+
 
   const expand = ref(false);
   const show = ref(false);
   const shouldReset = ref(false);
+  const loading = ref(false);
 
   const terms = ref(false);
   const fullName = ref('');
@@ -26,13 +31,13 @@
       if (value?.length > 1) return true
       return 'Full name must be at least 2 characters.'
     },
-  ]
+  ];
   const emailRules = [
     value => {
       if (value) return true
       return 'You must enter a valid email.'
     }, 
-  ]
+  ];
 
   watch(cardIndex, () => {
     if (cardIndex.value == 11) {
@@ -44,11 +49,21 @@
     }
   });
 
-  async function submit (event) {
-    event.preventDefault();
-    console.log('submit')
-    expand.value = false;
-  }  
+  const submit = async (event) => {
+    //event.preventDefault();
+    loading.value = true;
+    APIStore.sendPlayer();
+  };
+
+  watch(APIStatus, () => {
+    if (APIStatus.value == 1) {
+      loading.value = false;
+      expand.value = false;
+    } else {
+      loading.value = false;
+      //tratar erro
+    }
+  });
 
   const tryAgainClick = (event) => {
     expand.value = false;
@@ -121,7 +136,7 @@
               label="I am 18 years old or older, and I have read, and agreed with our  Terms & Conditions and Privacy Policy."
             ></v-checkbox>
 
-            <v-btn type="submit" rounded="xl" variant="tonal" :slim="false" class="g-bt font-weight-black my-2">CONTINUE</v-btn>
+            <v-btn :loading="loading" type="submit" rounded="xl" variant="tonal" :slim="false" class="g-bt font-weight-black my-2">CONTINUE</v-btn>
           </v-form>                 
         </v-card-item>
       </v-card>     

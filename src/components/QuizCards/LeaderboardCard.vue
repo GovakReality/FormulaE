@@ -16,7 +16,7 @@
   const expand = ref(false);
   const show = ref(false);
 
-  const players = [
+/*   const players = [
     {
       name: 'JORDAN Mitchell',
       position: '1',
@@ -70,18 +70,22 @@
       position: '10',
       points: '73,051'
     }
-  ]
+  ] */
 
   watch(cardIndex, () => {
     if (cardIndex.value == 12) {
-      //APIStore.fetchLeaderboard();
-      //console.log(leaderboard)
       show.value = true;
+      console.log(leaderboard.value)
+      //leaderboard.value.forEach(i => console.log(i))
       setTimeout(() => expand.value = true, 100);
     } else {
       expand.value = false;
     }
   });
+
+/*   const players = computed(() => {
+    return timeLeft.value.toFixed(3).replace(".",",");
+  }); */
 
   const onClick = (event) => {
     expand.value = false;
@@ -127,7 +131,7 @@
           <v-table class="g-table">
             <tbody>
               <tr
-                v-for="item in players"
+                v-for="item in leaderboard"
                 :key="item.name"
               >
                 <td class="g-pos px-1">{{ item.position }}</td>
@@ -135,7 +139,7 @@
                   {{ item.name }}
                   <span v-if="item.finalist" class="g-flag"></span>
                 </td>
-                <td class="g-points">{{ item.points }} PTS</td>
+                <td class="g-points">{{ item.points }} <span v-if="item.points">PTS</span></td>
                 <td v-if="item.finalist" class="g-final px-0">
                   <div class="px-3 py-2">finalist</div>
                 </td>

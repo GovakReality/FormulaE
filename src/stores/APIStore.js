@@ -1,31 +1,40 @@
 import { defineStore } from 'pinia';
-import { ref } from 'vue';
+import { ref, toRaw } from 'vue';
 import axios from "axios";
 
 export const useAPIStore = defineStore('API', () => {
 
-  const url = 'https://if040cyo8k.execute-api.eu-central-1.amazonaws.com/';
-  let leaderboard = ref([]);
+  //const url = 'https://if040cyo8k.execute-api.eu-central-1.amazonaws.com/';
+  const leaderboard = ref();
+  const APIStatus = ref(0);// 0 = undefined / 1 = ok / 2 = error  
 
   const fetchLeaderboard = async () => {
-   
-/*       const data = await axios.get(url + 'leaderboard', {
-        withCredentials: false,
-        headers: {
-          'content-type': 'application/json'
-        }
-    }) */
     const data = await axios.get('/leaderboard')    
     .then((res) => {
       leaderboard.value = res.data;
-      //console.log(res.data[0])
-      //console.log(leaderboard.value[0])
+      APIStatus.value = 1;
     })
-    .catch((err) => console.error(err));   
-/*     const response = await fetch("/leaderboard");
-    const data = await response.json();
-    console.log(data) */
+    .catch((err) => {
+      APIStatus.value = 2;
+      console.error(err);
+    });  
   }
 
-  return { leaderboard, fetchLeaderboard };
+  const sendPlayer = async () => {
+    const data = await axios.post('/items', {
+      score: 2424,
+      full_name: 'test form',
+      email: 'test@email.com',
+    })
+         .then((res) => {
+            fetchLeaderboard();
+         })
+         .catch((error) => {
+            APIStatus.value = 2;
+         }).finally(() => {
+             //Perform action in always
+         });
+  }
+
+  return { leaderboard, APIStatus, fetchLeaderboard, sendPlayer};
 })

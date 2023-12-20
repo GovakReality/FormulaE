@@ -16,17 +16,104 @@
 
   const expand = ref(false);
   const show = ref(false);
+  const isTopTen = ref(false);
+  const formattedPlayers = ref([]);
+
+/*   fullName.value = 'Heather Reynolds234';
+  score.value = '80,317'; */
+
+/*   const players = ref([
+    {
+      full_name: 'JORDAN Mitchell',
+      score: '82,546',
+    },
+    {
+      full_name: 'Heather Reynolds',
+      score: '80,317',
+    },
+    {
+      full_name: 'Heather Reynolds2',
+      score: '80,317',
+    },
+    {
+      full_name: 'Heather Reynolds2',
+      score: '80,317',
+    },
+    {
+      full_name: 'Heather Reynolds2',
+      score: '80,317',
+    },
+    {
+      full_name: 'Heather Reynolds23',
+      score: '80,317',
+    },
+    {
+      full_name: 'Heather Reynolds23',
+      score: '80,317',
+    },
+    {
+      full_name: 'Heather Reynolds23',
+      score: '80,317',
+    },
+    {
+      full_name: 'Heather Reynolds23',
+      score: '80,317',
+    },
+    {
+      full_name: 'Heather Reynolds23',
+      score: '80,317',
+    },
+    {
+      full_name: 'Heather Reynolds234',
+      score: '80,317',
+    },
+    {
+      full_name: 'Heather Reynolds2',
+      score: '80,317',
+    },
+
+  ]); */
 
   watch(cardIndex, () => {
     if (cardIndex.value == 12) {
       show.value = true;
+      formatLeaderboard();
       setTimeout(() => expand.value = true, 100);
     } else {
       expand.value = false;
     }
   });
 
-  const playersFinalists = computed(() => {
+  const formatLeaderboard = () => {
+    players.value.forEach((item, index) => {
+      if (index < 10) {
+        if (item.full_name == fullName.value && item.score == score.value) {
+          item = {...item, 'current': true};
+          isTopTen.value = true;
+        }
+      }
+      if (index < 3) {
+        item = {...item, 'finalist': true};
+      }
+      formattedPlayers.value.push(item);
+    });
+    let rows = 10;
+    if(isTopTen.value) {
+      rows = 12;
+    }
+    let blank = rows - formattedPlayers.value.length;
+    if (blank > 0) {
+      for(let i = 0; i < blank; i++) {
+        formattedPlayers.value.push('');
+      }
+    } else if (blank < 0) {
+      for(let i = 0; i > blank; i--) {
+        formattedPlayers.value.pop();
+      }
+    }
+  };
+
+/*   const playersFinalists = computed(() => {
     return players.value.map((el, index) => {
       return index < 3 ? {...el, finalist: true} : {...el};
     });
@@ -34,9 +121,9 @@
 
   const playersChecked = computed(() => {
     return playersFinalists.value.map((el, index) => {
-      return (el.full_name == fullName && el.score == score)? {...el, current: true} : {...el};
+      return index == currentIndex.value ? {...el, current: true} : {...el};
     });
-  });
+  }); */
 
   const onClick = (event) => {
     expand.value = false;
@@ -92,10 +179,10 @@
           <v-table class="g-table">
             <tbody>
               <tr
-                v-for="(item, index) in playersChecked"
+                v-for="(item, index) in formattedPlayers"
                 :key="item.full_name"
               >
-                <td class="g-pos px-1">{{ index + 1 }}</td>
+                <td class="g-pos px-1"> <span v-if="item.full_name">{{ index + 1 }}</span></td>
                 <td class="g-name" :class="{ current: item.current }">
                   {{ item.full_name }}
                   <span v-if="item.finalist" class="g-flag"></span>
@@ -105,17 +192,17 @@
                   <div class="px-3 py-2">finalist</div>
                 </td>
               </tr>
-              <tr>
+              <tr v-if="!isTopTen">
                 <td colspan="3" class="g-top">
                   <v-icon icon="mdi-chevron-up" class="pr-10"></v-icon>
                   <span>TOP 10</span>
                   <v-icon icon="mdi-chevron-up" class="pl-10"></v-icon>
                 </td>
               </tr> 
-              <tr>
-                <td class="g-pos current px-1">27</td>
-                <td class="g-name current">JOHN DOE</td>
-                <td class="g-score current">64,232 PTS</td>
+              <tr v-if="!isTopTen">
+                <td class="g-pos current px-1"></td>
+                <td class="g-name current">{{fullName}}</td>
+                <td class="g-score current">{{score}} PTS</td>
               </tr>                                   
             </tbody>
           </v-table>

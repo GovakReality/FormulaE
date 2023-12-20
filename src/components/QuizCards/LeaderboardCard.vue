@@ -3,7 +3,7 @@
   import { useCardsStore } from '/src/stores/CardsStore';
   import { useQuizStore } from '/src/stores/QuizStore';
   import { useAPIStore } from '/src/stores/APIStore';
-  import { ref, watch } from 'vue';
+  import { ref, watch, computed } from 'vue';
   import { storeToRefs } from 'pinia';
 
   const positionStore = usePositionStore();
@@ -11,81 +11,81 @@
   const { cardIndex } = storeToRefs(cardsStore);
   const quizStore = useQuizStore();
   const APIStore = useAPIStore();
-  const { leaderboard } = storeToRefs(APIStore);
+  const { players } = storeToRefs(APIStore);
 
   const expand = ref(false);
   const show = ref(false);
 
-/*   const players = [
+  /* const players = ref([
     {
       name: 'JORDAN Mitchell',
       position: '1',
-      points: '82,546',
+      score: '82,546',
       finalist: true
     },
     {
       name: 'Heather Reynolds',
       position: '2',
-      points: '80,317',
+      score: '80,317',
       finalist: true
     },
     {
       name: 'Wesley Anderson',
       position: '3',
-      points: '80,293',
+      score: '80,293',
       finalist: true
     },
     {
       name: 'Natalie Chambers',
       position: '4',
-      points: '78,601'
+      score: '78,601'
     },
     {
       name: 'Victor Ramirez',
       position: '5',
-      points: '78,187'
+      score: '78,187'
     },
     {
       name: 'Chloe Bennett',
       position: '6',
-      points: '77,125'
+      score: '77,125'
     },
     {
       name: 'Desmond Thompson',
       position: '7',
-      points: '76,528'
+      score: '76,528'
     },
     {
       name: 'Morgan Foster',
       position: '8',
-      points: '76,198'
+      score: '76,198'
     },
     {
       name: 'Lily Morgan',
       position: '9',
-      points: '74,914'
+      score: '74,914'
     },
     {
       name: 'Adrian Sanchez',
       position: '10',
-      points: '73,051'
+      score: '73,051'
     }
-  ] */
+  ]); */
 
   watch(cardIndex, () => {
     if (cardIndex.value == 12) {
       show.value = true;
-      console.log(leaderboard.value)
-      //leaderboard.value.forEach(i => console.log(i))
       setTimeout(() => expand.value = true, 100);
     } else {
       expand.value = false;
     }
   });
 
-/*   const players = computed(() => {
-    return timeLeft.value.toFixed(3).replace(".",",");
-  }); */
+  const playersComp = computed(() => {
+    return players.value.map((el, index) => {
+      return index < 3 ? {...el, finalist: true} : el;
+    });
+  });
 
   const onClick = (event) => {
     expand.value = false;
@@ -131,15 +131,15 @@
           <v-table class="g-table">
             <tbody>
               <tr
-                v-for="item in leaderboard"
-                :key="item.name"
+                v-for="(item, index) in playersComp"
+                :key="item.full_name"
               >
-                <td class="g-pos px-1">{{ item.position }}</td>
+                <td class="g-pos px-1">{{ index + 1 }}</td>
                 <td class="g-name">
-                  {{ item.name }}
+                  {{ item.full_name }}
                   <span v-if="item.finalist" class="g-flag"></span>
                 </td>
-                <td class="g-points">{{ item.points }} <span v-if="item.points">PTS</span></td>
+                <td class="g-score">{{ item.score }} <span v-if="item.score">PTS</span></td>
                 <td v-if="item.finalist" class="g-final px-0">
                   <div class="px-3 py-2">finalist</div>
                 </td>
@@ -154,7 +154,7 @@
               <tr>
                 <td class="g-pos g-pl px-1">27</td>
                 <td class="g-name g-pl">JOHN DOE</td>
-                <td class="g-points g-pl">64,232 PTS</td>
+                <td class="g-score g-pl">64,232 PTS</td>
               </tr>                                   
             </tbody>
           </v-table>
@@ -246,7 +246,7 @@
   top: 0;
   right: 0;
 }
-.g-points {
+.g-score {
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%),#F0F0F0;
   color: #000000;
   font-size: 20px;

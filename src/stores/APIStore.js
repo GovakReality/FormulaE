@@ -21,12 +21,11 @@ export const useAPIStore = defineStore('API', () => {
     });  
   }
 
-  const sendPlayer = async () => {
-    fetchLeaderboard();    
-/*     const data = await axios.post('/items', {
-      score: 2424,
-      full_name: 'test form',
-      email: 'test@email.com',
+  const sendPlayer = async (val) => {   
+    const data = await axios.post('/items', {
+      score: val.score,
+      full_name: val.full_name,
+      email: val.email,
     })
     .then((res) => {
       fetchLeaderboard();
@@ -35,7 +34,7 @@ export const useAPIStore = defineStore('API', () => {
       APIStatus.value = 2;
     }).finally(() => {
         //Perform action in always
-    }); */
+    });
   }
 
   return { players, APIStatus, fetchLeaderboard, sendPlayer};

@@ -22,6 +22,7 @@
   const terms = ref(false);
   const fullName = ref('');
   const email = ref('');
+
   const fullNameRules = [
     value => {
       if (value) return true
@@ -50,9 +51,12 @@
   });
 
   const submit = async (event) => {
-    //event.preventDefault();
     loading.value = true;
-    APIStore.sendPlayer();
+    APIStore.sendPlayer({
+      score: 777.1,
+      full_name: fullName.value,
+      email: email.value,
+    });
   };
 
   watch(APIStatus, () => {

@@ -19,7 +19,7 @@
   const shouldReset = ref(false);
   const loading = ref(false);
 
-  const canSubmit = ref(false);
+  const isFormValid = ref(false);
   const terms = ref(false);
   const fullName = ref('');
   const email = ref('');
@@ -36,10 +36,20 @@
   ];
   const emailRules = [
     value => {
-      if (value) return true
-      return 'You must enter a valid email.'
-    }, 
+          if (value) return true
+          return 'E-mail is requred.'
+        },
+        value => {
+          if (/.+@.+\..+/.test(value)) return true
+          return 'E-mail must be valid.'
+        },
   ];
+  const termsRules = [
+    value => {
+          if (value) return true
+          return ''
+        },
+  ];  
 
   watch(cardIndex, () => {
     if (cardIndex.value == 11) {
@@ -53,7 +63,7 @@
 
   const submit = async (event) => {
     loading.value = true;
-    if (canSubmit) {
+    if (isFormValid) {
       APIStore.sendPlayer({
         score: 777.1,
         full_name: fullName.value,
@@ -116,7 +126,7 @@
           <div class="g-text pb-6 px-7">
             Enter your information to win exclusive Formula E prizes and find your place on the leaderboard!
           </div>    
-          <v-form @submit.prevent="submit" class="px-6 pt-4">
+          <v-form @submit.prevent="submit" class="px-6 pt-4" v-model="isFormValid">
             <v-text-field
               v-model="fullName"
               label="Full name"
@@ -125,6 +135,7 @@
               rounded="lg"
               bg-color="white"
               class="g-tfield"
+              required
             ></v-text-field>
       
             <v-text-field
@@ -136,15 +147,17 @@
               rounded="lg"
               bg-color="white"
               class="g-tfield my-4"
+              required
             ></v-text-field>
       
             <v-checkbox
               v-model="terms"
+              :rules="termsRules"
               :center-affix=false
               label="I am 18 years old or older, and I have read, and agreed with our  Terms & Conditions and Privacy Policy."
             ></v-checkbox>
 
-            <v-btn :loading="loading" type="submit" rounded="xl" variant="tonal" :slim="false" :disabled="!terms" class="g-bt font-weight-black my-2">CONTINUE</v-btn>
+            <v-btn :loading="loading" type="submit" rounded="xl" variant="tonal" :slim="false" :disabled="!isFormValid" class="g-bt font-weight-black my-2">CONTINUE</v-btn>
           </v-form>                 
         </v-card-item>
       </v-card>     

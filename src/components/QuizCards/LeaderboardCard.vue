@@ -51,12 +51,21 @@
         <v-card class="g-card py-5 rounded-s-xl rounded-e-0" variant="flat">
           <v-card-item class="text-center">            
             <v-img src="/images/SaudiaLogo.png" width="138" class="text-center justify-center mx-auto" ></v-img>
-            <h3 class="g-title font-weight-bold pt-8">
+            
+<!--             <h3 class="g-title font-weight-bold pt-8">
               You are currently in:
             </h3>          
             <div class="g-place font-weight-bold py-8 px-5">
               27<small>th</small>
-            </div>   
+            </div> -->
+
+            <h3 class="g-title font-weight-bold pt-8">
+              Your score is:
+            </h3>          
+            <div class="g-points font-weight-bold py-10 px-5">
+              64,254 PTS
+            </div> 
+
             <h3 class="g-title font-weight-bold py-2 px-7">
               Tip: you can try answering faster to score more points!
             </h3>                 
@@ -134,6 +143,11 @@
   font-family: IBM Plex Sans;
   line-height: normal;
   font-size: 56px;
+}
+.g-points {
+  font-family: IBM Plex Sans;
+  line-height: normal;
+  font-size: 46px;
 }
 .g-place small {
   font-size: 42px;

@@ -262,8 +262,8 @@
 .g-table {
   background-color: transparent;
 }
-.g-table table td{
-  height:50px;
+.g-table table td {
+  border: none !important;
 }
 .g-names-list {
   max-width: 100%;

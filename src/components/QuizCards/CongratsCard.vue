@@ -47,7 +47,7 @@
   const termsRules = [
     value => {
           if (value) return true
-          return ''
+          return 'You should agree.'
         },
   ];  
 
@@ -131,7 +131,7 @@
               v-model="fullName"
               label="Full name"
               :rules="fullNameRules"
-              variant="outlined"
+              variant="solo"
               rounded="lg"
               bg-color="white"
               class="g-tfield"
@@ -143,7 +143,7 @@
               label="E-mail"
               type="email"
               :rules="emailRules"
-              variant="outlined"
+              variant="solo"
               rounded="lg"
               bg-color="white"
               class="g-tfield my-4"
@@ -198,6 +198,15 @@
 .g-tfield {
   max-width: 100%;
 }
+:deep(.v-messages) {
+  font-size: 15px;
+  padding-top: 3px;
+  padding-bottom: 1px 
+}
+:deep(.v-field__input ) {
+  min-height: 60px;
+}
+
 .g-bt {
   font-size: 18px;
   width: 183px;

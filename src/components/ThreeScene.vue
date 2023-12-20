@@ -17,7 +17,7 @@ import { storeToRefs } from 'pinia';
 const positionStore = usePositionStore();
 const { positionIndex } = storeToRefs(positionStore);
 const loadingStore = useLoadingStore();
-const { loadStart, loadComplete, loadError, loadProgress } = storeToRefs(loadingStore);
+const { loadStart, loadComplete, loadError, loadProgress, errorUrl } = storeToRefs(loadingStore);
 const graphicsStore = useGraphicsStore();
 const { directionalLightIntensity, directionalLightColor, ambientLightIntensity, ambientLightColor, lightProbeIntensity, backgroundIntensity, backgroundBlurriness, fogColor, fogNear, fogFar, toneMapping, toneMappingExposure } = storeToRefs(graphicsStore);
 const cameraStore = useCameraStore();
@@ -125,6 +125,7 @@ manager.onProgress = function (item, loaded, total) {
 
 manager.onError = function (url) {
   // console.log('Error loading');
+  errorUrl.value = url;
   loadError.value = true;
 };
 

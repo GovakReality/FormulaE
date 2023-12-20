@@ -13,11 +13,12 @@
   const APIStore = useAPIStore();
   const { APIStatus } = storeToRefs(APIStore);
 
-
   const expand = ref(false);
   const show = ref(false);
   const shouldReset = ref(false);
   const loading = ref(false);
+  const showError = ref(false);
+  const errorMsg = ref('');
 
   const isFormValid = ref(false);
   const terms = ref(false);
@@ -76,9 +77,11 @@
     if (APIStatus.value == 1) {
       loading.value = false;
       expand.value = false;
-    } else {
+    } else if (APIStatus.value > 1) {
+      errorMsg.value = 'ERROR ' + APIStatus.value + ': Please wait a few minutes before you try again.';
+      showError.value = true;
       loading.value = false;
-      //tratar erro
+      APIStatus.value = 0;
     }
   });
 
@@ -160,6 +163,24 @@
             <v-btn :loading="loading" type="submit" rounded="xl" variant="tonal" :slim="false" :disabled="!isFormValid" class="g-bt font-weight-black my-2">CONTINUE</v-btn>
           </v-form>                 
         </v-card-item>
+        <v-snackbar
+          v-model="showError"
+          multi-line
+          color="error"
+          elevation="16"
+          timeout="-1"
+          >
+          {{ errorMsg }}
+          <template v-slot:actions>
+            <v-btn
+              color="white"
+              variant="text"
+              @click="showError = !showError"
+            >
+              Close
+            </v-btn>
+          </template>
+        </v-snackbar>
       </v-card>     
     </v-slide-y-reverse-transition>
   </v-sheet>

@@ -10,6 +10,7 @@
   const cardsStore = useCardsStore();
   const { cardIndex } = storeToRefs(cardsStore);
   const quizStore = useQuizStore();
+  const { fullName, email, score } = storeToRefs(quizStore);
   const APIStore = useAPIStore();
   const { players } = storeToRefs(APIStore);
 
@@ -25,9 +26,15 @@
     }
   });
 
-  const playersComp = computed(() => {
+  const playersFinalists = computed(() => {
     return players.value.map((el, index) => {
-      return index < 3 ? {...el, finalist: true} : el;
+      return index < 3 ? {...el, finalist: true} : {...el};
+    });
+  });
+
+  const playersChecked = computed(() => {
+    return playersFinalists.value.map((el, index) => {
+      return (el.full_name == fullName && el.score == score)? {...el, current: true} : {...el};
     });
   });
 
@@ -63,7 +70,7 @@
               Your score is:
             </h3>          
             <div class="g-points font-weight-bold py-10 px-5">
-              64,254 PTS
+              {{score}} PTS
             </div> 
 
             <h3 class="g-title font-weight-bold py-2 px-7">
@@ -85,11 +92,11 @@
           <v-table class="g-table">
             <tbody>
               <tr
-                v-for="(item, index) in playersComp"
+                v-for="(item, index) in playersChecked"
                 :key="item.full_name"
               >
                 <td class="g-pos px-1">{{ index + 1 }}</td>
-                <td class="g-name">
+                <td class="g-name" :class="{ current: item.current }">
                   {{ item.full_name }}
                   <span v-if="item.finalist" class="g-flag"></span>
                 </td>
@@ -106,9 +113,9 @@
                 </td>
               </tr> 
               <tr>
-                <td class="g-pos g-pl px-1">27</td>
-                <td class="g-name g-pl">JOHN DOE</td>
-                <td class="g-score g-pl">64,232 PTS</td>
+                <td class="g-pos current px-1">27</td>
+                <td class="g-name current">JOHN DOE</td>
+                <td class="g-score current">64,232 PTS</td>
               </tr>                                   
             </tbody>
           </v-table>
@@ -233,7 +240,7 @@
   vertical-align: middle;
   margin-top: 1px;
 }
-.g-pl {
+.current {
   color:#28673C;
 }
 .g-final {

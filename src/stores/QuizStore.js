@@ -6,6 +6,10 @@ export const useQuizStore = defineStore('quiz', () => {
 
   const question = ref();
   const round = ref(0);
+  const score = ref(999.2);
+  const fullName = ref('');
+  const email = ref('');
+
   let questionsList = [];
   let alreadyIdx = [];
 
@@ -48,5 +52,5 @@ export const useQuizStore = defineStore('quiz', () => {
     }
   }
 
-  return { question, round, incrementRound, reset, setDificulty, newQuestion };
+  return { question, round, fullName, email, score, incrementRound, reset, setDificulty, newQuestion };
 })

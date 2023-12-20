@@ -10,6 +10,7 @@
   const cardsStore = useCardsStore();
   const { cardIndex } = storeToRefs(cardsStore);
   const quizStore = useQuizStore();
+  const { fullName, email, score } = storeToRefs(quizStore);
   const APIStore = useAPIStore();
   const { APIStatus } = storeToRefs(APIStore);
 
@@ -22,8 +23,6 @@
 
   const isFormValid = ref(false);
   const terms = ref(false);
-  const fullName = ref('');
-  const email = ref('');
 
   const fullNameRules = [
     value => {
@@ -66,7 +65,7 @@
     loading.value = true;
     if (isFormValid) {
       APIStore.sendPlayer({
-        score: 777.1,
+        score: score,
         full_name: fullName.value,
         email: email.value,
       });
@@ -124,7 +123,7 @@
             Your score is:
           </h3>          
           <div class="g-points font-weight-bold py-10 px-5">
-            64,254 PTS
+            {{score}} PTS
           </div>          
           <div class="g-text pb-6 px-7">
             Enter your information to win exclusive Formula E prizes and find your place on the leaderboard!

@@ -16,62 +16,6 @@
   const expand = ref(false);
   const show = ref(false);
 
-  /* const players = ref([
-    {
-      name: 'JORDAN Mitchell',
-      position: '1',
-      score: '82,546',
-      finalist: true
-    },
-    {
-      name: 'Heather Reynolds',
-      position: '2',
-      score: '80,317',
-      finalist: true
-    },
-    {
-      name: 'Wesley Anderson',
-      position: '3',
-      score: '80,293',
-      finalist: true
-    },
-    {
-      name: 'Natalie Chambers',
-      position: '4',
-      score: '78,601'
-    },
-    {
-      name: 'Victor Ramirez',
-      position: '5',
-      score: '78,187'
-    },
-    {
-      name: 'Chloe Bennett',
-      position: '6',
-      score: '77,125'
-    },
-    {
-      name: 'Desmond Thompson',
-      position: '7',
-      score: '76,528'
-    },
-    {
-      name: 'Morgan Foster',
-      position: '8',
-      score: '76,198'
-    },
-    {
-      name: 'Lily Morgan',
-      position: '9',
-      score: '74,914'
-    },
-    {
-      name: 'Adrian Sanchez',
-      position: '10',
-      score: '73,051'
-    }
-  ]); */
-
   watch(cardIndex, () => {
     if (cardIndex.value == 12) {
       show.value = true;
@@ -96,6 +40,7 @@
     cardsStore.reset();
     positionStore.reset();
     quizStore.reset();
+    APIStore.reset();
   }    
 </script>
 

@@ -19,6 +19,7 @@
   const shouldReset = ref(false);
   const loading = ref(false);
 
+  const canSubmit = ref(false);
   const terms = ref(false);
   const fullName = ref('');
   const email = ref('');
@@ -52,11 +53,13 @@
 
   const submit = async (event) => {
     loading.value = true;
-    APIStore.sendPlayer({
-      score: 777.1,
-      full_name: fullName.value,
-      email: email.value,
-    });
+    if (canSubmit) {
+      APIStore.sendPlayer({
+        score: 777.1,
+        full_name: fullName.value,
+        email: email.value,
+      });
+    }
   };
 
   watch(APIStatus, () => {
@@ -80,6 +83,7 @@
       cardsStore.reset();
       positionStore.reset();
       quizStore.reset();
+      APIStore.reset();
     } else {
       cardsStore.incrementCardIndex();
     }
@@ -140,7 +144,7 @@
               label="I am 18 years old or older, and I have read, and agreed with our  Terms & Conditions and Privacy Policy."
             ></v-checkbox>
 
-            <v-btn :loading="loading" type="submit" rounded="xl" variant="tonal" :slim="false" class="g-bt font-weight-black my-2">CONTINUE</v-btn>
+            <v-btn :loading="loading" type="submit" rounded="xl" variant="tonal" :slim="false" :disabled="!terms" class="g-bt font-weight-black my-2">CONTINUE</v-btn>
           </v-form>                 
         </v-card-item>
       </v-card>     

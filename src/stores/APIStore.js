@@ -37,5 +37,9 @@ export const useAPIStore = defineStore('API', () => {
     });
   }
 
-  return { players, APIStatus, fetchLeaderboard, sendPlayer};
+  function reset() {
+    APIStatus.value = 0;
+  };
+
+  return { players, APIStatus, fetchLeaderboard, sendPlayer, reset};
 })

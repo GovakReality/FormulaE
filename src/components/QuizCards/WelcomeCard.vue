@@ -56,7 +56,7 @@
             class="text-center justify-center mx-auto"
           ></v-img>
           <h3 class="g-title font-weight-bold my-1 py-6 px-1">
-            Take a quiz now and grab your chance to win exclusive prizes!
+            Take a quiz now for the chance to win exclusive prizes!
           </h3>
         </v-card-item>
         <v-card-actions class="text-center justify-center">

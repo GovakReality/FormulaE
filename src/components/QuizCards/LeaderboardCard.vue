@@ -161,7 +161,7 @@
             </div> 
 
             <h3 class="g-title font-weight-bold py-2 px-7">
-              Tip: you can try answering faster to score more points!
+              Tip: answer faster to score more points!
             </h3>                 
             <div class="g-text py-9 px-9">
               If you're among the finalists by the end of the contest, you will be notified via email about your prize. 

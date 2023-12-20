@@ -126,7 +126,7 @@
             {{score}} PTS
           </div>          
           <div class="g-text pb-6 px-7">
-            Enter your information to win exclusive Formula E prizes and find your place on the leaderboard!
+            Enter your information below to register for the prize draw:
           </div>    
           <v-form @submit.prevent="submit" class="px-6 pt-4" v-model="isFormValid">
             <v-text-field
@@ -156,7 +156,7 @@
               v-model="terms"
               :rules="termsRules"
               :center-affix=false
-              label="I am 18 years old or older, and I have read, and agreed with our  Terms & Conditions and Privacy Policy."
+              label="I confirm that I am over 18 years of age and accept the terms and conditions and the Saudia Airlines Privacy Policy."
             ></v-checkbox>
 
             <v-btn :loading="loading" type="submit" rounded="xl" variant="tonal" :slim="false" :disabled="!isFormValid" class="g-bt font-weight-black my-2">CONTINUE</v-btn>

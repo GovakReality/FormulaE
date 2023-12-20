@@ -91,11 +91,11 @@ const car1Target3 = new Vector3(-0.32, 0.16, -1.79);
 
 // car 2 points
 const car2Pos1 = new Vector3(2.75, 1.86, -2.72);
-const car2Target1 = new Vector3(6.9, 0.36, -7.69);
+const car2Target1 = new Vector3(6.1, 0.36, -7.69);
 const car2Pos2 = new Vector3(5.3, 1.6, -14);
-const car2Target2 = new Vector3(6.9, 0.36, -7.69);
+const car2Target2 = new Vector3(6.1, 0.36, -7.69);
 const car2Pos3 = new Vector3(10.2, 1.69, -2.10);
-const car2Target3 = new Vector3(6.9, 0.36, -7.69);
+const car2Target3 = new Vector3(6.1, 0.36, -7.69);
 
 
 // car 3 points
@@ -172,7 +172,7 @@ const setCanvas = () => {
   });
 
   // Car 2 (with Draco)
-  gltfLoader.load('/models/Gen3Placeholder-1.glb', function (gltf) {
+  gltfLoader.load('/models/Gen2.glb', function (gltf) {
     const car2Obj = gltf.scene;
     scene.add(car2Obj);
   }, undefined, function (error) {
@@ -180,7 +180,7 @@ const setCanvas = () => {
   });
 
   // Car 3 (with Draco)
-  gltfLoader.load('/models/Gen3Placeholder-2.glb', function (gltf) {
+  gltfLoader.load('/models/Gen1.glb', function (gltf) {
     const car3Obj = gltf.scene;
     scene.add(car3Obj);
   }, undefined, function (error) {

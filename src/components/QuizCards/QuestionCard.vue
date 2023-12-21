@@ -1,16 +1,13 @@
 <script setup>
-  import { usePositionStore } from '/src/stores/PositionStore';
   import { useCardsStore } from '/src/stores/CardsStore';
   import { useQuizStore } from '/src/stores/QuizStore';
   import { ref, watch, computed } from 'vue';
   import { storeToRefs } from 'pinia';
 
-  const positionStore = usePositionStore();
-  const { positionIndex } = storeToRefs(positionStore);
   const cardsStore = useCardsStore();
   const { cardIndex } = storeToRefs(cardsStore);
   const quizStore = useQuizStore();
-  const { question, round, score } = storeToRefs(quizStore);
+  const { question, round, score, shouldCameraMove, quizEnded } = storeToRefs(quizStore);
 
   const expand = ref(false);
   const show = ref(false);
@@ -49,8 +46,9 @@
   });
 
   const expandCard = () => {
-    quizStore.incrementRound();
     quizStore.newQuestion(genType.value);
+    quizStore.incrementRound();
+    shouldCameraMove.value = true;
     setTimeout(() => {
       expand.value = true;
       if(cardIndex.value == 2) {
@@ -64,6 +62,8 @@
     expand.value = false;
     if(cardIndex.value == 10) {
         expandHud.value = false;
+        quizEnded.value = true;
+        shouldCameraMove.value = true;
       }    
   };
 
@@ -77,7 +77,6 @@
   };
   
   const onAfterLeave = (el) => {
-    positionStore.increment();
     cardsStore.incrementCardIndex();
   }  
    

@@ -9,7 +9,9 @@ export const useQuizStore = defineStore('quiz', () => {
   const score = ref(0);
   const fullName = ref('');
   const email = ref('');
-  const actualGenType = ref('')
+  const actualGenType = ref('');
+  const shouldCameraMove = ref(false);
+  const quizEnded = ref(false);
 
   let gen1QuestionsList = [];
   let gen2QuestionsList = [];
@@ -27,6 +29,8 @@ export const useQuizStore = defineStore('quiz', () => {
     randIdxs = [];
     round.value = 0;
     score.value = 0;
+    shouldCameraMove.value = false;
+    quizEnded.value = false;
   };
 
   function setDificulty(val) {
@@ -89,5 +93,5 @@ export const useQuizStore = defineStore('quiz', () => {
     return shuffledInput;
   }; */
 
-  return { question, round, fullName, email, score, incrementRound, reset, setDificulty, newQuestion, addScore };
+  return { question, round, fullName, email, score, shouldCameraMove, quizEnded, incrementRound, reset, setDificulty, newQuestion, addScore };
 })

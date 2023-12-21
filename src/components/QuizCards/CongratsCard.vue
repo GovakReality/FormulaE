@@ -1,12 +1,10 @@
 <script setup>
-  import { usePositionStore } from '/src/stores/PositionStore';
   import { useCardsStore } from '/src/stores/CardsStore';
   import { useQuizStore } from '/src/stores/QuizStore';
   import { useAPIStore } from '/src/stores/APIStore';
   import { ref, watch } from 'vue';
   import { storeToRefs } from 'pinia';
 
-  const positionStore = usePositionStore();
   const cardsStore = useCardsStore();
   const { cardIndex } = storeToRefs(cardsStore);
   const quizStore = useQuizStore();
@@ -93,7 +91,6 @@
     show.value = false;
     if (shouldReset.value) {
       cardsStore.reset();
-      positionStore.reset();
       quizStore.reset();
       APIStore.reset();
     } else {

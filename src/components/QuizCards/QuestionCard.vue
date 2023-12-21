@@ -14,6 +14,7 @@
 
   const expand = ref(false);
   const show = ref(false);
+  const expandHud = ref(false);
 
   const maxPoints = parseFloat(10.000); 
   const timeLeft = ref(maxPoints);
@@ -30,12 +31,20 @@
   const expandCard = () => {
     quizStore.incrementRound();
     quizStore.newQuestion();
-    setTimeout(() => expand.value = true, 100);
+    setTimeout(() => {
+      expand.value = true;
+      if(cardIndex.value == 2) {
+        expandHud.value = true;
+      }
+    }, 100);
     startTimer();
   };
 
   const contractCard = () => {
     expand.value = false;
+    if(cardIndex.value == 10) {
+        expandHud.value = false;
+      }    
   };
 
   const onClick = (val, event) => {
@@ -219,7 +228,7 @@ const startTimer = () => {
   </v-sheet>
   <v-sheet v-if="show" class="g-hud">
     <v-slide-y-reverse-transition group>
-      <v-sheet v-if="expand" class="g-hud-w">
+      <v-sheet v-if="expandHud" class="g-hud-w">
         <span class="g-hud-total px-5 py-2">{{score.toFixed(3)}} PTS</span>
         <span class="g-hud-round px-5 py-2">ROUND 0{{ round }}/09</span>
         <span class="g-hud-score px-5 py-2">+{{timeLeftFixed}} PTS</span>

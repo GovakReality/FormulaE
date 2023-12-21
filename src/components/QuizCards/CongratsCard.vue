@@ -167,7 +167,7 @@
           multi-line
           color="error"
           elevation="16"
-          timeout="-1"
+          timeout="10000"
           >
           {{ errorMsg }}
           <template v-slot:actions>

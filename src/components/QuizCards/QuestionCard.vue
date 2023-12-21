@@ -15,22 +15,42 @@
   const expand = ref(false);
   const show = ref(false);
   const expandHud = ref(false);
+  const genType = ref('');
 
   const maxPoints = parseFloat(10.000); 
   const timeLeft = ref(maxPoints);
 
   watch(cardIndex, () => {
     if (cardIndex.value >= 2 && cardIndex.value < 11) {
-      show.value = true;
+      switch (cardIndex.value) {
+        case (2):
+        case (3):
+        case (4):
+          genType.value = 'gen3';
+          break;
+        case (5):
+        case (6):
+        case (7):
+          genType.value = 'gen2';
+          break;
+        case (8):
+        case (9):
+        case (10):
+          genType.value = 'gen1';
+          break;
+        default:
+          genType.value = 'gen3';
+      };
+      show.value = true; 
       expandCard();
     } else {
       show.value = false;
-    }
+    }      
   });
 
   const expandCard = () => {
     quizStore.incrementRound();
-    quizStore.newQuestion();
+    quizStore.newQuestion(genType.value);
     setTimeout(() => {
       expand.value = true;
       if(cardIndex.value == 2) {

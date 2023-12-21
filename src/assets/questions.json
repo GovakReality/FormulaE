@@ -6,7 +6,10 @@
     "answer3": "22",
     "answer4": "24",
     "correct": 2,
-    "difficulty": ["easy", "medium"]  
+    "difficulty": ["easy"],
+    "type": "gen1",
+    "camPosition": [2.68, 1.8, -8.6],
+    "camTarget": [0, 0.36, -14.9]
   },
   {
     "question": "What was the primary composition material of Gen1 tyres?",
@@ -15,7 +18,10 @@
     "answer3": "Bio-based",
     "answer4": "Recycled",
     "correct": 4,
-    "difficulty": ["easy", "medium"]  
+    "difficulty": ["easy"],
+    "type": "gen1",
+    "camPosition": [-6.7, 1.87, -14.94],
+    "camTarget": [0, 0.36, -14.9] 
   },
   {
     "question": "What was the average lifespan, in kilometers, of a set of tires used in a race by Gen1 Formula E cars?",
@@ -24,7 +30,10 @@
     "answer3": "60",
     "answer4": "80",
     "correct": 3,
-    "difficulty": ["easy", "hard"]  
+    "difficulty": ["easy"],
+    "type": "gen1",
+    "camPosition": [4.8, 3.0, -19.10],
+    "camTarget": [0, 0.36, -14.9]   
   },
   {
     "question": "What was the battery capacity of Gen1 cars?",
@@ -33,7 +42,10 @@
     "answer3": "54 kWh",
     "answer4": "70 kWh",
     "correct": 1,
-    "difficulty": ["easy", "medium"]  
+    "difficulty": ["medium"],
+    "type": "gen1",
+    "camPosition": [2.68, 1.8, -8.6],
+    "camTarget": [0, 0.36, -14.9]
   },
   {
     "question": "How many laps could a Gen1 car typically complete on a single battery charge?",
@@ -42,7 +54,10 @@
     "answer3": "30-35",
     "answer4": "40-45",
     "correct": 1,
-    "difficulty": ["easy", "medium"]  
+    "difficulty": ["medium"],
+    "type": "gen1",
+    "camPosition": [-6.7, 1.87, -14.94],
+    "camTarget": [0, 0.36, -14.9] 
   },
   {
     "question": "What technology was used in the battery cells of Gen1 cars?",
@@ -51,7 +66,10 @@
     "answer3": "Lithium-polymer",
     "answer4": "Lead-acid",
     "correct": 2,
-    "difficulty": ["medium", "hard"]  
+    "difficulty": ["medium"],
+    "type": "gen1",
+    "camPosition": [4.8, 3.0, -19.10],
+    "camTarget": [0, 0.36, -14.9]   
   },
   {
     "question": "What was the top speed of Gen1 cars?",
@@ -60,7 +78,10 @@
     "answer3": "225 km/h",
     "answer4": "250 km/h",
     "correct": 3,
-    "difficulty": ["medium", "hard"]  
+    "difficulty": ["hard"],
+    "type": "gen1",
+    "camPosition": [2.68, 1.8, -8.6],
+    "camTarget": [0, 0.36, -14.9] 
   },
   {
     "question": "How long in seconds did it take for Gen1 cars to go from 0 to 100 km/h?",
@@ -69,7 +90,10 @@
     "answer3": "4.0",
     "answer4": "5.5",
     "correct": 4,
-    "difficulty": ["easy"]  
+    "difficulty": ["hard"],
+    "type": "gen1",
+    "camPosition": [-6.7, 1.87, -14.94],
+    "camTarget": [0, 0.36, -14.9]  
   },
   {
     "question": "What factor primarily limited the top speed of Gen1 cars?",
@@ -78,7 +102,10 @@
     "answer3": "Battery capacity",
     "answer4": "Motor power",
     "correct": 1,
-    "difficulty": ["medium"]  
+    "difficulty": ["hard"],
+    "type": "gen1",
+    "camPosition": [4.8, 3.0, -19.10],
+    "camTarget": [0, 0.36, -14.9]  
   },
   {
     "question": "How many gears do Gen2 cars typically have in their gearbox?",
@@ -87,7 +114,10 @@
     "answer3": "3",
     "answer4": "4",
     "correct": 3,
-    "difficulty": ["hard"]  
+    "difficulty": ["easy"],
+    "type": "gen2",
+    "camPosition": [2.75, 1.86, -2.72],
+    "camTarget": [6.1, 0.36, -7.69] 
   },
   {
     "question": "Which company supplied the tyres for Gen2 cars?",
@@ -96,7 +126,10 @@
     "answer3": "Bridgestone",
     "answer4": "Goodyear",
     "correct": 1,
-    "difficulty": ["medium"]  
+    "difficulty": ["easy"],
+    "type": "gen2",
+    "camPosition": [5.3, 1.6, -14],
+    "camTarget": [6.1, 0.36, -7.69]
   },
   {
     "question": "What technical feature did Gen2 tires introduce to improve energy efficiency?",
@@ -105,7 +138,10 @@
     "answer3": "Aerodynamic tread",
     "answer4": "Weight reduction",
     "correct": 3,
-    "difficulty": ["easy", "medium"]  
+    "difficulty": ["easy"],
+    "type": "gen2",
+    "camPosition": [10.2, 1.69, -2.10],
+    "camTarget": [6.1, 0.36, -7.69]
   },
   {
     "question": "Who was the battery manufacturer for the Gen2 cars?",
@@ -114,7 +150,10 @@
     "answer3": "Williams",
     "answer4": "LG Chem",
     "correct": 3,
-    "difficulty": ["easy", "medium"]  
+    "difficulty": ["medium"],
+    "type": "gen2",
+    "camPosition": [2.75, 1.86, -2.72],
+    "camTarget": [6.1, 0.36, -7.69]
   },
   {
     "question": "What was a significant improvement in the Gen2 car’s battery compared to Gen1?",
@@ -123,7 +162,10 @@
     "answer3": "Lower weight",
     "answer4": "Longer lifespan",
     "correct": 3,
-    "difficulty": ["easy", "medium"]  
+    "difficulty": ["medium"],
+    "type": "gen2",
+    "camPosition": [5.3, 1.6, -14],
+    "camTarget": [6.1, 0.36, -7.69]
   },
   {
     "question": "What specific challenge did teams face with the increased battery capacity of Gen2 cars?",
@@ -132,7 +174,10 @@
     "answer3": "Reduced speed",
     "answer4": "Increased weight",
     "correct": 3,
-    "difficulty": ["easy", "medium"]  
+    "difficulty": ["medium"],
+    "type": "gen2",
+    "camPosition": [10.2, 1.69, -2.10],
+    "camTarget": [6.1, 0.36, -7.69]
   },
   {
     "question": "What type of main brakes did Gen2 cars use?",
@@ -141,7 +186,10 @@
     "answer3": "ReGenerative",
     "answer4": "Air",
     "correct": 3,
-    "difficulty": ["easy", "medium"]  
+    "difficulty": ["hard"],
+    "type": "gen2",
+    "camPosition": [2.75, 1.86, -2.72],
+    "camTarget": [6.1, 0.36, -7.69]
   },
   {
     "question": "What was a key challenge for drivers when adapting to the braking system of Gen2 cars?",
@@ -150,7 +198,10 @@
     "answer3": "Tire wear",
     "answer4": "High sensitivity",
     "correct": 3,
-    "difficulty": ["easy", "medium"]  
+    "difficulty": ["hard"],
+    "type": "gen2",
+    "camPosition": [5.3, 1.6, -14],
+    "camTarget": [6.1, 0.36, -7.69]
   },
   {
     "question": "What specific feature of the Gen2 car's braking system allowed for more precise energy management?",
@@ -159,7 +210,10 @@
     "answer3": "Dynamic brake bias",
     "answer4": "Enhanced brake pads",
     "correct": 3,
-    "difficulty": ["easy", "medium"]  
+    "difficulty": ["hard"],
+    "type": "gen2",
+    "camPosition": [10.2, 1.69, -2.10],
+    "camTarget": [6.1, 0.36, -7.69]
   },
   {
     "question": "What is the approximate top speed of Gen3 cars?",
@@ -168,7 +222,10 @@
     "answer3": "280 km/h",
     "answer4": "320 km/h",
     "correct": 3,
-    "difficulty": ["easy", "medium"]  
+    "difficulty": ["easy"],
+    "type": "gen3",
+    "camPosition": [2.34, 0.38, 3.51],
+    "camTarget": [1, 0.3, 1.6]
   },
   {
     "question": "What is the maximum reGeneration power of the Gen3 car's braking system?",
@@ -177,7 +234,10 @@
     "answer3": "250 kW",
     "answer4": "350 kW",
     "correct": 3,
-    "difficulty": ["easy", "medium"]  
+    "difficulty": ["easy"],
+    "type": "gen3",
+    "camPosition": [-0.60, 0.94, 1.43],
+    "camTarget": [0, 0.8, 0.4]
   },
   {
     "question": "At what speed does the Drag Reduction System (DRS) in Gen3 cars become most effective?",
@@ -186,7 +246,10 @@
     "answer3": "210 km/h",
     "answer4": "240 km/h",
     "correct": 3,
-    "difficulty": ["easy", "medium"]  
+    "difficulty": ["easy"],
+    "type": "gen3",
+    "camPosition": [-2.39, 0.57, -5.02],
+    "camTarget": [-0.32, 0.16, -1.79]
   },
   {
     "question": "What is the diameter (in inches) of the tires used on Gen3 cars?",
@@ -195,7 +258,10 @@
     "answer3": "22",
     "answer4": "24",
     "correct": 3,
-    "difficulty": ["easy", "medium"]  
+    "difficulty": ["medium"],
+    "type": "gen3",
+    "camPosition": [2.34, 0.38, 3.51],
+    "camTarget": [1, 0.3, 1.6]
   },
   {
     "question": "What is the tread depth of the tires used on Gen3 Formula E cars?",
@@ -204,7 +270,10 @@
     "answer3": "4 mm",
     "answer4": "5 mm",
     "correct": 3,
-    "difficulty": ["easy", "medium"]  
+    "difficulty": ["medium"],
+    "type": "gen3",
+    "camPosition": [-0.60, 0.94, 1.43],
+    "camTarget": [0, 0.8, 0.4]
   },
   {
     "question": "What percentage of sustainable materials is used in the composition of Gen3 tyres?",
@@ -213,7 +282,10 @@
     "answer3": "40%",
     "answer4": "50%",
     "correct": 3,
-    "difficulty": ["easy", "medium"]  
+    "difficulty": ["medium"],
+    "type": "gen3",
+    "camPosition": [-2.39, 0.57, -5.02],
+    "camTarget": [-0.32, 0.16, -1.79]
   },
   {
     "question": "How many kW is the maximum power output of a Gen3 car?",
@@ -222,7 +294,10 @@
     "answer3": "350 kW",
     "answer4": "400 kW",
     "correct": 3,
-    "difficulty": ["easy", "medium"]  
+    "difficulty": ["hard"],
+    "type": "gen3",
+    "camPosition": [2.34, 0.38, 3.51],
+    "camTarget": [1, 0.3, 1.6]
   },
   {
     "question": "What is the charging power capacity of Gen3 cars' fast-charging system?",
@@ -231,7 +306,10 @@
     "answer3": "300 kW",
     "answer4": "350 kW",
     "correct": 3,
-    "difficulty": ["easy", "medium"]  
+    "difficulty": ["hard"],
+    "type": "gen3",
+    "camPosition": [-0.60, 0.94, 1.43],
+    "camTarget": [0, 0.8, 0.4]
   },
   {
     "question": "How many gear ratios does the transmission system in Gen3 cars have?",
@@ -240,6 +318,9 @@
     "answer3": "3",
     "answer4": "4",
     "correct": 3,
-    "difficulty": ["easy", "medium"]  
+    "difficulty": ["hard"],
+    "type": "gen3",
+    "camPosition": [-2.39, 0.57, -5.02],
+    "camTarget": [-0.32, 0.16, -1.79]
   }
 ]

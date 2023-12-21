@@ -263,6 +263,11 @@
 :deep(.v-selection-control__input) {
   align-items: start;
 }
+:deep(.v-messages__message) {
+  color: #F0F0F0;
+  opacity: 0.6;
+  line-height: 15px;
+}
 .g-ripple {
   align-items: start;
 }

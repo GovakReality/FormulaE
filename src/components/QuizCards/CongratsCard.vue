@@ -164,7 +164,7 @@
               label="I confirm that I am over 18 years of age and accept the terms and conditions and the Saudia Airlines Privacy Policy."
             ></v-checkbox>
 
-            <v-btn :loading="loading" type="submit" rounded="xl" variant="tonal" :slim="false" :disabled="!isFormValid" class="g-bt font-weight-black my-2">CONTINUE</v-btn>
+            <v-btn :loading="loading" type="submit" rounded="xl" variant="tonal" :slim="false" :disabled="!isFormValid" class="g-bt font-weight-black mb-2 mt-8">CONTINUE</v-btn>
           </v-form>                 
         </v-card-item>
         <v-snackbar

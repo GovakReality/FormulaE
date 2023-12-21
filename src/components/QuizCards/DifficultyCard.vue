@@ -64,10 +64,10 @@
             Ready to test your knowledge?
           </h3>
           <div class="g-text pb-6 px-6">
-            Gear up to answer questions about the three Formula E racing cars
+            Gear up to answer questions about the three Formula E racing cars.
           </div>    
-          <div class="g-text pb-4 px-6">
-            Choose your difficulty below begin:
+          <div class="g-text pb-4 px-8">
+            Choose your difficulty below to begin:
           </div>                 
         </v-card-item>
         <v-card-actions class="text-center justify-center">

@@ -119,10 +119,10 @@
           <h3 class="g-title font-weight-bold pt-8">
             Congratulations!
           </h3>
-          <h3 class="g-title font-weight-bold pt-3">
+          <h3 class="g-title font-weight-bold pt-2">
             Your score is:
           </h3>          
-          <div class="g-points font-weight-bold py-10 px-5">
+          <div class="g-points font-weight-bold pb-7 pt-6 px-5">
             {{score}} PTS
           </div>          
           <div class="g-text pb-6 px-7">
@@ -206,14 +206,14 @@
 
 .g-text {
   font-family: Saudia Sans;
-  line-height: normal;
+  line-height: 34px;
   font-weight: 400;
   font-size: 24px;
 }
 .g-points {
   font-family: IBM Plex Sans;
   line-height: normal;
-  font-size: 46px;
+  font-size: 44px;
 }
 .g-tfield {
   max-width: 100%;

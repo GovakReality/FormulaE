@@ -15,8 +15,8 @@
   const expand = ref(false);
   const show = ref(false);
 
-  const maxPoints = 10.000; 
-  const timeLeft = ref(parseFloat(maxPoints));
+  const maxPoints = parseFloat(10.000); 
+  const timeLeft = ref(maxPoints);
 
   watch(cardIndex, () => {
     if (cardIndex.value >= 2 && cardIndex.value < 11) {
@@ -61,7 +61,7 @@
       if(timeLeft.value <= 0){
         timeLeft.value = 0.000;
         clearInterval(interval);
-        contractCard();
+        //contractCard();
       }      
     }, 10)
   }; 
@@ -119,6 +119,42 @@
     return x.toFixed(0);
   }); */
 
+/*   let lastTime;
+  let animationRef;
+  let remainingTime = 10000;
+
+  const timer = (timestamp) => {
+    if (lastTime === undefined) {
+      lastTime = timestamp + remainingTime;
+    }
+    timeLeft.value = lastTime - timestamp;
+    if (timeLeft.value <= 0) {
+      cancelAnimationFrame(animationRef);
+      timeLeft.value = 0;
+    } else {
+      animationRef = requestAnimationFrame(timer);
+    }
+    console.log(timestamp)
+  };
+
+  const timeLeftRounded = computed(() => {
+    return roundWithPrecision(timeLeft.value, 3);
+  });
+
+  const timeBar = computed(() => {
+    let x = normalizeToRange(timeLeft.value, 0, maxPoints, 0, 10);
+    return (x * 10).toFixed(0);
+  });  
+
+const startTimer = () => {
+    timeLeft.value = maxPoints;
+    animationRef = requestAnimationFrame(timer)
+  }; */
+ 
+  const roundWithPrecision = (num, precision) => {
+    var multiplier = Math.pow(10, precision);
+    return Math.round( num * multiplier ) / multiplier;
+  }
   const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - oldMin) * (newMax - newMin)) / (oldMax - oldMin)) + newMin;
 </script>
 
@@ -213,14 +249,18 @@
   color: #28673c;
 }
 .g-bt {
-  font-size: 20px;
+  font-size: 18px;
   width: 254px;
   max-width: 100%;
   line-height: normal;
   background: linear-gradient(94deg, #28673C 7.42%, #07361C 166.68%);
+  text-wrap: auto;
 }
 :deep(.v-btn.v-btn--density-default) {
-  height: 50px;
+  height: 70px;
+}
+:deep(.v-btn__content) {
+  white-space: normal;
 }
 .g-hud {
   background-color: transparent;

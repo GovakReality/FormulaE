@@ -156,7 +156,7 @@
             <h3 class="g-title font-weight-bold pt-8">
               Your score is:
             </h3>          
-            <div class="g-points font-weight-bold py-10 px-5">
+            <div class="g-points font-weight-bold py-6 px-5">
               {{score}} PTS
             </div> 
 

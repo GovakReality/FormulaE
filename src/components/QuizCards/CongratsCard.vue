@@ -156,6 +156,11 @@
               v-model="terms"
               :rules="termsRules"
               :center-affix=false
+              color="white"
+              false-icon="mdi-checkbox-blank"
+              hide-details
+              class="g-terms"
+              :ripple="false"
               label="I confirm that I am over 18 years of age and accept the terms and conditions and the Saudia Airlines Privacy Policy."
             ></v-checkbox>
 
@@ -242,7 +247,25 @@
 :deep(.v-btn.v-btn--density-default) {
   height: 46px;
 }
-
+.g-terms {
+  opacity: 1;
+  text-align: left;
+}
+:deep(.v-selection-control__input > .v-icon) {
+  opacity: 1;
+}
+:deep(.v-selection-control) {
+  align-items: start;
+}
+:deep(.v-selection-control__wrapper) {
+  align-items: start;
+}
+:deep(.v-selection-control__input) {
+  align-items: start;
+}
+.g-ripple {
+  align-items: start;
+}
 .g-try {
   background-color: transparent;
   position: absolute;

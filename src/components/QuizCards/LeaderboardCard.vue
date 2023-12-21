@@ -142,37 +142,44 @@
   <v-sheet v-if="show" class="d-flex align-center justify-center h-100 pa-10">
     <v-slide-y-reverse-transition @after-leave="onAfterLeave" group>
       <v-sheet v-if="expand" class="g-sheet" position="relative" color="transparent">
-        <v-card class="g-card py-5 rounded-s-xl rounded-e-0" variant="flat">
-          <v-card-item class="text-center">            
-            <v-img src="/images/SaudiaLogo.png" width="138" class="text-center justify-center mx-auto" ></v-img>
-            
-<!--             <h3 class="g-title font-weight-bold pt-8">
-              You are currently in:
-            </h3>          
-            <div class="g-place font-weight-bold py-8 px-5">
-              27<small>th</small>
-            </div> -->
+        <v-sheet
+        class="d-flex flex-column justify-center g-card py-8 rounded-s-xl rounded-e-0"
+        variant="flat"
+        color="transparent"
+        >
+          <v-sheet class="text-center" color="transparent">
+            <div class="g-wrapper">
+              <v-img src="/images/SaudiaLogo.png" width="138" class="text-center justify-center mx-auto" ></v-img>
+                
+              <!-- <h3 class="g-title font-weight-bold pt-8">
+                You are currently in:
+              </h3>          
+              <div class="g-place font-weight-bold py-8 px-5">
+                27<small>th</small>
+              </div> -->
+              
+              <h3 class="g-title font-weight-bold pt-10">
+                Your score is:
+              </h3>          
+              <div class="g-points font-weight-bold py-6 px-5">
+                {{score}} PTS
+              </div> 
+  
+              <h3 class="g-title font-weight-bold py-2 px-10">
+                Tip: answer faster to score more points!
+              </h3>                 
+              <div class="g-text py-9 px-12">
+                If you're among the finalists by the end of the contest, you will be notified via email about your prize. 
+              </div>            
 
-            <h3 class="g-title font-weight-bold pt-8">
-              Your score is:
-            </h3>          
-            <div class="g-points font-weight-bold py-6 px-5">
-              {{score}} PTS
-            </div> 
-
-            <h3 class="g-title font-weight-bold py-2 px-7">
-              Tip: answer faster to score more points!
-            </h3>                 
-            <div class="g-text py-9 px-9">
-              If you're among the finalists by the end of the contest, you will be notified via email about your prize. 
-            </div>                    
-          </v-card-item>       
-          <v-card-actions class="text-center justify-center">
-            <v-btn rounded="xl" variant="tonal" :slim="false" @click="onClick" class="g-bt font-weight-black">
+            </div>
+          </v-sheet>
+          <v-sheet class="text-center justify-center mt-auto" color="transparent">
+            <v-btn rounded="xl" color="#f0f0f0" variant="tonal" :slim="false" @click="onClick" class="g-bt font-weight-black mb-2">
               TRY AGAIN
             </v-btn>
-          </v-card-actions>        
-        </v-card>               
+          </v-sheet>
+        </v-sheet>                      
       </v-sheet>
       <v-sheet v-if="expand" class="g-sheet" position="relative" color="transparent">
         <v-card variant="flat" class="g-names-list rounded-0" color="transparent">
@@ -223,6 +230,9 @@
   width: 413px;
   height: 624px;
 }
+.g-wrapper {
+  color: #F0F0F0;
+}
 .g-title {
   font-size: 26px;
   line-height: 36px;
@@ -231,7 +241,8 @@
   font-family: Saudia Sans;
   line-height: normal;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 18px;
+  opacity: 0.6;
 }
 .g-place {
   font-family: IBM Plex Sans;

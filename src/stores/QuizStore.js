@@ -6,7 +6,7 @@ export const useQuizStore = defineStore('quiz', () => {
 
   const question = ref();
   const round = ref(0);
-  const score = ref(999.2);
+  const score = ref(0);
   const fullName = ref('');
   const email = ref('');
 
@@ -21,10 +21,15 @@ export const useQuizStore = defineStore('quiz', () => {
     questionsList = [];
     alreadyIdx = [];
     round.value = 0;
+    score.value = 0;
   };
 
   function setDificulty(val) {
     setQuestionsList(val);
+  };
+
+  function addScore(val) {
+    score.value = parseFloat(score.value) + parseFloat(val);
   };
 
   const setQuestionsList = (val) => {
@@ -52,5 +57,5 @@ export const useQuizStore = defineStore('quiz', () => {
     }
   }
 
-  return { question, round, fullName, email, score, incrementRound, reset, setDificulty, newQuestion };
+  return { question, round, fullName, email, score, incrementRound, reset, setDificulty, newQuestion, addScore };
 })

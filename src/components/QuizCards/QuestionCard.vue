@@ -10,7 +10,7 @@
   const cardsStore = useCardsStore();
   const { cardIndex } = storeToRefs(cardsStore);
   const quizStore = useQuizStore();
-  const { question, round } = storeToRefs(quizStore);
+  const { question, round, score } = storeToRefs(quizStore);
 
   const expand = ref(false);
   const show = ref(false);
@@ -39,7 +39,11 @@
   };
 
   const onClick = (val, event) => {
-    //logica da resposta correta e pontuaçao
+    if (val == question.value.correct) {
+      quizStore.addScore(timeLeft.value.toFixed(3));
+    } else {
+      //wrong answer effect
+    }
     contractCard();
   };
   
@@ -180,8 +184,9 @@
   <v-sheet v-if="show" class="g-hud">
     <v-slide-y-reverse-transition group>
       <v-sheet v-if="expand" class="g-hud-w">
+        <span class="g-hud-total px-5 py-2">{{score.toFixed(3)}} PTS</span>
         <span class="g-hud-round px-5 py-2">ROUND 0{{ round }}/09</span>
-        <span class="g-hud-points px-5 py-2">+{{timeLeftFixed}} PTS</span>
+        <span class="g-hud-score px-5 py-2">+{{timeLeftFixed}} PTS</span>
       </v-sheet>    
     </v-slide-y-reverse-transition>        
   </v-sheet>  
@@ -237,7 +242,7 @@
   font-size: 17px;
   color: #000000;  
 }
-.g-hud-points {
+.g-hud-score {
   background-color: #28673C;
   font-family: IBM Plex Sans;
   line-height: normal;
@@ -245,6 +250,17 @@
   font-size: 18px;
   color: #F0F0F0;  
 }
+.g-hud-total {
+  background-color: #28673C;
+  font-family: IBM Plex Sans;
+  line-height: normal;
+  font-weight: 700;
+  font-size: 18px;
+  color: #F0F0F0;  
+  display: block;
+  text-align: right;
+}
+
 :deep(.v-card__loader) {
   bottom: 0;
   top: auto;

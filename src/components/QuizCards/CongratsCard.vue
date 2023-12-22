@@ -8,7 +8,7 @@
   const cardsStore = useCardsStore();
   const { cardIndex } = storeToRefs(cardsStore);
   const quizStore = useQuizStore();
-  const { fullName, email, score } = storeToRefs(quizStore);
+  const { fullName, email, score, scoreFixed } = storeToRefs(quizStore);
   const APIStore = useAPIStore();
   const { APIStatus } = storeToRefs(APIStore);
 
@@ -120,7 +120,7 @@
             Your score is:
           </h3>          
           <div class="g-points font-weight-bold pb-7 pt-6 px-5">
-            {{score}} PTS
+            {{scoreFixed}} PTS
           </div>          
           <div class="g-text pb-6 px-7">
             Enter your information below to register for the prize draw:

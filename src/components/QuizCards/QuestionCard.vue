@@ -7,15 +7,18 @@
   const cardsStore = useCardsStore();
   const { cardIndex } = storeToRefs(cardsStore);
   const quizStore = useQuizStore();
-  const { question, round, score, shouldCameraMove, quizEnded } = storeToRefs(quizStore);
+  const { question, round, scoreFixed, shouldCameraMove, quizEnded } = storeToRefs(quizStore);
 
   const expand = ref(false);
   const show = ref(false);
   const expandHud = ref(false);
   const genType = ref('');
 
-  const maxPoints = parseFloat(10.000); 
+  const maxPoints = parseFloat(10000); 
   const timeLeft = ref(maxPoints);
+  let animFrame;
+  let prevTime;
+  let clockStep = 10;
 
   watch(cardIndex, () => {
     if (cardIndex.value >= 2 && cardIndex.value < 11) {
@@ -55,7 +58,6 @@
         expandHud.value = true;
       }
     }, 100);
-    startTimer();
   };
 
   const contractCard = () => {
@@ -68,8 +70,9 @@
   };
 
   const onClick = (val, event) => {
+    cancelAnimationFrame(animFrame);
     if (val == question.value.correct) {
-      quizStore.addScore(timeLeft.value.toFixed(3));
+      quizStore.addScore(timeLeft.value);
       showCorrectAnswer();
     } else {
       showCorrectAnswer();
@@ -92,8 +95,45 @@
     cardsStore.incrementCardIndex();
   }  
    
+  const onAfterEnter = (el) => {
+    startTimer();
+  }  
+
+  const startTimer = () => {
+    timeLeft.value = maxPoints;
+    prevTime = performance.now();
+    timer();
+  };
+
+  const timer = () => {
+    let aux = performance.now();
+    let calc = (aux - prevTime);
+    if (calc > clockStep) {
+      timeLeft.value = (timeLeft.value - calc).toFixed(0);
+      if(timeLeft.value <= 0) {
+        timeLeft.value = 0;
+        cancelAnimationFrame(animFrame);
+        contractCard();
+      } else {
+        prevTime = aux;
+        animFrame = requestAnimationFrame(timer);
+      }
+    } else {
+      animFrame = requestAnimationFrame(timer);
+    }
+  };
+
+  const timeLeftFixed = computed(() => {
+    return (timeLeft.value / 1000).toFixed(3).replace(".",",");
+  });
+
+  const timeBar = computed(() => {
+    let x = normalizeToRange(timeLeft.value, 0, maxPoints, 0, 100);
+    return x.toFixed(0);
+  });
+
   // timer
-  let interval;
+/*   let interval;
   const timer = () => {
     clearInterval(interval);
     interval = setInterval(() => {
@@ -118,14 +158,15 @@
   const startTimer = () => {
     timeLeft.value = maxPoints;
     timer();
-  };
+  }; */
+
+
 ///////////////////
+
   //let lastTime = (new Date()).getTime();
 	//let milliseconds = maxPoints.value;
-/*   let animFrame;
-  let now = performance.now();
 
-  const timer = () => {
+/*   const timer = () => {
     let currentTime = performance.now();
     let distance = (currentTime - now);
     console.log(distance.toFixed(3))
@@ -143,7 +184,7 @@
     } else {
       animFrame = requestAnimationFrame(timer);
     } 
-  };*/
+  }; */
 
 /*   const startTimer = () => {
     timeLeft.value = parseFloat(maxPoints);
@@ -159,7 +200,7 @@
     return x.toFixed(0);
   }); */
 
-/*   let lastTime;
+ /*  let lastTime;
   let animationRef;
   let remainingTime = 10000;
 
@@ -186,7 +227,7 @@
     return (x * 10).toFixed(0);
   });  
 
-const startTimer = () => {
+  const startTimer = () => {
     timeLeft.value = maxPoints;
     animationRef = requestAnimationFrame(timer)
   }; */
@@ -200,7 +241,11 @@ const startTimer = () => {
 
 <template>
   <v-sheet v-if="show" class="d-flex align-end justify-center h-100 pa-10">
-    <v-slide-y-reverse-transition @after-leave="onAfterLeave" group>
+    <v-slide-y-reverse-transition
+    @after-leave="onAfterLeave"
+    @after-enter="onAfterEnter"
+    group
+    >
       <v-card
       v-if="expand"
       class="g-card py-5 px-4 rounded-xl"
@@ -260,7 +305,7 @@ const startTimer = () => {
   <v-sheet v-if="show" class="g-hud">
     <v-slide-y-reverse-transition group>
       <v-sheet v-if="expandHud" class="g-hud-w">
-        <span class="g-hud-total px-5 py-2">{{score.toFixed(3)}} PTS</span>
+        <span class="g-hud-total px-5 py-2">{{scoreFixed}} PTS</span>
         <span class="g-hud-round px-5 py-2">ROUND 0{{ round }}/09</span>
         <span class="g-hud-score px-5 py-2">+{{timeLeftFixed}} PTS</span>
       </v-sheet>    

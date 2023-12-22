@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import questionsData from '/src/assets/questions.json';
 
 export const useQuizStore = defineStore('quiz', () => {
@@ -40,6 +40,10 @@ export const useQuizStore = defineStore('quiz', () => {
   function addScore(val) {
     score.value = parseFloat(score.value) + parseFloat(val);
   };
+
+  const scoreFixed = computed(() => {
+    return (score.value / 1000).toFixed(3).replace(".",",");
+  });
 
   const setQuestionsList = (dif) => {
     gen1QuestionsList = questionsData.filter(v => v.difficulty.includes(dif) && v.type == 'gen1');
@@ -93,5 +97,5 @@ export const useQuizStore = defineStore('quiz', () => {
     return shuffledInput;
   }; */
 
-  return { question, round, fullName, email, score, shouldCameraMove, quizEnded, incrementRound, reset, setDificulty, newQuestion, addScore };
+  return { question, round, fullName, email, score, scoreFixed, shouldCameraMove, quizEnded, incrementRound, reset, setDificulty, newQuestion, addScore };
 })

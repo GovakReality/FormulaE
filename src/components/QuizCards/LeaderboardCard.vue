@@ -8,7 +8,7 @@
   const cardsStore = useCardsStore();
   const { cardIndex } = storeToRefs(cardsStore);
   const quizStore = useQuizStore();
-  const { fullName, email, score } = storeToRefs(quizStore);
+  const { fullName, email, score, scoreFixed } = storeToRefs(quizStore);
   const APIStore = useAPIStore();
   const { players } = storeToRefs(APIStore);
 
@@ -93,6 +93,7 @@
       if (index < 3) {
         item = {...item, 'finalist': true};
       }
+      item = {...item, 'scoreFixed': (item.score / 1000).toFixed(3).replace(".",",")};
       formattedPlayers.value.push(item);
     });
     let rows = 10;
@@ -159,7 +160,7 @@
                 Your score is:
               </h3>          
               <div class="g-points font-weight-bold py-6 px-5">
-                {{score}} PTS
+                {{scoreFixed}} PTS
               </div> 
   
               <h3 class="g-title font-weight-bold py-2 px-10">
@@ -191,7 +192,7 @@
                   {{ item.full_name }}
                   <span v-if="item.finalist" class="g-flag"></span>
                 </td>
-                <td class="g-score">{{ item.score }} <span v-if="item.score">PTS</span></td>
+                <td class="g-score">{{ item.scoreFixed }} <span v-if="item.score">PTS</span></td>
                 <td v-if="item.finalist" class="g-final px-0">
                   <div class="px-3 py-2">finalist</div>
                 </td>
@@ -206,7 +207,7 @@
               <tr v-if="!isTopTen">
                 <td class="g-pos current px-1"></td>
                 <td class="g-name current">{{fullName}}</td>
-                <td class="g-score current">{{score}} PTS</td>
+                <td class="g-score current">{{scoreFixed}} PTS</td>
               </tr>                                   
             </tbody>
           </v-table>

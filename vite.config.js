@@ -7,7 +7,7 @@ import vue from '@vitejs/plugin-vue'
 export default ({ mode }) => {
   process.env = {...process.env, ...loadEnv(mode, process.cwd())};
   return defineConfig({
-    base: './',
+    base: 'https://govakreality.github.io/FormulaE/',
     plugins: [
       vue(),
       //vuetify(),

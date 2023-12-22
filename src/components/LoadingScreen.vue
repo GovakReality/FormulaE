@@ -26,7 +26,7 @@
   watch(loadError, (val) => {
     if (loadError.value) {
       errorMessage.value = 'Please wait a few minutes before you try again.';
-      errorDevMessage.value = 'ThreJS loader manager error. URL: ' + errorUrl.value;      
+      errorDevMessage.value = 'ThreeJS loader manager error. URL: ' + errorUrl.value;      
       onError();
     }
   });

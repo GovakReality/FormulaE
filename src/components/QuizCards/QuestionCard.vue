@@ -69,21 +69,25 @@
 
   const onClick = (val, event) => {
     if (val == question.value.correct) {
-      console.log('correct')
       quizStore.addScore(timeLeft.value.toFixed(3));
-      event.target.classList.add('g-correct');
-      
+      showCorrectAnswer();
     } else {
-      console.log('wrong')
-      event.target.classList.add('g-wrong');
+      showCorrectAnswer();
+      showWrongAnswer(event);
     }
     setTimeout(() => {
-      event.target.classList.remove('g-correct');
-      event.target.classList.remove('g-wrong');
       contractCard();
-    }, 500);    
+    }, 300);    
   };
   
+  const showCorrectAnswer = () => {
+    //correct answer
+  }  
+  
+  const showWrongAnswer = (ev) => {
+    //wrong answer
+  }  
+
   const onAfterLeave = (el) => {
     cardsStore.incrementCardIndex();
   }  

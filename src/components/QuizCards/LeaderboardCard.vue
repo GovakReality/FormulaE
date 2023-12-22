@@ -51,7 +51,7 @@
       score: '40011',
     },
     {
-      full_name: 'Lily Morgan aer a raer aer ae ',
+      full_name: 'Lily Morgan aer a xxxraer yyyaer uuuuuae lllllede',
       score: '39318',
     },
     {
@@ -294,6 +294,9 @@
   background-color: #F0F0F0;
   color: #000000;
   position: relative;
+  max-width: 300px;
+  text-wrap: nowrap;
+  overflow: hidden;
 }
 .g-flag {
   display: inline-block;
@@ -308,11 +311,11 @@
 .g-score {
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%),#F0F0F0;
   color: #000000;
+  font-family: IBM Plex Sans;
   font-size: 20px;
   text-transform: uppercase;
   line-height: normal;
-  text-align: left;
-  font-weight: 500;  
+  font-weight: 700;  
   text-align: right;
 }
 .g-top {

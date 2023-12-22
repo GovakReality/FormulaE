@@ -63,7 +63,7 @@
     loading.value = true;
     if (isFormValid) {
       APIStore.sendPlayer({
-        score: score,
+        score: score.value,
         full_name: fullName.value,
         email: email.value,
       });

@@ -1,29 +1,33 @@
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 //import vuetify from 'vite-plugin-vuetify'
 
 
 // https://vitejs.dev/config/
-export default defineConfig({
-  base: './',
-  plugins: [
-    vue(),
-    //vuetify(),
-  ],
-  server: {
-    proxy: {
-      "/leaderboard": {
-        target: "https://if040cyo8k.execute-api.eu-central-1.amazonaws.com/",
-        changeOrigin: true,
-        secure: false,
-        ws: true,
+export default ({ mode }) => {
+  process.env = {...process.env, ...loadEnv(mode, process.cwd())};
+  return defineConfig({
+    base: './',
+    plugins: [
+      vue(),
+      //vuetify(),
+    ],
+    server: {
+      proxy: {
+        "/leaderboard": {
+          target: process.env.VITE_PROXY_TARGET,
+          changeOrigin: true,
+          secure: false,
+          ws: true,
+        },
+        "/items": {
+          target: process.env.VITE_PROXY_TARGET,
+          changeOrigin: true,
+          secure: false,
+          ws: true,
+        },
       },
-      "/items": {
-        target: "https://if040cyo8k.execute-api.eu-central-1.amazonaws.com/",
-        changeOrigin: true,
-        secure: false,
-        ws: true,
-      },
-    },
-  }  
-})
+    }
+  });
+}
+

@@ -56,7 +56,10 @@
             class="text-center justify-center mx-auto"
           ></v-img>
           <h3 class="g-title font-weight-bold my-1 py-6 px-1">
-            Take a quiz now and grab your chance to win exclusive prizes!
+            Test your knowledge on the generations of Formula E models.
+          </h3>          
+          <h3 class="g-title font-weight-bold my-1 pb-6 px-7">
+            Take a quiz now for the chance to win exclusive prizes!
           </h3>
         </v-card-item>
         <v-card-actions class="text-center justify-center">
@@ -77,8 +80,8 @@
   color: #F0F0F0;
 }
 .g-title {
-  font-size: 30px;
-  line-height: 36px;
+  font-size: 28px;
+  line-height: 34px;
 }
 .g-bt-start {
   font-size: 18px;

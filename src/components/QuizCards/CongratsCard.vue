@@ -1,19 +1,27 @@
 <script setup>
   import { useCardsStore } from '/src/stores/CardsStore';
   import { useQuizStore } from '/src/stores/QuizStore';
+  import { useAPIStore } from '/src/stores/APIStore';
   import { ref, watch } from 'vue';
   import { storeToRefs } from 'pinia';
 
   const cardsStore = useCardsStore();
   const { cardIndex } = storeToRefs(cardsStore);
   const quizStore = useQuizStore();
+  const { fullName, email, score, scoreFixed } = storeToRefs(quizStore);
+  const APIStore = useAPIStore();
+  const { APIStatus } = storeToRefs(APIStore);
 
   const expand = ref(false);
   const show = ref(false);
+  const shouldReset = ref(false);
+  const loading = ref(false);
+  const showError = ref(false);
+  const errorMsg = ref('');
 
+  const isFormValid = ref(false);
   const terms = ref(false);
-  const fullName = ref('');
-  const email = ref('');
+
   const fullNameRules = [
     value => {
       if (value) return true
@@ -23,16 +31,27 @@
       if (value?.length > 1) return true
       return 'Full name must be at least 2 characters.'
     },
-  ]
+  ];
   const emailRules = [
     value => {
-      if (value) return true
-      return 'You must enter a valid email.'
-    }, 
-  ]
+          if (value) return true
+          return 'E-mail is requred.'
+        },
+        value => {
+          if (/.+@.+\..+/.test(value)) return true
+          return 'E-mail must be valid.'
+        },
+  ];
+  const termsRules = [
+    value => {
+          if (value) return true
+          return 'You should agree.'
+        },
+  ];  
 
   watch(cardIndex, () => {
     if (cardIndex.value == 11) {
+      shouldReset.value = false;
       show.value = true;
       setTimeout(() => expand.value = true, 100);
     } else {
@@ -40,16 +59,45 @@
     }
   });
 
-  async function submit (event) {
-    event.preventDefault();
-    console.log('submit')
+  const submit = async (event) => {
+    loading.value = true;
+    if (isFormValid) {
+/*       APIStore.sendPlayer({
+        score: score.value,
+        full_name: fullName.value,
+        email: email.value,
+      }); */
+      APIStatus.value = 1; //remove
+    }
+  };
+
+  watch(APIStatus, () => {
+    if (APIStatus.value == 1) {
+      loading.value = false;
+      expand.value = false;
+    } else if (APIStatus.value > 1) {
+      errorMsg.value = 'ERROR ' + APIStatus.value + ': Please wait a few minutes before you try again.';
+      showError.value = true;
+      loading.value = false;
+      APIStatus.value = 0;
+    }
+  });
+
+  const tryAgainClick = (event) => {
     expand.value = false;
-  }  
+    shouldReset.value = true;
+  };
 
   const onAfterLeave = (el) => {
     show.value = false;
-    cardsStore.incrementCardIndex();
-  }    
+    if (shouldReset.value) {
+      cardsStore.reset();
+      quizStore.reset();
+      APIStore.reset();
+    } else {
+      cardsStore.incrementCardIndex();
+    }
+  };
 </script>
 
 <template>
@@ -69,24 +117,25 @@
           <h3 class="g-title font-weight-bold pt-8">
             Congratulations!
           </h3>
-          <h3 class="g-title font-weight-bold pt-3">
+          <h3 class="g-title font-weight-bold pt-2">
             Your score is:
           </h3>          
-          <div class="g-points font-weight-bold py-10 px-5">
-            64,2564 PTS
+          <div class="g-points font-weight-bold pb-7 pt-6 px-5">
+            {{scoreFixed}} PTS
           </div>          
           <div class="g-text pb-6 px-7">
-            Enter your information to win exclusive Formula E prizes and find your place on the leaderboard!
+            Enter your information below to register for the prize draw:
           </div>    
-          <v-form @submit.prevent="submit" class="px-6 pt-4">
+          <v-form @submit.prevent="submit" class="px-6 pt-4" v-model="isFormValid">
             <v-text-field
               v-model="fullName"
               label="Full name"
               :rules="fullNameRules"
-              variant="outlined"
+              variant="solo"
               rounded="lg"
               bg-color="white"
               class="g-tfield"
+              required
             ></v-text-field>
       
             <v-text-field
@@ -94,24 +143,56 @@
               label="E-mail"
               type="email"
               :rules="emailRules"
-              variant="outlined"
+              variant="solo"
               rounded="lg"
               bg-color="white"
               class="g-tfield my-4"
+              required
             ></v-text-field>
       
             <v-checkbox
               v-model="terms"
+              :rules="termsRules"
               :center-affix=false
-              label="I am 18 years old or older, and I have read, and agreed with our  Terms & Conditions and Privacy Policy."
+              color="white"
+              false-icon="mdi-checkbox-blank"
+              hide-details
+              class="g-terms"
+              :ripple="false"
+              label="I confirm that I am over 18 years of age and accept the terms and conditions and the Saudia Airlines Privacy Policy."
             ></v-checkbox>
 
-            <v-btn type="submit" rounded="xl" variant="tonal" :slim="false" class="g-bt font-weight-black my-2">CONTINUE</v-btn>
+            <v-btn :loading="loading" type="submit" rounded="xl" variant="tonal" :slim="false" :disabled="!isFormValid" class="g-bt font-weight-black mb-2 mt-8">CONTINUE</v-btn>
           </v-form>                 
         </v-card-item>
-      </v-card>
+        <v-snackbar
+          v-model="showError"
+          multi-line
+          color="error"
+          elevation="16"
+          timeout="10000"
+          >
+          {{ errorMsg }}
+          <template v-slot:actions>
+            <v-btn
+              color="white"
+              variant="text"
+              @click="showError = !showError"
+            >
+              Close
+            </v-btn>
+          </template>
+        </v-snackbar>
+      </v-card>     
     </v-slide-y-reverse-transition>
   </v-sheet>
+  <v-sheet v-if="show" class="g-try">
+    <v-slide-y-reverse-transition >
+      <v-btn v-if="expand" rounded="xl" variant="tonal" :slim="false" @click="tryAgainClick" class="g-try-bt font-weight-black">
+        TRY AGAIN
+      </v-btn>
+    </v-slide-y-reverse-transition>        
+  </v-sheet>  
 </template>
 
 <style scoped>
@@ -128,18 +209,27 @@
 
 .g-text {
   font-family: Saudia Sans;
-  line-height: normal;
+  line-height: 34px;
   font-weight: 400;
   font-size: 24px;
 }
 .g-points {
   font-family: IBM Plex Sans;
   line-height: normal;
-  font-size: 46px;
+  font-size: 44px;
 }
 .g-tfield {
   max-width: 100%;
 }
+:deep(.v-messages) {
+  font-size: 15px;
+  padding-top: 3px;
+  padding-bottom: 1px 
+}
+:deep(.v-field__input ) {
+  min-height: 60px;
+}
+
 .g-bt {
   font-size: 18px;
   width: 183px;
@@ -149,9 +239,51 @@
 
 :deep(.v-btn--variant-tonal .v-btn__underlay) {
   opacity: 0.4;
+  background-color: white;
 }
 
 :deep(.v-btn.v-btn--density-default) {
   height: 46px;
+}
+.g-terms {
+  opacity: 1;
+  text-align: left;
+}
+:deep(.v-selection-control__input > .v-icon) {
+  opacity: 1;
+}
+:deep(.v-selection-control) {
+  align-items: start;
+}
+:deep(.v-selection-control__wrapper) {
+  align-items: start;
+}
+:deep(.v-selection-control__input) {
+  align-items: start;
+}
+:deep(.v-messages__message) {
+  color: #F0F0F0;
+  opacity: 0.6;
+  line-height: 15px;
+}
+.g-ripple {
+  align-items: start;
+}
+.g-try {
+  background-color: transparent;
+  position: absolute;
+  z-index: 90;
+  max-width: 100%;
+  bottom: 56px;
+  right: 38px;
+}
+.g-try-bt {
+  font-family: Saudia Sans;
+  line-height: normal;
+  font-size: 18px;
+  text-transform: uppercase;
+  color: #28673C; 
+  background-color: white;
+  width: 183px;
 }
 </style>

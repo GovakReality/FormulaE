@@ -1,11 +1,9 @@
 <script setup>
-  import { usePositionStore } from '/src/stores/PositionStore';
   import { useCardsStore } from '/src/stores/CardsStore';
   import { useQuizStore } from '/src/stores/QuizStore';
   import { ref, watch } from 'vue';
   import { storeToRefs } from 'pinia';
 
-  const positionStore = usePositionStore();
   const cardsStore = useCardsStore();
   const { cardIndex } = storeToRefs(cardsStore);
   const quizStore = useQuizStore();
@@ -42,7 +40,6 @@
   const onAfterLeave = (el) => {
     show.value = false;
     cardsStore.incrementCardIndex();
-    positionStore.increment();
   }    
 </script>
 
@@ -64,10 +61,10 @@
             Ready to test your knowledge?
           </h3>
           <div class="g-text pb-6 px-6">
-            Get ready to answer questions about the Formula E racing cars.
+            Gear up to answer questions about the three Formula E racing cars.
           </div>    
-          <div class="g-text pb-4 px-6">
-            Choose your difficulty below to start the quiz:
+          <div class="g-text pb-4 px-8">
+            Choose your difficulty below to begin:
           </div>                 
         </v-card-item>
         <v-card-actions class="text-center justify-center">

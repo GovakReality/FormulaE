@@ -5,7 +5,7 @@ import axiosRetry from 'axios-retry';
 
 export const useAPIStore = defineStore('API', () => {
 
-  const url = 'https://if040cyo8k.execute-api.eu-central-1.amazonaws.com/';
+  const url = import.meta.env.VITE_API_URL;
 
   const players = ref([]);
   const APIStatus = ref(0);// 0 = undefined / 1 = ok / 2 = send error / 3 = fetch error  
@@ -20,7 +20,7 @@ export const useAPIStore = defineStore('API', () => {
   });
 
   const fetchLeaderboard = async () => {
-    const data = await axios.get('/leaderboard')
+    const data = await axios.get(url + '/leaderboard')
     .then((res) => {
       players.value = res.data;
       APIStatus.value = 1;
@@ -32,7 +32,7 @@ export const useAPIStore = defineStore('API', () => {
   }
 
   const sendPlayer = async (val) => {   
-    const data = await axios.post('/items', {
+    const data = await axios.post(url + '/items', {
       score: val.score,
       full_name: val.full_name,
       email: val.email,

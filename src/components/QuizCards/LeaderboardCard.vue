@@ -4,6 +4,7 @@
   import { useAPIStore } from '/src/stores/APIStore';
   import { ref, watch, computed } from 'vue';
   import { storeToRefs } from 'pinia';
+  import saudiaLogo from '/images/SaudiaLogo.png';
 
   const cardsStore = useCardsStore();
   const { cardIndex } = storeToRefs(cardsStore);
@@ -144,7 +145,7 @@
         >
           <v-sheet class="text-center" color="transparent">
             <div class="g-wrapper">
-              <v-img src="/images/SaudiaLogo.png" width="138" class="text-center justify-center mx-auto" ></v-img>
+              <v-img :src="saudiaLogo" width="138" class="text-center justify-center mx-auto" ></v-img>
                 
               <!-- <h3 class="g-title font-weight-bold pt-8">
                 You are currently in:

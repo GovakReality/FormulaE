@@ -3,6 +3,7 @@
   import { useQuizStore } from '/src/stores/QuizStore';
   import { ref, watch } from 'vue';
   import { storeToRefs } from 'pinia';
+  import saudiaLogo from '/images/SaudiaLogo.png';
 
   const cardsStore = useCardsStore();
   const { cardIndex } = storeToRefs(cardsStore);
@@ -53,7 +54,7 @@
       >
         <v-card-item class="text-center">
           <v-img
-          src="/images/SaudiaLogo.png"
+          :src="saudiaLogo"
           width="138"
           class="text-center justify-center mx-auto"
           ></v-img>

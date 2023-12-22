@@ -13,6 +13,18 @@ import { useGraphicsStore } from '/src/stores/GraphicsStore';
 import { useCameraStore } from '/src/stores/CameraStore';
 import { storeToRefs } from 'pinia';
 
+import raceTrackGLB from '/models/RaceTrack.glb?url';
+import gen3GLB from '/models/Gen3.glb?url';
+import gen2GLB from '/models/Gen2.glb?url';
+import gen1GLB from '/models/Gen1.glb?url';
+import raceTrackHDR from '/textures/RaceTrack.hdr?url';
+import pxTexture from '/textures/px.jpg';
+import nxTexture from '/textures/nx.jpg';
+import pyTexture from '/textures/py.jpg';
+import nyTexture from '/textures/ny.jpg';
+import pzTexture from '/textures/pz.jpg';
+import nzTexture from '/textures/nz.jpg';
+
 // get stores
 const quizStore = useQuizStore();
 const { shouldCameraMove, question, quizEnded } = storeToRefs(quizStore);
@@ -119,12 +131,12 @@ const setCanvas = () => {
 
   // Create LDR equirretangular background
   cubeTextureLoader.load([
-    '/textures/px.jpg',
-    '/textures/nx.jpg',
-    '/textures/py.jpg',
-    '/textures/ny.jpg',
-    '/textures/pz.jpg',
-    '/textures/nz.jpg',
+    pxTexture,
+    nxTexture,
+    pyTexture,
+    nyTexture,
+    pzTexture,
+    nzTexture,
   ], (backgroundMap) => {
     scene.background = backgroundMap;
     scene.backgroundIntensity = backgroundIntensity.value;
@@ -132,7 +144,7 @@ const setCanvas = () => {
   });
 
   // Race Track (with Draco)
-  gltfLoader.load('/models/RaceTrack.glb', function (gltf) {
+  gltfLoader.load(raceTrackGLB, function (gltf) {
     const raceTrackObj = gltf.scene;
     scene.add(raceTrackObj);
   }, undefined, function (error) {
@@ -140,7 +152,7 @@ const setCanvas = () => {
   });
 
   // Car 1 (with Draco)
-  gltfLoader.load('/models/Gen3.glb', function (gltf) {
+  gltfLoader.load(gen3GLB, function (gltf) {
     const car1Obj = gltf.scene;
     scene.add(car1Obj);
   }, undefined, function (error) {
@@ -148,7 +160,7 @@ const setCanvas = () => {
   });
 
   // Car 2 (with Draco)
-  gltfLoader.load('/models/Gen2.glb', function (gltf) {
+  gltfLoader.load(gen2GLB, function (gltf) {
     const car2Obj = gltf.scene;
     scene.add(car2Obj);
   }, undefined, function (error) {
@@ -156,7 +168,7 @@ const setCanvas = () => {
   });
 
   // Car 3 (with Draco)
-  gltfLoader.load('/models/Gen1.glb', function (gltf) {
+  gltfLoader.load(gen1GLB, function (gltf) {
     const car3Obj = gltf.scene;
     scene.add(car3Obj);
   }, undefined, function (error) {
@@ -192,7 +204,7 @@ const setCanvas = () => {
   updateRenderer();
 
   // Create HDR equirretangular environment map
-  rgbeLoader.load('/textures/RaceTrack.hdr', (environmentMap) => {
+  rgbeLoader.load(raceTrackHDR, (environmentMap) => {
     //Adding the environment map to the scene
     environmentMap.mapping = EquirectangularReflectionMapping
     // scene.background = environmentMap;

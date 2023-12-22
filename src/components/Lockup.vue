@@ -1,9 +1,10 @@
 <script setup>
+  import lockup from '/images/Lockup-Shadows.png';
 </script>
 
 <template>
   <v-img
-  src="/images/Lockup-Shadows.png"
+  :src="lockup"
   class="g-lockup"
   ></v-img>
 </template>

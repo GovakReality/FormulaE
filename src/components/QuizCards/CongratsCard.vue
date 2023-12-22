@@ -62,11 +62,12 @@
   const submit = async (event) => {
     loading.value = true;
     if (isFormValid) {
-      APIStore.sendPlayer({
+/*       APIStore.sendPlayer({
         score: score.value,
         full_name: fullName.value,
         email: email.value,
-      });
+      }); */
+      APIStatus.value = 1;
     }
   };
 

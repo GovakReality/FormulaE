@@ -10,67 +10,64 @@
   const quizStore = useQuizStore();
   const { fullName, email, score, scoreFixed } = storeToRefs(quizStore);
   const APIStore = useAPIStore();
-  const { players } = storeToRefs(APIStore);
+  //const { players } = storeToRefs(APIStore);
 
   const expand = ref(false);
   const show = ref(false);
   const isTopTen = ref(false);
   const formattedPlayers = ref([]);
 
-/*   fullName.value = 'Heather Reynolds234';
-  score.value = '80,317'; */
-
-/*   const players = ref([
+  const players = ref([
     {
       full_name: 'JORDAN Mitchell',
-      score: '82,546',
+      score: '82546',
     },
     {
       full_name: 'Heather Reynolds',
-      score: '80,317',
+      score: '80317',
     },
     {
-      full_name: 'Heather Reynolds2',
-      score: '80,317',
+      full_name: 'Wesley Anderson',
+      score: '78367',
     },
     {
-      full_name: 'Heather Reynolds2',
-      score: '80,317',
+      full_name: 'Natalie Chambers',
+      score: '72382',
     },
     {
-      full_name: 'Heather Reynolds2',
-      score: '80,317',
+      full_name: 'Victor Ramirez',
+      score: '70111',
     },
     {
-      full_name: 'Heather Reynolds23',
-      score: '80,317',
+      full_name: 'Chloe Bennett',
+      score: '56777',
     },
     {
-      full_name: 'Heather Reynolds23',
-      score: '80,317',
+      full_name: 'Desmond Thompson',
+      score: '55418',
     },
     {
-      full_name: 'Heather Reynolds23',
-      score: '80,317',
+      full_name: 'Morgan Foster',
+      score: '40011',
     },
     {
-      full_name: 'Heather Reynolds23',
-      score: '80,317',
+      full_name: 'Lily Morgan aer a raer aer ae ',
+      score: '39318',
     },
     {
-      full_name: 'Heather Reynolds23',
-      score: '80,317',
+      full_name: 'Adrian Sanchez',
+      score: '25224',
     },
     {
-      full_name: 'Heather Reynolds234',
-      score: '80,317',
+      full_name: 'Victor Reynolds',
+      score: '18257',
     },
     {
-      full_name: 'Heather Reynolds2',
-      score: '80,317',
+      full_name: 'Chloe Bennett',
+      score: '2312',
     },
 
-  ]); */
+  ]);
 
   watch(cardIndex, () => {
     if (cardIndex.value == 12) {

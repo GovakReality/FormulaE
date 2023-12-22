@@ -67,7 +67,7 @@
         full_name: fullName.value,
         email: email.value,
       }); */
-      APIStatus.value = 1;
+      APIStatus.value = 1; //remove
     }
   };
 

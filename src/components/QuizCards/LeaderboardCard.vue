@@ -10,13 +10,13 @@
   const quizStore = useQuizStore();
   const { fullName, email, score, scoreFixed } = storeToRefs(quizStore);
   const APIStore = useAPIStore();
-  //const { players } = storeToRefs(APIStore);
 
   const expand = ref(false);
   const show = ref(false);
   const isTopTen = ref(false);
   const formattedPlayers = ref([]);
 
+  //const { players } = storeToRefs(APIStore);
   const players = ref([
     {
       full_name: 'JORDAN Mitchell',

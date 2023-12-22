@@ -69,11 +69,19 @@
 
   const onClick = (val, event) => {
     if (val == question.value.correct) {
+      console.log('correct')
       quizStore.addScore(timeLeft.value.toFixed(3));
+      event.target.classList.add('g-correct');
+      
     } else {
-      //wrong answer effect
+      console.log('wrong')
+      event.target.classList.add('g-wrong');
     }
-    contractCard();
+    setTimeout(() => {
+      event.target.classList.remove('g-correct');
+      event.target.classList.remove('g-wrong');
+      contractCard();
+    }, 500);    
   };
   
   const onAfterLeave = (el) => {
@@ -218,24 +226,24 @@ const startTimer = () => {
           <v-container fluid class="pa-0">
             <v-row dense>
               <v-col class="pa-2"> 
-                <v-btn block rounded="xl" :slim="false" color="#F0F0F0" class="g-bt font-weight-bold" @click="onClick(1)">
+                <v-btn block rounded="xl" :slim="false" color="#F0F0F0" class="g-bt font-weight-bold" @click="onClick(1, $event)">
                   {{ question.answer1 }}
                 </v-btn>
               </v-col>
               <v-col class="pa-2">
-                <v-btn block rounded="xl" :slim="false" color="#F0F0F0" class="g-bt font-weight-bold" @click="onClick(2)">
+                <v-btn block rounded="xl" :slim="false" color="#F0F0F0" class="g-bt font-weight-bold" @click="onClick(2, $event)">
                   {{ question.answer2 }}
                 </v-btn>
               </v-col>
             </v-row>
             <v-row dense>
               <v-col class="pa-2">
-                <v-btn block rounded="xl" :slim="false" color="#F0F0F0" class="g-bt font-weight-bold" @click="onClick(3)">
+                <v-btn block rounded="xl" :slim="false" color="#F0F0F0" class="g-bt font-weight-bold" @click="onClick(3, $event)">
                   {{ question.answer3 }}
                 </v-btn> 
               </v-col>
               <v-col class="pa-2">
-                <v-btn block rounded="xl" :slim="false" color="#F0F0F0" class="g-bt font-weight-bold" @click="onClick(4)">
+                <v-btn block rounded="xl" :slim="false" color="#F0F0F0" class="g-bt font-weight-bold" @click="onClick(4, $event)">
                   {{ question.answer4 }}
                 </v-btn> 
               </v-col>              
@@ -282,7 +290,13 @@ const startTimer = () => {
   max-width: 100%;
   line-height: normal;
   background: linear-gradient(94deg, #28673C 7.42%, #07361C 166.68%);
-  text-wrap: auto;
+  text-wrap: balance;
+}
+.g-correct { 
+  border: 3px solid #261bc0;
+}
+.g-wrong { 
+  border: 3px solid #ff0000;
 }
 :deep(.v-btn.v-btn--density-default) {
   height: 70px;

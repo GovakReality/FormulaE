@@ -290,4 +290,7 @@
   background-color: white;
   width: 183px;
 }
+:deep(.v-selection-control__input:hover::before) {
+  opacity: 0.0;
+}
 </style>

@@ -2,7 +2,7 @@
   import { useCardsStore } from '/src/stores/CardsStore';
   import { useLoadingStore } from '/src/stores/LoadingStore';
   import { storeToRefs } from 'pinia';
-  import { ref, watch, onMounted } from 'vue';
+  import { ref, watch, onMounted, computed } from 'vue';
   import { useI18n } from 'vue-i18n'
   const { t } = useI18n();
 
@@ -14,22 +14,24 @@
   const expand = ref(false);
   const show = ref(false);
 
-  const gens = [
+
+
+  const gens = ref([
     {
       title: 'GEN 3',
-      subtitle: '2023 - ' + t('geninfo.present'),
+      subtitle: computed(() => t('geninfo.gen3Year')),
     },
     {
       title: 'GEN 2',
-      subtitle: '2018 - 2022',
+      subtitle: computed(() => t('geninfo.gen2Year')),
     },
     {
       title: 'GEN 1',
-      subtitle: '2014 - 2017',
+      subtitle: computed(() => t('geninfo.gen1Year')),
     }
-  ];
+  ]);
 
-  let actualGen = ref(gens[0]);
+  let actualGen = ref(gens.value[0]);
   let shouldExpand = ref(true);
 
   watch(loadComplete, (val) => {
@@ -42,16 +44,17 @@
     if (cardIndex.value == 0) {
       shouldExpand.value = true;
       expand.value = true;
+      actualGen.value = gens.value[0];
     } else if (cardIndex.value == 5) {
       expand.value = false;
-      actualGen.value = gens[1];
+      actualGen.value = gens.value[1];
     } else if (cardIndex.value == 8) {
       expand.value = false;
-      actualGen.value = gens[2];
+      actualGen.value = gens.value[2];
     } else if (cardIndex.value == 11) {
       expand.value = false;
       shouldExpand.value = false;
-      actualGen.value = gens[0];
+      actualGen.value = gens.value[0];
     }
   });
 

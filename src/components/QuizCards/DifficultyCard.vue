@@ -59,13 +59,13 @@
           class="text-center justify-center mx-auto"
           ></v-img>
           <h3 class="g-title font-weight-bold pa-8">
-            Ready to test your knowledge?
+            {{ $t("difficulty.title") }}
           </h3>
           <div class="g-text pb-6 px-6">
-            Gear up to answer questions about the three Formula E racing cars.
+            {{ $t("difficulty.text1") }}
           </div>    
           <div class="g-text pb-4 px-8">
-            Choose your difficulty below to begin:
+            {{ $t("difficulty.text2") }}
           </div>                 
         </v-card-item>
         <v-card-actions class="text-center justify-center">
@@ -73,21 +73,21 @@
             <v-row no-gutters>
               <v-col>
                 <v-btn rounded="xl" variant="tonal" :slim="false" class="g-bt-diff font-weight-black my-2" @click="onClick(1)">
-                  Easy
+                  {{ $t("global.easy") }}
                 </v-btn>
               </v-col>
             </v-row>
             <v-row no-gutters>
               <v-col>
                 <v-btn rounded="xl" variant="tonal" :slim="false" class="g-bt-diff font-weight-black my-2" @click="onClick(2)">
-                  Medium
+                  {{ $t("global.medium") }}
                 </v-btn>
               </v-col>
             </v-row>
             <v-row no-gutters>
               <v-col>
                 <v-btn rounded="xl" variant="tonal" :slim="false" class="g-bt-diff font-weight-black my-2" @click="onClick(3)">
-                  Hard
+                  {{ $t("global.hard") }}
                 </v-btn>  
               </v-col>
             </v-row>          

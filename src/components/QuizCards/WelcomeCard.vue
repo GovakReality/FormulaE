@@ -4,7 +4,7 @@
   import { ref, watch, onMounted} from 'vue';
   import { storeToRefs } from 'pinia';
   import saudiaLogo from '/images/SaudiaLogo.png';
-
+  
   const cardsStore = useCardsStore();
   const { cardIndex } = storeToRefs(cardsStore);
   const loadingStore = useLoadingStore();
@@ -13,11 +13,6 @@
   const show = ref(false);
 
   
-  const test = [
-    { title:  't1' },
-    { title:  't2' },
-  ]
-
   watch(loadComplete, (val) => {
     if (loadComplete.value) {
       expand.value = true;
@@ -57,17 +52,17 @@
       variant="elevated"
       >
         <v-card-item class="text-center">
-                   
+        
           <v-img
             :src=saudiaLogo
             width="138"
             class="text-center justify-center mx-auto"
           ></v-img>
           <h3 class="g-title font-weight-bold my-1 py-6 px-1">
-            {{ $t("welcome.title1") }}
+            {{ $t("welcome.title") }}
           </h3>          
           <h3 class="g-title font-weight-bold my-1 pb-6 px-7">
-            {{ $t("welcome.title2") }}
+            {{ $t("welcome.subtitle") }}
           </h3>
         </v-card-item>
         <v-card-actions class="text-center justify-center">

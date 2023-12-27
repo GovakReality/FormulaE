@@ -264,7 +264,7 @@
 
         <v-card-item>
           <div class="g-round mb-1 font-weight-bold">
-            ROUND {{ round }}
+            {{ $t("global.round") }} {{ round }}
           </div>
           <div class="g-text mb-2 pt-2">
             {{ question.question }}
@@ -305,9 +305,9 @@
   <v-sheet v-if="show" class="g-hud">
     <v-slide-y-reverse-transition group>
       <v-sheet v-if="expandHud" class="g-hud-w">
-        <span class="g-hud-total px-5 py-2">{{scoreFixed}} PTS</span>
-        <span class="g-hud-round px-5 py-2">ROUND 0{{ round }}/09</span>
-        <span class="g-hud-score px-5 py-2">+{{timeLeftFixed}} PTS</span>
+        <span class="g-hud-total px-5 py-2">{{scoreFixed}} {{ $t("global.pts") }}</span>
+        <span class="g-hud-round px-5 py-2">{{ $t("global.round") }} 0{{ round }}/09</span>
+        <span class="g-hud-score px-5 py-2">+{{timeLeftFixed}} {{ $t("global.pts") }}</span>
       </v-sheet>    
     </v-slide-y-reverse-transition>        
   </v-sheet>  

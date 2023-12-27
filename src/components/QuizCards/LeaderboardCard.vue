@@ -155,24 +155,24 @@
               </div> -->
               
               <h3 class="g-title font-weight-bold pt-10">
-                Your score is:
+                {{ $t("leaderboard.title") }}
               </h3>          
               <div class="g-points font-weight-bold py-6 px-5">
-                {{scoreFixed}} PTS
+                {{scoreFixed}} {{ $t("global.pts") }}
               </div> 
   
               <h3 class="g-title font-weight-bold py-2 px-10">
-                Tip: answer faster to score more points!
+                {{ $t("leaderboard.tip") }}
               </h3>                 
               <div class="g-text py-9 px-12">
-                If you're among the finalists by the end of the contest, you will be notified via email about your prize. 
+                {{ $t("leaderboard.text") }} 
               </div>            
 
             </div>
           </v-sheet>
           <v-sheet class="text-center justify-center mt-auto" color="transparent">
             <v-btn rounded="xl" color="#f0f0f0" variant="tonal" :slim="false" @click="onClick" class="g-bt font-weight-black mb-2">
-              TRY AGAIN
+              {{ $t("global.tryagain") }}
             </v-btn>
           </v-sheet>
         </v-sheet>                      
@@ -190,22 +190,22 @@
                   {{ item.full_name }}
                   <span v-if="item.finalist" class="g-flag"></span>
                 </td>
-                <td class="g-score">{{ item.scoreFixed }} <span v-if="item.score">PTS</span></td>
+                <td class="g-score">{{ item.scoreFixed }} <span v-if="item.score">{{ $t("global.pts") }}</span></td>
                 <td v-if="item.finalist" class="g-final px-0">
-                  <div class="px-3 py-2">finalist</div>
+                  <div class="px-3 py-2">{{ $t("leaderboard.finalist") }}</div>
                 </td>
               </tr>
               <tr v-if="!isTopTen">
                 <td colspan="3" class="g-top">
                   <v-icon icon="mdi-chevron-up" class="pr-10"></v-icon>
-                  <span>TOP 10</span>
+                  <span>{{ $t("leaderboard.top10") }}</span>
                   <v-icon icon="mdi-chevron-up" class="pl-10"></v-icon>
                 </td>
               </tr> 
               <tr v-if="!isTopTen">
                 <td class="g-pos current px-1"></td>
                 <td class="g-name current">{{fullName}}</td>
-                <td class="g-score current">{{scoreFixed}} PTS</td>
+                <td class="g-score current">{{scoreFixed}} {{ $t("global.pts") }}</td>
               </tr>                                   
             </tbody>
           </v-table>

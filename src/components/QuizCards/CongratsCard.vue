@@ -5,6 +5,9 @@
   import { ref, watch } from 'vue';
   import { storeToRefs } from 'pinia';
   import saudiaLogo from '/images/SaudiaLogo.png';
+  import { useI18n } from 'vue-i18n'
+
+  const { t } = useI18n();
 
   const cardsStore = useCardsStore();
   const { cardIndex } = storeToRefs(cardsStore);
@@ -26,27 +29,27 @@
   const fullNameRules = [
     value => {
       if (value) return true
-      return 'You must enter your full name.'
+      return t('rules.name.required')
     },    
     value => {
       if (value?.length > 1) return true
-      return 'Full name must be at least 2 characters.'
+      return t('rules.name.length')
     },
   ];
   const emailRules = [
     value => {
           if (value) return true
-          return 'E-mail is requred.'
+          return t('rules.email.required')
         },
         value => {
           if (/.+@.+\..+/.test(value)) return true
-          return 'E-mail must be valid.'
+          return t('rules.name.format')
         },
   ];
   const termsRules = [
     value => {
           if (value) return true
-          return 'You should agree.'
+          return t('rules.terms.required')
         },
   ];  
 
@@ -116,21 +119,21 @@
           class="text-center justify-center mx-auto"
           ></v-img>
           <h3 class="g-title font-weight-bold pt-8">
-            Congratulations!
+            {{ $t("congrats.title") }}
           </h3>
           <h3 class="g-title font-weight-bold pt-2">
-            Your score is:
+            {{ $t("congrats.subtitle") }}
           </h3>          
           <div class="g-points font-weight-bold pb-7 pt-6 px-5">
-            {{scoreFixed}} PTS
+            {{scoreFixed}} {{ $t("global.pts") }}
           </div>          
           <div class="g-text pb-6 px-7">
-            Enter your information below to register for the prize draw:
+            {{ $t("congrats.text") }}
           </div>    
           <v-form @submit.prevent="submit" class="px-6 pt-4" v-model="isFormValid">
             <v-text-field
               v-model="fullName"
-              label="Full name"
+              :label="$t('global.fullname')"
               :rules="fullNameRules"
               variant="solo"
               rounded="lg"
@@ -141,7 +144,7 @@
       
             <v-text-field
               v-model="email"
-              label="E-mail"
+              :label="$t('global.email')"
               type="email"
               :rules="emailRules"
               variant="solo"
@@ -160,10 +163,10 @@
               hide-details
               class="g-terms"
               :ripple="false"
-              label="I confirm that I am over 18 years of age and accept the terms and conditions and the Saudia Airlines Privacy Policy."
+              :label="$t('congrats.terms')"
             ></v-checkbox>
 
-            <v-btn :loading="loading" type="submit" rounded="xl" variant="tonal" :slim="false" :disabled="!isFormValid" class="g-bt font-weight-black mb-2 mt-8">CONTINUE</v-btn>
+            <v-btn :loading="loading" type="submit" rounded="xl" variant="tonal" :slim="false" :disabled="!isFormValid" class="g-bt font-weight-black mb-2 mt-8">{{ $t("global.continue") }}</v-btn>
           </v-form>                 
         </v-card-item>
         <v-snackbar
@@ -190,7 +193,7 @@
   <v-sheet v-if="show" class="g-try">
     <v-slide-y-reverse-transition >
       <v-btn v-if="expand" rounded="xl" variant="tonal" :slim="false" @click="tryAgainClick" class="g-try-bt font-weight-black">
-        TRY AGAIN
+        {{ $t("global.tryagain") }}
       </v-btn>
     </v-slide-y-reverse-transition>        
   </v-sheet>  

@@ -1,0 +1,21 @@
+{  
+  "locale": {
+    "en": "English",
+    "ar": "Arabic"
+  },
+  "global": {
+    "tryagain": "Try Again"
+  },
+  "menu": {
+    "admin": "Admin",
+    "about": "About"
+  },
+  "geninfo": {
+    "present": "present"
+  },
+  "welcome": {
+    "title1": "About us",
+    "title2": "Donations raised: {donations}",
+    "start": "Start Quiz"
+  }
+}

@@ -1,0 +1,21 @@
+{  
+  "locale": {
+    "en": "English",
+    "ar": "Arabic"
+  },
+  "global": {
+    "tryagain": "Try Again"
+  },
+  "menu": {
+    "admin": "Admin",
+    "about": "About"
+  },
+  "geninfo": {
+    "present": "present"
+  },
+  "welcome": {
+    "title1": "Test your knowledge on the generations of Formula E models.",
+    "title2": "Take a quiz now for the chance to win exclusive prizes!",
+    "start": "Start Quiz"
+  }
+}

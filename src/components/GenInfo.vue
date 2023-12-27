@@ -3,6 +3,8 @@
   import { useLoadingStore } from '/src/stores/LoadingStore';
   import { storeToRefs } from 'pinia';
   import { ref, watch, onMounted } from 'vue';
+  import { useI18n } from 'vue-i18n'
+  const { t } = useI18n();
 
   const cardStore = useCardsStore();
   const { cardIndex } = storeToRefs(cardStore);
@@ -15,7 +17,7 @@
   const gens = [
     {
       title: 'GEN 3',
-      subtitle: '2023 - Present',
+      subtitle: '2023 - ' + t('geninfo.present'),
     },
     {
       title: 'GEN 2',
@@ -60,6 +62,7 @@
   onMounted(() => {
     show.value = true;
   }); 
+
 
 </script>
 

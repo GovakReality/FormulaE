@@ -1,8 +1,10 @@
 <script setup>
+  import { useI18n } from 'vue-i18n'
+  const { t } = useI18n();
 
   const menuItems = [
-    { title: 'Admin' },
-    { title: 'About' },
+    { title:  t('menu.admin') },
+    { title:  t('menu.about') },
   ]
 </script>
 <template>

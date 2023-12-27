@@ -57,15 +57,15 @@
             class="text-center justify-center mx-auto"
           ></v-img>
           <h3 class="g-title font-weight-bold my-1 py-6 px-1">
-            Test your knowledge on the generations of Formula E models.
+            {{ $t("welcome.title1") }}
           </h3>          
           <h3 class="g-title font-weight-bold my-1 pb-6 px-7">
-            Take a quiz now for the chance to win exclusive prizes!
+            {{ $t("welcome.title2") }}
           </h3>
         </v-card-item>
         <v-card-actions class="text-center justify-center">
           <v-btn rounded="xl" variant="tonal" :slim="false" @click="onClick" class="g-bt-start font-weight-black">
-            Start Quiz
+            {{ $t("welcome.start") }}
           </v-btn>
         </v-card-actions>
       </v-card>

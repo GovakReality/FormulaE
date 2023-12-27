@@ -1,21 +1,31 @@
 <script setup>
-  const languages = [
-    'English',
-		'lang2',
-		'lang3',
-  ]
+  import { computed, watch } from 'vue';
+  import { useI18n } from 'vue-i18n'
 
-	const defaultSelected = ['English']
+  const { t, locale, availableLocales } = useI18n()
+
+  const availableLocalesComp = computed(() => {
+    return availableLocales.map(function(code, index) {
+      return { title: t(`locale.${code}`), value: code };
+    });
+  });
+
+  watch(locale, () => {
+    document.querySelector("html").setAttribute("lang", locale.value)
+  });
+
 </script>
 <template>
   <v-select
+    v-model="locale"
+    :items="availableLocalesComp"
+    item-title="title"
+    item-value="value"    
     rounded="sm"
     bg-color="transparent"
     item-color="green"
     variant="solo"
     flat
-    :items="languages"
-    v-model="defaultSelected"			
     menu-icon=""
     class="g-lang mt-6 text-center"
     transition="scroll-y-transition"

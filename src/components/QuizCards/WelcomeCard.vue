@@ -12,6 +12,12 @@
   const expand = ref(false);
   const show = ref(false);
 
+  
+  const test = [
+    { title:  't1' },
+    { title:  't2' },
+  ]
+
   watch(loadComplete, (val) => {
     if (loadComplete.value) {
       expand.value = true;
@@ -51,6 +57,7 @@
       variant="elevated"
       >
         <v-card-item class="text-center">
+                   
           <v-img
             :src=saudiaLogo
             width="138"

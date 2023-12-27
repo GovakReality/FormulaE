@@ -8,6 +8,7 @@ import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
 import { LightProbeGenerator } from 'three/addons/lights/LightProbeGenerator.js';
 import { gsap } from 'gsap';
 import { useQuizStore } from '/src/stores/QuizStore';
+import { useCardsStore } from '/src/stores/CardsStore';
 import { useLoadingStore } from '/src/stores/LoadingStore';
 import { useGraphicsStore } from '/src/stores/GraphicsStore';
 import { useCameraStore } from '/src/stores/CameraStore';
@@ -30,6 +31,8 @@ const quizStore = useQuizStore();
 const { shouldCameraMove, question, quizEnded } = storeToRefs(quizStore);
 const loadingStore = useLoadingStore();
 const { loadStart, loadComplete, loadError, loadProgress, errorUrl } = storeToRefs(loadingStore);
+const cardsStore = useCardsStore();
+const { cardIndex } = storeToRefs(cardsStore);
 const graphicsStore = useGraphicsStore();
 const { directionalLightIntensity, directionalLightColor, ambientLightIntensity, ambientLightColor, lightProbeIntensity, backgroundIntensity, backgroundBlurriness, fogColor, fogNear, fogFar, toneMapping, toneMappingExposure } = storeToRefs(graphicsStore);
 const cameraStore = useCameraStore();
@@ -42,6 +45,7 @@ const windowHeight = ref(window.innerHeight);
 const aspectRatio = computed(() => {
   return windowWidth.value / windowHeight.value;
 });
+const shouldBlur = ref(false);
 
 let camera;
 let renderer;
@@ -115,6 +119,14 @@ manager.onError = function (url) {
   errorUrl.value = url;
   loadError.value = true;
 };
+
+watch(cardIndex, () => {
+  if (cardIndex.value >= 11) {
+    shouldBlur.value = true;
+  } else {
+    shouldBlur.value = false;
+  }
+});
 
 // Start scene
 const setCanvas = () => {
@@ -420,7 +432,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <canvas ref="webGl" class="webGl" />
+  <canvas ref="webGl" class="webGl" :class="{ blur: shouldBlur }"/>
 </template>
 
 <style scoped>
@@ -432,5 +444,23 @@ onUnmounted(() => {
   right: 0;
   left: 0;
   z-index: 0;
+  transition: 0.5s filter linear;
+  -webkit-transition: 0.5s -webkit-filter linear;
+  -moz-transition: 0.5s -moz-filter linear;
+  -ms-transition: 0.5s -ms-filter linear;
+  -o-transition: 0.5s -o-filter linear;    
+}
+.blur{
+  -webkit-filter: blur(20px);
+  -moz-filter: blur(20px);
+  -o-filter: blur(20px);
+  -ms-filter: blur(20px);
+  filter: blur(20px);
+  pointer-events: none;
+  transition: 0.5s filter linear;
+  -webkit-transition: 0.5s -webkit-filter linear;
+  -moz-transition: 0.5s -moz-filter linear;
+  -ms-transition: 0.5s -ms-filter linear;
+  -o-transition: 0.5s -o-filter linear;  
 }
 </style>

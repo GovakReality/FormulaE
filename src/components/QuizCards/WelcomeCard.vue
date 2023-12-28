@@ -44,7 +44,7 @@
 </script>
 
 <template>
-  <v-sheet v-if="show" class="d-flex align-end justify-end h-100 pa-10">
+  <v-sheet v-if="show" class="d-flex align-end justify-end h-100 pa-8 pb-16 pa-sm-10">
     <v-slide-y-reverse-transition @after-leave="onAfterLeave">
       <v-card
       v-if="expand"
@@ -58,10 +58,10 @@
             width="138"
             class="text-center justify-center mx-auto"
           ></v-img>
-          <h3 class="g-title font-weight-bold my-1 py-6 px-1">
+          <h3 class="g-title font-weight-bold my-1 pt-4 pb-1 py-sm-6 px-1 px-sm-2">
             {{ $t("welcome.title") }}
           </h3>          
-          <h3 class="g-title font-weight-bold my-1 pb-6 px-7">
+          <h3 class="g-title font-weight-bold my-1 pt-1 pb-0 pb-sm-6 px-4 px-sm-7">
             {{ $t("welcome.subtitle") }}
           </h3>
         </v-card-item>
@@ -84,7 +84,7 @@
 }
 .g-title {
   font-size: 28px;
-  line-height: 34px;
+  line-height: 36px;
 }
 .g-bt-start {
   font-size: 18px;
@@ -99,5 +99,30 @@
 
 :deep(.v-btn.v-btn--density-default) {
   height: 46px;
+}
+
+@media (max-width: 599px) {
+  .g-card{
+    width: 300px;
+  }
+  .g-title {
+    font-size: 18px;
+    line-height: 28px;
+    padding: 0px;
+  }
+  .g-bt-start {
+    font-size: 16px;
+    width: 130px;
+  }
+  :deep(.v-btn.v-btn--density-default) {
+    height: 36px;
+  }  
+}
+
+@media (max-width: 426px) {
+  .g-card{
+    width: 300px;
+  }
+ 
 }
 </style>

@@ -86,7 +86,7 @@
 .g-geninfo {
   background-color: transparent;
   position: absolute;
-  z-index: 90;
+  z-index: 20;
   max-width: 100%;
   bottom: 33px;
   left: 38px;
@@ -103,5 +103,31 @@
 .g-subtitle {
   font-size: 21px;
   font-weight: 400;
+}
+
+@media (max-width: 599px) {
+  .g-geninfo {
+    bottom: 10px;
+    left: 10px; 
+  }
+  .g-title {
+    font-size: 25px;
+  }
+  .g-subtitle {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 2560px) {
+  .g-geninfo {
+    bottom: 40px;
+    left: 50px; 
+  }
+  .g-title {
+    font-size: 60px;
+  }
+  .g-subtitle {
+    font-size: 34px;
+  }
 }
 </style>

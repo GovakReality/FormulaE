@@ -19,4 +19,20 @@
   left: 5px;
   pointer-events: none;
 }
+
+@media (max-width: 599px) {
+  .g-lockup {
+    width: 300px;
+    left: 50%;
+    top: 40px;
+    margin-left: -150px;
+  }
+}
+
+@media (min-width: 2560px) {
+  .g-lockup {
+    width: 580px;
+  }
+}
+
 </style>

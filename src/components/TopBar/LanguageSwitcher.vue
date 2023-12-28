@@ -31,7 +31,7 @@
     transition="scroll-y-transition"
   >
     <template v-slot:item="{ props, item }">
-      <v-list-item v-bind="props"></v-list-item>
+      <v-list-item v-bind="props" class="text-center g-lang-item"></v-list-item>
     </template>  
     <template v-slot:prepend-inner>
       <v-icon icon="mdi-chevron-down" class="g-icon"></v-icon>
@@ -43,9 +43,12 @@
 .g-lang {
 	color: white !important;
   pointer-events: auto;
-  font-size: 24px;
   font-weight: 700;
   width: 130px;
+  font-size: 24px;
+}
+.g-lang-item {
+  font-size: 24px;
 }
 .v-select--active-menu .g-icon {
   transform: rotate(180deg);
@@ -54,4 +57,18 @@
 .v-select .g-icon {
   transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+@media (min-width: 2560px) {
+  .g-lang {
+    width: 260px;
+  }
+  :deep(.v-field) {
+    font-size: 30px;
+  }
+  :deep(.v-list-item-title) {
+    font-size: 30px;
+    padding: 20px 0px;
+  }
+}
+
 </style>

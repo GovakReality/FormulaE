@@ -354,6 +354,7 @@
   white-space: normal;
 }
 .g-hud {
+  font-family: IBM Plex Sans;
   background-color: transparent;
   position: absolute;
   z-index: 90;
@@ -367,35 +368,32 @@
 .g-hud-round {
   opacity: 0.9;
   background-color: #F3F5F4;
-  font-family: IBM Plex Sans;
-  line-height: normal;
   font-weight: 700;
   font-size: 17px;
+  width: 150px;
   color: #000000;  
   display: inline-block;
-  height: 40px;
+  vertical-align: middle;
 }
 .g-hud-score {
   background-color: #28673C;
-  font-family: IBM Plex Sans;
-  line-height: normal;
   font-weight: 700;
   font-size: 18px;
   color: #F0F0F0;  
   text-align: right;
-  display: inline-block;
   width: 150px;
-  height: 40px;
+  display: inline-block;
+  vertical-align: middle;
 }
 .g-hud-total {
   background-color: #28673C;
-  font-family: IBM Plex Sans;
-  line-height: normal;
   font-weight: 700;
   font-size: 18px;
   color: #F0F0F0;  
-  display: block;
   text-align: right;
+  vertical-align: bottom;
+  width: 300px;
+  max-width: 100%;
 }
 
 :deep(.v-card__loader) {
@@ -424,9 +422,17 @@
     height: 50px;
   } 
   .g-hud {
-    bottom: 15px;
-    right: 25px;
-  }       
+    bottom: 25px;
+    right: auto;
+    left: 50%;
+    margin-left: -150px;
+  } 
+  .g-hud-round {
+    width: 150px;
+  }
+  .g-hud-score {
+    width: 150px;
+  }        
 }
 
 @media (max-width: 446px) {
@@ -463,14 +469,16 @@
   .g-hud-round {
     font-size: 24px;
     height: 52px;
+    width: 200px;
   }
   .g-hud-score {
     font-size: 26px;
-    width: 180px;
+    width: 200px;
     height: 52px;
   }
   .g-hud-total {
     font-size: 26px;
+    width: 400px;
   }    
 }
 </style>

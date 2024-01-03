@@ -124,13 +124,13 @@
           <h3 class="g-title font-weight-bold pt-2">
             {{ $t("congrats.subtitle") }}
           </h3>          
-          <div class="g-points font-weight-bold pb-7 pt-6 px-5">
+          <div class="g-points font-weight-bold pb-7 pt-6 px-5 py-xxl-10">
             {{scoreFixed}} {{ $t("global.pts") }}
           </div>          
-          <div class="g-text pb-6 px-7">
+          <div class="g-text pb-6 px-7 px-xxl-11">
             {{ $t("congrats.text") }}
           </div>    
-          <v-form @submit.prevent="submit" class="px-6 pt-4" v-model="isFormValid">
+          <v-form @submit.prevent="submit" class="px-6 pt-4 pt-xxl-6" v-model="isFormValid">
             <v-text-field
               v-model="fullName"
               :label="$t('global.fullname')"
@@ -138,7 +138,7 @@
               variant="solo"
               rounded="lg"
               bg-color="white"
-              class="g-tfield"
+              class="g-tfield mb-xxl-8"
               required
             ></v-text-field>
       
@@ -150,7 +150,7 @@
               variant="solo"
               rounded="lg"
               bg-color="white"
-              class="g-tfield my-4"
+              class="g-tfield my-4 mb-xxl-8"
               required
             ></v-text-field>
       
@@ -166,7 +166,7 @@
               :label="$t('congrats.terms')"
             ></v-checkbox>
 
-            <v-btn :loading="loading" type="submit" rounded="xl" variant="tonal" :slim="false" :disabled="!isFormValid" class="g-bt font-weight-black mb-2 mt-8">{{ $t("global.continue") }}</v-btn>
+            <v-btn :loading="loading" type="submit" rounded="xl" variant="tonal" :slim="false" :disabled="!isFormValid" class="g-bt font-weight-black mb-2 mt-8 mt-xxl-10">{{ $t("global.continue") }}</v-btn>
           </v-form>                 
         </v-card-item>
         <v-snackbar
@@ -292,5 +292,41 @@
 }
 :deep(.v-selection-control__input:hover::before) {
   opacity: 0.0;
+}
+
+@media (max-width: 599px) {
+  .g-try {
+    bottom: 40px;
+    right: 40px;
+  }   
+}
+
+@media (min-width: 2560px) {
+  .g-card{
+    width: 513px;
+  }
+  .g-title {
+    font-size: 32px;
+  }
+  .g-text {
+    font-size: 30px;
+  }
+  .g-points {
+    font-size: 54px;
+  }
+  :deep(.v-messages) {
+    font-size: 18px;
+  }
+  .g-bt {
+    font-size: 22px;
+    width: 223px;
+  }  
+  :deep(.v-btn.v-btn--density-default) {
+    height: 54px;
+  }
+  .g-try-bt {
+    font-size: 22px;
+    width: 213px;
+  }   
 }
 </style>

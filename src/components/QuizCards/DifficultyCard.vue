@@ -130,4 +130,24 @@
 :deep(.v-btn.v-btn--density-default) {
   height: 46px;
 }
+
+@media (min-width: 2560px) {
+  .g-card{
+    width: 513px;
+  }
+  .g-title {
+    font-size: 34px;
+    line-height: 38px;
+  }  
+  .g-text {
+    font-size: 29px;
+  } 
+  .g-bt-diff {
+    font-size: 22px;
+    width: 220px;
+  }  
+  :deep(.v-btn.v-btn--density-default) {
+    height: 56px;
+  }  
+}
 </style>

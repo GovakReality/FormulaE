@@ -354,7 +354,7 @@
   white-space: normal;
 }
 .g-hud {
-  background-color: #28673C;
+  background-color: transparent;
   position: absolute;
   z-index: 90;
   max-width: 100%;
@@ -426,10 +426,7 @@
   .g-hud {
     bottom: 15px;
     right: 25px;
-  } 
-  .g-hud-round {
-    font-size: 15px; 
-  }        
+  }       
 }
 
 @media (max-width: 446px) {
@@ -437,7 +434,7 @@
     right: 20px;
   } 
   .g-hud-round {
-    font-size: 14px; 
+    font-size: 16px; 
   }  
   .g-hud-score {
     font-size: 16px; 

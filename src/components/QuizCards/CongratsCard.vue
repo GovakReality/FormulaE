@@ -110,7 +110,7 @@
       <v-card
       v-if="expand"
       class="g-card py-5 pe-2 rounded-xl"
-      variant="elevated"
+      variant="flat"
       >
         <v-card-item class="text-center">
           <v-img

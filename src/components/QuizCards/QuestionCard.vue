@@ -250,7 +250,7 @@
       v-if="expand"
       class="g-card py-5 px-4 rounded-xl"
       color="#F0F0F0"
-      variant="elevated"
+      variant="flat"
       >
       <template v-slot:loader="{ isActive }">
         <v-progress-linear

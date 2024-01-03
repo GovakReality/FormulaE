@@ -125,4 +125,21 @@
   }
  
 }
+
+@media (min-width: 2560px) {
+  .g-card{
+    width: 513px;
+  }
+  .g-title {
+    font-size: 32px;
+    line-height: 38px;
+  }  
+  .g-bt-start {
+    font-size: 22px;
+    width: 220px;
+  } 
+  :deep(.v-btn.v-btn--density-default) {
+    height: 56px;
+  }  
+}
 </style>

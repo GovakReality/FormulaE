@@ -119,13 +119,6 @@
   }  
 }
 
-@media (max-width: 426px) {
-  .g-card{
-    width: 300px;
-  }
- 
-}
-
 @media (min-width: 2560px) {
   .g-card{
     width: 513px;

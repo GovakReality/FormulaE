@@ -240,7 +240,7 @@
 </script>
 
 <template>
-  <v-sheet v-if="show" class="d-flex align-end justify-center h-100 pa-10">
+  <v-sheet v-if="show" class="d-flex align-end justify-center h-100 pa-8 pb-10 pb-sm-16 pa-sm-10">
     <v-slide-y-reverse-transition
     @after-leave="onAfterLeave"
     @after-enter="onAfterEnter"
@@ -263,10 +263,10 @@
       </template>
 
         <v-card-item>
-          <div class="g-round mb-1 font-weight-bold">
+          <div class="g-round mb-0 mb-sm-1 font-weight-bold">
             {{ $t("global.round") }} {{ round }}
           </div>
-          <div class="g-text mb-2 pt-2">
+          <div class="g-text mb-1 mb-sm-2 pt-2">
             {{ question.question }}
           </div>                     
         </v-card-item>
@@ -305,9 +305,9 @@
   <v-sheet v-if="show" class="g-hud">
     <v-slide-y-reverse-transition group>
       <v-sheet v-if="expandHud" class="g-hud-w">
-        <span class="g-hud-total px-5 py-2">{{scoreFixed}} {{ $t("global.pts") }}</span>
-        <span class="g-hud-round px-5 py-2">{{ $t("global.round") }} 0{{ round }}/09</span>
-        <span class="g-hud-score px-5 py-2">+{{timeLeftFixed}} {{ $t("global.pts") }}</span>
+        <div class="g-hud-total px-5 py-2">{{scoreFixed}} {{ $t("global.pts") }}</div>
+        <div class="g-hud-round px-5 py-2">{{ $t("global.round") }} 0{{ round }}/09</div>
+        <div class="g-hud-score px-5 py-2">+{{timeLeftFixed}} {{ $t("global.pts") }}</div>
       </v-sheet>    
     </v-slide-y-reverse-transition>        
   </v-sheet>  
@@ -354,11 +354,11 @@
   white-space: normal;
 }
 .g-hud {
-  background-color: transparent;
+  background-color: #28673C;
   position: absolute;
   z-index: 90;
   max-width: 100%;
-  bottom: 56px;
+  bottom: 45px;
   right: 38px;
 }
 .g-hud-w {
@@ -372,6 +372,8 @@
   font-weight: 700;
   font-size: 17px;
   color: #000000;  
+  display: inline-block;
+  height: 40px;
 }
 .g-hud-score {
   background-color: #28673C;
@@ -380,6 +382,10 @@
   font-weight: 700;
   font-size: 18px;
   color: #F0F0F0;  
+  text-align: right;
+  display: inline-block;
+  width: 150px;
+  height: 40px;
 }
 .g-hud-total {
   background-color: #28673C;
@@ -398,5 +404,76 @@
 }
 :deep(.v-progress-linear__background) {
   opacity: 0.3;
+}
+
+@media (max-width: 599px) {
+  .g-card{
+    width: 420px;
+  }
+  .g-round {
+    font-size: 18px;
+  }
+  .g-text {
+    font-size: 19px;
+  } 
+  .g-bt {
+    font-size: 15px;
+    width: 184px;
+  } 
+  :deep(.v-btn.v-btn--density-default) {
+    height: 50px;
+  } 
+  .g-hud {
+    bottom: 15px;
+    right: 25px;
+  } 
+  .g-hud-round {
+    font-size: 15px; 
+  }        
+}
+
+@media (max-width: 446px) {
+  .g-hud {
+    right: 20px;
+  } 
+  .g-hud-round {
+    font-size: 14px; 
+  }  
+  .g-hud-score {
+    font-size: 16px; 
+  }      
+  .g-hud-total {
+    font-size: 16px; 
+  }   
+}
+
+@media (min-width: 2560px) {
+  .g-card{
+    width: 710px;
+  }
+  .g-round {
+    font-size: 30px;
+  }
+  .g-text {
+    font-size: 32px;
+  } 
+  .g-bt {
+    font-size: 25px;
+  } 
+  :deep(.v-btn.v-btn--density-default) {
+    height: 82px;
+  } 
+  .g-hud-round {
+    font-size: 24px;
+    height: 52px;
+  }
+  .g-hud-score {
+    font-size: 26px;
+    width: 180px;
+    height: 52px;
+  }
+  .g-hud-total {
+    font-size: 26px;
+  }    
 }
 </style>

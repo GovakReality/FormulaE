@@ -43,7 +43,7 @@
         },
         value => {
           if (/.+@.+\..+/.test(value)) return true
-          return t('rules.name.format')
+          return t('rules.email.format')
         },
   ];
   const termsRules = [

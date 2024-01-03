@@ -184,6 +184,7 @@
               <tr
                 v-for="(item, index) in formattedPlayers"
                 :key="item.full_name"
+                class="py-4"
               >
                 <td class="g-pos px-1"> <span v-if="item.full_name">{{ index + 1 }}</span></td>
                 <td class="g-name" :class="{ current: item.current }">
@@ -295,9 +296,13 @@
   background-color: #F0F0F0;
   color: #000000;
   position: relative;
-  max-width: 300px;
+  max-width: 310px;
   text-wrap: nowrap;
   overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-break: normal;
+  word-wrap: break-word  
 }
 .g-flag {
   display: inline-block;
@@ -318,6 +323,7 @@
   line-height: normal;
   font-weight: 700;  
   text-align: right;
+  width: 152px;
 }
 .g-top {
   font-size: 20px;
@@ -354,5 +360,68 @@
   background-color: #28673C;
   color:#F0F0F0;
   width: 100%;
+}
+
+@media (min-width: 2560px) {
+  .g-card{
+    width: 513px;
+    height: 684px;
+  }
+  .g-title {
+    font-size: 30px;
+  }
+  .g-text {
+    font-size: 22px;
+  }
+  .g-place {
+    font-size: 60px;
+  }
+  .g-points {
+    font-size: 50px;
+  }
+  .g-place small {
+    font-size: 46px;
+  }
+  .g-bt {
+    font-size: 22px;
+    width: 213px;
+  }
+  :deep(.v-btn.v-btn--density-default) {
+    height: 56px;
+  }
+  .g-names-list {
+    width: 780px;
+    max-width: 100%;
+    height: 684px;
+  }
+  .g-pos {
+    font-size: 22px;
+    width: 70px;
+  }
+  .g-name {
+    font-size: 22px;
+    max-width: 410px;
+  }
+  .g-score {
+    font-size: 23px;
+    width: 210px;
+  }
+  .g-top {
+    font-size: 22px;
+    width: 100%;
+  }
+  .g-top i {
+    font-size: 45px;
+  }
+  .g-final {
+    font-size: 18px;
+    width: 90px;
+  }
+  .g-final div {
+    width: 100%;
+  }
+  :deep(.v-table--density-default > .v-table__wrapper > table > tbody > tr > td, .v-table--density-default > .v-table__wrapper > table > thead > tr > td, .v-table--density-default > .v-table__wrapper > table > tfoot > tr > td) {
+    height: 57px;
+  }
 }
 </style>

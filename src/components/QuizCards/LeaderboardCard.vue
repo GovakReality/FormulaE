@@ -2,7 +2,8 @@
   import { useCardsStore } from '/src/stores/CardsStore';
   import { useQuizStore } from '/src/stores/QuizStore';
   import { useAPIStore } from '/src/stores/APIStore';
-  import { ref, watch, computed } from 'vue';
+  import { ref, watch, computed, onMounted, onUnmounted } from 'vue';
+  import { useDisplay } from 'vuetify'
   import { storeToRefs } from 'pinia';
   import saudiaLogo from '/images/SaudiaLogo.png';
 
@@ -11,6 +12,8 @@
   const quizStore = useQuizStore();
   const { fullName, email, score, scoreFixed } = storeToRefs(quizStore);
   const APIStore = useAPIStore();
+
+  const { height } = useDisplay();
 
   const expand = ref(false);
   const show = ref(false);
@@ -131,17 +134,36 @@
     cardsStore.reset();
     quizStore.reset();
     APIStore.reset();
-  }    
+  }  
+  
+  const test = ref(null)
+  const calcHeight = () => {
+    console.log(test.value.$el.clientHeight)
+    
+  };
+
+  const handleResize = () => {
+    calcHeight();
+  };
+
+  onMounted(() => {
+    window.addEventListener('resize', handleResize);
+  });
+
+  onUnmounted(() => {
+    window.removeEventListener('resize', handleResize);
+  })  
 </script>
 
 <template>
-  <v-sheet v-if="show" class="d-flex align-center justify-center h-100 pa-10">
+  <v-sheet v-if="show" class="d-flex flex-column flex-sm-column flex-md-row align-center justify-center h-100 pa-10">
     <v-slide-y-reverse-transition @after-leave="onAfterLeave" group>
       <v-sheet v-if="expand" class="g-sheet" position="relative" color="transparent">
         <v-sheet
-        class="d-flex flex-column justify-center g-card py-8 rounded-s-xl rounded-e-0"
+        class="d-flex flex-column justify-center g-card mt-8 mt-sm-0 pt-8 pb-0 pb-md-8"
         variant="flat"
         color="transparent"
+        ref="test"
         >
           <v-sheet class="text-center" color="transparent">
             <div class="g-wrapper">
@@ -164,20 +186,20 @@
               <h3 class="g-title font-weight-bold py-2 px-10">
                 {{ $t("leaderboard.tip") }}
               </h3>                 
-              <div class="g-text py-9 px-12">
+              <div class="g-text pt-4 pb-8 py-md-9 px-12">
                 {{ $t("leaderboard.text") }} 
               </div>            
 
             </div>
           </v-sheet>
-          <v-sheet class="text-center justify-center mt-auto" color="transparent">
+          <v-sheet class="text-center justify-center mt-auto d-none d-sm-none d-md-flex" color="transparent">
             <v-btn rounded="xl" color="#f0f0f0" variant="tonal" :slim="false" @click="onClick" class="g-bt font-weight-black mb-2">
               {{ $t("global.tryagain") }}
             </v-btn>
           </v-sheet>
         </v-sheet>                      
       </v-sheet>
-      <v-sheet v-if="expand" class="g-sheet" position="relative" color="transparent">
+      <v-sheet v-if="expand" class="g-sheet g-sheet-l" position="relative" color="transparent">
         <v-card variant="flat" class="g-names-list rounded-0" color="transparent">
           <v-table class="g-table">
             <tbody>
@@ -192,7 +214,7 @@
                   <span v-if="item.finalist" class="g-flag"></span>
                 </td>
                 <td class="g-score">{{ item.scoreFixed }} <span v-if="item.score">{{ $t("global.pts") }}</span></td>
-                <td v-if="item.finalist" class="g-final px-0">
+                <td v-if="item.finalist" class="g-final px-0 d-none d-sm-none d-md-inline">
                   <div class="px-3 py-2">{{ $t("leaderboard.finalist") }}</div>
                 </td>
               </tr>
@@ -226,6 +248,10 @@
   max-width: 100%;
   width: 413px;
   height: 624px;
+  border-top-left-radius: 24px !important;
+  border-bottom-left-radius: 24px !important;
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;  
 }
 .g-wrapper {
   color: #F0F0F0;
@@ -360,6 +386,92 @@
   background-color: #28673C;
   color:#F0F0F0;
   width: 100%;
+}
+
+@media (max-width: 1089px) {
+  .g-card{
+    width: 358px;
+  }
+  .g-names-list {
+    width: 542px;
+  }  
+  .g-pos {
+    font-size: 16px;
+    width: 45px;
+  }  
+  .g-name {
+    font-size: 17px;
+    max-width: 250px; 
+  }  
+  .g-score {
+    font-size: 19px;
+    width: 142px;
+  }  
+  .g-final {
+    font-size: 14px;
+    width: 80px;
+  }  
+}
+
+@media (max-width: 959px) {
+  .g-card{
+    width: 513px;
+    height: auto;
+    border-top-left-radius: 24px !important;
+    border-bottom-left-radius: 0px !important;
+    border-top-right-radius: 24px !important;
+    border-bottom-right-radius: 0px !important;  
+  }
+  .g-names-list {  
+    width: 513px;
+    height: auto;
+  }
+  .g-pos {
+    font-size: 14px;
+    width: 30px;
+  }  
+  .g-name {
+    font-size: 17px;
+    max-width: 250px; 
+  }  
+  .g-score {
+    font-size: 17px;
+    width: 120px;
+  }      
+}
+
+@media (max-width: 549px) {
+  .g-card{
+    width: auto;  
+  }
+  .g-points {
+    font-size: 40px;
+  }
+  .g-title {
+    font-size: 24px;
+  }
+  .g-text {
+    font-size: 16px;
+  }
+  .g-sheet-l {
+    width: 100%;
+  }
+  .g-names-list {  
+    width: auto;
+  }
+  .g-pos {
+    font-size: 14px;
+    width: auto;
+  }  
+  .g-name {
+    font-size: 16px;
+    width: auto;
+    max-width: 200px;
+  }  
+  .g-score {
+    font-size: 16px;
+    width: auto;
+  }    
 }
 
 @media (min-width: 2560px) {

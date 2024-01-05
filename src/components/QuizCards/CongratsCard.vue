@@ -105,101 +105,103 @@
 </script>
 
 <template>
-  <v-sheet v-if="show" class="d-flex align-center justify-center h-100 pa-10">
-    <v-slide-y-reverse-transition @after-leave="onAfterLeave">
-      <v-card
-      v-if="expand"
-      class="g-card py-5 pe-2 rounded-xl"
-      variant="flat"
-      >
-        <v-card-item class="text-center">
-          <v-img
-          :src="saudiaLogo"
-          width="138"
-          class="text-center justify-center mx-auto"
-          ></v-img>
-          <h3 class="g-title font-weight-bold pt-8">
-            {{ $t("congrats.title") }}
-          </h3>
-          <h3 class="g-title font-weight-bold pt-2">
-            {{ $t("congrats.subtitle") }}
-          </h3>          
-          <div class="g-points font-weight-bold pb-7 pt-6 px-5 py-xxl-10">
-            {{scoreFixed}} {{ $t("global.pts") }}
-          </div>          
-          <div class="g-text pb-6 px-7 px-xxl-11">
-            {{ $t("congrats.text") }}
-          </div>    
-          <v-form @submit.prevent="submit" class="px-6 pt-4 pt-xxl-6" v-model="isFormValid">
-            <v-text-field
-              v-model="fullName"
-              :label="$t('global.fullname')"
-              :rules="fullNameRules"
-              variant="solo"
-              rounded="lg"
-              bg-color="white"
-              class="g-tfield mb-xxl-8"
-              required
-            ></v-text-field>
-      
-            <v-text-field
-              v-model="email"
-              :label="$t('global.email')"
-              type="email"
-              :rules="emailRules"
-              variant="solo"
-              rounded="lg"
-              bg-color="white"
-              class="g-tfield my-4 mb-xxl-8"
-              required
-            ></v-text-field>
-      
-            <v-checkbox
-              v-model="terms"
-              :rules="termsRules"
-              :center-affix=false
-              color="white"
-              false-icon="mdi-checkbox-blank"
-              hide-details
-              class="g-terms"
-              :ripple="false"
-              :label="$t('congrats.terms')"
-            ></v-checkbox>
-
-            <v-btn :loading="loading" type="submit" rounded="xl" variant="tonal" :slim="false" :disabled="!isFormValid" class="g-bt font-weight-black mb-2 mt-8 mt-xxl-10">{{ $t("global.continue") }}</v-btn>
-          </v-form>                 
-        </v-card-item>
-        <v-snackbar
-          v-model="showError"
-          multi-line
-          color="error"
-          elevation="16"
-          timeout="10000"
-          >
-          {{ errorMsg }}
-          <template v-slot:actions>
-            <v-btn
-              color="white"
-              variant="text"
-              @click="showError = !showError"
+  <v-sheet v-if="show" class="d-flex flex-column align-center justify-center h-100 pa-10">
+    <v-slide-y-reverse-transition @after-leave="onAfterLeave" group>
+      <v-sheet v-if="expand" class="g-sheet" position="relative" color="transparent">
+        <v-card
+        class="g-card py-5 pe-2 rounded-xl"
+        variant="flat"
+        >
+          <v-card-item class="text-center">
+            <v-img
+            :src="saudiaLogo"
+            width="138"
+            class="text-center justify-center mx-auto"
+            ></v-img>
+            <h3 class="g-title font-weight-bold pt-8">
+              {{ $t("congrats.title") }}
+            </h3>
+            <h3 class="g-title font-weight-bold pt-2">
+              {{ $t("congrats.subtitle") }}
+            </h3>          
+            <div class="g-points font-weight-bold pb-7 pt-6 px-5 py-xxl-10">
+              {{scoreFixed}} {{ $t("global.pts") }}
+            </div>          
+            <div class="g-text pb-6 px-7 px-xxl-11">
+              {{ $t("congrats.text") }}
+            </div>    
+            <v-form @submit.prevent="submit" class="px-6 pt-4 pt-xxl-6" v-model="isFormValid">
+              <v-text-field
+                v-model="fullName"
+                :label="$t('global.fullname')"
+                :rules="fullNameRules"
+                variant="solo"
+                rounded="lg"
+                bg-color="white"
+                class="g-tfield mb-xxl-8"
+                required
+              ></v-text-field>
+        
+              <v-text-field
+                v-model="email"
+                :label="$t('global.email')"
+                type="email"
+                :rules="emailRules"
+                variant="solo"
+                rounded="lg"
+                bg-color="white"
+                class="g-tfield my-4 mb-xxl-8"
+                required
+              ></v-text-field>
+        
+              <v-checkbox
+                v-model="terms"
+                :rules="termsRules"
+                :center-affix=false
+                color="white"
+                false-icon="mdi-checkbox-blank"
+                hide-details
+                class="g-terms"
+                :ripple="false"
+                :label="$t('congrats.terms')"
+              ></v-checkbox>
+  
+              <v-btn :loading="loading" type="submit" rounded="xl" variant="tonal" :slim="false" :disabled="!isFormValid" class="g-bt font-weight-black mb-2 mt-8 mt-xxl-10">{{ $t("global.continue") }}</v-btn>
+            </v-form>                 
+          </v-card-item>
+          <v-snackbar
+            v-model="showError"
+            multi-line
+            color="error"
+            elevation="16"
+            timeout="10000"
             >
-              Close
-            </v-btn>
-          </template>
-        </v-snackbar>
-      </v-card>     
+            {{ errorMsg }}
+            <template v-slot:actions>
+              <v-btn
+                color="white"
+                variant="text"
+                @click="showError = !showError"
+              >
+                Close
+              </v-btn>
+            </template>
+          </v-snackbar>
+        </v-card>   
+      </v-sheet>
+      <v-sheet v-if="expand" class="g-sheet g-try" color="transparent">
+        <v-btn rounded="xl" variant="tonal" :slim="false" @click="tryAgainClick" class="g-try-bt font-weight-black">
+          {{ $t("global.tryagain") }}
+        </v-btn>  
+      </v-sheet>
     </v-slide-y-reverse-transition>
   </v-sheet>
-  <v-sheet v-if="show" class="g-try">
-    <v-slide-y-reverse-transition >
-      <v-btn v-if="expand" rounded="xl" variant="tonal" :slim="false" @click="tryAgainClick" class="g-try-bt font-weight-black">
-        {{ $t("global.tryagain") }}
-      </v-btn>
-    </v-slide-y-reverse-transition>        
-  </v-sheet>  
 </template>
 
 <style scoped>
+.g-sheet {
+  background-color: transparent;
+}
 .g-card{
   background: linear-gradient(67deg, #07361C 7.82%, #28673C 75.59%);
   max-width: 100%;
@@ -294,10 +296,13 @@
   opacity: 0.0;
 }
 
-@media (max-width: 599px) {
+@media (max-width: 959px) {
   .g-try {
-    bottom: 40px;
-    right: 40px;
+    position: relative;
+    bottom: auto;
+    right: auto;
+    text-align: center;
+    margin: 20px auto;
   }   
 }
 

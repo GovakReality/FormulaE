@@ -3,7 +3,6 @@
   import { useQuizStore } from '/src/stores/QuizStore';
   import { useAPIStore } from '/src/stores/APIStore';
   import { ref, watch, computed, onMounted, onUnmounted } from 'vue';
-  import { useDisplay } from 'vuetify'
   import { storeToRefs } from 'pinia';
   import saudiaLogo from '/images/SaudiaLogo.png';
 
@@ -12,8 +11,6 @@
   const quizStore = useQuizStore();
   const { fullName, email, score, scoreFixed } = storeToRefs(quizStore);
   const APIStore = useAPIStore();
-
-  const { height } = useDisplay();
 
   const expand = ref(false);
   const show = ref(false);
@@ -135,24 +132,7 @@
     quizStore.reset();
     APIStore.reset();
   }  
-  
-  const test = ref(null)
-  const calcHeight = () => {
-    console.log(test.value.$el.clientHeight)
-    
-  };
-
-  const handleResize = () => {
-    calcHeight();
-  };
-
-  onMounted(() => {
-    window.addEventListener('resize', handleResize);
-  });
-
-  onUnmounted(() => {
-    window.removeEventListener('resize', handleResize);
-  })  
+   
 </script>
 
 <template>
@@ -163,7 +143,6 @@
         class="d-flex flex-column justify-center g-card mt-8 mt-sm-0 pt-8 pb-0 pb-md-8"
         variant="flat"
         color="transparent"
-        ref="test"
         >
           <v-sheet class="text-center" color="transparent">
             <div class="g-wrapper">

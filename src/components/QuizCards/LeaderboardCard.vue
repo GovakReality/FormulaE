@@ -212,6 +212,11 @@
             </tbody>
           </v-table>
         </v-card>
+        <v-sheet class="text-center justify-center mt-auto d-flex d-sm-flex d-md-none" color="transparent">
+          <v-btn rounded="xl" color="#f0f0f0" variant="tonal" :slim="false" @click="onClick" class="g-bt font-weight-black my-5">
+            {{ $t("global.tryagain") }}
+          </v-btn>
+        </v-sheet>        
       </v-sheet>
     </v-slide-y-reverse-transition>
   </v-sheet>

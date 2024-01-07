@@ -4,7 +4,10 @@
   import { storeToRefs } from 'pinia';
   import { ref, watch, onMounted, computed } from 'vue';
   import { useI18n } from 'vue-i18n'
+  import { useLocale } from 'vuetify';
+
   const { t } = useI18n();
+  const { isRtl } = useLocale();
 
   const cardStore = useCardsStore();
   const { cardIndex } = storeToRefs(cardStore);
@@ -70,7 +73,7 @@
 </script>
 
 <template>
-  <v-sheet v-if="show" class="g-geninfo">
+  <v-sheet v-if="show" class="g-geninfo" :class="{ 'g-lang-def': !isRtl, 'g-lang-rtl': isRtl }">
     <v-slide-y-reverse-transition @after-leave="onAfterLeave" group>
       <div v-if="expand" class="g-title">
         {{actualGen.title}}
@@ -89,12 +92,17 @@
   z-index: 20;
   max-width: 100%;
   bottom: 33px;
-  left: 38px;
   pointer-events: none;
   font-family: Saudia Sans;
   line-height: normal;
   text-transform: uppercase;
   color: white;    
+}
+.g-lang-def {
+  left: 38px;
+}
+.g-lang-rtl {
+  right: 38px;
 }
 .g-title {
   font-size: 48px;
@@ -108,8 +116,13 @@
 @media (max-width: 599px) {
   .g-geninfo {
     bottom: 10px;
-    left: 10px; 
   }
+  .g-lang-def {
+    left: 10px;
+  }
+  .g-lang-rtl {
+    right: 10px;
+  }  
   .g-title {
     font-size: 25px;
   }
@@ -121,7 +134,12 @@
 @media (min-width: 2560px) {
   .g-geninfo {
     bottom: 40px;
-    left: 50px; 
+  }
+  .g-lang-def {
+    left: 50px;
+  }
+  .g-lang-rtl {
+    right: 50px;
   }
   .g-title {
     font-size: 64px;

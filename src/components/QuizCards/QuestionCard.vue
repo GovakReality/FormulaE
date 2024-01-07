@@ -3,6 +3,9 @@
   import { useQuizStore } from '/src/stores/QuizStore';
   import { ref, watch, computed } from 'vue';
   import { storeToRefs } from 'pinia';
+  import { useLocale } from 'vuetify';
+
+  const { isRtl } = useLocale();
 
   const cardsStore = useCardsStore();
   const { cardIndex } = storeToRefs(cardsStore);
@@ -263,7 +266,9 @@
       </template>
 
         <v-card-item>
-          <div class="g-round mb-0 mb-sm-1 font-weight-bold">
+          <div class="g-round mb-0 mb-sm-1 font-weight-bold" 
+          :class="{ 'g-round-l-def': !isRtl, 'g-round-l-rtl': isRtl }"
+          >
             {{ $t("global.round") }} {{ round }}
           </div>
           <div class="g-text mb-1 mb-sm-2 pt-2">
@@ -302,11 +307,16 @@
       </v-card>
     </v-slide-y-reverse-transition>
   </v-sheet>
-  <v-sheet v-if="show" class="g-hud">
+  <v-sheet v-if="show" class="g-hud"
+  :class="{ 'g-hud-l-def': !isRtl, 'g-hud-l-rtl': isRtl }"
+  >
     <v-slide-y-reverse-transition group>
       <v-sheet v-if="expandHud" class="g-hud-w">
         <div class="g-hud-total px-5 py-2">{{scoreFixed}} {{ $t("global.pts") }}</div>
-        <div class="g-hud-round px-5 py-2">{{ $t("global.round") }} 0{{ round }}/09</div>
+        <div class="g-hud-round px-5 py-2">{{ $t("global.round") }} 
+          <span v-if="!isRtl">0{{ round }}/09</span>
+          <span v-if="isRtl">09/0{{ round }}</span>
+        </div>
         <div class="g-hud-score px-5 py-2">+{{timeLeftFixed}} {{ $t("global.pts") }}</div>
       </v-sheet>    
     </v-slide-y-reverse-transition>        
@@ -323,8 +333,13 @@
 .g-round {
   font-size: 24px;
   color: #28673c;
-  text-align: left;
   line-height: normal;
+}
+.g-round-l-def {
+  text-align: left;
+}
+.g-round-l-rtl {
+  text-align: right;
 }
 .g-text {
   font-family: Saudia Sans;
@@ -360,7 +375,12 @@
   z-index: 90;
   max-width: 100%;
   bottom: 45px;
+}
+.g-hud-l-def {
   right: 38px;
+}
+.g-hud-l-rtl {
+  left: 38px;
 }
 .g-hud-w {
   background-color: transparent;
@@ -440,9 +460,6 @@
 }
 
 @media (max-width: 446px) {
-  .g-hud {
-    right: 20px;
-  } 
   .g-hud-round {
     font-size: 16px; 
   }  

@@ -4,7 +4,10 @@
   import { useAPIStore } from '/src/stores/APIStore';
   import { ref, watch, computed, onMounted, onUnmounted } from 'vue';
   import { storeToRefs } from 'pinia';
+  import { useLocale } from 'vuetify';
   import saudiaLogo from '/images/SaudiaLogo.png';
+
+  const { isRtl } = useLocale();
 
   const cardsStore = useCardsStore();
   const { cardIndex } = storeToRefs(cardsStore);
@@ -141,6 +144,7 @@
       <v-sheet v-if="expand" class="g-sheet" position="relative" color="transparent">
         <v-sheet
         class="d-flex flex-column justify-center g-card mt-8 mt-sm-0 pt-8 pb-0 pb-md-8"
+        :class="{ 'g-card-l-def': !isRtl, 'g-card-l-rtl': isRtl }"
         variant="flat"
         color="transparent"
         >
@@ -187,10 +191,17 @@
                 :key="item.full_name"
                 class="py-4"
               >
-                <td class="g-pos px-1"> <span v-if="item.full_name">{{ index + 1 }}</span></td>
-                <td class="g-name" :class="{ current: item.current }">
-                  {{ item.full_name }}
-                  <span v-if="item.finalist" class="g-flag"></span>
+                <td
+                  class="g-pos px-1"
+                  :class="{ 'g-pos-l-def': !isRtl, 'g-pos-l-rtl': isRtl }"
+                  >
+                    <span v-if="item.full_name">{{ index + 1 }}</span></td>
+                <td
+                  class="g-name"
+                  :class="{ current: item.current, 'g-name-l-def': !isRtl, 'g-name-l-rtl': isRtl }"
+                  >
+                    {{ item.full_name }}
+                    <span v-if="item.finalist" class="g-flag" :class="{ 'g-flag-l-def': !isRtl, 'g-flag-l-rtl': isRtl }"></span>
                 </td>
                 <td class="g-score">{{ item.scoreFixed }} <span v-if="item.score">{{ $t("global.pts") }}</span></td>
                 <td v-if="item.finalist" class="g-final px-0 d-none d-sm-none d-md-inline">
@@ -199,14 +210,16 @@
               </tr>
               <tr v-if="!isTopTen">
                 <td colspan="3" class="g-top">
-                  <v-icon icon="mdi-chevron-up" class="pr-10"></v-icon>
+                  <v-icon icon="mdi-chevron-up" :class="{ 'g-lefticon-def': !isRtl, 'g-lefticon-rtl': isRtl }"></v-icon>
                   <span>{{ $t("leaderboard.top10") }}</span>
-                  <v-icon icon="mdi-chevron-up" class="pl-10"></v-icon>
+                  <v-icon icon="mdi-chevron-up" :class="{ 'g-righticon-def': !isRtl, 'g-righticon-rtl': isRtl }"></v-icon>
                 </td>
               </tr> 
               <tr v-if="!isTopTen">
                 <td class="g-pos current px-1"></td>
-                <td class="g-name current">{{fullName}}</td>
+                <td class="g-name current"
+                :class="{ 'g-name-l-def': !isRtl, 'g-name-l-rtl': isRtl }"
+                >{{fullName}}</td>
                 <td class="g-score current">{{scoreFixed}} {{ $t("global.pts") }}</td>
               </tr>                                   
             </tbody>
@@ -231,11 +244,19 @@
   background: linear-gradient(68deg, #07361C 9.84%, #28673C 76.17%);
   max-width: 100%;
   width: 413px;
-  height: 624px;
+  height: 624px; 
+}
+.g-card-l-def{
   border-top-left-radius: 24px !important;
   border-bottom-left-radius: 24px !important;
   border-top-right-radius: 0 !important;
-  border-bottom-right-radius: 0 !important;  
+  border-bottom-right-radius: 0 !important; 
+}
+.g-card-l-rtl{
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  border-top-right-radius: 24px !important;
+  border-bottom-right-radius: 24px !important; 
 }
 .g-wrapper {
   color: #F0F0F0;
@@ -292,10 +313,15 @@
   font-size: 18px;
   text-transform: uppercase;
   line-height: normal;
-  text-align: right;
   width: 50px;
   background-color: #F0F0F0;
   color: #000000;
+}
+.g-pos-l-def {
+  text-align: right;
+}
+.g-pos-l-rtl {
+  text-align: left;
 }
 .g-name {
   font-size: 18px;
@@ -314,6 +340,12 @@
   word-break: normal;
   word-wrap: break-word  
 }
+.g-name-l-def {
+  text-align: left;
+}
+.g-name-l-rtl {
+  text-align: right;
+}
 .g-flag {
   display: inline-block;
   background-image:url('/images/LeaderboardFlags.png');
@@ -322,7 +354,18 @@
   height: 100%;
   position: absolute;
   top: 0;
+}
+.g-flag-l-def {
   right: 0;
+}
+.g-flag-l-rtl {
+  left: 0;
+  -moz-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  filter: FlipH;
+  -ms-filter: "FlipH";
 }
 .g-score {
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%),#F0F0F0;
@@ -347,6 +390,18 @@
 }
 .g-top i {
   font-size: 45px;
+}
+.g-lefticon-def {
+  padding-right: 40px;
+}
+.g-lefticon-rtl {
+  padding-left: 40px;
+}
+.g-righticon-def {
+  padding-left: 40px;
+}
+.g-righticon-rtl {
+  padding-right: 40px;
 }
 .g-top span {
   display: inline-block;

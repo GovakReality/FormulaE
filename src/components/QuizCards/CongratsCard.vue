@@ -6,8 +6,10 @@
   import { storeToRefs } from 'pinia';
   import saudiaLogo from '/images/SaudiaLogo.png';
   import { useI18n } from 'vue-i18n'
+  import { useLocale } from 'vuetify';
 
   const { t } = useI18n();
+  const { isRtl } = useLocale();
 
   const cardsStore = useCardsStore();
   const { cardIndex } = storeToRefs(cardsStore);
@@ -162,6 +164,7 @@
                 false-icon="mdi-checkbox-blank"
                 hide-details
                 class="g-terms"
+                :class="{ 'g-terms-l-def': !isRtl, 'g-terms-l-rtl': isRtl }"
                 :ripple="false"
                 :label="$t('congrats.terms')"
               ></v-checkbox>
@@ -189,7 +192,9 @@
           </v-snackbar>
         </v-card>   
       </v-sheet>
-      <v-sheet v-if="expand" class="g-sheet g-try" color="transparent">
+      <v-sheet v-if="expand" class="g-sheet g-try" color="transparent"
+        :class="{ 'g-try-l-def': !isRtl, 'g-try-l-rtl': isRtl }"
+        >
         <v-btn rounded="xl" variant="tonal" :slim="false" @click="tryAgainClick" class="g-try-bt font-weight-black">
           {{ $t("global.tryagain") }}
         </v-btn>  
@@ -253,7 +258,12 @@
 }
 .g-terms {
   opacity: 1;
+}
+.g-terms-l-def {
   text-align: left;
+}
+.g-terms-l-rtl {
+  text-align: right;
 }
 :deep(.v-selection-control__input > .v-icon) {
   opacity: 1;
@@ -281,7 +291,12 @@
   z-index: 90;
   max-width: 100%;
   bottom: 41px;
+}
+.g-try-l-def {
   right: 38px;
+}
+.g-try-l-rtl {
+  left: 38px;
 }
 .g-try-bt {
   font-family: Saudia Sans;
@@ -307,6 +322,9 @@
     text-align: center;
     margin: 20px auto;
   }   
+  .g-try-l-rtl {
+    left: auto;
+  }  
 }
 
 @media (min-width: 2560px) {

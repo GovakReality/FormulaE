@@ -44,8 +44,8 @@
 	color: white !important;
   pointer-events: auto;
   font-weight: 700;
-  width: 130px;
   font-size: 24px;
+  padding-right: 10px;
 }
 .g-lang-item {
   font-size: 24px;
@@ -60,7 +60,7 @@
 
 @media (min-width: 2560px) {
   .g-lang {
-    width: 260px;
+    padding-right: 40px;
   }
   :deep(.v-field) {
     font-size: 30px;

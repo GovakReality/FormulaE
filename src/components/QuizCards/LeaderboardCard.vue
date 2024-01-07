@@ -372,6 +372,10 @@
   width: 100%;
 }
 
+:deep(.v-btn__content) {
+  padding-top: 2px;
+}
+
 @media (max-width: 1089px) {
   .g-card{
     width: 358px;

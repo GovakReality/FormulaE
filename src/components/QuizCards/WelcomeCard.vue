@@ -58,7 +58,7 @@
             width="138"
             class="text-center justify-center mx-auto"
           ></v-img>
-          <h3 class="g-title font-weight-bold my-1 pt-4 pb-1 py-sm-6 px-1 px-sm-2">
+          <h3 class="g-title font-weight-bold my-2 pt-4 pb-1 py-sm-6 px-1 px-sm-2">
             {{ $t("welcome.title") }}
           </h3>          
           <h3 class="g-title font-weight-bold my-1 pt-1 pb-0 pb-sm-6 px-4 px-sm-7">
@@ -84,7 +84,7 @@
 }
 .g-title {
   font-size: 28px;
-  line-height: 36px;
+  line-height: 34px;
 }
 .g-bt-start {
   font-size: 18px;
@@ -99,6 +99,10 @@
 
 :deep(.v-btn.v-btn--density-default) {
   height: 46px;
+}
+
+:deep(.v-btn__content) {
+  padding-top: 2px;
 }
 
 @media (max-width: 599px) {

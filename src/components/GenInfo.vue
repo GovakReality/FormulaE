@@ -97,11 +97,11 @@
   color: white;    
 }
 .g-title {
-  font-size: 42px;
+  font-size: 48px;
   font-weight: 700;
 }
 .g-subtitle {
-  font-size: 21px;
+  font-size: 26px;
   font-weight: 400;
 }
 
@@ -124,7 +124,7 @@
     left: 50px; 
   }
   .g-title {
-    font-size: 60px;
+    font-size: 64px;
   }
   .g-subtitle {
     font-size: 34px;

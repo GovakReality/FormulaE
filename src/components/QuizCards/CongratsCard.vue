@@ -280,7 +280,7 @@
   position: absolute;
   z-index: 90;
   max-width: 100%;
-  bottom: 56px;
+  bottom: 41px;
   right: 38px;
 }
 .g-try-bt {
@@ -296,6 +296,9 @@
   opacity: 0.0;
 }
 
+:deep(.v-btn__content) {
+  padding-top: 2px;
+}
 @media (max-width: 959px) {
   .g-try {
     position: relative;

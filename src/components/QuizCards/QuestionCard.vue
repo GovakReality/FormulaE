@@ -318,7 +318,7 @@
   max-width: 100%;
   width: 594px;
   color: #28673c;
-  margin-bottom: 70px;
+  margin-bottom: 90px;
 }
 .g-round {
   font-size: 24px;
@@ -371,6 +371,7 @@
   font-weight: 700;
   font-size: 17px;
   width: 150px;
+  height: 40px;
   color: #000000;  
   display: inline-block;
   vertical-align: middle;
@@ -382,6 +383,7 @@
   color: #F0F0F0;  
   text-align: right;
   width: 150px;
+  height: 40px;
   display: inline-block;
   vertical-align: middle;
 }
@@ -403,7 +405,9 @@
 :deep(.v-progress-linear__background) {
   opacity: 0.3;
 }
-
+:deep(.v-btn__content) {
+  padding-top: 2px;
+}
 @media (max-width: 599px) {
   .g-card{
     width: 420px;

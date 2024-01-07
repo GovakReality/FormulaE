@@ -131,6 +131,10 @@
   height: 46px;
 }
 
+:deep(.v-btn__content) {
+  padding-top: 2px;
+}
+
 @media (max-width: 599px) {
   .g-card{
     width: 300px;

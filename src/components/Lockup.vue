@@ -1,11 +1,16 @@
 <script setup>
   import lockup from '/images/Lockup-Shadows.png';
+  import { useLocale } from 'vuetify';
+
+  const { isRtl } = useLocale();
+
 </script>
 
 <template>
   <v-img
   :src="lockup"
   class="g-lockup"
+  :class="{ 'g-lang-def': !isRtl, 'g-lang-rtl': isRtl }"
   ></v-img>
 </template>
 
@@ -16,8 +21,14 @@
   max-width: 100%;
   width: 360px;
   top: 2px;
-  left: 5px;
   pointer-events: none;
+}
+
+.g-lang-def {
+  left: 5px;
+}
+.g-lang-rtl {
+  right: 5px;
 }
 
 @media (max-width: 599px) {
@@ -26,6 +37,9 @@
     left: 50%;
     top: 40px;
     margin-left: -150px;
+  }  
+  .g-lang-rtl {
+    right: auto;
   }
 }
 

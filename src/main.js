@@ -19,9 +19,9 @@ const pinia = createPinia();
 const vuetify = createVuetify({
   components,
   directives,
-  //locale: {
-  //  adapter: createVueI18nAdapter({ i18n, useI18n }),
-  //},
+  locale: { //
+    adapter: createVueI18nAdapter({ i18n, useI18n }), //
+  }, //
   icons: {
     defaultSet: 'mdi',
     aliases,

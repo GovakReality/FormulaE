@@ -1,4 +1,2 @@
-# Formula E
-## Govak Reality
-- npm install
-- npm run dev
+# Formula E 
+## [Govak Reality](https://www.govakreality.com/)

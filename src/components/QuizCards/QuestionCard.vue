@@ -5,7 +5,7 @@
   import { storeToRefs } from 'pinia';
   import { useLocale } from 'vuetify';
 
-  const { isRtl } = useLocale();
+  const { isRtl, current } = useLocale();
 
   const cardsStore = useCardsStore();
   const { cardIndex } = storeToRefs(cardsStore);
@@ -272,7 +272,7 @@
             {{ $t("global.round") }} {{ round }}
           </div>
           <div class="g-text mb-1 mb-sm-2 pt-2">
-            {{ question.question }}
+            {{ question[current].question }}
           </div>                     
         </v-card-item>
         <v-card-actions class="text-center justify-center px-3">
@@ -281,24 +281,24 @@
             <v-row dense>
               <v-col class="pa-2"> 
                 <v-btn block rounded="xl" :slim="false" color="#F0F0F0" class="g-bt font-weight-bold" @click="onClick(1, $event)">
-                  {{ question.answer1 }}
+                  {{ question[current].answer1 }}
                 </v-btn>
               </v-col>
               <v-col class="pa-2">
                 <v-btn block rounded="xl" :slim="false" color="#F0F0F0" class="g-bt font-weight-bold" @click="onClick(2, $event)">
-                  {{ question.answer2 }}
+                  {{ question[current].answer2 }}
                 </v-btn>
               </v-col>
             </v-row>
             <v-row dense>
               <v-col class="pa-2">
                 <v-btn block rounded="xl" :slim="false" color="#F0F0F0" class="g-bt font-weight-bold" @click="onClick(3, $event)">
-                  {{ question.answer3 }}
+                  {{ question[current].answer3 }}
                 </v-btn> 
               </v-col>
               <v-col class="pa-2">
                 <v-btn block rounded="xl" :slim="false" color="#F0F0F0" class="g-bt font-weight-bold" @click="onClick(4, $event)">
-                  {{ question.answer4 }}
+                  {{ question[current].answer4 }}
                 </v-btn> 
               </v-col>              
             </v-row>

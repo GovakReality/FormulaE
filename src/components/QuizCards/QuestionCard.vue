@@ -3,6 +3,9 @@
   import { useQuizStore } from '/src/stores/QuizStore';
   import { ref, watch, computed } from 'vue';
   import { storeToRefs } from 'pinia';
+  import { useLocale } from 'vuetify';
+
+  const { isRtl } = useLocale();
 
   const cardsStore = useCardsStore();
   const { cardIndex } = storeToRefs(cardsStore);
@@ -240,7 +243,7 @@
 </script>
 
 <template>
-  <v-sheet v-if="show" class="d-flex align-end justify-center h-100 pa-10">
+  <v-sheet v-if="show" class="d-flex align-end justify-center h-100 pa-8 pb-10 pb-sm-16 pa-sm-10">
     <v-slide-y-reverse-transition
     @after-leave="onAfterLeave"
     @after-enter="onAfterEnter"
@@ -250,7 +253,7 @@
       v-if="expand"
       class="g-card py-5 px-4 rounded-xl"
       color="#F0F0F0"
-      variant="elevated"
+      variant="flat"
       >
       <template v-slot:loader="{ isActive }">
         <v-progress-linear
@@ -263,10 +266,12 @@
       </template>
 
         <v-card-item>
-          <div class="g-round mb-1 font-weight-bold">
-            ROUND {{ round }}
+          <div class="g-round mb-0 mb-sm-1 font-weight-bold" 
+          :class="{ 'g-round-l-def': !isRtl, 'g-round-l-rtl': isRtl }"
+          >
+            {{ $t("global.round") }} {{ round }}
           </div>
-          <div class="g-text mb-2 pt-2">
+          <div class="g-text mb-1 mb-sm-2 pt-2">
             {{ question.question }}
           </div>                     
         </v-card-item>
@@ -302,12 +307,17 @@
       </v-card>
     </v-slide-y-reverse-transition>
   </v-sheet>
-  <v-sheet v-if="show" class="g-hud">
+  <v-sheet v-if="show" class="g-hud"
+  :class="{ 'g-hud-l-def': !isRtl, 'g-hud-l-rtl': isRtl }"
+  >
     <v-slide-y-reverse-transition group>
       <v-sheet v-if="expandHud" class="g-hud-w">
-        <span class="g-hud-total px-5 py-2">{{scoreFixed}} PTS</span>
-        <span class="g-hud-round px-5 py-2">ROUND 0{{ round }}/09</span>
-        <span class="g-hud-score px-5 py-2">+{{timeLeftFixed}} PTS</span>
+        <div class="g-hud-total px-5 py-2">{{scoreFixed}} {{ $t("global.pts") }}</div>
+        <div class="g-hud-round px-5 py-2">{{ $t("global.round") }} 
+          <span v-if="!isRtl">0{{ round }}/09</span>
+          <span v-if="isRtl">09/0{{ round }}</span>
+        </div>
+        <div class="g-hud-score px-5 py-2">+{{timeLeftFixed}} {{ $t("global.pts") }}</div>
       </v-sheet>    
     </v-slide-y-reverse-transition>        
   </v-sheet>  
@@ -318,13 +328,18 @@
   max-width: 100%;
   width: 594px;
   color: #28673c;
-  margin-bottom: 70px;
+  margin-bottom: 90px;
 }
 .g-round {
   font-size: 24px;
   color: #28673c;
-  text-align: left;
   line-height: normal;
+}
+.g-round-l-def {
+  text-align: left;
+}
+.g-round-l-rtl {
+  text-align: right;
 }
 .g-text {
   font-family: Saudia Sans;
@@ -354,12 +369,18 @@
   white-space: normal;
 }
 .g-hud {
+  font-family: IBM Plex Sans;
   background-color: transparent;
   position: absolute;
   z-index: 90;
   max-width: 100%;
-  bottom: 56px;
+  bottom: 45px;
+}
+.g-hud-l-def {
   right: 38px;
+}
+.g-hud-l-rtl {
+  left: 38px;
 }
 .g-hud-w {
   background-color: transparent;
@@ -367,29 +388,34 @@
 .g-hud-round {
   opacity: 0.9;
   background-color: #F3F5F4;
-  font-family: IBM Plex Sans;
-  line-height: normal;
   font-weight: 700;
   font-size: 17px;
+  width: 150px;
+  height: 40px;
   color: #000000;  
+  display: inline-block;
+  vertical-align: middle;
 }
 .g-hud-score {
   background-color: #28673C;
-  font-family: IBM Plex Sans;
-  line-height: normal;
   font-weight: 700;
   font-size: 18px;
   color: #F0F0F0;  
+  text-align: right;
+  width: 150px;
+  height: 40px;
+  display: inline-block;
+  vertical-align: middle;
 }
 .g-hud-total {
   background-color: #28673C;
-  font-family: IBM Plex Sans;
-  line-height: normal;
   font-weight: 700;
   font-size: 18px;
   color: #F0F0F0;  
-  display: block;
   text-align: right;
+  vertical-align: bottom;
+  width: 300px;
+  max-width: 100%;
 }
 
 :deep(.v-card__loader) {
@@ -398,5 +424,82 @@
 }
 :deep(.v-progress-linear__background) {
   opacity: 0.3;
+}
+:deep(.v-btn__content) {
+  padding-top: 2px;
+}
+@media (max-width: 599px) {
+  .g-card{
+    width: 420px;
+  }
+  .g-round {
+    font-size: 18px;
+  }
+  .g-text {
+    font-size: 19px;
+  } 
+  .g-bt {
+    font-size: 15px;
+    width: 184px;
+  } 
+  :deep(.v-btn.v-btn--density-default) {
+    height: 50px;
+  } 
+  .g-hud {
+    bottom: 25px;
+    right: auto;
+    left: 50%;
+    margin-left: -150px;
+  } 
+  .g-hud-round {
+    width: 150px;
+  }
+  .g-hud-score {
+    width: 150px;
+  }        
+}
+
+@media (max-width: 446px) {
+  .g-hud-round {
+    font-size: 16px; 
+  }  
+  .g-hud-score {
+    font-size: 16px; 
+  }      
+  .g-hud-total {
+    font-size: 16px; 
+  }   
+}
+
+@media (min-width: 2560px) {
+  .g-card{
+    width: 710px;
+  }
+  .g-round {
+    font-size: 30px;
+  }
+  .g-text {
+    font-size: 32px;
+  } 
+  .g-bt {
+    font-size: 25px;
+  } 
+  :deep(.v-btn.v-btn--density-default) {
+    height: 82px;
+  } 
+  .g-hud-round {
+    font-size: 24px;
+    height: 52px;
+    width: 200px;
+  }
+  .g-hud-score {
+    font-size: 26px;
+    width: 200px;
+    height: 52px;
+  }
+  .g-hud-total {
+    font-size: 26px;
+    width: 400px;
+  }    
 }
 </style>

@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@intlify/unplugin-vue-i18n": "^2.0.0",
     "@mdi/font": "^7.3.67",
     "axios": "^1.6.2",
     "axios-retry": "^4.0.0",
@@ -16,6 +17,7 @@
     "pinia": "^2.1.7",
     "three": "^0.159.0",
     "vue": "^3.3.8",
+    "vue-i18n": "^9.8.0",
     "vuetify": "^3.4.6"
   },
   "devDependencies": {

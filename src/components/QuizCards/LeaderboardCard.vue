@@ -2,9 +2,12 @@
   import { useCardsStore } from '/src/stores/CardsStore';
   import { useQuizStore } from '/src/stores/QuizStore';
   import { useAPIStore } from '/src/stores/APIStore';
-  import { ref, watch, computed } from 'vue';
+  import { ref, watch, computed, onMounted, onUnmounted } from 'vue';
   import { storeToRefs } from 'pinia';
+  import { useLocale } from 'vuetify';
   import saudiaLogo from '/images/SaudiaLogo.png';
+
+  const { isRtl } = useLocale();
 
   const cardsStore = useCardsStore();
   const { cardIndex } = storeToRefs(cardsStore);
@@ -131,15 +134,17 @@
     cardsStore.reset();
     quizStore.reset();
     APIStore.reset();
-  }    
+  }  
+   
 </script>
 
 <template>
-  <v-sheet v-if="show" class="d-flex align-center justify-center h-100 pa-10">
+  <v-sheet v-if="show" class="d-flex flex-column flex-sm-column flex-md-row align-center justify-center h-100 pa-10">
     <v-slide-y-reverse-transition @after-leave="onAfterLeave" group>
       <v-sheet v-if="expand" class="g-sheet" position="relative" color="transparent">
         <v-sheet
-        class="d-flex flex-column justify-center g-card py-8 rounded-s-xl rounded-e-0"
+        class="d-flex flex-column justify-center g-card mt-8 mt-sm-0 pt-8 pb-0 pb-md-8"
+        :class="{ 'g-card-l-def': !isRtl, 'g-card-l-rtl': isRtl }"
         variant="flat"
         color="transparent"
         >
@@ -155,61 +160,76 @@
               </div> -->
               
               <h3 class="g-title font-weight-bold pt-10">
-                Your score is:
+                {{ $t("leaderboard.title") }}
               </h3>          
               <div class="g-points font-weight-bold py-6 px-5">
-                {{scoreFixed}} PTS
+                {{scoreFixed}} {{ $t("global.pts") }}
               </div> 
   
               <h3 class="g-title font-weight-bold py-2 px-10">
-                Tip: answer faster to score more points!
+                {{ $t("leaderboard.tip") }}
               </h3>                 
-              <div class="g-text py-9 px-12">
-                If you're among the finalists by the end of the contest, you will be notified via email about your prize. 
+              <div class="g-text pt-4 pb-8 py-md-9 px-12">
+                {{ $t("leaderboard.text") }} 
               </div>            
 
             </div>
           </v-sheet>
-          <v-sheet class="text-center justify-center mt-auto" color="transparent">
+          <v-sheet class="text-center justify-center mt-auto d-none d-sm-none d-md-flex" color="transparent">
             <v-btn rounded="xl" color="#f0f0f0" variant="tonal" :slim="false" @click="onClick" class="g-bt font-weight-black mb-2">
-              TRY AGAIN
+              {{ $t("global.tryagain") }}
             </v-btn>
           </v-sheet>
         </v-sheet>                      
       </v-sheet>
-      <v-sheet v-if="expand" class="g-sheet" position="relative" color="transparent">
+      <v-sheet v-if="expand" class="g-sheet g-sheet-l" position="relative" color="transparent">
         <v-card variant="flat" class="g-names-list rounded-0" color="transparent">
           <v-table class="g-table">
             <tbody>
               <tr
                 v-for="(item, index) in formattedPlayers"
                 :key="item.full_name"
+                class="py-4"
               >
-                <td class="g-pos px-1"> <span v-if="item.full_name">{{ index + 1 }}</span></td>
-                <td class="g-name" :class="{ current: item.current }">
-                  {{ item.full_name }}
-                  <span v-if="item.finalist" class="g-flag"></span>
+                <td
+                  class="g-pos px-1"
+                  :class="{ 'g-pos-l-def': !isRtl, 'g-pos-l-rtl': isRtl }"
+                  >
+                    <span v-if="item.full_name">{{ index + 1 }}</span></td>
+                <td
+                  class="g-name"
+                  :class="{ current: item.current, 'g-name-l-def': !isRtl, 'g-name-l-rtl': isRtl }"
+                  >
+                    {{ item.full_name }}
+                    <span v-if="item.finalist" class="g-flag" :class="{ 'g-flag-l-def': !isRtl, 'g-flag-l-rtl': isRtl }"></span>
                 </td>
-                <td class="g-score">{{ item.scoreFixed }} <span v-if="item.score">PTS</span></td>
-                <td v-if="item.finalist" class="g-final px-0">
-                  <div class="px-3 py-2">finalist</div>
+                <td class="g-score">{{ item.scoreFixed }} <span v-if="item.score">{{ $t("global.pts") }}</span></td>
+                <td v-if="item.finalist" class="g-final px-0 d-none d-sm-none d-md-inline">
+                  <div class="px-3 py-2">{{ $t("leaderboard.finalist") }}</div>
                 </td>
               </tr>
               <tr v-if="!isTopTen">
                 <td colspan="3" class="g-top">
-                  <v-icon icon="mdi-chevron-up" class="pr-10"></v-icon>
-                  <span>TOP 10</span>
-                  <v-icon icon="mdi-chevron-up" class="pl-10"></v-icon>
+                  <v-icon icon="mdi-chevron-up" :class="{ 'g-lefticon-def': !isRtl, 'g-lefticon-rtl': isRtl }"></v-icon>
+                  <span>{{ $t("leaderboard.top10") }}</span>
+                  <v-icon icon="mdi-chevron-up" :class="{ 'g-righticon-def': !isRtl, 'g-righticon-rtl': isRtl }"></v-icon>
                 </td>
               </tr> 
               <tr v-if="!isTopTen">
                 <td class="g-pos current px-1"></td>
-                <td class="g-name current">{{fullName}}</td>
-                <td class="g-score current">{{scoreFixed}} PTS</td>
+                <td class="g-name current"
+                :class="{ 'g-name-l-def': !isRtl, 'g-name-l-rtl': isRtl }"
+                >{{fullName}}</td>
+                <td class="g-score current">{{scoreFixed}} {{ $t("global.pts") }}</td>
               </tr>                                   
             </tbody>
           </v-table>
         </v-card>
+        <v-sheet class="text-center justify-center mt-auto d-flex d-sm-flex d-md-none" color="transparent">
+          <v-btn rounded="xl" color="#f0f0f0" variant="tonal" :slim="false" @click="onClick" class="g-bt font-weight-black my-5">
+            {{ $t("global.tryagain") }}
+          </v-btn>
+        </v-sheet>        
       </v-sheet>
     </v-slide-y-reverse-transition>
   </v-sheet>
@@ -224,7 +244,19 @@
   background: linear-gradient(68deg, #07361C 9.84%, #28673C 76.17%);
   max-width: 100%;
   width: 413px;
-  height: 624px;
+  height: 624px; 
+}
+.g-card-l-def{
+  border-top-left-radius: 24px !important;
+  border-bottom-left-radius: 24px !important;
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important; 
+}
+.g-card-l-rtl{
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  border-top-right-radius: 24px !important;
+  border-bottom-right-radius: 24px !important; 
 }
 .g-wrapper {
   color: #F0F0F0;
@@ -281,10 +313,15 @@
   font-size: 18px;
   text-transform: uppercase;
   line-height: normal;
-  text-align: right;
   width: 50px;
   background-color: #F0F0F0;
   color: #000000;
+}
+.g-pos-l-def {
+  text-align: right;
+}
+.g-pos-l-rtl {
+  text-align: left;
 }
 .g-name {
   font-size: 18px;
@@ -295,9 +332,19 @@
   background-color: #F0F0F0;
   color: #000000;
   position: relative;
-  max-width: 300px;
+  max-width: 310px;
   text-wrap: nowrap;
   overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-break: normal;
+  word-wrap: break-word  
+}
+.g-name-l-def {
+  text-align: left;
+}
+.g-name-l-rtl {
+  text-align: right;
 }
 .g-flag {
   display: inline-block;
@@ -307,7 +354,18 @@
   height: 100%;
   position: absolute;
   top: 0;
+}
+.g-flag-l-def {
   right: 0;
+}
+.g-flag-l-rtl {
+  left: 0;
+  -moz-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  filter: FlipH;
+  -ms-filter: "FlipH";
 }
 .g-score {
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%),#F0F0F0;
@@ -318,6 +376,7 @@
   line-height: normal;
   font-weight: 700;  
   text-align: right;
+  width: 152px;
 }
 .g-top {
   font-size: 20px;
@@ -331,6 +390,18 @@
 }
 .g-top i {
   font-size: 45px;
+}
+.g-lefticon-def {
+  padding-right: 40px;
+}
+.g-lefticon-rtl {
+  padding-left: 40px;
+}
+.g-righticon-def {
+  padding-left: 40px;
+}
+.g-righticon-rtl {
+  padding-right: 40px;
 }
 .g-top span {
   display: inline-block;
@@ -354,5 +425,158 @@
   background-color: #28673C;
   color:#F0F0F0;
   width: 100%;
+}
+
+:deep(.v-btn__content) {
+  padding-top: 2px;
+}
+
+@media (max-width: 1089px) {
+  .g-card{
+    width: 358px;
+  }
+  .g-names-list {
+    width: 542px;
+  }  
+  .g-pos {
+    font-size: 16px;
+    width: 45px;
+  }  
+  .g-name {
+    font-size: 17px;
+    max-width: 250px; 
+  }  
+  .g-score {
+    font-size: 19px;
+    width: 142px;
+  }  
+  .g-final {
+    font-size: 14px;
+    width: 80px;
+  }  
+}
+
+@media (max-width: 959px) {
+  .g-card{
+    width: 513px;
+    height: auto;
+    border-top-left-radius: 24px !important;
+    border-bottom-left-radius: 0px !important;
+    border-top-right-radius: 24px !important;
+    border-bottom-right-radius: 0px !important;  
+  }
+  .g-names-list {  
+    width: 513px;
+    height: auto;
+  }
+  .g-pos {
+    font-size: 14px;
+    width: 30px;
+  }  
+  .g-name {
+    font-size: 17px;
+    max-width: 250px; 
+  }  
+  .g-score {
+    font-size: 17px;
+    width: 120px;
+  }      
+}
+
+@media (max-width: 549px) {
+  .g-card{
+    width: auto;  
+  }
+  .g-points {
+    font-size: 40px;
+  }
+  .g-title {
+    font-size: 24px;
+  }
+  .g-text {
+    font-size: 16px;
+  }
+  .g-sheet-l {
+    width: 100%;
+  }
+  .g-names-list {  
+    width: auto;
+  }
+  .g-pos {
+    font-size: 14px;
+    width: auto;
+  }  
+  .g-name {
+    font-size: 16px;
+    width: auto;
+    max-width: 200px;
+  }  
+  .g-score {
+    font-size: 16px;
+    width: auto;
+  }    
+}
+
+@media (min-width: 2560px) {
+  .g-card{
+    width: 513px;
+    height: 684px;
+  }
+  .g-title {
+    font-size: 30px;
+  }
+  .g-text {
+    font-size: 22px;
+  }
+  .g-place {
+    font-size: 60px;
+  }
+  .g-points {
+    font-size: 50px;
+  }
+  .g-place small {
+    font-size: 46px;
+  }
+  .g-bt {
+    font-size: 22px;
+    width: 213px;
+  }
+  :deep(.v-btn.v-btn--density-default) {
+    height: 56px;
+  }
+  .g-names-list {
+    width: 780px;
+    max-width: 100%;
+    height: 684px;
+  }
+  .g-pos {
+    font-size: 22px;
+    width: 70px;
+  }
+  .g-name {
+    font-size: 22px;
+    max-width: 410px;
+  }
+  .g-score {
+    font-size: 23px;
+    width: 210px;
+  }
+  .g-top {
+    font-size: 22px;
+    width: 100%;
+  }
+  .g-top i {
+    font-size: 45px;
+  }
+  .g-final {
+    font-size: 18px;
+    width: 90px;
+  }
+  .g-final div {
+    width: 100%;
+  }
+  :deep(.v-table--density-default > .v-table__wrapper > table > tbody > tr > td, .v-table--density-default > .v-table__wrapper > table > thead > tr > td, .v-table--density-default > .v-table__wrapper > table > tfoot > tr > td) {
+    height: 57px;
+  }
 }
 </style>

@@ -4,7 +4,7 @@
   import { ref, watch, onMounted} from 'vue';
   import { storeToRefs } from 'pinia';
   import saudiaLogo from '/images/SaudiaLogo.png';
-
+  
   const cardsStore = useCardsStore();
   const { cardIndex } = storeToRefs(cardsStore);
   const loadingStore = useLoadingStore();
@@ -12,6 +12,7 @@
   const expand = ref(false);
   const show = ref(false);
 
+  
   watch(loadComplete, (val) => {
     if (loadComplete.value) {
       expand.value = true;
@@ -43,29 +44,30 @@
 </script>
 
 <template>
-  <v-sheet v-if="show" class="d-flex align-end justify-end h-100 pa-10">
+  <v-sheet v-if="show" class="d-flex align-end justify-end h-100 pa-8 pb-16 pa-sm-10">
     <v-slide-y-reverse-transition @after-leave="onAfterLeave">
       <v-card
       v-if="expand"
       class="g-card py-5 pe-2 rounded-xl"
-      variant="elevated"
+      variant="flat"
       >
         <v-card-item class="text-center">
+        
           <v-img
             :src=saudiaLogo
             width="138"
             class="text-center justify-center mx-auto"
           ></v-img>
-          <h3 class="g-title font-weight-bold my-1 py-6 px-1">
-            Test your knowledge on the generations of Formula E models.
+          <h3 class="g-title font-weight-bold my-2 pt-4 pb-1 py-sm-6 px-1 px-sm-2">
+            {{ $t("welcome.title") }}
           </h3>          
-          <h3 class="g-title font-weight-bold my-1 pb-6 px-7">
-            Take a quiz now for the chance to win exclusive prizes!
+          <h3 class="g-title font-weight-bold my-1 pt-1 pb-0 pb-sm-6 px-4 px-sm-7">
+            {{ $t("welcome.subtitle") }}
           </h3>
         </v-card-item>
         <v-card-actions class="text-center justify-center">
           <v-btn rounded="xl" variant="tonal" :slim="false" @click="onClick" class="g-bt-start font-weight-black">
-            Start Quiz
+            {{ $t("welcome.start") }}
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -97,5 +99,44 @@
 
 :deep(.v-btn.v-btn--density-default) {
   height: 46px;
+}
+
+:deep(.v-btn__content) {
+  padding-top: 2px;
+}
+
+@media (max-width: 599px) {
+  .g-card{
+    width: 300px;
+  }
+  .g-title {
+    font-size: 18px;
+    line-height: 28px;
+    padding: 0px;
+  }
+  .g-bt-start {
+    font-size: 16px;
+    width: 130px;
+  }
+  :deep(.v-btn.v-btn--density-default) {
+    height: 36px;
+  }  
+}
+
+@media (min-width: 2560px) {
+  .g-card{
+    width: 513px;
+  }
+  .g-title {
+    font-size: 32px;
+    line-height: 38px;
+  }  
+  .g-bt-start {
+    font-size: 22px;
+    width: 220px;
+  } 
+  :deep(.v-btn.v-btn--density-default) {
+    height: 56px;
+  }  
 }
 </style>

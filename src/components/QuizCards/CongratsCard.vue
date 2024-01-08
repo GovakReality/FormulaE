@@ -5,6 +5,11 @@
   import { ref, watch } from 'vue';
   import { storeToRefs } from 'pinia';
   import saudiaLogo from '/images/SaudiaLogo.png';
+  import { useI18n } from 'vue-i18n'
+  import { useLocale } from 'vuetify';
+
+  const { t } = useI18n();
+  const { isRtl } = useLocale();
 
   const cardsStore = useCardsStore();
   const { cardIndex } = storeToRefs(cardsStore);
@@ -26,27 +31,27 @@
   const fullNameRules = [
     value => {
       if (value) return true
-      return 'You must enter your full name.'
+      return t('rules.name.required')
     },    
     value => {
       if (value?.length > 1) return true
-      return 'Full name must be at least 2 characters.'
+      return t('rules.name.length')
     },
   ];
   const emailRules = [
     value => {
           if (value) return true
-          return 'E-mail is requred.'
+          return t('rules.email.required')
         },
         value => {
           if (/.+@.+\..+/.test(value)) return true
-          return 'E-mail must be valid.'
+          return t('rules.email.format')
         },
   ];
   const termsRules = [
     value => {
           if (value) return true
-          return 'You should agree.'
+          return t('rules.terms.required')
         },
   ];  
 
@@ -102,101 +107,106 @@
 </script>
 
 <template>
-  <v-sheet v-if="show" class="d-flex align-center justify-center h-100 pa-10">
-    <v-slide-y-reverse-transition @after-leave="onAfterLeave">
-      <v-card
-      v-if="expand"
-      class="g-card py-5 pe-2 rounded-xl"
-      variant="elevated"
-      >
-        <v-card-item class="text-center">
-          <v-img
-          :src="saudiaLogo"
-          width="138"
-          class="text-center justify-center mx-auto"
-          ></v-img>
-          <h3 class="g-title font-weight-bold pt-8">
-            Congratulations!
-          </h3>
-          <h3 class="g-title font-weight-bold pt-2">
-            Your score is:
-          </h3>          
-          <div class="g-points font-weight-bold pb-7 pt-6 px-5">
-            {{scoreFixed}} PTS
-          </div>          
-          <div class="g-text pb-6 px-7">
-            Enter your information below to register for the prize draw:
-          </div>    
-          <v-form @submit.prevent="submit" class="px-6 pt-4" v-model="isFormValid">
-            <v-text-field
-              v-model="fullName"
-              label="Full name"
-              :rules="fullNameRules"
-              variant="solo"
-              rounded="lg"
-              bg-color="white"
-              class="g-tfield"
-              required
-            ></v-text-field>
-      
-            <v-text-field
-              v-model="email"
-              label="E-mail"
-              type="email"
-              :rules="emailRules"
-              variant="solo"
-              rounded="lg"
-              bg-color="white"
-              class="g-tfield my-4"
-              required
-            ></v-text-field>
-      
-            <v-checkbox
-              v-model="terms"
-              :rules="termsRules"
-              :center-affix=false
-              color="white"
-              false-icon="mdi-checkbox-blank"
-              hide-details
-              class="g-terms"
-              :ripple="false"
-              label="I confirm that I am over 18 years of age and accept the terms and conditions and the Saudia Airlines Privacy Policy."
-            ></v-checkbox>
-
-            <v-btn :loading="loading" type="submit" rounded="xl" variant="tonal" :slim="false" :disabled="!isFormValid" class="g-bt font-weight-black mb-2 mt-8">CONTINUE</v-btn>
-          </v-form>                 
-        </v-card-item>
-        <v-snackbar
-          v-model="showError"
-          multi-line
-          color="error"
-          elevation="16"
-          timeout="10000"
-          >
-          {{ errorMsg }}
-          <template v-slot:actions>
-            <v-btn
-              color="white"
-              variant="text"
-              @click="showError = !showError"
+  <v-sheet v-if="show" class="d-flex flex-column align-center justify-center h-100 pa-10">
+    <v-slide-y-reverse-transition @after-leave="onAfterLeave" group>
+      <v-sheet v-if="expand" class="g-sheet" position="relative" color="transparent">
+        <v-card
+        class="g-card py-5 pe-2 rounded-xl"
+        variant="flat"
+        >
+          <v-card-item class="text-center">
+            <v-img
+            :src="saudiaLogo"
+            width="138"
+            class="text-center justify-center mx-auto"
+            ></v-img>
+            <h3 class="g-title font-weight-bold pt-8">
+              {{ $t("congrats.title") }}
+            </h3>
+            <h3 class="g-title font-weight-bold pt-2">
+              {{ $t("congrats.subtitle") }}
+            </h3>          
+            <div class="g-points font-weight-bold pb-7 pt-6 px-5 py-xxl-10">
+              {{scoreFixed}} {{ $t("global.pts") }}
+            </div>          
+            <div class="g-text pb-6 px-7 px-xxl-11">
+              {{ $t("congrats.text") }}
+            </div>    
+            <v-form @submit.prevent="submit" class="px-6 pt-4 pt-xxl-6" v-model="isFormValid">
+              <v-text-field
+                v-model="fullName"
+                :label="$t('global.fullname')"
+                :rules="fullNameRules"
+                variant="solo"
+                rounded="lg"
+                bg-color="white"
+                class="g-tfield mb-xxl-8"
+                required
+              ></v-text-field>
+        
+              <v-text-field
+                v-model="email"
+                :label="$t('global.email')"
+                type="email"
+                :rules="emailRules"
+                variant="solo"
+                rounded="lg"
+                bg-color="white"
+                class="g-tfield my-4 mb-xxl-8"
+                required
+              ></v-text-field>
+        
+              <v-checkbox
+                v-model="terms"
+                :rules="termsRules"
+                :center-affix=false
+                color="white"
+                false-icon="mdi-checkbox-blank"
+                hide-details
+                class="g-terms"
+                :class="{ 'g-terms-l-def': !isRtl, 'g-terms-l-rtl': isRtl }"
+                :ripple="false"
+                :label="$t('congrats.terms')"
+              ></v-checkbox>
+  
+              <v-btn :loading="loading" type="submit" rounded="xl" variant="tonal" :slim="false" :disabled="!isFormValid" class="g-bt font-weight-black mb-2 mt-8 mt-xxl-10">{{ $t("global.continue") }}</v-btn>
+            </v-form>                 
+          </v-card-item>
+          <v-snackbar
+            v-model="showError"
+            multi-line
+            color="error"
+            elevation="16"
+            timeout="10000"
             >
-              Close
-            </v-btn>
-          </template>
-        </v-snackbar>
-      </v-card>     
+            {{ errorMsg }}
+            <template v-slot:actions>
+              <v-btn
+                color="white"
+                variant="text"
+                @click="showError = !showError"
+              >
+                Close
+              </v-btn>
+            </template>
+          </v-snackbar>
+        </v-card>   
+      </v-sheet>
+      <v-sheet v-if="expand" class="g-sheet g-try" color="transparent"
+        :class="{ 'g-try-l-def': !isRtl, 'g-try-l-rtl': isRtl }"
+        >
+        <v-btn rounded="xl" variant="tonal" :slim="false" @click="tryAgainClick" class="g-try-bt font-weight-black">
+          {{ $t("global.tryagain") }}
+        </v-btn>  
+      </v-sheet>
     </v-slide-y-reverse-transition>
   </v-sheet>
-  <v-sheet v-if="show" class="g-try">
-    <v-slide-y-reverse-transition >
-      <v-btn v-if="expand" rounded="xl" variant="tonal" :slim="false" @click="tryAgainClick" class="g-try-bt font-weight-black">
-        TRY AGAIN
-      </v-btn>
-    </v-slide-y-reverse-transition>        
-  </v-sheet>  
 </template>
 
 <style scoped>
+.g-sheet {
+  background-color: transparent;
+}
 .g-card{
   background: linear-gradient(67deg, #07361C 7.82%, #28673C 75.59%);
   max-width: 100%;
@@ -248,7 +258,12 @@
 }
 .g-terms {
   opacity: 1;
+}
+.g-terms-l-def {
   text-align: left;
+}
+.g-terms-l-rtl {
+  text-align: right;
 }
 :deep(.v-selection-control__input > .v-icon) {
   opacity: 1;
@@ -275,8 +290,13 @@
   position: absolute;
   z-index: 90;
   max-width: 100%;
-  bottom: 56px;
+  bottom: 41px;
+}
+.g-try-l-def {
   right: 38px;
+}
+.g-try-l-rtl {
+  left: 38px;
 }
 .g-try-bt {
   font-family: Saudia Sans;
@@ -286,5 +306,53 @@
   color: #28673C; 
   background-color: white;
   width: 183px;
+}
+:deep(.v-selection-control__input:hover::before) {
+  opacity: 0.0;
+}
+
+:deep(.v-btn__content) {
+  padding-top: 2px;
+}
+@media (max-width: 959px) {
+  .g-try {
+    position: relative;
+    bottom: auto;
+    right: auto;
+    text-align: center;
+    margin: 20px auto;
+  }   
+  .g-try-l-rtl {
+    left: auto;
+  }  
+}
+
+@media (min-width: 2560px) {
+  .g-card{
+    width: 513px;
+  }
+  .g-title {
+    font-size: 32px;
+  }
+  .g-text {
+    font-size: 30px;
+  }
+  .g-points {
+    font-size: 54px;
+  }
+  :deep(.v-messages) {
+    font-size: 18px;
+  }
+  .g-bt {
+    font-size: 22px;
+    width: 223px;
+  }  
+  :deep(.v-btn.v-btn--density-default) {
+    height: 54px;
+  }
+  .g-try-bt {
+    font-size: 22px;
+    width: 213px;
+  }   
 }
 </style>

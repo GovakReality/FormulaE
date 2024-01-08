@@ -2,7 +2,12 @@
   import { useCardsStore } from '/src/stores/CardsStore';
   import { useLoadingStore } from '/src/stores/LoadingStore';
   import { storeToRefs } from 'pinia';
-  import { ref, watch, onMounted } from 'vue';
+  import { ref, watch, onMounted, computed } from 'vue';
+  import { useI18n } from 'vue-i18n'
+  import { useLocale } from 'vuetify';
+
+  const { t } = useI18n();
+  const { isRtl } = useLocale();
 
   const cardStore = useCardsStore();
   const { cardIndex } = storeToRefs(cardStore);
@@ -12,22 +17,24 @@
   const expand = ref(false);
   const show = ref(false);
 
-  const gens = [
+
+
+  const gens = ref([
     {
       title: 'GEN 3',
-      subtitle: '2023 - Present',
+      subtitle: computed(() => t('geninfo.gen3Year')),
     },
     {
       title: 'GEN 2',
-      subtitle: '2018 - 2022',
+      subtitle: computed(() => t('geninfo.gen2Year')),
     },
     {
       title: 'GEN 1',
-      subtitle: '2014 - 2017',
+      subtitle: computed(() => t('geninfo.gen1Year')),
     }
-  ];
+  ]);
 
-  let actualGen = ref(gens[0]);
+  let actualGen = ref(gens.value[0]);
   let shouldExpand = ref(true);
 
   watch(loadComplete, (val) => {
@@ -40,16 +47,17 @@
     if (cardIndex.value == 0) {
       shouldExpand.value = true;
       expand.value = true;
+      actualGen.value = gens.value[0];
     } else if (cardIndex.value == 5) {
       expand.value = false;
-      actualGen.value = gens[1];
+      actualGen.value = gens.value[1];
     } else if (cardIndex.value == 8) {
       expand.value = false;
-      actualGen.value = gens[2];
+      actualGen.value = gens.value[2];
     } else if (cardIndex.value == 11) {
       expand.value = false;
       shouldExpand.value = false;
-      actualGen.value = gens[0];
+      actualGen.value = gens.value[0];
     }
   });
 
@@ -61,10 +69,11 @@
     show.value = true;
   }); 
 
+
 </script>
 
 <template>
-  <v-sheet v-if="show" class="g-geninfo">
+  <v-sheet v-if="show" class="g-geninfo" :class="{ 'g-lang-def': !isRtl, 'g-lang-rtl': isRtl }">
     <v-slide-y-reverse-transition @after-leave="onAfterLeave" group>
       <div v-if="expand" class="g-title">
         {{actualGen.title}}
@@ -80,22 +89,63 @@
 .g-geninfo {
   background-color: transparent;
   position: absolute;
-  z-index: 90;
+  z-index: 20;
   max-width: 100%;
   bottom: 33px;
-  left: 38px;
   pointer-events: none;
   font-family: Saudia Sans;
   line-height: normal;
   text-transform: uppercase;
   color: white;    
 }
+.g-lang-def {
+  left: 38px;
+}
+.g-lang-rtl {
+  right: 38px;
+}
 .g-title {
-  font-size: 42px;
+  font-size: 48px;
   font-weight: 700;
 }
 .g-subtitle {
-  font-size: 21px;
+  font-size: 26px;
   font-weight: 400;
+}
+
+@media (max-width: 599px) {
+  .g-geninfo {
+    bottom: 10px;
+  }
+  .g-lang-def {
+    left: 10px;
+  }
+  .g-lang-rtl {
+    right: 10px;
+  }  
+  .g-title {
+    font-size: 25px;
+  }
+  .g-subtitle {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 2560px) {
+  .g-geninfo {
+    bottom: 40px;
+  }
+  .g-lang-def {
+    left: 50px;
+  }
+  .g-lang-rtl {
+    right: 50px;
+  }
+  .g-title {
+    font-size: 64px;
+  }
+  .g-subtitle {
+    font-size: 34px;
+  }
 }
 </style>

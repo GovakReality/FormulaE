@@ -4,8 +4,8 @@ import ar from "./locales/ar.json"
 import { en as envuetify, ar as arvuetify } from 'vuetify/locale'
 
 export default createI18n({
-  locale: process.env.VITE_DEFAULT_LOCALE, 
-  fallbackLocale: process.env.VITE_FALLBACK_LOCALE, 
+  locale: import.meta.env.VITE_DEFAULT_LOCALE, 
+  fallbackLocale: import.meta.env.VITE_FALLBACK_LOCALE, 
   legacy: false,
   globalInjection: true,
   messages: {

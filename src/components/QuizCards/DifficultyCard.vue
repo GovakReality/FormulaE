@@ -1,11 +1,10 @@
 <script setup>
-  import { usePositionStore } from '/src/stores/PositionStore';
   import { useCardsStore } from '/src/stores/CardsStore';
   import { useQuizStore } from '/src/stores/QuizStore';
   import { ref, watch } from 'vue';
   import { storeToRefs } from 'pinia';
+  import saudiaLogo from '/images/SaudiaLogo.png';
 
-  const positionStore = usePositionStore();
   const cardsStore = useCardsStore();
   const { cardIndex } = storeToRefs(cardsStore);
   const quizStore = useQuizStore();
@@ -42,32 +41,31 @@
   const onAfterLeave = (el) => {
     show.value = false;
     cardsStore.incrementCardIndex();
-    positionStore.increment();
   }    
 </script>
 
 <template>
-  <v-sheet v-if="show" class="d-flex align-end justify-end h-100 pa-10">
+  <v-sheet v-if="show" class="d-flex align-end justify-end h-100 pa-8 pb-16 pa-sm-10">
     <v-slide-y-reverse-transition @after-leave="onAfterLeave">
       <v-card
       v-if="expand"
-      class="g-card py-5 pe-2 rounded-xl"
-      variant="elevated"
+      class="g-card py-5 rounded-xl"
+      variant="flat"
       >
         <v-card-item class="text-center">
           <v-img
-          src="/images/SaudiaLogo.png"
+          :src="saudiaLogo"
           width="138"
           class="text-center justify-center mx-auto"
           ></v-img>
-          <h3 class="g-title font-weight-bold pa-8">
-            Ready to test your knowledge?
+          <h3 class="g-title font-weight-bold pa-5 pa-sm-8">
+            {{ $t("difficulty.title") }}
           </h3>
-          <div class="g-text pb-6 px-6">
-            Get ready to answer questions about the Formula E racing cars.
+          <div class="g-text pb-6 px-3 px-sm-6">
+            {{ $t("difficulty.text1") }}
           </div>    
-          <div class="g-text pb-4 px-6">
-            Choose your difficulty below to start the quiz:
+          <div class="g-text pb-4 px-4 px-sm-8">
+            {{ $t("difficulty.text2") }}
           </div>                 
         </v-card-item>
         <v-card-actions class="text-center justify-center">
@@ -75,21 +73,21 @@
             <v-row no-gutters>
               <v-col>
                 <v-btn rounded="xl" variant="tonal" :slim="false" class="g-bt-diff font-weight-black my-2" @click="onClick(1)">
-                  Easy
+                  {{ $t("global.easy") }}
                 </v-btn>
               </v-col>
             </v-row>
             <v-row no-gutters>
               <v-col>
                 <v-btn rounded="xl" variant="tonal" :slim="false" class="g-bt-diff font-weight-black my-2" @click="onClick(2)">
-                  Medium
+                  {{ $t("global.medium") }}
                 </v-btn>
               </v-col>
             </v-row>
             <v-row no-gutters>
               <v-col>
                 <v-btn rounded="xl" variant="tonal" :slim="false" class="g-bt-diff font-weight-black my-2" @click="onClick(3)">
-                  Hard
+                  {{ $t("global.hard") }}
                 </v-btn>  
               </v-col>
             </v-row>          
@@ -131,5 +129,51 @@
 
 :deep(.v-btn.v-btn--density-default) {
   height: 46px;
+}
+
+:deep(.v-btn__content) {
+  padding-top: 2px;
+}
+
+@media (max-width: 599px) {
+  .g-card{
+    width: 300px;
+    margin-bottom: 10px;
+  }
+  .g-title {
+    font-size: 20px;
+    line-height: 28px;
+    padding: 0px;
+  }  
+  .g-text {
+    font-size: 18px;
+  } 
+  .g-bt-diff {
+    font-size: 16px;
+    width: 130px;
+  }  
+  :deep(.v-btn.v-btn--density-default) {
+    height: 36px;
+  }  
+}
+
+@media (min-width: 2560px) {
+  .g-card{
+    width: 513px;
+  }
+  .g-title {
+    font-size: 34px;
+    line-height: 38px;
+  }  
+  .g-text {
+    font-size: 29px;
+  } 
+  .g-bt-diff {
+    font-size: 22px;
+    width: 220px;
+  }  
+  :deep(.v-btn.v-btn--density-default) {
+    height: 56px;
+  }  
 }
 </style>

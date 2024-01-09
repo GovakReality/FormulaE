@@ -1,0 +1,62 @@
+{  
+  "locale": {
+    "en": "English",
+    "ar": "عرب"
+  },
+  "global": {
+    "pts": "pts",
+    "easy": "Easy",
+    "medium": "Medium",
+    "hard": "Hard",
+    "round": "Round",
+    "tryagain": "Try Again",
+    "fullname": "Full Name",
+    "email": "E-mail",
+    "continue": "Continue"
+  },
+  "menu": {
+    "admin": "Admin",
+    "about": "About"
+  },
+  "geninfo": {
+    "gen3Year": "2023 - present",
+    "gen2Year": "2018 - 2022",
+    "gen1Year": "2014 - 2017"
+  },
+  "welcome": {
+    "title": "Test your knowledge on the generations of Formula E models.",
+    "subtitle": "Take a quiz now for the chance to win exclusive prizes!",
+    "start": "Start Quiz"
+  },
+  "difficulty": {
+    "title": "Ready to test your knowledge?",
+    "text1": "Gear up to answer questions about the three Formula E racing cars.",
+    "text2": "Choose your difficulty below to begin:"
+  },
+  "congrats": {
+    "title": "Congratulations!",
+    "subtitle": "Your score is:",
+    "text": "Enter your information below to register for the prize draw:",
+    "terms": "I confirm that I am over 18 years of age and accept the terms and conditions and the Saudia Airlines Privacy Policy."
+  },  
+  "leaderboard": {
+    "title": "Your score is:",
+    "tip": "Tip: answer faster to score more points!",
+    "text": "If you're among the finalists by the end of the contest, you will be notified via email about your prize.",
+    "finalist": "finalist",
+    "top10": "TOP 10"
+  },
+  "rules": {
+    "name":{
+      "required": "You must enter your full name.",
+      "length": "Full name must be at least 2 characters."
+    },
+    "email":{
+      "required": "E-mail is requred.",
+      "format": "E-mail must be valid."
+    },
+    "terms":{
+      "required": "You should agree."
+    }      
+  }
+}

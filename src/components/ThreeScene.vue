@@ -7,17 +7,32 @@ import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
 import { LightProbeGenerator } from 'three/addons/lights/LightProbeGenerator.js';
 import { gsap } from 'gsap';
-import { usePositionStore } from '/src/stores/PositionStore';
+import { useQuizStore } from '/src/stores/QuizStore';
+import { useCardsStore } from '/src/stores/CardsStore';
 import { useLoadingStore } from '/src/stores/LoadingStore';
 import { useGraphicsStore } from '/src/stores/GraphicsStore';
 import { useCameraStore } from '/src/stores/CameraStore';
 import { storeToRefs } from 'pinia';
 
+import raceTrackGLB from '/models/RaceTrack.glb?url';
+import gen3GLB from '/models/Gen3.glb?url';
+import gen2GLB from '/models/Gen2.glb?url';
+import gen1GLB from '/models/Gen1.glb?url';
+import raceTrackHDR from '/textures/RaceTrack.hdr?url';
+import pxTexture from '/textures/px.jpg';
+import nxTexture from '/textures/nx.jpg';
+import pyTexture from '/textures/py.jpg';
+import nyTexture from '/textures/ny.jpg';
+import pzTexture from '/textures/pz.jpg';
+import nzTexture from '/textures/nz.jpg';
+
 // get stores
-const positionStore = usePositionStore();
-const { positionIndex } = storeToRefs(positionStore);
+const quizStore = useQuizStore();
+const { shouldCameraMove, question, quizEnded } = storeToRefs(quizStore);
 const loadingStore = useLoadingStore();
-const { loadStart, loadComplete, loadError, loadProgress } = storeToRefs(loadingStore);
+const { loadStart, loadComplete, loadError, loadProgress, errorUrl } = storeToRefs(loadingStore);
+const cardsStore = useCardsStore();
+const { cardIndex } = storeToRefs(cardsStore);
 const graphicsStore = useGraphicsStore();
 const { directionalLightIntensity, directionalLightColor, ambientLightIntensity, ambientLightColor, lightProbeIntensity, backgroundIntensity, backgroundBlurriness, fogColor, fogNear, fogFar, toneMapping, toneMappingExposure } = storeToRefs(graphicsStore);
 const cameraStore = useCameraStore();
@@ -30,6 +45,7 @@ const windowHeight = ref(window.innerHeight);
 const aspectRatio = computed(() => {
   return windowWidth.value / windowHeight.value;
 });
+const shouldBlur = ref(false);
 
 let camera;
 let renderer;
@@ -81,30 +97,6 @@ gltfLoader.setDRACOLoader(dracoLoader);
 const initialPos = new Vector3(-3.6, 1.4, 5.5); // on intial screen
 const initialTarget = new Vector3(0, 0.46, 0.35); // on intial screen
 
-// car 1 points
-const car1Pos1 = new Vector3(2.34, 0.38, 3.51);
-const car1Target1 = new Vector3(1, 0.3, 1.6);
-const car1Pos2 = new Vector3(-0.60, 0.94, 1.43);
-const car1Target2 = new Vector3(0, 0.8, 0.4);
-const car1Pos3 = new Vector3(-2.39, 0.57, -5.02);
-const car1Target3 = new Vector3(-0.32, 0.16, -1.79);
-
-// car 2 points
-const car2Pos1 = new Vector3(2.75, 1.86, -2.72);
-const car2Target1 = new Vector3(6.9, 0.36, -7.69);
-const car2Pos2 = new Vector3(10.2, 1.69, -2.10);
-const car2Target2 = new Vector3(6.9, 0.36, -7.69);
-const car2Pos3 = new Vector3(5.3, 1.6, -14);
-const car2Target3 = new Vector3(6.9, 0.36, -7.69);
-
-// car 3 points
-const car3Pos1 = new Vector3(2.68, 1.8, -8.6);
-const car3Target1 = new Vector3(0, 0.36, -14.9);
-const car3Pos2 = new Vector3(-6.7, 1.87, -14.94);
-const car3Target2 = new Vector3(0, 0.36, -14.9);
-const car3Pos3 = new Vector3(4.8, 3.0, -19.10);
-const car3Target3 = new Vector3(0, 0.36, -14.9);
-
 // Loader manager functions
 manager.onStart = function (item, loaded, total) {
   // console.log('Loading started');
@@ -124,8 +116,17 @@ manager.onProgress = function (item, loaded, total) {
 
 manager.onError = function (url) {
   // console.log('Error loading');
+  errorUrl.value = url;
   loadError.value = true;
 };
+
+watch(cardIndex, () => {
+  if (cardIndex.value >= 11) {
+    shouldBlur.value = true;
+  } else {
+    shouldBlur.value = false;
+  }
+});
 
 // Start scene
 const setCanvas = () => {
@@ -142,12 +143,12 @@ const setCanvas = () => {
 
   // Create LDR equirretangular background
   cubeTextureLoader.load([
-    '/textures/px.jpg',
-    '/textures/nx.jpg',
-    '/textures/py.jpg',
-    '/textures/ny.jpg',
-    '/textures/pz.jpg',
-    '/textures/nz.jpg',
+    pxTexture,
+    nxTexture,
+    pyTexture,
+    nyTexture,
+    pzTexture,
+    nzTexture,
   ], (backgroundMap) => {
     scene.background = backgroundMap;
     scene.backgroundIntensity = backgroundIntensity.value;
@@ -155,7 +156,7 @@ const setCanvas = () => {
   });
 
   // Race Track (with Draco)
-  gltfLoader.load('/models/RaceTrack.glb', function (gltf) {
+  gltfLoader.load(raceTrackGLB, function (gltf) {
     const raceTrackObj = gltf.scene;
     scene.add(raceTrackObj);
   }, undefined, function (error) {
@@ -163,7 +164,7 @@ const setCanvas = () => {
   });
 
   // Car 1 (with Draco)
-  gltfLoader.load('/models/Gen3.glb', function (gltf) {
+  gltfLoader.load(gen3GLB, function (gltf) {
     const car1Obj = gltf.scene;
     scene.add(car1Obj);
   }, undefined, function (error) {
@@ -171,7 +172,7 @@ const setCanvas = () => {
   });
 
   // Car 2 (with Draco)
-  gltfLoader.load('/models/Gen3Placeholder-1.glb', function (gltf) {
+  gltfLoader.load(gen2GLB, function (gltf) {
     const car2Obj = gltf.scene;
     scene.add(car2Obj);
   }, undefined, function (error) {
@@ -179,7 +180,7 @@ const setCanvas = () => {
   });
 
   // Car 3 (with Draco)
-  gltfLoader.load('/models/Gen3Placeholder-2.glb', function (gltf) {
+  gltfLoader.load(gen1GLB, function (gltf) {
     const car3Obj = gltf.scene;
     scene.add(car3Obj);
   }, undefined, function (error) {
@@ -215,7 +216,7 @@ const setCanvas = () => {
   updateRenderer();
 
   // Create HDR equirretangular environment map
-  rgbeLoader.load('/textures/RaceTrack.hdr', (environmentMap) => {
+  rgbeLoader.load(raceTrackHDR, (environmentMap) => {
     //Adding the environment map to the scene
     environmentMap.mapping = EquirectangularReflectionMapping
     // scene.background = environmentMap;
@@ -291,51 +292,20 @@ const animate = () => {
   requestAnimationFrame(animate);
 };
 
-watch(positionIndex, () => {
-  switch (positionIndex.value) {
-    case 0:
+watch(shouldCameraMove, () => {
+  if (shouldCameraMove.value) {
+    if (quizEnded.value) {
       cameraMovement(initialPos, initialTarget);
-      controls.minDistance = 3.5;
-      break;
-    case 1:
-      cameraMovement(car1Pos1, car1Target1);
-      controls.minDistance = 1.2;
-      break;
-    case 2:
-      cameraMovement(car1Pos2, car1Target2);
-      controls.minDistance = 1.2;
-      break;
-    case 3:
-      cameraMovement(car1Pos3, car1Target3);
-      controls.minDistance = 1.2;
-      break;
-    case 4:
-      cameraMovement(car2Pos1, car2Target1);
-      controls.minDistance = 3.5;
-      break;
-    case 5:
-      cameraMovement(car2Pos2, car2Target2);
-      controls.minDistance = 3.5;
-      break;
-    case 6:
-      cameraMovement(car2Pos3, car2Target3);
-      controls.minDistance = 3.5;
-      break;
-    case 7:
-      cameraMovement(car3Pos1, car3Target1);
-      controls.minDistance = 3.5;
-      break;
-    case 8:
-      cameraMovement(car3Pos2, car3Target2);
-      controls.minDistance = 3.5;
-      break;
-    case 9:
-      cameraMovement(car3Pos3, car3Target3);
-      controls.minDistance = 3.5;
-      break;
-    default:
-      positionStore.reset();
-      console.log('no way');
+      controls.minDistance = 3.5; 
+      controls.maxDistance = 7;
+    } else {
+      let pos = new Vector3(...question.value.camPosition);
+      let tar = new Vector3(...question.value.camTarget)
+      cameraMovement(pos, tar);
+      controls.maxDistance = question.value.ctrlMaxDist;
+      controls.minDistance = question.value.ctrlMinDist;     
+    }
+    shouldCameraMove.value = false;
   }
 });
 
@@ -462,17 +432,35 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <canvas ref="webGl" class="webGl" />
+  <canvas ref="webGl" class="webGl" :class="{ blur: shouldBlur }"/>
 </template>
 
 <style scoped>
 .webGl {
   width: 100%;
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   right: 0;
   left: 0;
   z-index: 0;
+  transition: 0.5s filter linear;
+  -webkit-transition: 0.5s -webkit-filter linear;
+  -moz-transition: 0.5s -moz-filter linear;
+  -ms-transition: 0.5s -ms-filter linear;
+  -o-transition: 0.5s -o-filter linear;    
+}
+.blur{
+  -webkit-filter: blur(20px);
+  -moz-filter: blur(20px);
+  -o-filter: blur(20px);
+  -ms-filter: blur(20px);
+  filter: blur(20px);
+  pointer-events: none;
+  transition: 0.5s filter linear;
+  -webkit-transition: 0.5s -webkit-filter linear;
+  -moz-transition: 0.5s -moz-filter linear;
+  -ms-transition: 0.5s -ms-filter linear;
+  -o-transition: 0.5s -o-filter linear;  
 }
 </style>

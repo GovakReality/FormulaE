@@ -1,10 +1,13 @@
 <script setup>
 	import LanguageSwitcher from './LanguageSwitcher.vue';
 	import MainMenu from './MainMenu.vue';
+
+  //import { useDisplay } from 'vuetify'
+  //const { xs, sm } = useDisplay()
 </script>
 
 <template>
-	<v-app-bar flat color="transparent" class="pt-5 pr-5 g-bar">
+	<v-app-bar flat color="transparent" class="pt-sm-5 pr-sm-5 g-bar">
 		<template v-slot:append>
 				<LanguageSwitcher />
 				<MainMenu />

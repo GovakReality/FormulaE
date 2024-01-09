@@ -4,10 +4,11 @@
   import { storeToRefs } from 'pinia';
   import { ref, watch, onMounted, computed } from 'vue';
   import { useI18n } from 'vue-i18n'
-  import { useLocale } from 'vuetify';
+  import { useLocale, useDisplay } from 'vuetify';
 
   const { t } = useI18n();
   const { isRtl } = useLocale();
+  const { xs } = useDisplay();
 
   const cardStore = useCardsStore();
   const { cardIndex } = storeToRefs(cardStore);
@@ -73,7 +74,7 @@
 </script>
 
 <template>
-  <v-sheet v-if="show" class="g-geninfo" :class="{ 'g-lang-def': !isRtl, 'g-lang-rtl': isRtl }">
+  <v-sheet v-if="show && !xs" class="g-geninfo" :class="{ 'g-lang-def': !isRtl, 'g-lang-rtl': isRtl }">
     <v-slide-y-reverse-transition @after-leave="onAfterLeave" group>
       <div v-if="expand" class="g-title">
         {{actualGen.title}}

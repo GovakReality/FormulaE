@@ -14,31 +14,6 @@ watch(locale, () => {
   document.querySelector("html").setAttribute("lang", locale.value)
 });
 
-
-
-
-
-
-
-// console.log(process.env.VITE_API_URL);
-// console.log(process.env.VITE_DEFAULT_LOCALE);
-// console.log(process.env.VITE_FALLBACK_LOCALE);
-// console.log(process.env.VITE_PROXY_TARGET);
-
-console.log(import.meta.env.VITE_API_URL);
-console.log(import.meta.env.VITE_DEFAULT_LOCALE);
-console.log(import.meta.env.VITE_FALLBACK_LOCALE);
-console.log(import.meta.env.VITE_PROXY_TARGET);
-
-
-
-
-
-
-
-
-
-
 </script>
 <template>
   <v-select v-model="locale" :items="availableLocalesComp" item-title="title" item-value="value" rounded="sm"

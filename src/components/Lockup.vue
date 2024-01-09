@@ -1,5 +1,5 @@
 <script setup>
-  import lockup from '/images/Lockup-Shadows.png';
+  import lockup from '/images/Lockup.png';
   import { useLocale } from 'vuetify';
 
   const { isRtl } = useLocale();
@@ -8,45 +8,42 @@
 
 <template>
   <v-img
-  :src="lockup"
-  class="g-lockup"
-  :class="{ 'g-lang-def': !isRtl, 'g-lang-rtl': isRtl }"
+    :src="lockup"
+    class="g-lockup"
   ></v-img>
 </template>
 
 <style scoped>
 .g-lockup {
-  position: absolute;
   z-index: 90;
   max-width: 100%;
   width: 360px;
-  top: 2px;
-  pointer-events: none;
 }
-
-.g-lang-def {
-  left: 5px;
+.g-img {
+  width: 100%;
 }
-.g-lang-rtl {
-  right: 5px;
-}
-
 @media (max-width: 599px) {
   .g-lockup {
-    width: 300px;
-    left: 50%;
-    top: 40px;
-    margin-left: -150px;
-  }  
-  .g-lang-rtl {
-    right: auto;
+    width: 260px;
+    margin-top: 10px;
   }
 }
-
+@media (max-width: 469px) {
+  .g-lockup {
+    width: 200px;
+  }
+}
+@media (max-width: 379px) {
+  .g-lockup {
+    width: 160px;
+  }
+}
 @media (min-width: 2560px) {
   .g-lockup {
-    width: 580px;
+    width: 460px;
+  }
+  .g-img {
+    width: 460px;
   }
 }
-
 </style>

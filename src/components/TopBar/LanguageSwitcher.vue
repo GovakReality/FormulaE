@@ -50,6 +50,18 @@ watch(locale, () => {
   transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+@media (max-width: 599px) {
+  .g-lang {
+    padding-right: 0px;
+  }
+}
+@media (max-width: 399px) {
+  :deep(.v-field.v-field--appended) {
+    padding-left: 2px;
+    padding-right: 2px;
+  }
+}
+
 @media (min-width: 2560px) {
   .g-lang {
     padding-right: 40px;

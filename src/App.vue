@@ -3,9 +3,9 @@ import ThreeScene from './components/ThreeScene.vue'
 import TopBar from './components/TopBar/TopBar.vue';
 import QuizCards from './components/QuizCards/QuizCards.vue';
 import LoadingScreen from './components/LoadingScreen.vue';
-import Lockup from './components/Lockup.vue';
+/* import Lockup from './components/Lockup.vue'; */
 import GenInfo from './components/GenInfo.vue';
-import LiveInspector from './components/LiveInspector.vue';
+/* import LiveInspector from './components/LiveInspector.vue'; */
 </script>
 
 <template>
@@ -13,7 +13,7 @@ import LiveInspector from './components/LiveInspector.vue';
 
     <TopBar />
     <v-main>
-      <Lockup />
+      <!--<Lockup />-->
       <ThreeScene />
       <QuizCards />
       <GenInfo />

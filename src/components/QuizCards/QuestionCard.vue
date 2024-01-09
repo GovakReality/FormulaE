@@ -431,6 +431,7 @@
 @media (max-width: 599px) {
   .g-card{
     width: 420px;
+    margin-bottom: 120px;
   }
   .g-round {
     font-size: 18px;
@@ -446,7 +447,7 @@
     height: 50px;
   } 
   .g-hud {
-    bottom: 25px;
+    bottom: 70px;
     right: auto;
     left: 50%;
     margin-left: -150px;

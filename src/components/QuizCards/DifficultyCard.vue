@@ -49,7 +49,7 @@
     <v-slide-y-reverse-transition @after-leave="onAfterLeave">
       <v-card
       v-if="expand"
-      class="g-card py-5 pe-2 rounded-xl"
+      class="g-card py-5 rounded-xl"
       variant="flat"
       >
         <v-card-item class="text-center">
@@ -138,6 +138,7 @@
 @media (max-width: 599px) {
   .g-card{
     width: 300px;
+    margin-bottom: 10px;
   }
   .g-title {
     font-size: 20px;

@@ -111,7 +111,7 @@
     <v-slide-y-reverse-transition @after-leave="onAfterLeave" group>
       <v-sheet v-if="expand" class="g-sheet" position="relative" color="transparent">
         <v-card
-        class="g-card py-5 pe-2 rounded-xl"
+        class="g-card py-5 rounded-xl"
         variant="flat"
         >
           <v-card-item class="text-center">
@@ -132,7 +132,7 @@
             <div class="g-text pb-6 px-7 px-xxl-11">
               {{ $t("congrats.text") }}
             </div>    
-            <v-form @submit.prevent="submit" class="px-6 pt-4 pt-xxl-6" v-model="isFormValid">
+            <v-form @submit.prevent="submit" class="px-6 pt-4 pt-xxl-6 g-form" v-model="isFormValid">
               <v-text-field
                 v-model="fullName"
                 :label="$t('global.fullname')"
@@ -326,7 +326,33 @@
     left: auto;
   }  
 }
-
+@media (max-width: 599px) {
+  .g-card{
+    margin-top: 16px;
+  }  
+}
+@media (max-width: 449px) {
+  .g-card{
+    width: 380px;
+  }  
+}
+@media (max-width: 399px) {
+  .g-card{
+    width: 320px;
+  }  
+  .g-points {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+  .g-text {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+  .g-form {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
+}
 @media (min-width: 2560px) {
   .g-card{
     width: 513px;

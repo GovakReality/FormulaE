@@ -55,7 +55,7 @@
       score: '40011',
     },
     {
-      full_name: 'Lily Morgan aer a xxxraer yyyaer uuuuuae lllllede',
+      full_name: 'Lily Morgan',
       score: '39318',
     },
     {
@@ -516,7 +516,53 @@
     width: auto;
   }    
 }
-
+@media (max-width: 529px) {
+  .g-title {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+  .g-text {
+    padding-left: 28px !important;
+    padding-right: 28px !important;
+  }
+  .g-name {
+    font-size: 15px;
+    max-width: 180px;
+  }  
+  .g-score {
+    font-size: 14px;
+    padding-left: 6px !important;
+    padding-right: 12px !important;
+  }  
+  .g-flag {
+    width: 12px;
+  }  
+}
+@media (max-width: 399px) {
+  .g-title {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+  .g-pos {
+    font-size: 12px;
+    padding-left: 3px !important;
+    padding-right: 3px !important;        
+  }  
+  .g-name {
+    font-size: 14px;
+    max-width: 170px;
+    padding-left: 8px !important;
+    padding-right: 8px !important;    
+  }  
+  .g-score {
+    font-size: 13px;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }  
+  .g-flag {
+    width: 10px;
+  }  
+}
 @media (min-width: 2560px) {
   .g-card{
     width: 513px;

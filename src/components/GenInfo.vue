@@ -114,24 +114,6 @@
   font-weight: 400;
 }
 
-@media (max-width: 599px) {
-  .g-geninfo {
-    bottom: 10px;
-  }
-  .g-lang-def {
-    left: 10px;
-  }
-  .g-lang-rtl {
-    right: 10px;
-  }  
-  .g-title {
-    font-size: 25px;
-  }
-  .g-subtitle {
-    font-size: 16px;
-  }
-}
-
 @media (min-width: 2560px) {
   .g-geninfo {
     bottom: 40px;

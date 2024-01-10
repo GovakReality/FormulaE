@@ -44,7 +44,7 @@
 </script>
 
 <template>
-  <v-sheet v-if="show" class="d-flex align-center align-sm-end justify-center justify-sm-end h-100 pa-2 pa-sm-10 pb-sm-16">
+  <v-sheet v-if="show" class="d-flex align-center align-sm-end justify-center justify-sm-end h-100 px-2 px-sm-10 pb-sm-10">
     <v-slide-y-reverse-transition @after-leave="onAfterLeave">
       <v-card
       v-if="expand"
@@ -58,16 +58,16 @@
             width="138"
             class="text-center justify-center mx-auto"
           ></v-img>
-          <h3 class="g-title font-weight-bold pt-6 pt-sm-7 pb-5 pb-sm-8 px-2 px-sm-2">
+          <h3 class="g-title">
             {{ $t("welcome.title") }}
           </h3>          
           
-          <h3 class="g-title font-weight-bold pt-0 pt-sm-0 pb-3 pb-sm-6 px-2 px-sm-2">
+          <h3 class="g-text">
             {{ $t("welcome.subtitle") }}
           </h3>
         </v-card-item>
         <v-card-actions class="text-center justify-center">
-          <v-btn rounded="xl" variant="tonal" :slim="false" @click="onClick" class="g-bt-start font-weight-black">
+          <v-btn rounded="xl" variant="tonal" :slim="false" @click="onClick" class="g-bt-start font-weight-black my-2">
             {{ $t("welcome.start") }}
           </v-btn>
         </v-card-actions>
@@ -83,15 +83,29 @@
   width: 413px;
   color: #F0F0F0;
 }
+
 .g-title {
-  font-size: 28px;
-  line-height: 34px;
+  font-weight: bold;
+  font-size: clamp(18px, 3.6dvh, 28px);
+  line-height: clamp(30px, 4.2dvh, 36px);
+  padding-top: clamp(12px, 3.4dvh, 32px);
+  padding-bottom: clamp(12px, 3dvh, 30px);
+  padding-left: 14px;
+  padding-right: 14px;
+}
+.g-text {
+  font-weight: 400;
+  font-size: clamp(18px, 3dvh, 26px);
+  line-height: clamp(30px, 3.5dvh, 34px);
+  padding-bottom: 4px;
+  padding-left: 28px;
+  padding-right: 28px;
 }
 .g-bt-start {
-  font-size: 18px;
+  font-size: clamp(16px, 2.3dvh, 18px);
   width: 183px;
   max-width: 100%;
-  line-height: normal;
+  line-height: normal;  
 }
 
 :deep(.v-btn--variant-tonal .v-btn__underlay) {
@@ -99,7 +113,7 @@
 }
 
 :deep(.v-btn.v-btn--density-default) {
-  height: 46px;
+  height: clamp(32px, 5.4dvh, 46px);
 }
 
 :deep(.v-btn__content) {
@@ -107,20 +121,9 @@
 }
 
 @media (max-width: 599px) {
-  .g-card{
+  .g-card {
     width: 333px;
-  }
-  .g-title {
-    font-size: 20px;
-    line-height: 26px;
-  }
-  .g-bt-start {
-    font-size: 16px;
-    width: 175px;
-  }
-  :deep(.v-btn.v-btn--density-default) {
-    height: 36px;
-  }  
+  } 
 }
 
 @media (min-width: 2560px) {

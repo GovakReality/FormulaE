@@ -117,24 +117,24 @@
 }
 .g-title {
   font-weight: bold;
-  font-size: clamp(18px, 3.8dvh, 34px);
-  line-height: clamp(30px, 4dvh, 38px);
+  font-size: clamp(18px, 3.6dvh, 28px);
+  line-height: clamp(30px, 4.2dvh, 36px);
   padding-top: clamp(12px, 3.4dvh, 34px);
   padding-bottom: clamp(12px, 3dvh, 32px);
   padding-left: 14px;
   padding-right: 14px;
 }
-
 .g-text {
   font-weight: 400;
-  font-size: clamp(18px, 3dvh, 28px);;
+  font-size: clamp(18px, 3dvh, 26px);
   line-height: clamp(30px, 3.5dvh, 34px);
-  padding-bottom: clamp(10px, 2.8dvh, 22px);
+  padding-bottom: 0px;
   padding-left: 28px;
   padding-right: 28px;
 }
 .g-text2 {
-  padding-bottom: 0px;
+  padding-top: clamp(12px, 3.4dvh, 34px);
+  padding-bottom: 4px;
 }
 .g-bt-diff {
   font-size: clamp(16px, 2.3dvh, 18px);
@@ -148,18 +148,20 @@
 }
 
 :deep(.v-btn.v-btn--density-default) {
-  height: clamp(32px, 5.4dvh, 46px);;
+  height: clamp(32px, 5.4dvh, 46px);
 }
 
 :deep(.v-btn__content) {
   padding-top: 2px;
 }
+
 @media (max-width: 599px) {
   .g-text {
     padding-left: 12px;
     padding-right: 12px;
   }
 }
+
 @media (min-width: 2560px) {
   .g-card{
     width: 513px;

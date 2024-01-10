@@ -134,106 +134,6 @@
     let x = normalizeToRange(timeLeft.value, 0, maxPoints, 0, 100);
     return x.toFixed(0);
   });
-
-  // timer
-/*   let interval;
-  const timer = () => {
-    clearInterval(interval);
-    interval = setInterval(() => {
-      timeLeft.value -= 0.01;
-      if(timeLeft.value <= 0){
-        timeLeft.value = 0.000;
-        clearInterval(interval);
-        //contractCard();
-      }      
-    }, 10)
-  }; 
-
-  const timeLeftFixed = computed(() => {
-    return timeLeft.value.toFixed(3).replace(".",",");
-  });
-
-  const timeBar = computed(() => {
-    let x = normalizeToRange(timeLeft.value, 0, maxPoints, 0, 10);
-    return (x * 10).toFixed(0);
-  });
-
-  const startTimer = () => {
-    timeLeft.value = maxPoints;
-    timer();
-  }; */
-
-
-///////////////////
-
-  //let lastTime = (new Date()).getTime();
-	//let milliseconds = maxPoints.value;
-
-/*   const timer = () => {
-    let currentTime = performance.now();
-    let distance = (currentTime - now);
-    console.log(distance.toFixed(3))
-    animFrame = requestAnimationFrame(timer);
-		if (distance > 1000) {
-      lastTime = currentTime;
-      timeLeft.value--;
-      console.log(timeLeft.value)
-    } 
-     console.log(timeLeft.value)
-    if(distance <= 0){
-      timeLeft.value = 0.000;
-      //cancelAnimationFrame(animFrame);
-      //contractCard();
-    } else {
-      animFrame = requestAnimationFrame(timer);
-    } 
-  }; */
-
-/*   const startTimer = () => {
-    timeLeft.value = parseFloat(maxPoints);
-    timer();
-  };
-
-  const timeLeftFixed = computed(() => {
-    return timeLeft.value.toFixed(3).replace(".",",");
-  });
-
-  const timeBar = computed(() => {
-    let x = normalizeToRange(timeLeft.value, 0, maxPoints, 0, 100);
-    return x.toFixed(0);
-  }); */
-
- /*  let lastTime;
-  let animationRef;
-  let remainingTime = 10000;
-
-  const timer = (timestamp) => {
-    if (lastTime === undefined) {
-      lastTime = timestamp + remainingTime;
-    }
-    timeLeft.value = lastTime - timestamp;
-    if (timeLeft.value <= 0) {
-      cancelAnimationFrame(animationRef);
-      timeLeft.value = 0;
-    } else {
-      animationRef = requestAnimationFrame(timer);
-    }
-    console.log(timestamp)
-  };
-
-  const timeLeftRounded = computed(() => {
-    return roundWithPrecision(timeLeft.value, 3);
-  });
-
-  const timeBar = computed(() => {
-    let x = normalizeToRange(timeLeft.value, 0, maxPoints, 0, 10);
-    return (x * 10).toFixed(0);
-  });  
-
-  const startTimer = () => {
-    timeLeft.value = maxPoints;
-    animationRef = requestAnimationFrame(timer)
-  }; */
  
   const roundWithPrecision = (num, precision) => {
     var multiplier = Math.pow(10, precision);
@@ -243,7 +143,7 @@
 </script>
 
 <template>
-  <v-sheet v-if="show" class="d-flex align-end justify-center h-100 pa-8 pb-10 pb-sm-16 pa-sm-10">
+  <v-sheet v-if="show" class="d-flex flex-column flex-sm-row align-center align-sm-end justify-center h-100 pa-2 pa-sm-10 pb-sm-16 pb-sm-16">
     <v-slide-y-reverse-transition
     @after-leave="onAfterLeave"
     @after-enter="onAfterEnter"
@@ -306,21 +206,22 @@
         </v-card-actions>
       </v-card>
     </v-slide-y-reverse-transition>
+    <v-sheet v-if="show" class="g-hud"
+    :class="{ 'g-hud-l-def': !isRtl, 'g-hud-l-rtl': isRtl }"
+    >
+      <v-slide-y-reverse-transition group>
+        <v-sheet v-if="expandHud" class="g-hud-w">
+          <div class="g-hud-total px-5 py-2">{{scoreFixed}} {{ $t("global.pts") }}</div>
+          <div class="g-hud-round px-5 py-2">{{ $t("global.round") }} 
+            <span v-if="!isRtl">0{{ round }}/09</span>
+            <span v-if="isRtl">09/0{{ round }}</span>
+          </div>
+          <div class="g-hud-score px-5 py-2">+{{timeLeftFixed}} {{ $t("global.pts") }}</div>
+        </v-sheet>    
+      </v-slide-y-reverse-transition>        
+    </v-sheet>
   </v-sheet>
-  <v-sheet v-if="show" class="g-hud"
-  :class="{ 'g-hud-l-def': !isRtl, 'g-hud-l-rtl': isRtl }"
-  >
-    <v-slide-y-reverse-transition group>
-      <v-sheet v-if="expandHud" class="g-hud-w">
-        <div class="g-hud-total px-5 py-2">{{scoreFixed}} {{ $t("global.pts") }}</div>
-        <div class="g-hud-round px-5 py-2">{{ $t("global.round") }} 
-          <span v-if="!isRtl">0{{ round }}/09</span>
-          <span v-if="isRtl">09/0{{ round }}</span>
-        </div>
-        <div class="g-hud-score px-5 py-2">+{{timeLeftFixed}} {{ $t("global.pts") }}</div>
-      </v-sheet>    
-    </v-slide-y-reverse-transition>        
-  </v-sheet>  
+  
 </template>
 
 <style scoped>
@@ -431,7 +332,7 @@
 @media (max-width: 599px) {
   .g-card{
     width: 420px;
-    margin-bottom: 120px;
+    margin-bottom: 20px;
   }
   .g-round {
     font-size: 18px;
@@ -447,10 +348,10 @@
     height: 50px;
   } 
   .g-hud {
-    bottom: 70px;
+    position: relative;
+    bottom: auto;
     right: auto;
-    left: 50%;
-    margin-left: -150px;
+    left: auto;
   } 
   .g-hud-round {
     width: 150px;

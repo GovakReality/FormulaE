@@ -58,10 +58,10 @@
             width="138"
             class="text-center justify-center mx-auto"
           ></v-img>
-          <h3 class="g-title font-weight-bold my-2 pt-4 pb-1 py-sm-6 px-1 px-sm-2">
+          <h3 class="g-title font-weight-bold my-2 pt-4 pb-1 py-sm-6 px-2 px-sm-2">
             {{ $t("welcome.title") }}
           </h3>          
-          <h3 class="g-title font-weight-bold my-1 pt-1 pb-0 pb-sm-6 px-4 px-sm-7">
+          <h3 class="g-title font-weight-bold my-1 pt-1 pb-0 pb-sm-6 px-5 px-sm-7">
             {{ $t("welcome.subtitle") }}
           </h3>
         </v-card-item>
@@ -111,7 +111,7 @@
   }
   .g-title {
     font-size: 18px;
-    line-height: 28px;
+    line-height: 26px;
     padding: 0px;
   }
   .g-bt-start {

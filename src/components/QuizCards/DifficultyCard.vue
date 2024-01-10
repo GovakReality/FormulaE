@@ -45,7 +45,7 @@
 </script>
 
 <template>
-  <v-sheet v-if="show" class="d-flex align-end justify-end h-100 pa-8 pb-16 pa-sm-10">
+  <v-sheet v-if="show" class="d-flex align-center align-sm-end justify-center justify-sm-end h-100 pa-2 pa-sm-10 pb-sm-16">
     <v-slide-y-reverse-transition @after-leave="onAfterLeave">
       <v-card
       v-if="expand"
@@ -58,13 +58,13 @@
           width="138"
           class="text-center justify-center mx-auto"
           ></v-img>
-          <h3 class="g-title font-weight-bold pa-5 pa-sm-8">
+          <h3 class="g-title font-weight-bold pt-6 pt-sm-7 pb-5 pb-sm-8 px-2 px-sm-2">
             {{ $t("difficulty.title") }}
           </h3>
-          <div class="g-text pb-6 px-3 px-sm-6">
+          <div class="g-text pb-4 pb-sm-6 px-4 px-sm-6">
             {{ $t("difficulty.text1") }}
           </div>    
-          <div class="g-text pb-4 px-4 px-sm-8">
+          <div class="g-text pb-1 pb-sm-4 px-7 px-sm-8">
             {{ $t("difficulty.text2") }}
           </div>                 
         </v-card-item>
@@ -137,20 +137,19 @@
 
 @media (max-width: 599px) {
   .g-card{
-    width: 300px;
-    margin-bottom: 10px;
+    width: 333px;
   }
   .g-title {
     font-size: 20px;
-    line-height: 28px;
+    line-height: 26px;
     padding: 0px;
   }  
   .g-text {
-    font-size: 18px;
+    font-size: 20px;
   } 
   .g-bt-diff {
     font-size: 16px;
-    width: 130px;
+    width: 175px;
   }  
   :deep(.v-btn.v-btn--density-default) {
     height: 36px;

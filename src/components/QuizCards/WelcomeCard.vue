@@ -44,7 +44,7 @@
 </script>
 
 <template>
-  <v-sheet v-if="show" class="d-flex align-end justify-end h-100 pa-8 pb-16 pa-sm-10">
+  <v-sheet v-if="show" class="d-flex align-center align-sm-end justify-center justify-sm-end h-100 pa-8 pb-16 pa-sm-10">
     <v-slide-y-reverse-transition @after-leave="onAfterLeave">
       <v-card
       v-if="expand"
@@ -107,8 +107,7 @@
 
 @media (max-width: 599px) {
   .g-card{
-    width: 300px;
-    margin-bottom: 10px;
+    width: 333px;
   }
   .g-title {
     font-size: 18px;

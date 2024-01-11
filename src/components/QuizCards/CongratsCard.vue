@@ -107,7 +107,7 @@
 </script>
 
 <template>
-  <v-sheet v-if="show" class="d-flex flex-column align-center justify-center h-100 pa-10">
+  <v-sheet v-if="show" class="d-flex flex-column align-center justify-center h-100">
     <v-slide-y-reverse-transition @after-leave="onAfterLeave" group>
       <v-sheet v-if="expand" class="g-sheet" position="relative" color="transparent">
         <v-card
@@ -120,19 +120,19 @@
             width="138"
             class="text-center justify-center mx-auto"
             ></v-img>
-            <h3 class="g-title font-weight-bold pt-8">
+            <h3 class="g-title pt-xxl-8">
               {{ $t("congrats.title") }}
             </h3>
-            <h3 class="g-title font-weight-bold pt-2">
+            <h3 class="g-title pt-2">
               {{ $t("congrats.subtitle") }}
             </h3>          
-            <div class="g-points font-weight-bold pb-7 pt-6 px-5 py-xxl-10">
+            <div class="g-points font-weight-bold px-5">
               {{scoreFixed}} {{ $t("global.pts") }}
             </div>          
-            <div class="g-text pb-6 px-7 px-xxl-11">
+            <div class="g-text px-7 px-xxl-11">
               {{ $t("congrats.text") }}
             </div>    
-            <v-form @submit.prevent="submit" class="px-6 pt-4 pt-xxl-6 g-form" v-model="isFormValid">
+            <v-form @submit.prevent="submit" class="px-6 pt-xxl-6 g-form" v-model="isFormValid">
               <v-text-field
                 v-model="fullName"
                 :label="$t('global.fullname')"
@@ -152,7 +152,7 @@
                 variant="solo"
                 rounded="lg"
                 bg-color="white"
-                class="g-tfield my-4 mb-xxl-8"
+                class="g-tfield mb-xxl-8"
                 required
               ></v-text-field>
         
@@ -169,7 +169,7 @@
                 :label="$t('congrats.terms')"
               ></v-checkbox>
   
-              <v-btn :loading="loading" type="submit" rounded="xl" variant="tonal" :slim="false" :disabled="!isFormValid" class="g-bt font-weight-black mb-2 mt-8 mt-xxl-10">{{ $t("global.continue") }}</v-btn>
+              <v-btn :loading="loading" type="submit" rounded="xl" variant="tonal" :slim="false" :disabled="!isFormValid" class="g-bt font-weight-black mb-2">{{ $t("global.continue") }}</v-btn>
             </v-form>                 
           </v-card-item>
           <v-snackbar
@@ -214,50 +214,64 @@
   color: #F0F0F0;
 }
 .g-title {
-  font-size: 26px;
+  font-weight: bold;
+  font-size: clamp(20px, 3.2dvh, 26px);
+  padding-top: clamp(16px, 2.2dvh, 32px);
   line-height: normal;
 }
-
 .g-text {
-  font-family: Saudia Sans;
-  line-height: 34px;
   font-weight: 400;
-  font-size: 24px;
+  line-height: clamp(28px, 3.2dvh, 34px);
+  font-size: clamp(16px, 3dvh, 24px);
+  padding-bottom: clamp(10px, 2.2dvh, 32px); 
 }
 .g-points {
   font-family: IBM Plex Sans;
   line-height: normal;
-  font-size: 44px;
+  font-size: clamp(28px, 5dvh, 44px);
+  padding-top: clamp(6px, 2dvh, 30px);
+  padding-bottom: clamp(8px, 2.4dvh, 32px);
+}
+.g-form {
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
 .g-tfield {
   max-width: 100%;
 }
 :deep(.v-messages) {
-  font-size: 15px;
+  font-size: clamp(12px, 1.6dvh, 16px);
   padding-top: 3px;
   padding-bottom: 1px 
 }
 :deep(.v-field__input ) {
-  min-height: 60px;
+  min-height: clamp(30px, 2dvh, 60px);
 }
-
+:deep(.v-field) {
+  font-size: clamp(12px, 2dvh, 16px);
+}
 .g-bt {
-  font-size: 18px;
+  font-size: clamp(16px, 2.3dvh, 18px);
   width: 183px;
   max-width: 100%;
   line-height: normal;
+  margin-top: clamp(16px, 2.4dvh, 32px);
 }
-
 :deep(.v-btn--variant-tonal .v-btn__underlay) {
   opacity: 0.4;
   background-color: white;
 }
 
 :deep(.v-btn.v-btn--density-default) {
-  height: 46px;
+  height: clamp(32px, 5.4dvh, 46px);
 }
 .g-terms {
+  font-size: clamp(12px, 1dvh, 16px);
   opacity: 1;
+  margin-top: clamp(8px, 1.6dvh, 26px);
+}
+:deep(.g-terms .v-label) {
+  font-size: clamp(12px, 1.6dvh, 16px);
 }
 .g-terms-l-def {
   text-align: left;
@@ -290,7 +304,7 @@
   position: absolute;
   z-index: 90;
   max-width: 100%;
-  bottom: 41px;
+  bottom: clamp(20px, 3dvh, 41px);
 }
 .g-try-l-def {
   right: 38px;
@@ -310,27 +324,27 @@
 :deep(.v-selection-control__input:hover::before) {
   opacity: 0.0;
 }
-
 :deep(.v-btn__content) {
   padding-top: 2px;
 }
-@media (max-width: 959px) {
+@media (max-width: 599px) {
+  .g-points {
+    padding-top: 16px !important;
+    padding-bottom: 18px !important;
+    font-size: 34px;
+  }
   .g-try {
     position: relative;
     bottom: auto;
     right: auto;
     text-align: center;
-    margin: 20px auto;
+    margin: 20px auto 50px auto;
   }   
   .g-try-l-rtl {
     left: auto;
   }  
 }
-@media (max-width: 599px) {
-  .g-card{
-    margin-top: 16px;
-  }  
-}
+
 @media (max-width: 449px) {
   .g-card{
     width: 380px;
@@ -364,7 +378,15 @@
     font-size: 30px;
   }
   .g-points {
-    font-size: 54px;
+    font-size: clamp(34px, 5.2dvh, 54px);
+    padding-top: clamp(28px, 3dvh, 40px);
+    padding-bottom: clamp(28px, 3dvh, 40px);
+  }
+  :deep(.v-field__input ) {
+    min-height: clamp(50px, 5dvh, 70px);
+  }
+  :deep(.v-field) {
+    font-size: 18px;
   }
   :deep(.v-messages) {
     font-size: 18px;
@@ -372,6 +394,7 @@
   .g-bt {
     font-size: 22px;
     width: 223px;
+    margin-top: clamp(16px, 3dvh, 36px);
   }  
   :deep(.v-btn.v-btn--density-default) {
     height: 54px;

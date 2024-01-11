@@ -116,7 +116,7 @@
       if(timeLeft.value <= 0) {
         timeLeft.value = 0;
         cancelAnimationFrame(animFrame);
-        //contractCard();
+        contractCard();
       } else {
         prevTime = aux;
         animFrame = requestAnimationFrame(timer);

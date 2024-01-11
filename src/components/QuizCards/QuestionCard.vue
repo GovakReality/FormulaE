@@ -116,7 +116,7 @@
       if(timeLeft.value <= 0) {
         timeLeft.value = 0;
         cancelAnimationFrame(animFrame);
-        contractCard();
+        //contractCard();
       } else {
         prevTime = aux;
         animFrame = requestAnimationFrame(timer);
@@ -171,7 +171,7 @@
           >
             {{ $t("global.round") }} {{ round }}
           </div>
-          <div class="g-text mb-1 mb-sm-2 pt-2">
+          <div class="g-text">
             {{ question[current].question }}
           </div>                     
         </v-card-item>
@@ -232,7 +232,7 @@
   margin-bottom: 90px;
 }
 .g-round {
-  font-size: 24px;
+  font-size: clamp(22px, 3dvh, 24px);
   color: #28673c;
   line-height: normal;
 }
@@ -243,14 +243,15 @@
   text-align: right;
 }
 .g-text {
-  font-family: Saudia Sans;
-  line-height: normal;
-  font-weight: 400;
-  font-size: 24px;
   color: #28673c;
+  font-weight: 400;
+  font-size: clamp(20px, 3dvh, 24px);
+  line-height: clamp(30px, 3.5dvh, 32px);
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 .g-bt {
-  font-size: 18px;
+  font-size: clamp(16px, 2.3dvh, 18px);
   width: 254px;
   max-width: 100%;
   line-height: normal;
@@ -264,7 +265,7 @@
   border: 3px solid #ff0000;
 }
 :deep(.v-btn.v-btn--density-default) {
-  height: 70px;
+  height: clamp(60px, 6dvh, 70px);
 }
 :deep(.v-btn__content) {
   white-space: normal;

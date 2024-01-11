@@ -20,4 +20,9 @@
 .g-bar {
 	pointer-events: none;
 }
+@media (min-width: 2560px) {
+	:deep(.v-toolbar__content) {
+		height: 100px !important;
+	}
+}
 </style>

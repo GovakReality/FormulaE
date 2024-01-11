@@ -40,10 +40,11 @@
 }
 @media (min-width: 2560px) {
   .g-lockup {
-    width: 460px;
+    width: 580px;
+    margin-top: 25px;
   }
   .g-img {
-    width: 460px;
+    width: 580px;
   }
 }
 </style>

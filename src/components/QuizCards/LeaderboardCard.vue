@@ -91,7 +91,7 @@
           isTopTen.value = true;
         }
       }
-      if (index < 3) {
+      if (index < 1) {
         item = {...item, 'finalist': true};
       }
       item = {...item, 'scoreFixed': (item.score / 1000).toFixed(3).replace(".",",")};
@@ -139,11 +139,11 @@
 </script>
 
 <template>
-  <v-sheet v-if="show" class="d-flex flex-column flex-sm-column flex-md-row align-center justify-center h-100 pa-10">
+  <v-sheet v-if="show" class="d-flex flex-column flex-sm-column flex-md-row align-center justify-center h-100">
     <v-slide-y-reverse-transition @after-leave="onAfterLeave" group>
       <v-sheet v-if="expand" class="g-sheet" position="relative" color="transparent">
         <v-sheet
-        class="d-flex flex-column justify-center g-card mt-8 mt-sm-0 pt-8 pb-0 pb-md-8"
+        class="d-flex flex-column justify-center g-card pt-8 pb-7"
         :class="{ 'g-card-l-def': !isRtl, 'g-card-l-rtl': isRtl }"
         variant="flat"
         color="transparent"
@@ -159,17 +159,17 @@
                 27<small>th</small>
               </div> -->
               
-              <h3 class="g-title font-weight-bold pt-10">
+              <h3 class="g-title">
                 {{ $t("leaderboard.title") }}
               </h3>          
-              <div class="g-points font-weight-bold py-6 px-5">
+              <div class="g-points px-5">
                 {{scoreFixed}} {{ $t("global.pts") }}
               </div> 
   
-              <h3 class="g-title font-weight-bold py-2 px-10">
+              <h3 class="g-text px-16">
                 {{ $t("leaderboard.tip") }}
               </h3>                 
-              <div class="g-text pt-4 pb-8 py-md-9 px-12">
+              <div class="g-text2 px-12">
                 {{ $t("leaderboard.text") }} 
               </div>            
 
@@ -226,7 +226,7 @@
           </v-table>
         </v-card>
         <v-sheet class="text-center justify-center mt-auto d-flex d-sm-flex d-md-none" color="transparent">
-          <v-btn rounded="xl" color="#f0f0f0" variant="tonal" :slim="false" @click="onClick" class="g-bt font-weight-black my-5">
+          <v-btn rounded="xl" color="#f0f0f0" variant="tonal" :slim="false" @click="onClick" class="g-bt font-weight-black mt-5 mb-10">
             {{ $t("global.tryagain") }}
           </v-btn>
         </v-sheet>        
@@ -244,7 +244,7 @@
   background: linear-gradient(68deg, #07361C 9.84%, #28673C 76.17%);
   max-width: 100%;
   width: 413px;
-  height: 624px; 
+  height: clamp(456px, 65dvh, 624px);
 }
 .g-card-l-def{
   border-top-left-radius: 24px !important;
@@ -262,14 +262,24 @@
   color: #F0F0F0;
 }
 .g-title {
-  font-size: 26px;
-  line-height: 36px;
+  font-weight: bold;
+  font-size: clamp(22px, 3.2dvh, 26px);
+  line-height: normal; 
+  padding-top: clamp(16px, 3dvh, 32px);
 }
 .g-text {
+  font-weight: bold;
+  font-size: clamp(18px, 3.2dvh, 24px);
+  line-height: normal; 
+  padding-top: clamp(4px, 3dvh, 6px);
+}
+.g-text2 {
   font-family: Saudia Sans;
   line-height: normal;
   font-weight: 400;
-  font-size: 18px;
+  font-size: clamp(16px, 3.2dvh, 18px);
+  padding-top: clamp(18px, 3dvh, 36px);
+  margin-bottom: 20px;
   opacity: 0.6;
 }
 .g-place {
@@ -278,15 +288,18 @@
   font-size: 56px;
 }
 .g-points {
+  font-weight: bold;
   font-family: IBM Plex Sans;
   line-height: normal;
-  font-size: 46px;
+  font-size: clamp(32px, 3.2dvh, 46px);
+  padding-top: clamp(16px, 3dvh, 32px);
+  padding-bottom: clamp(16px, 3dvh, 32px);
 }
 .g-place small {
   font-size: 42px;
 }
 .g-bt {
-  font-size: 18px;
+  font-size: clamp(16px, 3.2dvh, 18px);
   width: 183px;
   max-width: 100%;
   line-height: normal;
@@ -296,7 +309,7 @@
   opacity: 0.4;
 }
 :deep(.v-btn.v-btn--density-default) {
-  height: 46px;
+  height: clamp(32px, 5.4dvh, 46px);
 }
 .g-table {
   background-color: transparent;
@@ -307,10 +320,14 @@
 .g-names-list {
   max-width: 100%;
   width: 642px;
-  height: 624px;
+  height: clamp(456px, 65dvh, 624px);
 }
+:deep(.v-table--density-default > .v-table__wrapper > table > tbody > tr > td, .v-table--density-default > .v-table__wrapper > table > thead > tr > td, .v-table--density-default > .v-table__wrapper > table > tfoot > tr > td) {
+  height: clamp(38px, 5.416dvh, 52px);
+}
+
 .g-pos {
-  font-size: 18px;
+  font-size: clamp(16px, 2dvh, 18px);
   text-transform: uppercase;
   line-height: normal;
   width: 50px;
@@ -324,7 +341,7 @@
   text-align: left;
 }
 .g-name {
-  font-size: 18px;
+  font-size: clamp(16px, 2dvh, 18px);
   text-transform: uppercase;
   line-height: normal;
   text-align: left;
@@ -371,7 +388,7 @@
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%),#F0F0F0;
   color: #000000;
   font-family: IBM Plex Sans;
-  font-size: 20px;
+  font-size: clamp(17px, 2dvh, 20px);
   text-transform: uppercase;
   line-height: normal;
   font-weight: 700;  
@@ -379,17 +396,17 @@
   width: 152px;
 }
 .g-top {
-  font-size: 20px;
+  font-size: clamp(16px, 2dvh, 20px);
   text-transform: uppercase;
   line-height: normal;
   text-align: center;
-  font-weight: 700;
+  font-weight: bold;
   color:#F0F0F0;
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.25) 100%), #F0F0F0;
   width: 100%;
 }
 .g-top i {
-  font-size: 45px;
+  font-size: clamp(35px, 3.2dvh, 45px);
 }
 .g-lefticon-def {
   padding-right: 40px;
@@ -412,7 +429,7 @@
   color:#28673C;
 }
 .g-final {
-  font-size: 15px;
+  font-size: clamp(13px, 2dvh, 15px);
   line-height: normal;
   text-align: center;
   font-weight: 700;  
@@ -430,7 +447,6 @@
 :deep(.v-btn__content) {
   padding-top: 2px;
 }
-
 @media (max-width: 1089px) {
   .g-card{
     width: 358px;
@@ -439,23 +455,22 @@
     width: 542px;
   }  
   .g-pos {
-    font-size: 16px;
+    font-size: clamp(14px, 2dvh, 16px);
     width: 45px;
   }  
   .g-name {
-    font-size: 17px;
+    font-size: clamp(15px, 2dvh, 17px);
     max-width: 250px; 
   }  
   .g-score {
-    font-size: 19px;
+    font-size: clamp(16px, 2dvh, 19px);
     width: 142px;
   }  
   .g-final {
-    font-size: 14px;
+    font-size: clamp(12px, 2dvh, 14px);
     width: 80px;
   }  
 }
-
 @media (max-width: 959px) {
   .g-card{
     width: 513px;
@@ -480,12 +495,14 @@
   .g-score {
     font-size: 17px;
     width: 120px;
-  }      
+  }
 }
 
 @media (max-width: 549px) {
-  .g-card{
+  .g-card {
     width: auto;  
+    margin-left: 16px;
+    margin-right: 16px;
   }
   .g-points {
     font-size: 40px;
@@ -493,7 +510,7 @@
   .g-title {
     font-size: 24px;
   }
-  .g-text {
+  .g-text2 {
     font-size: 16px;
   }
   .g-sheet-l {
@@ -501,6 +518,8 @@
   }
   .g-names-list {  
     width: auto;
+    margin-left: 16px;
+    margin-right: 16px;
   }
   .g-pos {
     font-size: 14px;
@@ -515,13 +534,24 @@
     font-size: 16px;
     width: auto;
   }    
+  :deep(.v-table--density-default > .v-table__wrapper > table > tbody > tr > td, .v-table--density-default > .v-table__wrapper > table > thead > tr > td, .v-table--density-default > .v-table__wrapper > table > tfoot > tr > td) {
+    height: 52px;
+  }  
 }
 @media (max-width: 529px) {
+  .g-card {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  .g-names-list {
+    margin-left: 10px;
+    margin-right: 10px;
+  }   
   .g-title {
     padding-left: 16px !important;
     padding-right: 16px !important;
   }
-  .g-text {
+  .g-text2 {
     padding-left: 28px !important;
     padding-right: 28px !important;
   }
@@ -539,6 +569,14 @@
   }  
 }
 @media (max-width: 399px) {
+  .g-card {
+    margin-left: 6px;
+    margin-right: 6px;
+  }  
+  .g-names-list {
+    margin-left: 6px;
+    margin-right: 6px;
+  } 
   .g-title {
     padding-left: 20px !important;
     padding-right: 20px !important;
@@ -571,7 +609,7 @@
   .g-title {
     font-size: 30px;
   }
-  .g-text {
+  .g-text2 {
     font-size: 22px;
   }
   .g-place {

@@ -166,11 +166,11 @@
                 {{scoreFixed}} {{ $t("global.pts") }}
               </div> 
   
-              <h3 class="g-text px-16">
+              <h3 class="g-text px-8">
                 {{ $t("leaderboard.tip") }}
               </h3>                 
-              <div class="g-text2 px-12">
-                {{ $t("leaderboard.text") }} 
+              <div class="g-text2 px-8">
+                {{ $t("leaderboard.text") }}
               </div>            
 
             </div>

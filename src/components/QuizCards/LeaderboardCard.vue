@@ -143,14 +143,14 @@
     <v-slide-y-reverse-transition @after-leave="onAfterLeave" group>
       <v-sheet v-if="expand" class="g-sheet" position="relative" color="transparent">
         <v-sheet
-        class="d-flex flex-column justify-center g-card pt-8 pb-7"
+        class="d-flex flex-column justify-center g-card"
         :class="{ 'g-card-l-def': !isRtl, 'g-card-l-rtl': isRtl }"
         variant="flat"
         color="transparent"
         >
           <v-sheet class="text-center" color="transparent">
             <div class="g-wrapper">
-              <v-img :src="saudiaLogo" width="138" class="text-center justify-center mx-auto" ></v-img>
+              <v-img :src="saudiaLogo" width="138" class="text-center justify-center mx-auto g-img" ></v-img>
                 
               <!-- <h3 class="g-title font-weight-bold pt-8">
                 You are currently in:
@@ -239,12 +239,14 @@
 .g-sheet {
   background-color: transparent;
 }
-.g-card{
+.g-card {
   color: #F0F0F0;
   background: linear-gradient(68deg, #07361C 9.84%, #28673C 76.17%);
   max-width: 100%;
   width: 413px;
   height: clamp(456px, 65dvh, 624px);
+  padding-top: 32px;
+  padding-bottom: 28px;
 }
 .g-card-l-def{
   border-top-left-radius: 24px !important;
@@ -472,6 +474,9 @@
   }  
 }
 @media (max-width: 959px) {
+  .g-img {
+    display: none;
+  }
   .g-card{
     width: 513px;
     height: auto;
@@ -479,6 +484,26 @@
     border-bottom-left-radius: 0px !important;
     border-top-right-radius: 24px !important;
     border-bottom-right-radius: 0px !important;  
+    padding-top: 26px;
+    padding-bottom: 20px;
+       
+  }
+  .g-points {
+    display: inline;
+    padding-top: 0px;
+    padding-bottom: clamp(6px, 3dvh, 12px);
+  }
+  .g-title {
+    padding-top: 0px;
+    display: inline;
+    font-size: 18px;
+  }
+  .g-text {
+    font-size: clamp(16px, 3.2dvh, 18px);
+  }
+  .g-text2 {
+    padding-top: clamp(6px, 3dvh, 12px);
+    margin-bottom: 0px;
   }
   .g-names-list {  
     width: 513px;
@@ -497,7 +522,32 @@
     width: 120px;
   }
 }
-
+@media (max-width: 599px) {
+  .g-card {
+    padding-top: 32px;
+    padding-bottom: 28px;
+  }
+  .g-img {
+    display: flex;
+  }
+  .g-points {
+    padding-top: clamp(16px, 3dvh, 32px);
+    padding-bottom: clamp(16px, 3dvh, 32px);
+    display: block;
+  }  
+  .g-title {
+    padding-top: clamp(16px, 3dvh, 32px);
+    display: block;
+    font-size: clamp(22px, 3.2dvh, 26px);  
+  }
+  .g-text {
+    font-size: clamp(18px, 3.2dvh, 24px);
+  }
+  .g-text2 {
+    padding-top: clamp(18px, 3dvh, 36px);
+    margin-bottom: 20px;
+  }
+}
 @media (max-width: 549px) {
   .g-card {
     width: auto;  

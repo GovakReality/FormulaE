@@ -290,9 +290,6 @@ const animate = () => {
   controls.update();
   renderer.render(scene, camera);
   requestAnimationFrame(animate);
-
-  // Show renderer info for debugging
-  console.log(renderer.info);
 };
 
 watch(shouldCameraMove, () => {

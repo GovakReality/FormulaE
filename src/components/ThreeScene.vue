@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, onUnmounted, ref, computed, watch } from 'vue';
-import { PerspectiveCamera, Scene, WebGLRenderer, Mesh, BoxGeometry, MeshBasicMaterial, MeshStandardMaterial, Vector3, PlaneGeometry, DoubleSide, SphereGeometry, TextureLoader, DirectionalLight, LoadingManager, EquirectangularReflectionMapping, CubeTextureLoader, SRGBColorSpace, NoToneMapping, LinearToneMapping, ReinhardToneMapping, CineonToneMapping, ACESFilmicToneMapping, CustomToneMapping, LightProbe, WebGLCubeRenderTarget, CubeCamera, Color, Fog } from 'three';
+import { PerspectiveCamera, Scene, WebGLRenderer, Mesh, BoxGeometry, MeshBasicMaterial, MeshStandardMaterial, Vector3, PlaneGeometry, DoubleSide, SphereGeometry, TextureLoader, DirectionalLight, LoadingManager, EquirectangularReflectionMapping, CubeTextureLoader, SRGBColorSpace, CineonToneMapping, LightProbe, WebGLCubeRenderTarget, CubeCamera, Color, Fog } from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
@@ -357,22 +357,22 @@ watch(fogFar, () => {
 watch(toneMapping, () => {
   switch (toneMapping.value) {
     case "NoToneMapping":
-      renderer.toneMapping = NoToneMapping;
+      // renderer.toneMapping = NoToneMapping;
       break;
     case "LinearToneMapping":
-      renderer.toneMapping = LinearToneMapping;
+      // renderer.toneMapping = LinearToneMapping;
       break;
     case "ReinhardToneMapping":
-      renderer.toneMapping = ReinhardToneMapping;
+      // renderer.toneMapping = ReinhardToneMapping;
       break;
     case "CineonToneMapping":
       renderer.toneMapping = CineonToneMapping;
       break;
     case "ACESFilmicToneMapping":
-      renderer.toneMapping = ACESFilmicToneMapping;
+      // renderer.toneMapping = ACESFilmicToneMapping;
       break;
     case "CustomToneMapping":
-      renderer.toneMapping = CustomToneMapping;
+      // renderer.toneMapping = CustomToneMapping;
       break;
     default:
       renderer.toneMapping = CineonToneMapping;

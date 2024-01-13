@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, onUnmounted, ref, computed, watch } from 'vue';
-import { PerspectiveCamera, Scene, WebGLRenderer, Mesh, BoxGeometry, MeshBasicMaterial, MeshStandardMaterial, Vector3, PlaneGeometry, DoubleSide, SphereGeometry, TextureLoader, DirectionalLight, LoadingManager, AmbientLight, EquirectangularReflectionMapping, CubeTextureLoader, SRGBColorSpace, NoToneMapping, LinearToneMapping, ReinhardToneMapping, CineonToneMapping, ACESFilmicToneMapping, CustomToneMapping, LightProbe, WebGLCubeRenderTarget, CubeCamera, Color, Fog } from 'three';
+import { PerspectiveCamera, Scene, WebGLRenderer, Mesh, BoxGeometry, MeshBasicMaterial, MeshStandardMaterial, Vector3, PlaneGeometry, DoubleSide, SphereGeometry, TextureLoader, DirectionalLight, LoadingManager, EquirectangularReflectionMapping, CubeTextureLoader, SRGBColorSpace, NoToneMapping, LinearToneMapping, ReinhardToneMapping, CineonToneMapping, ACESFilmicToneMapping, CustomToneMapping, LightProbe, WebGLCubeRenderTarget, CubeCamera, Color, Fog } from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
@@ -54,7 +54,7 @@ let controls;
 
 // Graphic elements
 let directionalLight;
-let ambientLight;
+// let ambientLight;
 let lightProbe;
 
 // Graphic properties
@@ -189,8 +189,8 @@ const setCanvas = () => {
 
   // Lights
   // Ambient Light
-  ambientLight = new AmbientLight(ambientLightColor.value, ambientLightIntensity.value); // soft white light
-  scene.add(ambientLight);
+  // ambientLight = new AmbientLight(ambientLightColor.value, ambientLightIntensity.value); // soft white light
+  // scene.add(ambientLight);
 
   // Directional Light
   directionalLight = new DirectionalLight(directionalLightColor.value, directionalLightIntensity.value); // 0xF09D59 0xF0AC59
@@ -320,11 +320,11 @@ watch(directionalLightColor, () => {
 });
 
 watch(ambientLightIntensity, () => {
-  ambientLight.intensity = ambientLightIntensity.value;
+  // ambientLight.intensity = ambientLightIntensity.value;
 });
 
 watch(ambientLightColor, () => {
-  ambientLight.color.setHex(ambientLightColor.value);
+  // ambientLight.color.setHex(ambientLightColor.value);
 });
 
 watch(lightProbeIntensity, () => {

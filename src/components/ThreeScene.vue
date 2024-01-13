@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, onUnmounted, ref, computed, watch } from 'vue';
-import { PerspectiveCamera, Scene, WebGLRenderer, Mesh, BoxGeometry, MeshBasicMaterial, MeshStandardMaterial, Vector3, PlaneGeometry, DoubleSide, SphereGeometry, TextureLoader, DirectionalLight, LoadingManager, EquirectangularReflectionMapping, CubeTextureLoader, SRGBColorSpace, CineonToneMapping, LightProbe, WebGLCubeRenderTarget, CubeCamera, Color, Fog } from 'three';
+import { PerspectiveCamera, Scene, WebGLRenderer, Vector3, DirectionalLight, LoadingManager, EquirectangularReflectionMapping, CubeTextureLoader, SRGBColorSpace, CineonToneMapping, LightProbe, WebGLCubeRenderTarget, CubeCamera, Fog } from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';

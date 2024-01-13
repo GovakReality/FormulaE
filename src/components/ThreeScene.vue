@@ -7,6 +7,11 @@ import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
 import { LightProbeGenerator } from 'three/addons/lights/LightProbeGenerator.js';
 import { gsap } from 'gsap';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
+import { FXAAShader } from 'three/addons/shaders/FXAAShader.js';
 import { useQuizStore } from '/src/stores/QuizStore';
 import { useCardsStore } from '/src/stores/CardsStore';
 import { useLoadingStore } from '/src/stores/LoadingStore';
@@ -49,6 +54,11 @@ const shouldBlur = ref(false);
 
 let camera;
 let renderer;
+let composer1;
+let composer2;
+let renderPass;
+let outputPass;
+let fxaaPass;
 let scene;
 let controls;
 
@@ -209,10 +219,34 @@ const setCanvas = () => {
 
   // Renderer
   const canvas = webGl.value;
-  renderer = new WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer = new WebGLRenderer({ canvas, antialias: false, alpha: true });
   renderer.outputColorSpace = SRGBColorSpace;
   renderer.toneMapping = toneMapping.value; // https://threejs.org/docs/#api/en/constants/Renderer
   renderer.toneMappingExposure = toneMappingExposure.value;
+
+  // Post Processing
+  renderPass = new RenderPass(scene, camera);
+  renderPass.clearAlpha = 0;
+
+  // FXAA
+  fxaaPass = new ShaderPass(FXAAShader);
+  outputPass = new OutputPass();
+
+  composer1 = new EffectComposer(renderer);
+  composer1.addPass(renderPass);
+  composer1.addPass(outputPass);
+
+  const pixelRatio = renderer.getPixelRatio();
+
+  fxaaPass.material.uniforms['resolution'].value.x = 1 / (windowWidth.value * pixelRatio);
+  fxaaPass.material.uniforms['resolution'].value.y = 1 / (windowHeight.value * pixelRatio);
+
+  composer2 = new EffectComposer(renderer);
+  composer2.addPass(renderPass);
+  composer2.addPass(outputPass);
+
+  composer2.addPass(fxaaPass);
+
   updateRenderer();
 
   // Create HDR equirretangular environment map
@@ -249,6 +283,13 @@ const updateCamera = () => {
 
 const updateRenderer = () => {
   renderer.setSize(windowWidth.value, windowHeight.value);
+  composer1.setSize(windowWidth.value, windowHeight.value);
+  composer2.setSize(windowWidth.value, windowHeight.value);
+
+  const pixelRatio = renderer.getPixelRatio();
+
+  fxaaPass.material.uniforms['resolution'].value.x = 1 / (windowWidth.value * pixelRatio);
+  fxaaPass.material.uniforms['resolution'].value.y = 1 / (windowHeight.value * pixelRatio);
   renderer.render(scene, camera);
 };
 
@@ -288,8 +329,10 @@ const handleResize = () => {
 
 const animate = () => {
   controls.update();
-  renderer.render(scene, camera);
+  // renderer.render(scene, camera);
   requestAnimationFrame(animate);
+  composer1.render();
+  composer2.render();
 };
 
 watch(shouldCameraMove, () => {

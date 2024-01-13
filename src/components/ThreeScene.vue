@@ -8,8 +8,9 @@ import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
 import { LightProbeGenerator } from 'three/addons/lights/LightProbeGenerator.js';
 import { gsap } from 'gsap';
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
-import { GlitchPass } from 'three/addons/postprocessing/GlitchPass.js';
+import { BokehPass } from 'three/addons/postprocessing/BokehPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { useQuizStore } from '/src/stores/QuizStore';
 import { useCardsStore } from '/src/stores/CardsStore';
@@ -55,7 +56,7 @@ let camera;
 let renderer;
 let composer;
 let renderPass;
-let glitchPass;
+let bokehPass;
 let outputPass;
 let scene;
 let controls;
@@ -228,8 +229,12 @@ const setCanvas = () => {
   renderPass = new RenderPass(scene, camera);
   composer.addPass(renderPass);
 
-  glitchPass = new GlitchPass();
-  composer.addPass(glitchPass);
+  bokehPass = new BokehPass(scene, camera, {
+    focus: 5.0,
+    aperture: 0.001,
+    maxblur: 0.01
+  });
+  composer.addPass(bokehPass);
 
   outputPass = new OutputPass();
   composer.addPass(outputPass);

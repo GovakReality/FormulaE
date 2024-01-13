@@ -37,8 +37,8 @@
       "answer3": "مواد حيوية",
       "answer4": "مواد معاد تدويرها"
     },
-    "correct": 4,
-    "difficulty": ["easy"],
+    "correct": 1,
+    "difficulty": ["medium"],
     "type": "gen1",
     "camPosition": [-6.7, 1.87, -14.94],
     "camTarget": [0, 0.36, -14.9],
@@ -61,7 +61,7 @@
       "answer4": "80"
     },
     "correct": 3,
-    "difficulty": ["easy"],
+    "difficulty": ["hard"],
     "type": "gen1",
     "camPosition": [4.8, 3.0, -19.10],
     "camTarget": [0, 0.36, -14.9],
@@ -84,7 +84,7 @@
       "answer4": "70 كيلوواط ساعة"
     },
     "correct": 1,
-    "difficulty": ["medium"],
+    "difficulty": ["easy"],
     "type": "gen1",
     "camPosition": [2.68, 1.8, -8.6],
     "camTarget": [0, 0.36, -14.9],
@@ -106,7 +106,7 @@
       "answer3": "30-35",
       "answer4": "40-45"
     },
-    "correct": 1,
+    "correct": 2,
     "difficulty": ["medium"],
     "type": "gen1",
     "camPosition": [-6.7, 1.87, -14.94],
@@ -129,8 +129,8 @@
       "answer3": "بوليمر الليثيوم ",
       "answer4": "حمض الرصاص"
     },
-    "correct": 2,
-    "difficulty": ["medium"],
+    "correct": 1,
+    "difficulty": ["hard"],
     "type": "gen1",
     "camPosition": [4.8, 3.0, -19.10],
     "camTarget": [0, 0.36, -14.9],
@@ -153,7 +153,7 @@
       "answer4": "250 كم/ساعة"
     },
     "correct": 3,
-    "difficulty": ["hard"],
+    "difficulty": ["easy"],
     "type": "gen1",
     "camPosition": [2.68, 1.8, -8.6],
     "camTarget": [0, 0.36, -14.9],
@@ -175,8 +175,8 @@
       "answer3": "4.0",
       "answer4": "5.5"
     },
-    "correct": 4,
-    "difficulty": ["hard"],
+    "correct": 1,
+    "difficulty": ["medium"],
     "type": "gen1",
     "camPosition": [-6.7, 1.87, -14.94],
     "camTarget": [0, 0.36, -14.9],
@@ -198,7 +198,7 @@
       "answer3": "قدرة البطارية",
       "answer4": "قوة المحرك"
     },
-    "correct": 1,
+    "correct": 3,
     "difficulty": ["hard"],
     "type": "gen1",
     "camPosition": [4.8, 3.0, -19.10],
@@ -221,7 +221,7 @@
       "answer3": "3",
       "answer4": "4"
     },
-    "correct": 3,
+    "correct": 1,
     "difficulty": ["easy"],
     "type": "gen2",
     "camPosition": [2.75, 1.86, -2.72],
@@ -245,7 +245,7 @@
       "answer4": "جود يير"
     },
     "correct": 1,
-    "difficulty": ["easy"],
+    "difficulty": ["medium"],
     "type": "gen2",
     "camPosition": [5.3, 1.6, -14],
     "camTarget": [6.1, 0.36, -7.69],
@@ -267,8 +267,8 @@
       "answer3": "الديناميكية الهوائية",
       "answer4": "تخفيض الوزن"
     },
-    "correct": 3,
-    "difficulty": ["easy"],
+    "correct": 1,
+    "difficulty": ["hard"],
     "type": "gen2",
     "camPosition": [10.2, 1.69, -2.10],
     "camTarget": [6.1, 0.36, -7.69],
@@ -291,7 +291,7 @@
       "answer4": "إل جي كيم"
     },
     "correct": 3,
-    "difficulty": ["medium"],
+    "difficulty": ["easy"],
     "type": "gen2",
     "camPosition": [2.75, 1.86, -2.72],
     "camTarget": [6.1, 0.36, -7.69],
@@ -313,7 +313,7 @@
       "answer3": "وزن أقل",
       "answer4": "عمر أطول"
     },
-    "correct": 3,
+    "correct": 2,
     "difficulty": ["medium"],
     "type": "gen2",
     "camPosition": [5.3, 1.6, -14],
@@ -336,8 +336,8 @@
       "answer3": "انخفاض السرعة",
       "answer4": "زيادة الوزن"
     },
-    "correct": 3,
-    "difficulty": ["medium"],
+    "correct": 2,
+    "difficulty": ["hard"],
     "type": "gen2",
     "camPosition": [10.2, 1.69, -2.10],
     "camTarget": [6.1, 0.36, -7.69],
@@ -359,8 +359,8 @@
       "answer3": "الفرامل المتجددة",
       "answer4": "الفرامل الهوائية"
     },
-    "correct": 3,
-    "difficulty": ["hard"],
+    "correct": 1,
+    "difficulty": ["easy"],
     "type": "gen2",
     "camPosition": [2.75, 1.86, -2.72],
     "camTarget": [6.1, 0.36, -7.69],
@@ -382,8 +382,8 @@
       "answer3": "تآكل الإطارات",
       "answer4": "حساسية عالية"
     },
-    "correct": 3,
-    "difficulty": ["hard"],
+    "correct": 2,
+    "difficulty": ["medium"],
     "type": "gen2",
     "camPosition": [5.3, 1.6, -14],
     "camTarget": [6.1, 0.36, -7.69],
@@ -405,7 +405,7 @@
       "answer3": "انحياز الفرامل الديناميكي",
       "answer4": "وسادات الفرامل المحسنة"
     },
-    "correct": 3,
+    "correct": 2,
     "difficulty": ["hard"],
     "type": "gen2",
     "camPosition": [10.2, 1.69, -2.10],
@@ -452,7 +452,7 @@
       "answer4": "350 كيلوواط"
     },
     "correct": 3,
-    "difficulty": ["easy"],
+    "difficulty": ["medium"],
     "type": "gen3",
     "camPosition": [-0.60, 0.94, 1.43],
     "camTarget": [0, 0.8, 0.4],
@@ -474,8 +474,8 @@
       "answer3": "210 كم/ساعة",
       "answer4": "240 كم/ساعة"
     },
-    "correct": 3,
-    "difficulty": ["easy"],
+    "correct": 2,
+    "difficulty": ["hard"],
     "type": "gen3",
     "camPosition": [-2.39, 0.57, -5.02],
     "camTarget": [-0.32, 0.16, -1.79],
@@ -497,8 +497,8 @@
       "answer3": "22",
       "answer4": "24"
     },      
-    "correct": 3,
-    "difficulty": ["medium"],
+    "correct": 2,
+    "difficulty": ["easy"],
     "type": "gen3",
     "camPosition": [2.34, 0.38, 3.51],
     "camTarget": [1, 0.3, 1.6],
@@ -520,7 +520,7 @@
       "answer3": "4 ملم",
       "answer4": "5 ملم"
     },         
-    "correct": 3,
+    "correct": 2,
     "difficulty": ["medium"],
     "type": "gen3",
     "camPosition": [-0.60, 0.94, 1.43],
@@ -543,8 +543,8 @@
       "answer3": "40%",
       "answer4": "50%"
     },      
-    "correct": 3,
-    "difficulty": ["medium"],
+    "correct": 2,
+    "difficulty": ["hard"],
     "type": "gen3",
     "camPosition": [-2.39, 0.57, -5.02],
     "camTarget": [-0.32, 0.16, -1.79],
@@ -567,7 +567,7 @@
       "answer4": "400 كيلوواط"
     },      
     "correct": 3,
-    "difficulty": ["hard"],
+    "difficulty": ["easy"],
     "type": "gen3",
     "camPosition": [2.34, 0.38, 3.51],
     "camTarget": [1, 0.3, 1.6],
@@ -589,8 +589,8 @@
       "answer3": "300 كيلوواط",
       "answer4": "350 كيلوواط"
     },       
-    "correct": 3,
-    "difficulty": ["hard"],
+    "correct": 4,
+    "difficulty": ["medium"],
     "type": "gen3",
     "camPosition": [-0.60, 0.94, 1.43],
     "camTarget": [0, 0.8, 0.4],
@@ -612,7 +612,7 @@
       "answer3": "3",
       "answer4": "4"
     },      
-    "correct": 3,
+    "correct": 2,
     "difficulty": ["hard"],
     "type": "gen3",
     "camPosition": [-2.39, 0.57, -5.02],

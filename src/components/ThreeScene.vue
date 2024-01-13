@@ -296,14 +296,14 @@ watch(shouldCameraMove, () => {
   if (shouldCameraMove.value) {
     if (quizEnded.value) {
       cameraMovement(initialPos, initialTarget);
-      controls.minDistance = 3.5; 
+      controls.minDistance = 3.5;
       controls.maxDistance = 7;
     } else {
       let pos = new Vector3(...question.value.camPosition);
       let tar = new Vector3(...question.value.camTarget)
       cameraMovement(pos, tar);
       controls.maxDistance = question.value.ctrlMaxDist;
-      controls.minDistance = question.value.ctrlMinDist;     
+      controls.minDistance = question.value.ctrlMinDist;
     }
     shouldCameraMove.value = false;
   }
@@ -432,7 +432,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <canvas ref="webGl" class="webGl" :class="{ blur: shouldBlur }"/>
+  <canvas ref="webGl" class="webGl" :class="{ blur: shouldBlur }" />
 </template>
 
 <style scoped>
@@ -448,9 +448,10 @@ onUnmounted(() => {
   -webkit-transition: 0.5s -webkit-filter linear;
   -moz-transition: 0.5s -moz-filter linear;
   -ms-transition: 0.5s -ms-filter linear;
-  -o-transition: 0.5s -o-filter linear;    
+  -o-transition: 0.5s -o-filter linear;
 }
-.blur{
+
+.blur {
   -webkit-filter: blur(20px);
   -moz-filter: blur(20px);
   -o-filter: blur(20px);
@@ -461,6 +462,6 @@ onUnmounted(() => {
   -webkit-transition: 0.5s -webkit-filter linear;
   -moz-transition: 0.5s -moz-filter linear;
   -ms-transition: 0.5s -ms-filter linear;
-  -o-transition: 0.5s -o-filter linear;  
+  -o-transition: 0.5s -o-filter linear;
 }
 </style>

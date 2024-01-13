@@ -9,9 +9,8 @@ import { LightProbeGenerator } from 'three/addons/lights/LightProbeGenerator.js'
 import { gsap } from 'gsap';
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { GlitchPass } from 'three/addons/postprocessing/GlitchPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
-import { FXAAShader } from 'three/addons/shaders/FXAAShader.js';
 import { useQuizStore } from '/src/stores/QuizStore';
 import { useCardsStore } from '/src/stores/CardsStore';
 import { useLoadingStore } from '/src/stores/LoadingStore';
@@ -54,11 +53,10 @@ const shouldBlur = ref(false);
 
 let camera;
 let renderer;
-let composer1;
-let composer2;
+let composer;
 let renderPass;
+let glitchPass;
 let outputPass;
-let fxaaPass;
 let scene;
 let controls;
 
@@ -225,27 +223,16 @@ const setCanvas = () => {
   renderer.toneMappingExposure = toneMappingExposure.value;
 
   // Post Processing
+  composer = new EffectComposer(renderer);
+
   renderPass = new RenderPass(scene, camera);
-  renderPass.clearAlpha = 0;
+  composer.addPass(renderPass);
 
-  // FXAA
-  fxaaPass = new ShaderPass(FXAAShader);
+  glitchPass = new GlitchPass();
+  composer.addPass(glitchPass);
+
   outputPass = new OutputPass();
-
-  composer1 = new EffectComposer(renderer);
-  composer1.addPass(renderPass);
-  composer1.addPass(outputPass);
-
-  const pixelRatio = renderer.getPixelRatio();
-
-  fxaaPass.material.uniforms['resolution'].value.x = 1 / (windowWidth.value * pixelRatio);
-  fxaaPass.material.uniforms['resolution'].value.y = 1 / (windowHeight.value * pixelRatio);
-
-  composer2 = new EffectComposer(renderer);
-  composer2.addPass(renderPass);
-  composer2.addPass(outputPass);
-
-  composer2.addPass(fxaaPass);
+  composer.addPass(outputPass);
 
   updateRenderer();
 
@@ -283,14 +270,9 @@ const updateCamera = () => {
 
 const updateRenderer = () => {
   renderer.setSize(windowWidth.value, windowHeight.value);
-  composer1.setSize(windowWidth.value, windowHeight.value);
-  composer2.setSize(windowWidth.value, windowHeight.value);
-
-  const pixelRatio = renderer.getPixelRatio();
-
-  fxaaPass.material.uniforms['resolution'].value.x = 1 / (windowWidth.value * pixelRatio);
-  fxaaPass.material.uniforms['resolution'].value.y = 1 / (windowHeight.value * pixelRatio);
-  renderer.render(scene, camera);
+  composer.setSize(windowWidth.value, windowHeight.value);
+  // renderer.render(scene, camera);
+  composer.render(scene, camera);
 };
 
 const cameraMovement = (toPos, toTarget) => {
@@ -329,10 +311,9 @@ const handleResize = () => {
 
 const animate = () => {
   controls.update();
-  // renderer.render(scene, camera);
+  renderer.render(scene, camera);
   requestAnimationFrame(animate);
-  composer1.render();
-  composer2.render();
+  composer.render();
 };
 
 watch(shouldCameraMove, () => {

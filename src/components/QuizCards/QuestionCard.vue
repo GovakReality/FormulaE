@@ -198,15 +198,15 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
     <v-sheet v-if="show" class="g-hud" :class="{ 'g-hud-l-def': !isRtl, 'g-hud-l-rtl': isRtl }">
       <v-slide-y-reverse-transition group>
         <v-sheet v-if="expandHud" class="g-hud-w">
-          <div v-if="!isRtl" class="g-hud-total g-hud-total-def px-4 py-1">{{
-            scoreFixed }} {{ $t("global.pts") }}</div>
-          <div v-if="isRtl" class="g-hud-total g-hud-total-rtl px-4 py-1">{{
-            scoreFixed }} {{ $t("global.pts") }}</div>
+          <div v-if="!isRtl" class="g-hud-total g-hud-total-def px-4 py-1">+{{
+            timeLeftFixed }} {{ $t("global.pts") }}</div>
+          <div v-if="isRtl" class="g-hud-total g-hud-total-rtl px-4 py-1">+{{
+            timeLeftFixed }} {{ $t("global.pts") }}</div>
           <div class="g-hud-round px-5 py-1">{{ $t("global.round") }}
             <span v-if="!isRtl">0{{ round }}/09</span>
             <span v-if="isRtl">09/0{{ round }}</span>
           </div>
-          <div class="g-hud-score pr-4 pl-1 py-1">+{{ timeLeftFixed }} {{ $t("global.pts") }}</div>
+          <div class="g-hud-score pr-4 pl-1 py-1">{{ scoreFixed }} {{ $t("global.pts") }}</div>
         </v-sheet>
       </v-slide-y-reverse-transition>
     </v-sheet>

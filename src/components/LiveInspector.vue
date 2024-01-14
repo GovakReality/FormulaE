@@ -55,7 +55,7 @@ const messages = {
 // Lighting
 const folder1 = gui.addFolder('Lighting');
 
-folder1.add(API, 'directionalLightIntensity', 0, 100, 0.02)
+folder1.add(API, 'directionalLightIntensity', 0, 20, 0.02)
     .name('Directional Light Intensity')
     .onChange(function () {
         directionalLightIntensity.value = API.directionalLightIntensity;
@@ -67,7 +67,7 @@ folder1.addColor(API, 'directionalLightColor')
         directionalLightColor.value = API.directionalLightColor;
     });
 
-folder1.add(API, 'ambientLightIntensity', 0, 100, 0.02)
+folder1.add(API, 'ambientLightIntensity', 0, 10, 0.02)
     .name('Ambient Light Intensity')
     .onChange(function () {
         ambientLightIntensity.value = API.ambientLightIntensity;
@@ -79,7 +79,7 @@ folder1.addColor(API, 'ambientLightColor')
         ambientLightColor.value = API.ambientLightColor;
     });
 
-folder1.add(API, 'lightProbeIntensity', 0, 20, 0.02)
+folder1.add(API, 'lightProbeIntensity', 0, 2, 0.02)
     .name('Light Probe Intensity')
     .onChange(function () {
         lightProbeIntensity.value = API.lightProbeIntensity;
@@ -130,7 +130,7 @@ folder4.add(API, 'toneMapping', Object.values(toneMappingOptions))
         toneMapping.value = API.toneMapping;
     });
 
-folder4.add(API, 'toneMappingExposure', 0, 10, 0.02)
+folder4.add(API, 'toneMappingExposure', 0, 3, 0.02)
     .name('Tone Mapping Exposure')
     .onChange(function () {
         toneMappingExposure.value = API.toneMappingExposure;

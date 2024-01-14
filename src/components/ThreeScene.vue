@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, onUnmounted, ref, computed, watch } from 'vue';
-import { PerspectiveCamera, Scene, WebGLRenderer, Mesh, BoxGeometry, MeshBasicMaterial, MeshStandardMaterial, Vector3, PlaneGeometry, DoubleSide, SphereGeometry, TextureLoader, DirectionalLight, LoadingManager, AmbientLight, EquirectangularReflectionMapping, CubeTextureLoader, SRGBColorSpace, NoToneMapping, LinearToneMapping, ReinhardToneMapping, CineonToneMapping, ACESFilmicToneMapping, CustomToneMapping, LightProbe, WebGLCubeRenderTarget, CubeCamera, Color, Fog } from 'three';
+import { PerspectiveCamera, Scene, WebGLRenderer, Vector3, DirectionalLight, LoadingManager, EquirectangularReflectionMapping, CubeTextureLoader, SRGBColorSpace, CineonToneMapping, LightProbe, WebGLCubeRenderTarget, CubeCamera, Fog } from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
@@ -54,26 +54,26 @@ let controls;
 
 // Graphic elements
 let directionalLight;
-let ambientLight;
+// let ambientLight;
 let lightProbe;
 
 // Graphic properties
 // Lighting
-directionalLightIntensity.value = 13 // Directional light intensity
-directionalLightColor.value = 0xFEBF71 // Directional light color 0xF0AC59
+directionalLightIntensity.value = 15 // Directional light intensity
+directionalLightColor.value = 0xFEBF71 // Directional light color 0xFEBF71 0xF0AC59 0xFFCF9D 0xFFCB82 0xFFD894
 ambientLightIntensity.value = 0 // Ambient light intensity
 ambientLightColor.value = 0x000000 // Ambient light color
-lightProbeIntensity.value = 0.3 // Light probe intensity
+lightProbeIntensity.value = 0.6 // Light probe intensity
 // Environment
 backgroundIntensity.value = 1.05 // Background intensity
 backgroundBlurriness.value = 0 // Background blur
 // Fog
 fogColor.value = 0xFFE9C2 // Fog color 0xFFEBC2
-fogNear.value = 10 // Fog near treshold
-fogFar.value = 435 // Fog far treshold
+fogNear.value = 0 // Fog near treshold
+fogFar.value = 400 // Fog far treshold
 // Renderer
 toneMapping.value = CineonToneMapping // Tone mapping type
-toneMappingExposure.value = 1 // Tone mapping exposure
+toneMappingExposure.value = 1.1 // Tone mapping exposure
 
 // Camera Coordinates
 cameraTargetX.value = 0;
@@ -189,8 +189,8 @@ const setCanvas = () => {
 
   // Lights
   // Ambient Light
-  ambientLight = new AmbientLight(ambientLightColor.value, ambientLightIntensity.value); // soft white light
-  scene.add(ambientLight);
+  // ambientLight = new AmbientLight(ambientLightColor.value, ambientLightIntensity.value); // soft white light
+  // scene.add(ambientLight);
 
   // Directional Light
   directionalLight = new DirectionalLight(directionalLightColor.value, directionalLightIntensity.value); // 0xF09D59 0xF0AC59
@@ -320,11 +320,11 @@ watch(directionalLightColor, () => {
 });
 
 watch(ambientLightIntensity, () => {
-  ambientLight.intensity = ambientLightIntensity.value;
+  // ambientLight.intensity = ambientLightIntensity.value;
 });
 
 watch(ambientLightColor, () => {
-  ambientLight.color.setHex(ambientLightColor.value);
+  // ambientLight.color.setHex(ambientLightColor.value);
 });
 
 watch(lightProbeIntensity, () => {
@@ -357,22 +357,22 @@ watch(fogFar, () => {
 watch(toneMapping, () => {
   switch (toneMapping.value) {
     case "NoToneMapping":
-      renderer.toneMapping = NoToneMapping;
+      // renderer.toneMapping = NoToneMapping;
       break;
     case "LinearToneMapping":
-      renderer.toneMapping = LinearToneMapping;
+      // renderer.toneMapping = LinearToneMapping;
       break;
     case "ReinhardToneMapping":
-      renderer.toneMapping = ReinhardToneMapping;
+      // renderer.toneMapping = ReinhardToneMapping;
       break;
     case "CineonToneMapping":
       renderer.toneMapping = CineonToneMapping;
       break;
     case "ACESFilmicToneMapping":
-      renderer.toneMapping = ACESFilmicToneMapping;
+      // renderer.toneMapping = ACESFilmicToneMapping;
       break;
     case "CustomToneMapping":
-      renderer.toneMapping = CustomToneMapping;
+      // renderer.toneMapping = CustomToneMapping;
       break;
     default:
       renderer.toneMapping = CineonToneMapping;

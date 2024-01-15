@@ -163,7 +163,7 @@ const startTimer = () => {
   correctPoints.value = false;
   wrongPoints.value = false;
   showPoints.value = true;
-  timer(); // COMMENT THIS TO STOP
+  // timer(); // COMMENT THIS TO STOP
 };
 
 const timer = () => {

@@ -53,17 +53,17 @@
     ],
     "type": "gen1",
     "camPosition": [
-      -6.7,
-      1.87,
-      -14.94
+      -3.32,
+      0.52,
+      -11.35
     ],
     "camTarget": [
-      0,
-      0.36,
-      -14.9
+      -0.6,
+      0.05,
+      -13.5
     ],
-    "ctrlMaxDist": 7,
-    "ctrlMinDist": 3.5
+    "ctrlMaxDist": 6,
+    "ctrlMinDist": 2.5
   },
   {
     "en": {
@@ -152,14 +152,14 @@
     ],
     "type": "gen1",
     "camPosition": [
-      -6.7,
-      1.87,
-      -14.94
+      -2.30,
+      1.88,
+      -8.89
     ],
     "camTarget": [
-      0,
-      0.36,
-      -14.9
+      -0.39,
+      0.1,
+      -13
     ],
     "ctrlMaxDist": 7,
     "ctrlMinDist": 3.5
@@ -251,13 +251,13 @@
     ],
     "type": "gen1",
     "camPosition": [
-      -6.7,
-      1.87,
-      -14.94
+      -2.15,
+      1.52,
+      -20.87
     ],
     "camTarget": [
       0,
-      0.36,
+      -0.34,
       -14.9
     ],
     "ctrlMaxDist": 7,
@@ -350,14 +350,14 @@
     ],
     "type": "gen2",
     "camPosition": [
-      5.3,
-      1.6,
-      -14
+      3.09,
+      0.37,
+      -4.50
     ],
     "camTarget": [
-      6.1,
-      0.36,
-      -7.69
+      6.0,
+      0,
+      -6.76
     ],
     "ctrlMaxDist": 7,
     "ctrlMinDist": 3.5
@@ -449,14 +449,14 @@
     ],
     "type": "gen2",
     "camPosition": [
-      5.3,
-      1.6,
-      -14
+      8.94,
+      1.45,
+      -5.97
     ],
     "camTarget": [
-      6.1,
-      0.36,
-      -7.69
+      6,
+      0.24,
+      -8.5
     ],
     "ctrlMaxDist": 7,
     "ctrlMinDist": 3.5
@@ -548,14 +548,14 @@
     ],
     "type": "gen2",
     "camPosition": [
-      5.3,
-      1.6,
-      -14
+      1.72,
+      1.55,
+      -2.31
     ],
     "camTarget": [
-      6.1,
-      0.36,
-      -7.69
+      5,
+      0,
+      -6
     ],
     "ctrlMaxDist": 7,
     "ctrlMinDist": 3.5
@@ -647,14 +647,14 @@
     ],
     "type": "gen3",
     "camPosition": [
-      -0.60,
-      0.94,
-      1.43
+      -2.10,
+      0.37,
+      -4.17
     ],
     "camTarget": [
       0,
-      0.8,
-      0.4
+      0.1,
+      -1.19
     ],
     "ctrlMaxDist": 7,
     "ctrlMinDist": 1.2
@@ -746,14 +746,14 @@
     ],
     "type": "gen3",
     "camPosition": [
-      -0.60,
-      0.94,
-      1.43
+      -2.30,
+      0.52,
+      -0.33
     ],
     "camTarget": [
-      0,
-      0.8,
-      0.4
+      -0.92,
+      0.09,
+      1.42
     ],
     "ctrlMaxDist": 7,
     "ctrlMinDist": 1.2
@@ -845,14 +845,14 @@
     ],
     "type": "gen3",
     "camPosition": [
-      -0.60,
-      0.94,
-      1.43
+      6.17,
+      1.35,
+      -0.26
     ],
     "camTarget": [
-      0,
-      0.8,
-      0.4
+      1.99,
+      0.1,
+      -0.1
     ],
     "ctrlMaxDist": 7,
     "ctrlMinDist": 1.2

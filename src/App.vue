@@ -5,7 +5,7 @@ import QuizCards from './components/QuizCards/QuizCards.vue';
 import LoadingScreen from './components/LoadingScreen.vue';
 /* import Lockup from './components/Lockup.vue'; */
 import GenInfo from './components/GenInfo.vue';
-import LiveInspector from './components/LiveInspector.vue';
+/* import LiveInspector from './components/LiveInspector.vue'; */
 </script>
 
 <template>
@@ -18,7 +18,7 @@ import LiveInspector from './components/LiveInspector.vue';
       <QuizCards />
       <GenInfo />
       <LoadingScreen />
-      <LiveInspector />
+      <!-- <LiveInspector /> -->
     </v-main>
   </v-app>
 </template>

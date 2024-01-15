@@ -16,6 +16,10 @@ const expand = ref(false);
 const show = ref(false);
 const expandHud = ref(false);
 const genType = ref('');
+const correctAnswer1 = ref(false);
+const correctAnswer2 = ref(false);
+const correctAnswer3 = ref(false);
+const correctAnswer4 = ref(false);
 
 const maxPoints = parseFloat(10000);
 const timeLeft = ref(maxPoints);
@@ -65,6 +69,10 @@ const expandCard = () => {
 
 const contractCard = () => {
   expand.value = false;
+  correctAnswer1.value = false;
+  correctAnswer2.value = false;
+  correctAnswer3.value = false;
+  correctAnswer4.value = false;
   if (cardIndex.value == 10) {
     expandHud.value = false;
     quizEnded.value = true;
@@ -73,25 +81,43 @@ const contractCard = () => {
 };
 
 const onClick = (val, event) => {
+  let clickedCard = event.target;
+  console.log(clickedCard);
   cancelAnimationFrame(animFrame);
   if (val == question.value.correct) {
     quizStore.addScore(timeLeft.value);
-    showCorrectAnswer();
   } else {
-    showCorrectAnswer();
-    showWrongAnswer(event);
+    showWrongAnswer(clickedCard);
   }
+  showCorrectAnswer(clickedCard);
   setTimeout(() => {
     contractCard();
-  }, 300);
+  }, 1000);
 };
 
 const showCorrectAnswer = () => {
   //correct answer
+  switch (question.value.correct) {
+    case 1:
+      correctAnswer1.value = true;
+      break;
+    case 2:
+      correctAnswer2.value = true;
+      break;
+    case 3:
+      correctAnswer3.value = true;
+      break;
+    case 4:
+      correctAnswer4.value = true;
+      break;
+    default:
+      break;
+  }
 }
 
-const showWrongAnswer = (ev) => {
+const showWrongAnswer = (clickedCard) => {
   //wrong answer
+  clickedCard.classList.add("g-wrong-answer");
 }
 
 const onAfterLeave = (el) => {
@@ -116,7 +142,7 @@ const timer = () => {
     if (timeLeft.value <= 0) {
       timeLeft.value = 0;
       cancelAnimationFrame(animFrame);
-      contractCard();
+      // contractCard(); // COMMENT THIS TO STOP
     } else {
       prevTime = aux;
       animFrame = requestAnimationFrame(timer);
@@ -166,13 +192,13 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
             <v-row dense>
               <v-col class="pa-2">
                 <v-btn block rounded="xl" :slim="false" color="#F0F0F0" class="g-bt font-weight-bold"
-                  @click="onClick(1, $event)">
+                  :class="{ 'g-correct-answer': correctAnswer1 }" @click="onClick(1, $event)">
                   {{ question[current].answer1 }}
                 </v-btn>
               </v-col>
               <v-col class="pa-2">
                 <v-btn block rounded="xl" :slim="false" color="#F0F0F0" class="g-bt font-weight-bold"
-                  @click="onClick(2, $event)">
+                  :class="{ 'g-correct-answer': correctAnswer2 }" @click="onClick(2, $event)">
                   {{ question[current].answer2 }}
                 </v-btn>
               </v-col>
@@ -180,13 +206,13 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
             <v-row dense>
               <v-col class="pa-2">
                 <v-btn block rounded="xl" :slim="false" color="#F0F0F0" class="g-bt font-weight-bold"
-                  @click="onClick(3, $event)">
+                  :class="{ 'g-correct-answer': correctAnswer3 }" @click="onClick(3, $event)">
                   {{ question[current].answer3 }}
                 </v-btn>
               </v-col>
               <v-col class="pa-2">
                 <v-btn block rounded="xl" :slim="false" color="#F0F0F0" class="g-bt font-weight-bold"
-                  @click="onClick(4, $event)">
+                  :class="{ 'g-correct-answer': correctAnswer4 }" @click="onClick(4, $event)">
                   {{ question[current].answer4 }}
                 </v-btn>
               </v-col>
@@ -254,12 +280,12 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
   text-wrap: balance;
 }
 
-.g-correct {
-  border: 3px solid #261bc0;
+.g-correct-answer {
+  background: linear-gradient(94deg, #1ac350 7.42%, #07361C 166.68%);
 }
 
-.g-wrong {
-  border: 3px solid #ff0000;
+.g-wrong-answer {
+  background: linear-gradient(94deg, #c12121 7.42%, #07361C 166.68%);
 }
 
 :deep(.v-btn.v-btn--density-default) {
@@ -268,6 +294,7 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
 
 :deep(.v-btn__content) {
   white-space: normal;
+  pointer-events: none;
 }
 
 .g-hud {

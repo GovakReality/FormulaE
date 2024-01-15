@@ -20,6 +20,11 @@ const correctAnswer1 = ref(false);
 const correctAnswer2 = ref(false);
 const correctAnswer3 = ref(false);
 const correctAnswer4 = ref(false);
+const wrongAnswer1 = ref(false);
+const wrongAnswer2 = ref(false);
+const wrongAnswer3 = ref(false);
+const wrongAnswer4 = ref(false);
+const neutralAnswers = ref(false);
 const slidePoints = ref(false);
 
 const maxPoints = parseFloat(10000);
@@ -75,6 +80,11 @@ const contractCard = () => {
   correctAnswer2.value = false;
   correctAnswer3.value = false;
   correctAnswer4.value = false;
+  wrongAnswer1.value = false;
+  wrongAnswer2.value = false;
+  wrongAnswer3.value = false;
+  wrongAnswer4.value = false;
+  neutralAnswers.value = false;
   if (cardIndex.value == 10) {
     expandHud.value = false;
     quizEnded.value = true;
@@ -85,21 +95,21 @@ const contractCard = () => {
 const onClick = (val, event) => {
   let clickedCard = event.target;
   slidePoints.value = true;
+  neutralAnswers.value = true;
   console.log(clickedCard);
   cancelAnimationFrame(animFrame);
   if (val == question.value.correct) {
     quizStore.addScore(timeLeft.value);
   } else {
-    showWrongAnswer(clickedCard);
+    showWrongAnswer(val);
   }
-  showCorrectAnswer(clickedCard);
+  showCorrectAnswer();
   setTimeout(() => {
     contractCard();
   }, 1000);
 };
 
 const showCorrectAnswer = () => {
-  //correct answer
   switch (question.value.correct) {
     case 1:
       correctAnswer1.value = true;
@@ -118,9 +128,24 @@ const showCorrectAnswer = () => {
   }
 }
 
-const showWrongAnswer = (clickedCard) => {
-  //wrong answer
-  clickedCard.classList.add("g-wrong-answer");
+const showWrongAnswer = (val) => {
+  switch (val) {
+    case 1:
+      wrongAnswer1.value = true;
+      break;
+    case 2:
+      wrongAnswer2.value = true;
+      break;
+    case 3:
+      wrongAnswer3.value = true;
+      break;
+    case 4:
+      wrongAnswer4.value = true;
+      break;
+    default:
+      break;
+  }
+  console.log("WRONG!");
 }
 
 const onAfterLeave = (el) => {
@@ -145,7 +170,7 @@ const timer = () => {
     if (timeLeft.value <= 0) {
       timeLeft.value = 0;
       cancelAnimationFrame(animFrame);
-      // contractCard(); // COMMENT THIS TO STOP
+      contractCard(); // COMMENT THIS TO STOP
     } else {
       prevTime = aux;
       animFrame = requestAnimationFrame(timer);
@@ -195,13 +220,15 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
             <v-row dense>
               <v-col class="pa-2">
                 <v-btn block rounded="xl" :slim="false" color="#F0F0F0" class="g-bt font-weight-bold"
-                  :class="{ 'g-correct-answer': correctAnswer1 }" @click="onClick(1, $event)">
+                  :class="{ 'g-correct-answer': correctAnswer1, 'g-wrong-answer': wrongAnswer1, 'g-neutral-answer': neutralAnswers }"
+                  @click="onClick(1, $event)">
                   {{ question[current].answer1 }}
                 </v-btn>
               </v-col>
               <v-col class="pa-2">
                 <v-btn block rounded="xl" :slim="false" color="#F0F0F0" class="g-bt font-weight-bold"
-                  :class="{ 'g-correct-answer': correctAnswer2 }" @click="onClick(2, $event)">
+                  :class="{ 'g-correct-answer': correctAnswer2, 'g-wrong-answer': wrongAnswer2, 'g-neutral-answer': neutralAnswers }"
+                  @click="onClick(2, $event)">
                   {{ question[current].answer2 }}
                 </v-btn>
               </v-col>
@@ -209,13 +236,15 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
             <v-row dense>
               <v-col class="pa-2">
                 <v-btn block rounded="xl" :slim="false" color="#F0F0F0" class="g-bt font-weight-bold"
-                  :class="{ 'g-correct-answer': correctAnswer3 }" @click="onClick(3, $event)">
+                  :class="{ 'g-correct-answer': correctAnswer3, 'g-wrong-answer': wrongAnswer3, 'g-neutral-answer': neutralAnswers }"
+                  @click="onClick(3, $event)">
                   {{ question[current].answer3 }}
                 </v-btn>
               </v-col>
               <v-col class="pa-2">
                 <v-btn block rounded="xl" :slim="false" color="#F0F0F0" class="g-bt font-weight-bold"
-                  :class="{ 'g-correct-answer': correctAnswer4 }" @click="onClick(4, $event)">
+                  :class="{ 'g-correct-answer': correctAnswer4, 'g-wrong-answer': wrongAnswer4, 'g-neutral-answer': neutralAnswers }"
+                  @click="onClick(4, $event)">
                   {{ question[current].answer4 }}
                 </v-btn>
               </v-col>
@@ -285,12 +314,19 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
   text-wrap: balance;
 }
 
+.g-neutral-answer {
+  opacity: 40%;
+  background: linear-gradient(94deg, #919191 7.42%, #232323 166.68%);
+}
+
 .g-correct-answer {
-  background: linear-gradient(94deg, #1ac350 7.42%, #07361C 166.68%);
+  opacity: 100%;
+  background: linear-gradient(94deg, #4bbf70 7.42%, #07361C 166.68%);
 }
 
 .g-wrong-answer {
-  background: linear-gradient(94deg, #c12121 7.42%, #07361C 166.68%);
+  opacity: 100%;
+  background: linear-gradient(94deg, #9f2e2e 7.42%, #d73b3b 166.68%);
 }
 
 :deep(.v-btn.v-btn--density-default) {

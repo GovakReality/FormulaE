@@ -20,6 +20,7 @@ const correctAnswer1 = ref(false);
 const correctAnswer2 = ref(false);
 const correctAnswer3 = ref(false);
 const correctAnswer4 = ref(false);
+const slidePoints = ref(false);
 
 const maxPoints = parseFloat(10000);
 const timeLeft = ref(maxPoints);
@@ -69,6 +70,7 @@ const expandCard = () => {
 
 const contractCard = () => {
   expand.value = false;
+  slidePoints.value = false;
   correctAnswer1.value = false;
   correctAnswer2.value = false;
   correctAnswer3.value = false;
@@ -82,6 +84,7 @@ const contractCard = () => {
 
 const onClick = (val, event) => {
   let clickedCard = event.target;
+  slidePoints.value = true;
   console.log(clickedCard);
   cancelAnimationFrame(animFrame);
   if (val == question.value.correct) {
@@ -224,10 +227,12 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
     <v-sheet v-if="show" class="g-hud" :class="{ 'g-hud-l-def': !isRtl, 'g-hud-l-rtl': isRtl }">
       <v-slide-y-reverse-transition group>
         <v-sheet v-if="expandHud" class="g-hud-w">
-          <div v-if="!isRtl" class="g-hud-total g-hud-total-def px-4 py-1">+{{
-            timeLeftFixed }} {{ $t("global.pts") }}</div>
-          <div v-if="isRtl" class="g-hud-total g-hud-total-rtl px-4 py-1">+{{
-            timeLeftFixed }} {{ $t("global.pts") }}</div>
+          <div :class="{ 'slidePoints': slidePoints }">
+            <div :class="{ 'slidePoints': slidePoints }" v-if="!isRtl" class="g-hud-total g-hud-total-def px-4 py-1">+{{
+              timeLeftFixed }} {{ $t("global.pts") }}</div>
+            <div v-if="isRtl" class="g-hud-total g-hud-total-rtl px-4 py-1">+{{
+              timeLeftFixed }} {{ $t("global.pts") }}</div>
+          </div>
           <div class="g-hud-round px-5 py-1">{{ $t("global.round") }}
             <span v-if="!isRtl">0{{ round }}/09</span>
             <span v-if="isRtl">09/0{{ round }}</span>
@@ -378,6 +383,11 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
 
 :deep(.v-btn__content) {
   padding-top: 2px;
+}
+
+.slidePoints {
+  color: #ffffff;
+  transition: color 0.5s ease 0s;
 }
 
 @media (max-width: 599px) {

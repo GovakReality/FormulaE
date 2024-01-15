@@ -16,6 +16,18 @@ const expand = ref(false);
 const show = ref(false);
 const expandHud = ref(false);
 const genType = ref('');
+const correctAnswer1 = ref(false);
+const correctAnswer2 = ref(false);
+const correctAnswer3 = ref(false);
+const correctAnswer4 = ref(false);
+const wrongAnswer1 = ref(false);
+const wrongAnswer2 = ref(false);
+const wrongAnswer3 = ref(false);
+const wrongAnswer4 = ref(false);
+const neutralAnswers = ref(false);
+const showPoints = ref(false);
+const correctPoints = ref(false);
+const wrongPoints = ref(false);
 
 const maxPoints = parseFloat(10000);
 const timeLeft = ref(maxPoints);
@@ -65,6 +77,16 @@ const expandCard = () => {
 
 const contractCard = () => {
   expand.value = false;
+  showPoints.value = false;
+  correctAnswer1.value = false;
+  correctAnswer2.value = false;
+  correctAnswer3.value = false;
+  correctAnswer4.value = false;
+  wrongAnswer1.value = false;
+  wrongAnswer2.value = false;
+  wrongAnswer3.value = false;
+  wrongAnswer4.value = false;
+  neutralAnswers.value = false;
   if (cardIndex.value == 10) {
     expandHud.value = false;
     quizEnded.value = true;
@@ -73,25 +95,59 @@ const contractCard = () => {
 };
 
 const onClick = (val, event) => {
+  let clickedCard = event.target;
+  neutralAnswers.value = true;
+  console.log(clickedCard);
   cancelAnimationFrame(animFrame);
   if (val == question.value.correct) {
     quizStore.addScore(timeLeft.value);
-    showCorrectAnswer();
+    correctPoints.value = true;
   } else {
-    showCorrectAnswer();
-    showWrongAnswer(event);
+    showWrongAnswer(val);
+    wrongPoints.value = true;
   }
+  showCorrectAnswer();
   setTimeout(() => {
     contractCard();
-  }, 300);
+  }, 2500);
 };
 
 const showCorrectAnswer = () => {
-  //correct answer
+  switch (question.value.correct) {
+    case 1:
+      correctAnswer1.value = true;
+      break;
+    case 2:
+      correctAnswer2.value = true;
+      break;
+    case 3:
+      correctAnswer3.value = true;
+      break;
+    case 4:
+      correctAnswer4.value = true;
+      break;
+    default:
+      break;
+  }
 }
 
-const showWrongAnswer = (ev) => {
-  //wrong answer
+const showWrongAnswer = (val) => {
+  switch (val) {
+    case 1:
+      wrongAnswer1.value = true;
+      break;
+    case 2:
+      wrongAnswer2.value = true;
+      break;
+    case 3:
+      wrongAnswer3.value = true;
+      break;
+    case 4:
+      wrongAnswer4.value = true;
+      break;
+    default:
+      break;
+  }
 }
 
 const onAfterLeave = (el) => {
@@ -105,6 +161,9 @@ const onAfterEnter = (el) => {
 const startTimer = () => {
   timeLeft.value = maxPoints;
   prevTime = performance.now();
+  correctPoints.value = false;
+  wrongPoints.value = false;
+  showPoints.value = true;
   timer(); // COMMENT THIS TO STOP
 };
 
@@ -116,7 +175,7 @@ const timer = () => {
     if (timeLeft.value <= 0) {
       timeLeft.value = 0;
       cancelAnimationFrame(animFrame);
-      contractCard();
+      contractCard(); // COMMENT THIS TO STOP
     } else {
       prevTime = aux;
       animFrame = requestAnimationFrame(timer);
@@ -166,12 +225,14 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
             <v-row dense>
               <v-col class="pa-2">
                 <v-btn block rounded="xl" :slim="false" color="#F0F0F0" class="g-bt font-weight-bold"
+                  :class="{ 'g-correct-answer': correctAnswer1, 'g-wrong-answer': wrongAnswer1, 'g-neutral-answer': neutralAnswers }"
                   @click="onClick(1, $event)">
                   {{ question[current].answer1 }}
                 </v-btn>
               </v-col>
               <v-col class="pa-2">
                 <v-btn block rounded="xl" :slim="false" color="#F0F0F0" class="g-bt font-weight-bold"
+                  :class="{ 'g-correct-answer': correctAnswer2, 'g-wrong-answer': wrongAnswer2, 'g-neutral-answer': neutralAnswers }"
                   @click="onClick(2, $event)">
                   {{ question[current].answer2 }}
                 </v-btn>
@@ -180,12 +241,14 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
             <v-row dense>
               <v-col class="pa-2">
                 <v-btn block rounded="xl" :slim="false" color="#F0F0F0" class="g-bt font-weight-bold"
+                  :class="{ 'g-correct-answer': correctAnswer3, 'g-wrong-answer': wrongAnswer3, 'g-neutral-answer': neutralAnswers }"
                   @click="onClick(3, $event)">
                   {{ question[current].answer3 }}
                 </v-btn>
               </v-col>
               <v-col class="pa-2">
                 <v-btn block rounded="xl" :slim="false" color="#F0F0F0" class="g-bt font-weight-bold"
+                  :class="{ 'g-correct-answer': correctAnswer4, 'g-wrong-answer': wrongAnswer4, 'g-neutral-answer': neutralAnswers }"
                   @click="onClick(4, $event)">
                   {{ question[current].answer4 }}
                 </v-btn>
@@ -198,8 +261,10 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
     <v-sheet v-if="show" class="g-hud" :class="{ 'g-hud-l-def': !isRtl, 'g-hud-l-rtl': isRtl }">
       <v-slide-y-reverse-transition group>
         <v-sheet v-if="expandHud" class="g-hud-w">
-          <div v-if="!isRtl" class="g-hud-total g-hud-total-def px-4 py-1">+{{
-            timeLeftFixed }} {{ $t("global.pts") }}</div>
+          <div :class="{ 'g-show-points': showPoints, 'g-correct-points': correctPoints, 'g-wrong-points': wrongPoints }"
+            v-if="!isRtl" class="g-hud-total g-hud-total-def px-4 py-1">
+            +{{
+              timeLeftFixed }} {{ $t("global.pts") }}</div>
           <div v-if="isRtl" class="g-hud-total g-hud-total-rtl px-4 py-1">+{{
             timeLeftFixed }} {{ $t("global.pts") }}</div>
           <div class="g-hud-round px-5 py-1">{{ $t("global.round") }}
@@ -252,14 +317,25 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
   line-height: 18px;
   background: linear-gradient(94deg, #28673C 7.42%, #07361C 166.68%);
   text-wrap: balance;
+  pointer-events: all;
 }
 
-.g-correct {
-  border: 3px solid #261bc0;
+.g-neutral-answer {
+  opacity: 40%;
+  background: linear-gradient(94deg, #919191 7.42%, #232323 166.68%);
+  pointer-events: none;
 }
 
-.g-wrong {
-  border: 3px solid #ff0000;
+.g-correct-answer {
+  opacity: 100%;
+  background: linear-gradient(94deg, #4bbf70 7.42%, #07361C 166.68%);
+  pointer-events: none;
+}
+
+.g-wrong-answer {
+  opacity: 100%;
+  background: linear-gradient(94deg, #9f2e2e 7.42%, #d73b3b 166.68%);
+  pointer-events: none;
 }
 
 :deep(.v-btn.v-btn--density-default) {
@@ -268,6 +344,7 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
 
 :deep(.v-btn__content) {
   white-space: normal;
+  pointer-events: none;
 }
 
 .g-hud {
@@ -316,6 +393,8 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
 }
 
 .g-hud-total {
+  opacity: 0%;
+  transition: opacity 0.25s ease 0s;
   background-color: #28673C00;
   font-weight: 700;
   font-size: 16px;
@@ -351,6 +430,31 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
 
 :deep(.v-btn__content) {
   padding-top: 2px;
+}
+
+.g-show-points {
+  opacity: 100%;
+  transition: opacity 0.25s ease 0s;
+}
+
+.g-correct-points {
+  color: #15f75d;
+  text-shadow:
+    1px 1px 0 #F0F0F000,
+    -1px 1px 0 #F0F0F000,
+    -1px -1px 0 #F0F0F000,
+    1px -1px 0 #F0F0F000;
+  transition: color 0.25s ease 0s, opacity 0.25s ease 0s, text-shadow 0.25s ease 0s;
+}
+
+.g-wrong-points {
+  color: #ef2504;
+  text-shadow:
+    1px 1px 0 #F0F0F000,
+    -1px 1px 0 #F0F0F000,
+    -1px -1px 0 #F0F0F000,
+    1px -1px 0 #F0F0F000;
+  transition: color 0.25s ease 0s, opacity 0.25s ease 0s, text-shadow 0.25s ease 0s;
 }
 
 @media (max-width: 599px) {

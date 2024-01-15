@@ -26,7 +26,8 @@ const wrongAnswer3 = ref(false);
 const wrongAnswer4 = ref(false);
 const neutralAnswers = ref(false);
 const showPoints = ref(false);
-const colorPoints = ref(false)
+const correctPoints = ref(false);
+const wrongPoints = ref(false);
 
 const maxPoints = parseFloat(10000);
 const timeLeft = ref(maxPoints);
@@ -76,7 +77,6 @@ const expandCard = () => {
 
 const contractCard = () => {
   expand.value = false;
-  colorPoints.value = false;
   showPoints.value = false;
   correctAnswer1.value = false;
   correctAnswer2.value = false;
@@ -96,15 +96,15 @@ const contractCard = () => {
 
 const onClick = (val, event) => {
   let clickedCard = event.target;
-  colorPoints.value = true;
-  // showPoints.value = true;
   neutralAnswers.value = true;
   console.log(clickedCard);
   cancelAnimationFrame(animFrame);
   if (val == question.value.correct) {
     quizStore.addScore(timeLeft.value);
+    correctPoints.value = true;
   } else {
     showWrongAnswer(val);
+    wrongPoints.value = true;
   }
   showCorrectAnswer();
   setTimeout(() => {
@@ -161,6 +161,8 @@ const onAfterEnter = (el) => {
 const startTimer = () => {
   timeLeft.value = maxPoints;
   prevTime = performance.now();
+  correctPoints.value = false;
+  wrongPoints.value = false;
   showPoints.value = true;
   timer(); // COMMENT THIS TO STOP
 };
@@ -259,7 +261,8 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
     <v-sheet v-if="show" class="g-hud" :class="{ 'g-hud-l-def': !isRtl, 'g-hud-l-rtl': isRtl }">
       <v-slide-y-reverse-transition group>
         <v-sheet v-if="expandHud" class="g-hud-w">
-          <div :class="{ 'g-show-points': showPoints }" v-if="!isRtl" class="g-hud-total g-hud-total-def px-4 py-1">
+          <div :class="{ 'g-show-points': showPoints, 'g-correct-points': correctPoints, 'g-wrong-points': wrongPoints }"
+            v-if="!isRtl" class="g-hud-total g-hud-total-def px-4 py-1">
             +{{
               timeLeftFixed }} {{ $t("global.pts") }}</div>
           <div v-if="isRtl" class="g-hud-total g-hud-total-rtl px-4 py-1">+{{
@@ -436,12 +439,12 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
 
 .g-correct-points {
   color: #00ff37;
-  transition: color 0.5s ease 0s;
+  transition: color 0.5s ease 0s, opacity 0.25s ease 0s;
 }
 
 .g-wrong-points {
   color: #ff0000;
-  transition: color 0.5s ease 0s;
+  transition: color 0.5s ease 0s, opacity 0.25s ease 0s;
 }
 
 @keyframes slidein {

@@ -25,7 +25,8 @@ const wrongAnswer2 = ref(false);
 const wrongAnswer3 = ref(false);
 const wrongAnswer4 = ref(false);
 const neutralAnswers = ref(false);
-const slidePoints = ref(false);
+const showPoints = ref(false);
+const colorPoints = ref(false)
 
 const maxPoints = parseFloat(10000);
 const timeLeft = ref(maxPoints);
@@ -75,7 +76,8 @@ const expandCard = () => {
 
 const contractCard = () => {
   expand.value = false;
-  slidePoints.value = false;
+  colorPoints.value = false;
+  showPoints.value = false;
   correctAnswer1.value = false;
   correctAnswer2.value = false;
   correctAnswer3.value = false;
@@ -94,7 +96,8 @@ const contractCard = () => {
 
 const onClick = (val, event) => {
   let clickedCard = event.target;
-  slidePoints.value = true;
+  colorPoints.value = true;
+  // showPoints.value = true;
   neutralAnswers.value = true;
   console.log(clickedCard);
   cancelAnimationFrame(animFrame);
@@ -145,7 +148,6 @@ const showWrongAnswer = (val) => {
     default:
       break;
   }
-  console.log("WRONG!");
 }
 
 const onAfterLeave = (el) => {
@@ -159,6 +161,7 @@ const onAfterEnter = (el) => {
 const startTimer = () => {
   timeLeft.value = maxPoints;
   prevTime = performance.now();
+  showPoints.value = true;
   timer(); // COMMENT THIS TO STOP
 };
 
@@ -256,12 +259,11 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
     <v-sheet v-if="show" class="g-hud" :class="{ 'g-hud-l-def': !isRtl, 'g-hud-l-rtl': isRtl }">
       <v-slide-y-reverse-transition group>
         <v-sheet v-if="expandHud" class="g-hud-w">
-          <div :class="{ 'slidePoints': slidePoints }">
-            <div :class="{ 'slidePoints': slidePoints }" v-if="!isRtl" class="g-hud-total g-hud-total-def px-4 py-1">+{{
+          <div :class="{ 'g-show-points': showPoints }" v-if="!isRtl" class="g-hud-total g-hud-total-def px-4 py-1">
+            +{{
               timeLeftFixed }} {{ $t("global.pts") }}</div>
-            <div v-if="isRtl" class="g-hud-total g-hud-total-rtl px-4 py-1">+{{
-              timeLeftFixed }} {{ $t("global.pts") }}</div>
-          </div>
+          <div v-if="isRtl" class="g-hud-total g-hud-total-rtl px-4 py-1">+{{
+            timeLeftFixed }} {{ $t("global.pts") }}</div>
           <div class="g-hud-round px-5 py-1">{{ $t("global.round") }}
             <span v-if="!isRtl">0{{ round }}/09</span>
             <span v-if="isRtl">09/0{{ round }}</span>
@@ -388,6 +390,8 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
 }
 
 .g-hud-total {
+  opacity: 0%;
+  transition: opacity 0.25s ease 0s;
   background-color: #28673C00;
   font-weight: 700;
   font-size: 16px;
@@ -425,9 +429,29 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
   padding-top: 2px;
 }
 
-.slidePoints {
-  color: #ffffff;
+.g-show-points {
+  opacity: 100%;
+  transition: opacity 0.25s ease 0s;
+}
+
+.g-correct-points {
+  color: #00ff37;
   transition: color 0.5s ease 0s;
+}
+
+.g-wrong-points {
+  color: #ff0000;
+  transition: color 0.5s ease 0s;
+}
+
+@keyframes slidein {
+  from {
+    opacity: 0%;
+  }
+
+  to {
+    opacity: 100%;
+  }
 }
 
 @media (max-width: 599px) {

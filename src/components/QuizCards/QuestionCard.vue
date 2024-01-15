@@ -438,23 +438,23 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
 }
 
 .g-correct-points {
-  color: #00ff37;
-  transition: color 0.5s ease 0s, opacity 0.25s ease 0s;
+  color: #15f75d;
+  text-shadow:
+    1px 1px 0 #F0F0F000,
+    -1px 1px 0 #F0F0F000,
+    -1px -1px 0 #F0F0F000,
+    1px -1px 0 #F0F0F000;
+  transition: color 0.25s ease 0s, opacity 0.25s ease 0s, text-shadow 0.25s ease 0s;
 }
 
 .g-wrong-points {
-  color: #ff0000;
-  transition: color 0.5s ease 0s, opacity 0.25s ease 0s;
-}
-
-@keyframes slidein {
-  from {
-    opacity: 0%;
-  }
-
-  to {
-    opacity: 100%;
-  }
+  color: #ef2504;
+  text-shadow:
+    1px 1px 0 #F0F0F000,
+    -1px 1px 0 #F0F0F000,
+    -1px -1px 0 #F0F0F000,
+    1px -1px 0 #F0F0F000;
+  transition: color 0.25s ease 0s, opacity 0.25s ease 0s, text-shadow 0.25s ease 0s;
 }
 
 @media (max-width: 599px) {

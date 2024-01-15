@@ -312,21 +312,25 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
   line-height: 18px;
   background: linear-gradient(94deg, #28673C 7.42%, #07361C 166.68%);
   text-wrap: balance;
+  pointer-events: all;
 }
 
 .g-neutral-answer {
   opacity: 40%;
   background: linear-gradient(94deg, #919191 7.42%, #232323 166.68%);
+  pointer-events: none;
 }
 
 .g-correct-answer {
   opacity: 100%;
   background: linear-gradient(94deg, #4bbf70 7.42%, #07361C 166.68%);
+  pointer-events: none;
 }
 
 .g-wrong-answer {
   opacity: 100%;
   background: linear-gradient(94deg, #9f2e2e 7.42%, #d73b3b 166.68%);
+  pointer-events: none;
 }
 
 :deep(.v-btn.v-btn--density-default) {

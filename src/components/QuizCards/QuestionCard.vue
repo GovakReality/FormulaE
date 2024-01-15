@@ -97,7 +97,6 @@ const contractCard = () => {
 const onClick = (val, event) => {
   let clickedCard = event.target;
   neutralAnswers.value = true;
-  console.log(clickedCard);
   cancelAnimationFrame(animFrame);
   if (val == question.value.correct) {
     quizStore.addScore(timeLeft.value);

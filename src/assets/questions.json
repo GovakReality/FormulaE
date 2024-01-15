@@ -12,13 +12,23 @@
       "answer1": "18",
       "answer2": "20",
       "answer3": "22",
-      "answer4": "24" 
+      "answer4": "24"
     },
     "correct": 2,
-    "difficulty": ["easy"],
+    "difficulty": [
+      "easy"
+    ],
     "type": "gen1",
-    "camPosition": [2.68, 1.8, -8.6],
-    "camTarget": [0, 0.36, -14.9],
+    "camPosition": [
+      -3.11,
+      0.14,
+      -11.55
+    ],
+    "camTarget": [
+      0,
+      0.09,
+      -14.35
+    ],
     "ctrlMaxDist": 7,
     "ctrlMinDist": 3.5
   },
@@ -38,10 +48,20 @@
       "answer4": "مواد معاد تدويرها"
     },
     "correct": 1,
-    "difficulty": ["medium"],
+    "difficulty": [
+      "medium"
+    ],
     "type": "gen1",
-    "camPosition": [-6.7, 1.87, -14.94],
-    "camTarget": [0, 0.36, -14.9],
+    "camPosition": [
+      -6.7,
+      1.87,
+      -14.94
+    ],
+    "camTarget": [
+      0,
+      0.36,
+      -14.9
+    ],
     "ctrlMaxDist": 7,
     "ctrlMinDist": 3.5
   },
@@ -61,12 +81,22 @@
       "answer4": "80"
     },
     "correct": 3,
-    "difficulty": ["hard"],
+    "difficulty": [
+      "hard"
+    ],
     "type": "gen1",
-    "camPosition": [4.8, 3.0, -19.10],
-    "camTarget": [0, 0.36, -14.9],
+    "camPosition": [
+      4.8,
+      3.0,
+      -19.10
+    ],
+    "camTarget": [
+      0,
+      0.36,
+      -14.9
+    ],
     "ctrlMaxDist": 7,
-    "ctrlMinDist": 3.5  
+    "ctrlMinDist": 3.5
   },
   {
     "en": {
@@ -84,10 +114,20 @@
       "answer4": "70 كيلوواط ساعة"
     },
     "correct": 1,
-    "difficulty": ["easy"],
+    "difficulty": [
+      "easy"
+    ],
     "type": "gen1",
-    "camPosition": [2.68, 1.8, -8.6],
-    "camTarget": [0, 0.36, -14.9],
+    "camPosition": [
+      0.00,
+      1.26,
+      -20.46
+    ],
+    "camTarget": [
+      0,
+      0,
+      -16.50
+    ],
     "ctrlMaxDist": 7,
     "ctrlMinDist": 3.5
   },
@@ -107,10 +147,20 @@
       "answer4": "40-45"
     },
     "correct": 2,
-    "difficulty": ["medium"],
+    "difficulty": [
+      "medium"
+    ],
     "type": "gen1",
-    "camPosition": [-6.7, 1.87, -14.94],
-    "camTarget": [0, 0.36, -14.9],
+    "camPosition": [
+      -6.7,
+      1.87,
+      -14.94
+    ],
+    "camTarget": [
+      0,
+      0.36,
+      -14.9
+    ],
     "ctrlMaxDist": 7,
     "ctrlMinDist": 3.5
   },
@@ -130,12 +180,22 @@
       "answer4": "حمض الرصاص"
     },
     "correct": 1,
-    "difficulty": ["hard"],
+    "difficulty": [
+      "hard"
+    ],
     "type": "gen1",
-    "camPosition": [4.8, 3.0, -19.10],
-    "camTarget": [0, 0.36, -14.9],
+    "camPosition": [
+      4.8,
+      3.0,
+      -19.10
+    ],
+    "camTarget": [
+      0,
+      0.36,
+      -14.9
+    ],
     "ctrlMaxDist": 7,
-    "ctrlMinDist": 3.5 
+    "ctrlMinDist": 3.5
   },
   {
     "en": {
@@ -153,10 +213,20 @@
       "answer4": "250 كم/ساعة"
     },
     "correct": 3,
-    "difficulty": ["easy"],
+    "difficulty": [
+      "easy"
+    ],
     "type": "gen1",
-    "camPosition": [2.68, 1.8, -8.6],
-    "camTarget": [0, 0.36, -14.9],
+    "camPosition": [
+      1.17,
+      6.99,
+      -14.89
+    ],
+    "camTarget": [
+      0.60,
+      0.35,
+      -14.89
+    ],
     "ctrlMaxDist": 7,
     "ctrlMinDist": 3.5
   },
@@ -176,10 +246,20 @@
       "answer4": "5.5"
     },
     "correct": 1,
-    "difficulty": ["medium"],
+    "difficulty": [
+      "medium"
+    ],
     "type": "gen1",
-    "camPosition": [-6.7, 1.87, -14.94],
-    "camTarget": [0, 0.36, -14.9],
+    "camPosition": [
+      -6.7,
+      1.87,
+      -14.94
+    ],
+    "camTarget": [
+      0,
+      0.36,
+      -14.9
+    ],
     "ctrlMaxDist": 7,
     "ctrlMinDist": 3.5
   },
@@ -199,10 +279,20 @@
       "answer4": "قوة المحرك"
     },
     "correct": 3,
-    "difficulty": ["hard"],
+    "difficulty": [
+      "hard"
+    ],
     "type": "gen1",
-    "camPosition": [4.8, 3.0, -19.10],
-    "camTarget": [0, 0.36, -14.9],
+    "camPosition": [
+      4.8,
+      3.0,
+      -19.10
+    ],
+    "camTarget": [
+      0,
+      0.36,
+      -14.9
+    ],
     "ctrlMaxDist": 7,
     "ctrlMinDist": 3.5
   },
@@ -222,12 +312,22 @@
       "answer4": "4"
     },
     "correct": 1,
-    "difficulty": ["easy"],
+    "difficulty": [
+      "easy"
+    ],
     "type": "gen2",
-    "camPosition": [2.75, 1.86, -2.72],
-    "camTarget": [6.1, 0.36, -7.69],
+    "camPosition": [
+      7.91,
+      1.26,
+      -8.82
+    ],
+    "camTarget": [
+      6.09,
+      0.30,
+      -7.00
+    ],
     "ctrlMaxDist": 7,
-    "ctrlMinDist": 3.5
+    "ctrlMinDist": 2.5
   },
   {
     "en": {
@@ -245,10 +345,20 @@
       "answer4": "جود يير"
     },
     "correct": 1,
-    "difficulty": ["medium"],
+    "difficulty": [
+      "medium"
+    ],
     "type": "gen2",
-    "camPosition": [5.3, 1.6, -14],
-    "camTarget": [6.1, 0.36, -7.69],
+    "camPosition": [
+      5.3,
+      1.6,
+      -14
+    ],
+    "camTarget": [
+      6.1,
+      0.36,
+      -7.69
+    ],
     "ctrlMaxDist": 7,
     "ctrlMinDist": 3.5
   },
@@ -268,10 +378,20 @@
       "answer4": "تخفيض الوزن"
     },
     "correct": 1,
-    "difficulty": ["hard"],
+    "difficulty": [
+      "hard"
+    ],
     "type": "gen2",
-    "camPosition": [10.2, 1.69, -2.10],
-    "camTarget": [6.1, 0.36, -7.69],
+    "camPosition": [
+      10.2,
+      1.69,
+      -2.10
+    ],
+    "camTarget": [
+      6.1,
+      0.36,
+      -7.69
+    ],
     "ctrlMaxDist": 7,
     "ctrlMinDist": 3.5
   },
@@ -291,10 +411,20 @@
       "answer4": "إل جي كيم"
     },
     "correct": 3,
-    "difficulty": ["easy"],
+    "difficulty": [
+      "easy"
+    ],
     "type": "gen2",
-    "camPosition": [2.75, 1.86, -2.72],
-    "camTarget": [6.1, 0.36, -7.69],
+    "camPosition": [
+      7.66,
+      1.91,
+      -10.92
+    ],
+    "camTarget": [
+      6.09,
+      0.25,
+      -8.28
+    ],
     "ctrlMaxDist": 7,
     "ctrlMinDist": 3.5
   },
@@ -314,10 +444,20 @@
       "answer4": "عمر أطول"
     },
     "correct": 2,
-    "difficulty": ["medium"],
+    "difficulty": [
+      "medium"
+    ],
     "type": "gen2",
-    "camPosition": [5.3, 1.6, -14],
-    "camTarget": [6.1, 0.36, -7.69],
+    "camPosition": [
+      5.3,
+      1.6,
+      -14
+    ],
+    "camTarget": [
+      6.1,
+      0.36,
+      -7.69
+    ],
     "ctrlMaxDist": 7,
     "ctrlMinDist": 3.5
   },
@@ -337,10 +477,20 @@
       "answer4": "زيادة الوزن"
     },
     "correct": 2,
-    "difficulty": ["hard"],
+    "difficulty": [
+      "hard"
+    ],
     "type": "gen2",
-    "camPosition": [10.2, 1.69, -2.10],
-    "camTarget": [6.1, 0.36, -7.69],
+    "camPosition": [
+      10.2,
+      1.69,
+      -2.10
+    ],
+    "camTarget": [
+      6.1,
+      0.36,
+      -7.69
+    ],
     "ctrlMaxDist": 7,
     "ctrlMinDist": 3.5
   },
@@ -360,10 +510,20 @@
       "answer4": "الفرامل الهوائية"
     },
     "correct": 1,
-    "difficulty": ["easy"],
+    "difficulty": [
+      "easy"
+    ],
     "type": "gen2",
-    "camPosition": [2.75, 1.86, -2.72],
-    "camTarget": [6.1, 0.36, -7.69],
+    "camPosition": [
+      8.81,
+      0.22,
+      -10.82
+    ],
+    "camTarget": [
+      6.09,
+      0.10,
+      -8.28
+    ],
     "ctrlMaxDist": 7,
     "ctrlMinDist": 3.5
   },
@@ -383,10 +543,20 @@
       "answer4": "حساسية عالية"
     },
     "correct": 2,
-    "difficulty": ["medium"],
+    "difficulty": [
+      "medium"
+    ],
     "type": "gen2",
-    "camPosition": [5.3, 1.6, -14],
-    "camTarget": [6.1, 0.36, -7.69],
+    "camPosition": [
+      5.3,
+      1.6,
+      -14
+    ],
+    "camTarget": [
+      6.1,
+      0.36,
+      -7.69
+    ],
     "ctrlMaxDist": 7,
     "ctrlMinDist": 3.5
   },
@@ -406,15 +576,25 @@
       "answer4": "وسادات الفرامل المحسنة"
     },
     "correct": 2,
-    "difficulty": ["hard"],
+    "difficulty": [
+      "hard"
+    ],
     "type": "gen2",
-    "camPosition": [10.2, 1.69, -2.10],
-    "camTarget": [6.1, 0.36, -7.69],
+    "camPosition": [
+      10.2,
+      1.69,
+      -2.10
+    ],
+    "camTarget": [
+      6.1,
+      0.36,
+      -7.69
+    ],
     "ctrlMaxDist": 7,
     "ctrlMinDist": 3.5
   },
   {
-    "en": {    
+    "en": {
       "question": "What is the approximate top speed of Gen3 cars?",
       "answer1": "200 km/h",
       "answer2": "240 km/h",
@@ -429,15 +609,25 @@
       "answer4": "320 كم/ساعة"
     },
     "correct": 3,
-    "difficulty": ["easy"],
+    "difficulty": [
+      "easy"
+    ],
     "type": "gen3",
-    "camPosition": [2.34, 0.38, 3.51],
-    "camTarget": [1, 0.3, 1.6],
+    "camPosition": [
+      0.00,
+      1.08,
+      5.95
+    ],
+    "camTarget": [
+      -0.02,
+      0.04,
+      2.99
+    ],
     "ctrlMaxDist": 7,
     "ctrlMinDist": 1.2
   },
   {
-    "en": {    
+    "en": {
       "question": "What is the maximum reGeneration power of the Gen3 car's braking system?",
       "answer1": "100 KW",
       "answer2": "200 kW",
@@ -452,10 +642,20 @@
       "answer4": "350 كيلوواط"
     },
     "correct": 3,
-    "difficulty": ["medium"],
+    "difficulty": [
+      "medium"
+    ],
     "type": "gen3",
-    "camPosition": [-0.60, 0.94, 1.43],
-    "camTarget": [0, 0.8, 0.4],
+    "camPosition": [
+      -0.60,
+      0.94,
+      1.43
+    ],
+    "camTarget": [
+      0,
+      0.8,
+      0.4
+    ],
     "ctrlMaxDist": 7,
     "ctrlMinDist": 1.2
   },
@@ -475,10 +675,20 @@
       "answer4": "240 كم/ساعة"
     },
     "correct": 2,
-    "difficulty": ["hard"],
+    "difficulty": [
+      "hard"
+    ],
     "type": "gen3",
-    "camPosition": [-2.39, 0.57, -5.02],
-    "camTarget": [-0.32, 0.16, -1.79],
+    "camPosition": [
+      -2.39,
+      0.57,
+      -5.02
+    ],
+    "camTarget": [
+      -0.32,
+      0.16,
+      -1.79
+    ],
     "ctrlMaxDist": 7,
     "ctrlMinDist": 1.2
   },
@@ -496,12 +706,22 @@
       "answer2": "20",
       "answer3": "22",
       "answer4": "24"
-    },      
+    },
     "correct": 2,
-    "difficulty": ["easy"],
+    "difficulty": [
+      "easy"
+    ],
     "type": "gen3",
-    "camPosition": [2.34, 0.38, 3.51],
-    "camTarget": [1, 0.3, 1.6],
+    "camPosition": [
+      2.53,
+      0.23,
+      3.07
+    ],
+    "camTarget": [
+      0.8,
+      0.16,
+      1.6
+    ],
     "ctrlMaxDist": 7,
     "ctrlMinDist": 1.2
   },
@@ -519,12 +739,22 @@
       "answer2": "3 ملم",
       "answer3": "4 ملم",
       "answer4": "5 ملم"
-    },         
+    },
     "correct": 2,
-    "difficulty": ["medium"],
+    "difficulty": [
+      "medium"
+    ],
     "type": "gen3",
-    "camPosition": [-0.60, 0.94, 1.43],
-    "camTarget": [0, 0.8, 0.4],
+    "camPosition": [
+      -0.60,
+      0.94,
+      1.43
+    ],
+    "camTarget": [
+      0,
+      0.8,
+      0.4
+    ],
     "ctrlMaxDist": 7,
     "ctrlMinDist": 1.2
   },
@@ -542,12 +772,22 @@
       "answer2": "30%",
       "answer3": "40%",
       "answer4": "50%"
-    },      
+    },
     "correct": 2,
-    "difficulty": ["hard"],
+    "difficulty": [
+      "hard"
+    ],
     "type": "gen3",
-    "camPosition": [-2.39, 0.57, -5.02],
-    "camTarget": [-0.32, 0.16, -1.79],
+    "camPosition": [
+      -2.39,
+      0.57,
+      -5.02
+    ],
+    "camTarget": [
+      -0.32,
+      0.16,
+      -1.79
+    ],
     "ctrlMaxDist": 7,
     "ctrlMinDist": 1.2
   },
@@ -565,12 +805,22 @@
       "answer2": "300 كيلوواط",
       "answer3": "350 كيلوواط",
       "answer4": "400 كيلوواط"
-    },      
+    },
     "correct": 3,
-    "difficulty": ["easy"],
+    "difficulty": [
+      "easy"
+    ],
     "type": "gen3",
-    "camPosition": [2.34, 0.38, 3.51],
-    "camTarget": [1, 0.3, 1.6],
+    "camPosition": [
+      -2.85,
+      1.96,
+      -1.49
+    ],
+    "camTarget": [
+      0,
+      0.3,
+      -1.5
+    ],
     "ctrlMaxDist": 7,
     "ctrlMinDist": 1.2
   },
@@ -588,12 +838,22 @@
       "answer2": "250 كيلوواط",
       "answer3": "300 كيلوواط",
       "answer4": "350 كيلوواط"
-    },       
+    },
     "correct": 4,
-    "difficulty": ["medium"],
+    "difficulty": [
+      "medium"
+    ],
     "type": "gen3",
-    "camPosition": [-0.60, 0.94, 1.43],
-    "camTarget": [0, 0.8, 0.4],
+    "camPosition": [
+      -0.60,
+      0.94,
+      1.43
+    ],
+    "camTarget": [
+      0,
+      0.8,
+      0.4
+    ],
     "ctrlMaxDist": 7,
     "ctrlMinDist": 1.2
   },
@@ -611,12 +871,22 @@
       "answer2": "2",
       "answer3": "3",
       "answer4": "4"
-    },      
+    },
     "correct": 2,
-    "difficulty": ["hard"],
+    "difficulty": [
+      "hard"
+    ],
     "type": "gen3",
-    "camPosition": [-2.39, 0.57, -5.02],
-    "camTarget": [-0.32, 0.16, -1.79],
+    "camPosition": [
+      -2.39,
+      0.57,
+      -5.02
+    ],
+    "camTarget": [
+      -0.32,
+      0.16,
+      -1.79
+    ],
     "ctrlMaxDist": 7,
     "ctrlMinDist": 1.2
   }

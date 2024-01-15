@@ -109,7 +109,7 @@ const onClick = (val, event) => {
   showCorrectAnswer();
   setTimeout(() => {
     contractCard();
-  }, 1000);
+  }, 2500);
 };
 
 const showCorrectAnswer = () => {

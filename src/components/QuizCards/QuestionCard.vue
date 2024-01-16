@@ -174,7 +174,7 @@ const timer = () => {
     if (timeLeft.value <= 0) {
       timeLeft.value = 0;
       cancelAnimationFrame(animFrame);
-      contractCard(); // COMMENT THIS TO STOP
+      //contractCard(); // COMMENT THIS TO STOP
     } else {
       prevTime = aux;
       animFrame = requestAnimationFrame(timer);
@@ -260,12 +260,9 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
     <v-sheet v-if="show" class="g-hud" :class="{ 'g-hud-l-def': !isRtl, 'g-hud-l-rtl': isRtl }">
       <v-slide-y-reverse-transition group>
         <v-sheet v-if="expandHud" class="g-hud-w">
-          <div :class="{ 'g-show-points': showPoints, 'g-correct-points': correctPoints, 'g-wrong-points': wrongPoints }"
-            v-if="!isRtl" class="g-hud-total g-hud-total-def px-4 py-1">
-            +{{
-              timeLeftFixed }} {{ $t("global.pts") }}</div>
-          <div v-if="isRtl" class="g-hud-total g-hud-total-rtl px-4 py-1">+{{
-            timeLeftFixed }} {{ $t("global.pts") }}</div>
+          <div :class="{ 'g-show-points': showPoints, 'g-correct-points': correctPoints, 'g-wrong-points': wrongPoints, 'g-hud-total-def': !isRtl, 'g-hud-total-rtl': isRtl }" class="g-hud-total g-hud-total-def px-4 py-1">
+            +{{ timeLeftFixed }} {{ $t("global.pts") }}
+          </div>
           <div class="g-hud-round px-5 py-1">{{ $t("global.round") }}
             <span v-if="!isRtl">0{{ round }}/09</span>
             <span v-if="isRtl">09/0{{ round }}</span>

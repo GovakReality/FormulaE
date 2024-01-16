@@ -1,7 +1,7 @@
 <script setup>
 import { useCardsStore } from '/src/stores/CardsStore';
 import { useQuizStore } from '/src/stores/QuizStore';
-import { ref, watch, computed } from 'vue';
+import { ref, watch, computed, onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useLocale } from 'vuetify';
 
@@ -28,6 +28,7 @@ const neutralAnswers = ref(false);
 const showPoints = ref(false);
 const correctPoints = ref(false);
 const wrongPoints = ref(false);
+const timedScore = ref();
 
 const maxPoints = parseFloat(10000);
 const timeLeft = ref(maxPoints);
@@ -63,6 +64,16 @@ watch(cardIndex, () => {
   }
 });
 
+watch(scoreFixed, () => {
+  setTimeout(() => {
+    timedScore.value = scoreFixed.value;
+  }, 850);
+});
+
+onMounted(() => {
+  timedScore.value = scoreFixed.value;
+});
+  
 const expandCard = () => {
   quizStore.newQuestion(genType.value);
   quizStore.incrementRound();
@@ -108,7 +119,7 @@ const onClick = (val, event) => {
   showCorrectAnswer();
   setTimeout(() => {
     contractCard();
-  }, 2500);
+  }, 1500);
 };
 
 const showCorrectAnswer = () => {
@@ -163,7 +174,7 @@ const startTimer = () => {
   correctPoints.value = false;
   wrongPoints.value = false;
   showPoints.value = true;
-  timer(); // COMMENT THIS TO STOP
+  timer();
 };
 
 const timer = () => {
@@ -174,7 +185,7 @@ const timer = () => {
     if (timeLeft.value <= 0) {
       timeLeft.value = 0;
       cancelAnimationFrame(animFrame);
-      //contractCard(); // COMMENT THIS TO STOP
+      contractCard(); // COMMENT THIS TO STOP
     } else {
       prevTime = aux;
       animFrame = requestAnimationFrame(timer);
@@ -260,14 +271,14 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
     <v-sheet v-if="show" class="g-hud" :class="{ 'g-hud-l-def': !isRtl, 'g-hud-l-rtl': isRtl }">
       <v-slide-y-reverse-transition group>
         <v-sheet v-if="expandHud" class="g-hud-w">
-          <div :class="{ 'g-show-points': showPoints, 'g-correct-points': correctPoints, 'g-wrong-points': wrongPoints, 'g-hud-total-def': !isRtl, 'g-hud-total-rtl': isRtl }" class="g-hud-total g-hud-total-def px-4 py-1">
+          <div :class="{ 'g-show-points': showPoints, 'g-correct-points': correctPoints, 'g-wrong-points': wrongPoints, 'g-hud-total-def': !isRtl, 'g-hud-total-rtl': isRtl }" class="g-hud-total py-1">
             +{{ timeLeftFixed }} {{ $t("global.pts") }}
           </div>
-          <div class="g-hud-round px-5 py-1">{{ $t("global.round") }}
+          <div class="g-hud-round px-4 py-1">{{ $t("global.round") }}
             <span v-if="!isRtl">0{{ round }}/09</span>
             <span v-if="isRtl">09/0{{ round }}</span>
           </div>
-          <div class="g-hud-score pr-4 pl-1 py-1">{{ scoreFixed }} {{ $t("global.pts") }}</div>
+          <div class="g-hud-score pr-4 pl-1 py-1">{{ timedScore }} {{ $t("global.pts") }}</div>
         </v-sheet>
       </v-slide-y-reverse-transition>
     </v-sheet>
@@ -368,9 +379,9 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
   opacity: 0.9;
   background-color: #F3F5F4;
   font-weight: 700;
-  font-size: 16px;
-  width: 140px;
-  height: 30px;
+  font-size: 19px;
+  width: 150px;
+  height: 35px;
   color: #000000;
   display: inline-block;
   vertical-align: middle;
@@ -379,11 +390,11 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
 .g-hud-score {
   background-color: #28673C;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 19px;
   color: #F0F0F0;
   text-align: right;
-  width: 130px;
-  height: 30px;
+  width: 140px;
+  height: 35px;
   display: inline-block;
   vertical-align: middle;
 }
@@ -393,7 +404,7 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
   transition: opacity 0.25s ease 0s;
   background-color: #28673C00;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 28px;
   color: #F0F0F0;
   text-align: right;
   vertical-align: bottom;
@@ -403,16 +414,16 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
     -1px 1px 0 #28673C,
     -1px -1px 0 #28673C,
     1px -1px 0 #28673C;
+    padding-right: 5px;
+    padding-left: 5px;    
 }
 
 .g-hud-total-def {
-  width: 130px;
-  margin-left: 140px;
+  text-align: right;
 }
 
 .g-hud-total-rtl {
-  width: 130px;
-  margin-right: 140px;
+  text-align: left;
 }
 
 :deep(.v-card__loader) {
@@ -440,7 +451,9 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
     -1px 1px 0 #F0F0F000,
     -1px -1px 0 #F0F0F000,
     1px -1px 0 #F0F0F000;
-  transition: color 0.25s ease 0s, opacity 0.25s ease 0s, text-shadow 0.25s ease 0s;
+  transform: translate(0px, -60px);
+  opacity: 0;
+  transition: opacity 2s ease 0.1s, text-shadow 0.25s ease 0s, transform 1.25s cubic-bezier(0.165, 0.84, 0.44, 1) 0s;
 }
 
 .g-wrong-points {
@@ -450,7 +463,9 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
     -1px 1px 0 #F0F0F000,
     -1px -1px 0 #F0F0F000,
     1px -1px 0 #F0F0F000;
-  transition: color 0.25s ease 0s, opacity 0.25s ease 0s, text-shadow 0.25s ease 0s;
+  transform: translate(0px, -60px);
+  opacity: 0;
+  transition: opacity 2s ease 0.1s, text-shadow 0.25s ease 0s, transform 1.25s cubic-bezier(0.165, 0.84, 0.44, 1) 0s;
 }
 
 @media (max-width: 599px) {
@@ -502,7 +517,9 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
   }
 
   .g-hud-total {
-    font-size: 16px;
+    font-size: 20px;
+    padding-right: 15px;
+    padding-left: 15px;      
   }
 }
 
@@ -531,17 +548,20 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
     font-size: 24px;
     height: 52px;
     width: 200px;
+    line-height: 42px;
   }
 
   .g-hud-score {
     font-size: 26px;
     width: 200px;
     height: 52px;
+    line-height: 42px;
   }
 
   .g-hud-total {
-    font-size: 26px;
+    font-size: 30px;
     width: 400px;
+    line-height: 42px;
   }
 }
 </style>

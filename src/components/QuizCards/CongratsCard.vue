@@ -107,7 +107,7 @@ const onAfterLeave = (el) => {
 </script>
 
 <template>
-  <v-sheet v-if="show" class="d-flex flex-column align-center justify-center h-95">
+  <v-sheet v-if="show" class="d-flex flex-column align-center justify-center h-100">
     <v-slide-y-reverse-transition @after-leave="onAfterLeave" group>
       <v-sheet v-if="expand" class="g-sheet" position="relative" color="transparent">
         <v-card class="g-card py-4 rounded-xl" variant="flat">

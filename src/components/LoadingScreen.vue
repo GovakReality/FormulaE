@@ -43,7 +43,7 @@
         errorDevMessage.value = 'Timed out error';
         onError();
       }
-    }, 30000);
+    }, 45000);
   });
 </script>
 

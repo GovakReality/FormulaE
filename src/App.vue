@@ -6,6 +6,7 @@ import LoadingScreen from './components/LoadingScreen.vue';
 /* import Lockup from './components/Lockup.vue'; */
 import GenInfo from './components/GenInfo.vue';
 /* import LiveInspector from './components/LiveInspector.vue'; */
+import InactivityAlert from './components/InactivityAlert.vue';
 </script>
 
 <template>
@@ -19,6 +20,7 @@ import GenInfo from './components/GenInfo.vue';
       <GenInfo />
       <LoadingScreen />
       <!-- <LiveInspector /> -->
+      <InactivityAlert />
     </v-main>
   </v-app>
 </template>

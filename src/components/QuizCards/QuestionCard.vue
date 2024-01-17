@@ -404,7 +404,7 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
   transition: opacity 0.25s ease 0s;
   background-color: #28673C00;
   font-weight: 700;
-  font-size: 28px;
+  font-size: 24px;
   color: #F0F0F0;
   text-align: right;
   vertical-align: bottom;
@@ -440,8 +440,7 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
 }
 
 .g-show-points {
-  opacity: 100%;
-  transition: opacity 0.25s ease 0s;
+  opacity: 100%;;
 }
 
 .g-correct-points {
@@ -453,7 +452,7 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
     1px -1px 0 #F0F0F000;
   transform: translate(0px, -60px);
   opacity: 0;
-  transition: opacity 2s ease 0.1s, text-shadow 0.25s ease 0s, transform 1.25s cubic-bezier(0.165, 0.84, 0.44, 1) 0s;
+  transition: opacity 3.6s ease 0.1s, text-shadow 0.25s ease 0s, transform 1.25s cubic-bezier(0.165, 0.84, 0.44, 1) 0s;
 }
 
 .g-wrong-points {
@@ -465,7 +464,7 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
     1px -1px 0 #F0F0F000;
   transform: translate(0px, -60px);
   opacity: 0;
-  transition: opacity 2s ease 0.1s, text-shadow 0.25s ease 0s, transform 1.25s cubic-bezier(0.165, 0.84, 0.44, 1) 0s;
+  transition: opacity 3.6s ease 0.1s, text-shadow 0.25s ease 0s, transform 1.25s cubic-bezier(0.165, 0.84, 0.44, 1) 0s;
 }
 
 @media (max-width: 599px) {

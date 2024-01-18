@@ -28,7 +28,7 @@ import nzTexture from '/textures/nz.jpg';
 
 // get stores
 const quizStore = useQuizStore();
-const { shouldCameraMove, question, quizEnded } = storeToRefs(quizStore);
+const { shouldCameraMove, question, iniPosMove } = storeToRefs(quizStore);
 const loadingStore = useLoadingStore();
 const { loadStart, loadComplete, loadError, loadProgress, errorUrl } = storeToRefs(loadingStore);
 const cardsStore = useCardsStore();
@@ -294,7 +294,7 @@ const animate = () => {
 
 watch(shouldCameraMove, () => {
   if (shouldCameraMove.value) {
-    if (quizEnded.value) {
+    if (iniPosMove.value) {
       cameraMovement(initialPos, initialTarget);
       controls.minDistance = 3.5;
       controls.maxDistance = 7;

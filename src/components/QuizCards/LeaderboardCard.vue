@@ -78,6 +78,9 @@ watch(cardIndex, () => {
     show.value = true;
     formatLeaderboard();
     setTimeout(() => expand.value = true, 100);
+  } else if (cardIndex.value == 0) {
+    expand.value = false;
+    show.value = false;
   } else {
     expand.value = false;
   }

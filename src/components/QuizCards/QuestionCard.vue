@@ -10,11 +10,12 @@ const { isRtl, current } = useLocale();
 const cardsStore = useCardsStore();
 const { cardIndex } = storeToRefs(cardsStore);
 const quizStore = useQuizStore();
-const { question, round, scoreFixed, shouldCameraMove, quizEnded } = storeToRefs(quizStore);
+const { question, round, scoreFixed, shouldCameraMove, iniPosMove } = storeToRefs(quizStore);
 
 const expand = ref(false);
 const show = ref(false);
 const expandHud = ref(false);
+const shouldReset = ref(false);
 const genType = ref('');
 const correctAnswer1 = ref(false);
 const correctAnswer2 = ref(false);
@@ -57,8 +58,17 @@ watch(cardIndex, () => {
       default:
         genType.value = 'gen3';
     };
+    shouldReset.value = false;
+    iniPosMove.value = false;
+    shouldCameraMove.value = false;
     show.value = true;
     expandCard();
+  } else if (cardIndex.value == 0) {
+    shouldReset.value = true;
+    contractCard();
+    show.value = false;
+    expand.value = false;
+    expandHud.value = false;
   } else {
     show.value = false;
   }
@@ -100,7 +110,7 @@ const contractCard = () => {
   neutralAnswers.value = false;
   if (cardIndex.value == 10) {
     expandHud.value = false;
-    quizEnded.value = true;
+    iniPosMove.value = true;
     shouldCameraMove.value = true;
   }
 };
@@ -161,7 +171,9 @@ const showWrongAnswer = (val) => {
 }
 
 const onAfterLeave = (el) => {
-  cardsStore.incrementCardIndex();
+  if (!shouldReset.value) {
+    cardsStore.incrementCardIndex();
+  }  
 }
 
 const onAfterEnter = (el) => {

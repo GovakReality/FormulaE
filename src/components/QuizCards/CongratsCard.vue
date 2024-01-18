@@ -5,7 +5,7 @@ import { useAPIStore } from '/src/stores/APIStore';
 import { ref, watch } from 'vue';
 import { storeToRefs } from 'pinia';
 import saudiaLogo from '/images/SaudiaLogo.png';
-import { useI18n } from 'vue-i18n'
+import { useI18n } from 'vue-i18n';
 import { useLocale } from 'vuetify';
 
 const { t } = useI18n();
@@ -60,6 +60,9 @@ watch(cardIndex, () => {
     shouldReset.value = false;
     show.value = true;
     setTimeout(() => expand.value = true, 100);
+  } else if (cardIndex.value == 0) {
+    show.value = false;
+    expand.value = false;
   } else {
     expand.value = false;
   }
@@ -82,7 +85,7 @@ watch(APIStatus, () => {
     loading.value = false;
     expand.value = false;
   } else if (APIStatus.value > 1) {
-    errorMsg.value = 'ERROR ' + APIStatus.value + ': Please wait a few minutes before you try again.';
+    errorMsg.value = t('system.error') + ' ' + APIStatus.value + ': ' + t('system.wait');
     showError.value = true;
     loading.value = false;
     APIStatus.value = 0;
@@ -145,7 +148,7 @@ const onAfterLeave = (el) => {
             {{ errorMsg }}
             <template v-slot:actions>
               <v-btn color="white" variant="text" @click="showError = !showError">
-                Close
+                {{ $t("global.close") }}
               </v-btn>
             </template>
           </v-snackbar>

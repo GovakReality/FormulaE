@@ -12,8 +12,15 @@
     "tryagain": "Try Again",
     "fullname": "Full Name",
     "email": "E-mail",
-    "continue": "Continue"
+    "continue": "Continue",
+    "restart": "Restart",
+    "close": "Close"
   },
+  "system": {
+    "error": "Error",
+    "stillthere": "Are you still there?",
+    "wait": "Please wait a few minutes before you try again."
+  },  
   "menu": {
     "admin": "Admin",
     "about": "About"

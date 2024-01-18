@@ -69,12 +69,7 @@ onMounted(() => {
     <v-card class="g-in-card rounded-xl align-center justify-center">
       <template v-slot:loader>
         <v-progress-linear :active="true" :model-value="counterBar" color="#28673C" bg-color="#28673c" height="5"></v-progress-linear>
-      </template>
-      <template v-slot:prepend>
-        <v-avatar color="#28673c" size="x-large">
-          <v-icon icon="mdi-alert"></v-icon>
-        </v-avatar>
-      </template>      
+      </template>    
       <v-card-item class="text-center">
         <h3 class="g-in-title">
           {{ $t("system.still") }}
@@ -87,7 +82,7 @@ onMounted(() => {
         <v-btn color="#F0F0F0" variant="tonal" rounded="xl" :slim="false" class="g-bt font-weight-bold" @click="keepPlaying">
           {{ $t("global.continue") }}
         </v-btn>
-        <v-btn color="#F0F0F0" variant="tonal" rounded="xl" :slim="false" class="g-bt g-bt-restart font-weight-bold" @click="restart">
+        <v-btn color="#F0F0F0" variant="tonal" rounded="xl" :slim="false" class="g-bt font-weight-bold" @click="restart">
           {{ $t("global.restart") }}
         </v-btn>
       </v-card-actions>
@@ -125,9 +120,7 @@ onMounted(() => {
   text-wrap: balance;
   pointer-events: all;
 }
-.g-bt-restart{
-  background: linear-gradient(94deg, #9f2e2e 7.42%, #d73b3b 166.68%);
-}
+
 :deep(.v-card__loader) {
   bottom: 0;
   top: auto;

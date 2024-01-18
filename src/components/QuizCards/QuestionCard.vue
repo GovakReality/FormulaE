@@ -346,15 +346,39 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
 }
 
 .g-correct-answer {
+  pointer-events: none;
   opacity: 100%;
   background: linear-gradient(94deg, #4bbf70 7.42%, #07361C 166.68%);
-  pointer-events: none;
+  background-size: 250% 250%;
+  -webkit-animation: backgroundAnime 2s ease infinite;
+  -moz-animation: backgroundAnime 2s ease infinite;
+  -o-animation: backgroundAnime 2s ease infinite;
+  animation: backgroundAnime 2s ease infinite;  
 }
-
+@-webkit-keyframes backgroundAnime {
+  0%{background-position:0% 39%}
+  50%{background-position:100% 62%}
+  100%{background-position:0% 39%}
+}
+@-moz-keyframes backgroundAnime {
+  0%{background-position:0% 39%}
+  50%{background-position:100% 62%}
+  100%{background-position:0% 39%}
+}
+@-o-keyframes backgroundAnime {
+  0%{background-position:0% 39%}
+  50%{background-position:100% 62%}
+  100%{background-position:0% 39%}
+}
+@keyframes backgroundAnime {
+  0%{background-position:0% 39%}
+  50%{background-position:100% 62%}
+  100%{background-position:0% 39%}
+}
 .g-wrong-answer {
-  opacity: 100%;
-  background: linear-gradient(94deg, #9f2e2e 7.42%, #d73b3b 166.68%);
   pointer-events: none;
+  opacity: 100%;
+  background: linear-gradient(94deg, #9f2e2e 7.42%, #d73b3b 166.68%); 
 }
 
 :deep(.v-btn.v-btn--density-default) {

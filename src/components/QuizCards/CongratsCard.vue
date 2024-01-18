@@ -110,7 +110,7 @@ const onAfterLeave = (el) => {
 </script>
 
 <template>
-  <v-sheet v-if="show" class="d-flex flex-column align-center justify-center h-100">
+  <v-sheet v-if="show" class="d-flex flex-column align-center justify-center h-100 g-back">
     <v-slide-y-reverse-transition @after-leave="onAfterLeave" group>
       <v-sheet v-if="expand" class="g-sheet" position="relative" color="transparent">
         <v-card class="g-card py-4 rounded-xl" variant="flat">
@@ -165,10 +165,12 @@ const onAfterLeave = (el) => {
 </template>
 
 <style scoped>
+.g-back {
+  background-color: #b58956;
+}
 .g-sheet {
   background-color: transparent;
 }
-
 .g-card {
   background: linear-gradient(67deg, #07361C 7.82%, #28673C 75.59%);
   max-width: 100%;

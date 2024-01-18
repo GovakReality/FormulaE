@@ -30,7 +30,7 @@ onMounted(() => {
   <v-app>
 
     <TopBar />
-    <v-main>
+    <v-main class="g-main">
       <!--<Lockup />-->
       <ThreeScene />
       <QuizCards />
@@ -42,4 +42,8 @@ onMounted(() => {
   </v-app>
 </template>
 
-<style scoped></style>
+<style scoped>
+.g-main {
+  background-color: #b58956;
+}
+</style>

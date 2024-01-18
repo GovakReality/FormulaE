@@ -68,17 +68,26 @@ onMounted(() => {
   <v-dialog v-model="showInactivity" persistent class="align-center justify-center">
     <v-card class="g-in-card rounded-xl align-center justify-center">
       <template v-slot:loader>
-        <v-progress-linear :active="true" :model-value="counterBar" color="red-darken-1" bg-color="#28673c"
-          height="5"></v-progress-linear>
+        <v-progress-linear :active="true" :model-value="counterBar" color="#28673C" bg-color="#28673c" height="5"></v-progress-linear>
       </template>
-      <v-card-title class="text-h5 g-in-title">
-        {{ $t("system.stillthere") }}
-      </v-card-title>
-      <v-card-actions>
-        <v-btn color="green-darken-1" variant="tonal" rounded="xl" :slim="false" @click="keepPlaying">
+      <template v-slot:prepend>
+        <v-avatar color="#28673c" size="x-large">
+          <v-icon icon="mdi-alert"></v-icon>
+        </v-avatar>
+      </template>      
+      <v-card-item class="text-center">
+        <h3 class="g-in-title">
+          {{ $t("system.still") }}
+        </h3>
+        <h3 class="g-in-text">
+          {{ $t("system.restartExperience") }}
+        </h3>
+      </v-card-item>      
+      <v-card-actions>       
+        <v-btn color="#F0F0F0" variant="tonal" rounded="xl" :slim="false" class="g-bt font-weight-bold" @click="keepPlaying">
           {{ $t("global.continue") }}
         </v-btn>
-        <v-btn color="red-darken-1" variant="tonal" rounded="xl" :slim="false" @click="restart">
+        <v-btn color="#F0F0F0" variant="tonal" rounded="xl" :slim="false" class="g-bt g-bt-restart font-weight-bold" @click="restart">
           {{ $t("global.restart") }}
         </v-btn>
       </v-card-actions>
@@ -88,17 +97,37 @@ onMounted(() => {
 
 <style scoped>
 .g-in-card {
-  width: 340px;
+  width: 355px;
   max-width: 100%;
   margin: auto;
   padding: 20px 5px;
 }
-
 .g-in-title {
   color: #28673C;
+  font-weight: bold;
+  font-size: 22px;
+  margin-top: 10px;
   margin-bottom: 20px;
 }
-
+.g-in-text {
+  color: #28673C;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 28px;
+  margin-bottom: 25px;
+}
+.g-bt {
+  font-size: 15px;
+  width: 140px;
+  max-width: 100%;
+  line-height: 18px;
+  background: linear-gradient(94deg, #28673C 7.42%, #07361C 166.68%);
+  text-wrap: balance;
+  pointer-events: all;
+}
+.g-bt-restart{
+  background: linear-gradient(94deg, #9f2e2e 7.42%, #d73b3b 166.68%);
+}
 :deep(.v-card__loader) {
   bottom: 0;
   top: auto;
@@ -107,5 +136,6 @@ onMounted(() => {
 :deep(.v-overlay__scrim) {
   opacity: 1;
   backdrop-filter: brightness(.95) blur(12px) grayscale(0.1);
+  background: none;
 }
 </style>

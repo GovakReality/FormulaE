@@ -18,7 +18,8 @@
   },
   "system": {
     "error": "Error",
-    "stillthere": "Are you still there?",
+    "still": "Are you still playing?",
+    "restartExperience": "The experience will restart in a few seconds.",
     "wait": "Please wait a few minutes before you try again."
   },  
   "menu": {

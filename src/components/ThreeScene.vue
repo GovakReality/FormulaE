@@ -300,12 +300,14 @@ watch(shouldCameraMove, () => {
       cameraMovement(initialPos, initialTarget);
       controls.minDistance = 3.5;
       controls.maxDistance = 7;
+      controls.autoRotateSpeed = -0.4;
     } else {
       let pos = new Vector3(...question.value.camPosition);
       let tar = new Vector3(...question.value.camTarget)
       cameraMovement(pos, tar);
       controls.maxDistance = question.value.ctrlMaxDist;
       controls.minDistance = question.value.ctrlMinDist;
+      controls.autoRotateSpeed = question.value.ctrlRotateSpeed;
     }
     shouldCameraMove.value = false;
   }

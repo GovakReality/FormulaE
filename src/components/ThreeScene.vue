@@ -232,7 +232,7 @@ const setCanvas = () => {
   controls = new OrbitControls(camera, canvas);
   controls.enableDamping = true;
   controls.autoRotate = true;
-  controls.autoRotateSpeed = 0.4;
+  controls.autoRotateSpeed = -0.4;
   // Controls limit
   controls.minDistance = 3.5;
   controls.maxDistance = 7;

@@ -425,6 +425,7 @@ window.addEventListener('keyup', handleKeyUp, false);
 
 onMounted(() => {
   window.addEventListener('resize', handleResize);
+  window.addEventListener('orientationchange', handleResize);
   setCanvas();
   animate();
 });

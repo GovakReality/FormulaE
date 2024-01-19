@@ -33,6 +33,7 @@ const timedScore = ref();
 
 const maxPoints = parseFloat(10000);
 const timeLeft = ref(maxPoints);
+const timeBarValue = ref(maxPoints);
 //const timeBarEl = ref(null);
 //const timeBarBgEl = ref(null);
 
@@ -190,6 +191,7 @@ const onAfterEnter = (el) => {
 
 const startTimer = () => {
   timeLeft.value = maxPoints;
+  timeBarValue.value = maxPoints;
   prevTime = performance.now();
   correctPoints.value = false;
   wrongPoints.value = false;
@@ -202,8 +204,10 @@ const timer = () => {
   let calc = (aux - prevTime);
   if (calc > clockStep) {
     timeLeft.value = (timeLeft.value - calc).toFixed(0);
+    timeBarValue.value = timeLeft.value;
     if (timeLeft.value <= 0) {
       timeLeft.value = 0;
+      timeBarValue.value = 0;
       cancelAnimationFrame(animFrame);
       showCorrectAnswer();
       wrongPoints.value = true;
@@ -223,8 +227,8 @@ const timeLeftFixed = computed(() => {
   return (timeLeft.value / 1000).toFixed(3).replace(".", ",");
 });
 
-const timeBarValue = computed(() => {
-  let x = normalizeToRange(timeLeft.value, 0, maxPoints, 0, 100);
+const timeBarValueFixed = computed(() => {
+  let x = normalizeToRange(timeBarValue.value, 0, maxPoints, 0, 100);
   return x.toFixed(0);
 });
 
@@ -242,7 +246,7 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
     <v-slide-y-reverse-transition @after-leave="onAfterLeave" @after-enter="onAfterEnter" group>
       <v-card v-if="expand" class="g-card py-4 px-4 rounded-xl" color="#F0F0F0" variant="flat">
         <template v-slot:loader="{ isActive }">
-          <v-progress-linear ref="timeBarEl" :active="true" :model-value="timeBarValue" color="#28673c" bg-color="#28673c" height="8"></v-progress-linear>
+          <v-progress-linear ref="timeBarEl" :active="true" :model-value="timeBarValueFixed" color="#28673c" bg-color="#28673c" height="8"></v-progress-linear>
         </template>
 
         <v-card-item>

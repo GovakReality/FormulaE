@@ -12,7 +12,7 @@ const quizStore = useQuizStore();
 const { shouldCameraMove, iniPosMove } = storeToRefs(quizStore);
 const APIStore = useAPIStore();
 
-const { idle, lastActive } = useIdle(15000);
+const { idle, lastActive } = useIdle(20000);
 const { counter, reset, pause, resume } = useInterval(100, { controls: true });
 
 const showInactivity = ref(false);

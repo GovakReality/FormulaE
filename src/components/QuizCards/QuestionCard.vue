@@ -33,6 +33,9 @@ const timedScore = ref();
 
 const maxPoints = parseFloat(10000);
 const timeLeft = ref(maxPoints);
+//const timeBarEl = ref(null);
+//const timeBarBgEl = ref(null);
+
 let animFrame;
 let prevTime;
 let clockStep = 10;
@@ -62,6 +65,9 @@ watch(cardIndex, () => {
     iniPosMove.value = false;
     shouldCameraMove.value = false;
     show.value = true;
+    //console.log(timeBarBgEl)
+    //timeBarBgEl.value = document.querySelector(".v-progress-linear__determinate");
+    //console.log(timeBarBgEl)
     expandCard();
   } else if (cardIndex.value == 0) {
     shouldReset.value = true;
@@ -83,7 +89,7 @@ watch(scoreFixed, () => {
 onMounted(() => {
   timedScore.value = scoreFixed.value;
 });
-  
+
 const expandCard = () => {
   quizStore.newQuestion(genType.value);
   quizStore.incrementRound();
@@ -127,6 +133,7 @@ const onClick = (val, event) => {
   setTimeout(() => {
     contractCard();
   }, 1500);
+  //timeBarBgEl.classList.add("timeBarAnimPause");
 };
 
 const showCorrectAnswer = () => {
@@ -176,6 +183,7 @@ const onAfterLeave = (el) => {
 }
 
 const onAfterEnter = (el) => {
+  //timeBarBgEl.classList.remove("timeBarAnimPause");
   startTimer();
 }
 
@@ -214,7 +222,7 @@ const timeLeftFixed = computed(() => {
   return (timeLeft.value / 1000).toFixed(3).replace(".", ",");
 });
 
-const timeBar = computed(() => {
+const timeBarValue = computed(() => {
   let x = normalizeToRange(timeLeft.value, 0, maxPoints, 0, 100);
   return x.toFixed(0);
 });
@@ -224,6 +232,7 @@ const roundWithPrecision = (num, precision) => {
   return Math.round(num * multiplier) / multiplier;
 }
 const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - oldMin) * (newMax - newMin)) / (oldMax - oldMin)) + newMin;
+
 </script>
 
 <template>
@@ -232,8 +241,7 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
     <v-slide-y-reverse-transition @after-leave="onAfterLeave" @after-enter="onAfterEnter" group>
       <v-card v-if="expand" class="g-card py-4 px-4 rounded-xl" color="#F0F0F0" variant="flat">
         <template v-slot:loader="{ isActive }">
-          <v-progress-linear :active="true" :model-value="timeBar" color="#28673c" bg-color="#28673c"
-            height="5"></v-progress-linear>
+          <v-progress-linear ref="timeBarEl" :active="true" :model-value="timeBarValue" color="#28673c" bg-color="#28673c" height="8"></v-progress-linear>
         </template>
 
         <v-card-item>
@@ -353,27 +361,27 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
   opacity: 100%;
   background: linear-gradient(94deg, #4bbf70 7.42%, #07361C 166.68%);
   background-size: 250% 250%;
-  -webkit-animation: backgroundAnime 2s ease infinite;
-  -moz-animation: backgroundAnime 2s ease infinite;
-  -o-animation: backgroundAnime 2s ease infinite;
-  animation: backgroundAnime 2s ease infinite;  
+  -webkit-animation: btBackgroundAnime 2s ease infinite;
+  -moz-animation: btBackgroundAnime 2s ease infinite;
+  -o-animation: btBackgroundAnime 2s ease infinite;
+  animation: btBackgroundAnime 2s ease infinite;  
 }
-@-webkit-keyframes backgroundAnime {
+@-webkit-keyframes btBackgroundAnime {
   0%{background-position:0% 39%}
   50%{background-position:100% 62%}
   100%{background-position:0% 39%}
 }
-@-moz-keyframes backgroundAnime {
+@-moz-keyframes btBackgroundAnime {
   0%{background-position:0% 39%}
   50%{background-position:100% 62%}
   100%{background-position:0% 39%}
 }
-@-o-keyframes backgroundAnime {
+@-o-keyframes btBackgroundAnime {
   0%{background-position:0% 39%}
   50%{background-position:100% 62%}
   100%{background-position:0% 39%}
 }
-@keyframes backgroundAnime {
+@keyframes btBackgroundAnime {
   0%{background-position:0% 39%}
   50%{background-position:100% 62%}
   100%{background-position:0% 39%}
@@ -504,6 +512,45 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
   transform: translate(0px, -60px);
   opacity: 0;
   transition: opacity 3.6s ease 0.1s, text-shadow 0.25s ease 0s, transform 1.25s cubic-bezier(0.165, 0.84, 0.44, 1) 0s;
+}
+
+:deep(.v-progress-linear__determinate) {
+  -webkit-animation: timerBackgroundAnime 10s ease infinite;
+  -moz-animation: timerBackgroundAnime 10s ease infinite;
+  -o-animation: timerBackgroundAnime 10s ease infinite;
+  animation: timerBackgroundAnime 10s ease infinite; 
+}
+
+.timeBarAnimPause {
+  -webkit-animation-play-state:paused;
+  -moz-animation-play-state:paused;
+  -o-animation-play-state:paused; 
+  animation-play-state:paused;
+}
+
+@-webkit-keyframes timerBackgroundAnime {
+  0%{background-color:#28673c}
+  40%{background-color:#5b5a3c}
+  75%{background-color:#a1493b}
+  100%{background-color:#d73b3b}
+}
+@-moz-keyframes timerBackgroundAnime {
+  0%{background-color:#28673c}
+  40%{background-color:#5b5a3c}
+  75%{background-color:#a1493b}
+  100%{background-color:#d73b3b}
+}
+@-o-keyframes timerBackgroundAnime {
+  0%{background-color:#28673c}
+  40%{background-color:#5b5a3c}
+  75%{background-color:#a1493b}
+  100%{background-color:#d73b3b}
+}
+@keyframes timerBackgroundAnime {
+  0%{background-color:#28673c}
+  40%{background-color:#5b5a3c}
+  75%{background-color:#a1493b}
+  100%{background-color:#d73b3b}
 }
 
 @media (max-width: 599px) {

@@ -1,5 +1,6 @@
 <script setup>
-import lockup from '/images/Lockup.png';
+import lockup from '/images/Logo-Lookup-en.svg';
+import lockupAr from '/images/Logo-Lookup-ar.svg';
 import { useLocale } from 'vuetify';
 
 const { isRtl } = useLocale();
@@ -7,7 +8,8 @@ const { isRtl } = useLocale();
 </script>
 
 <template>
-  <v-img :src="lockup" class="g-lockup"></v-img>
+  <v-img v-if="!isRtl" :src="lockup" class="g-lockup"></v-img>
+  <v-img v-if="isRtl" :src="lockupAr" class="g-lockup"></v-img>
 </template>
 
 <style scoped>

@@ -1,7 +1,7 @@
 <script setup>
 	import LanguageSwitcher from './LanguageSwitcher.vue';
 	import MainMenu from './MainMenu.vue';
-  import Lockup from '../Lockup.vue';
+  import Lockup from './Lockup.vue';
 </script>
 
 <template>

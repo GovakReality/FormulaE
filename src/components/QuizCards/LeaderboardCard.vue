@@ -20,8 +20,8 @@ const show = ref(false);
 const isTopTen = ref(false);
 const formattedPlayers = ref([]);
 
-//const { players } = storeToRefs(APIStore);
-const players = ref([
+const { players } = storeToRefs(APIStore);
+/* const players = ref([
   {
     full_name: 'JORDAN Mitchell',
     score: '82546',
@@ -69,9 +69,8 @@ const players = ref([
   {
     full_name: 'Chloe Bennett',
     score: '2312',
-  },
-
-]);
+  }
+]); */
 
 watch(cardIndex, () => {
   if (cardIndex.value == 12) {

@@ -72,13 +72,13 @@ watch(cardIndex, () => {
 const submit = async (event) => {
   loading.value = true;
   if (isFormValid) {
-    /*       APIStore.sendPlayer({
-            score: score.value,
-            full_name: fullName.value,
-            email: email.value,
-            consent: terms2.value,
-          }); */
-    APIStatus.value = 1; //remove
+    APIStore.sendPlayer({
+      score: score.value,
+      full_name: fullName.value,
+      email: email.value,
+      consent: terms2.value,
+    }); 
+    //APIStatus.value = 1; //remove
   }
 };
 

@@ -12,7 +12,7 @@ const quizStore = useQuizStore();
 const { shouldCameraMove, iniPosMove } = storeToRefs(quizStore);
 const APIStore = useAPIStore();
 
-const { idle, lastActive } = useIdle(20000);
+const { idle, lastActive } = useIdle(2000);
 const { counter, reset, pause, resume } = useInterval(100, { controls: true });
 
 const showInactivity = ref(false);
@@ -21,7 +21,7 @@ watch(idle, (idleValue) => {
   if (idleValue && cardIndex.value != 0) {
     showInactivity.value = true;
     reset();
-    resume();
+    //resume();
   }
 })
 
@@ -128,7 +128,9 @@ onMounted(() => {
 
 :deep(.v-overlay__scrim) {
   opacity: 1;
-  backdrop-filter: brightness(.95) blur(12px) grayscale(0.1);
   background: none;
+  background-color: rgba(0, 0, 0, 0.2);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
 }
 </style>

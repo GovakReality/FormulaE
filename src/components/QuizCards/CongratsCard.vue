@@ -4,7 +4,7 @@ import { useQuizStore } from '/src/stores/QuizStore';
 import { useAPIStore } from '/src/stores/APIStore';
 import { ref, watch } from 'vue';
 import { storeToRefs } from 'pinia';
-import saudiaLogo from '/images/SaudiaLogo.png';
+import saudiaLogo from '/images/SaudiaLogo.svg';
 import { useI18n } from 'vue-i18n';
 import { useLocale } from 'vuetify';
 

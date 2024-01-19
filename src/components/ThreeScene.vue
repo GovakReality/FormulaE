@@ -25,7 +25,7 @@ import pyTexture from '/textures/py.jpg';
 import nyTexture from '/textures/ny.jpg';
 import pzTexture from '/textures/pz.jpg';
 import nzTexture from '/textures/nz.jpg';
-import swipeHint from '/images/horizontal_swipe.png';
+import swipeHint from '/images/HorizontalSwipe.svg';
 
 // get stores
 const quizStore = useQuizStore();

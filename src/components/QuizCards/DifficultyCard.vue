@@ -3,7 +3,7 @@ import { useCardsStore } from '/src/stores/CardsStore';
 import { useQuizStore } from '/src/stores/QuizStore';
 import { ref, watch, onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
-import saudiaLogo from '/images/SaudiaLogo.png';
+import saudiaLogo from '/images/SaudiaLogo.svg';
 
 const cardsStore = useCardsStore();
 const { cardIndex } = storeToRefs(cardsStore);

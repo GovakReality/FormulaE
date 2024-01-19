@@ -5,7 +5,7 @@ import { useAPIStore } from '/src/stores/APIStore';
 import { ref, watch, computed, onMounted, onUnmounted } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useLocale } from 'vuetify';
-import saudiaLogo from '/images/SaudiaLogo.png';
+import saudiaLogo from '/images/SaudiaLogo.svg';
 
 const { isRtl } = useLocale();
 
@@ -385,7 +385,7 @@ const onAfterLeave = (el) => {
 
 .g-flag {
   display: inline-block;
-  background-image: url('/images/LeaderboardFlags.png');
+  background-image: url('/images/LeaderboardFlags.svg');
   background-size: 100% 100%;
   width: 17px;
   height: 100%;

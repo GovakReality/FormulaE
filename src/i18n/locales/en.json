@@ -23,8 +23,10 @@
     "wait": "Please wait a few minutes before you try again."
   },  
   "menu": {
-    "admin": "Admin",
-    "about": "About"
+    "termsAndConditions": "Terms and Conditions",
+    "termsUrl": "https://takeyourseat.saudia.com/formula-e/en/termsandconditions",
+    "privacyPolicy": "Privacy Policy",
+    "privacyUrl": "https://www.saudia.com/help/useful-links/legal-and-terms-and-conditions/privacy-policy?sc_lang=en&sc_country=SA"
   },
   "geninfo": {
     "gen3Year": "2023 - present",

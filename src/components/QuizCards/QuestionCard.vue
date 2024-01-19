@@ -124,6 +124,7 @@ const contractCard = () => {
 
 const onClick = (val, event) => {
   showCorrectAnswer();
+  neutralAnswers.value = true;
   cancelAnimationFrame(animFrame);
   if (val == question.value.correct) {
     quizStore.addScore(timeLeft.value);
@@ -138,7 +139,6 @@ const onClick = (val, event) => {
 };
 
 const showCorrectAnswer = () => {
-  neutralAnswers.value = true;
   switch (question.value.correct) {
     case 1:
       correctAnswer1.value = true;
@@ -209,8 +209,8 @@ const timer = () => {
       timeLeft.value = 0;
       timeBarValue.value = 0;
       cancelAnimationFrame(animFrame);
-      showCorrectAnswer();
       wrongPoints.value = true;
+      neutralAnswers.value = true;
       setTimeout(() => {
         contractCard(); // COMMENT THIS TO STOP
       }, 1500);      

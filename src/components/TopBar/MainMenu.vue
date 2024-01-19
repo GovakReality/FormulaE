@@ -1,11 +1,16 @@
 <script setup>
   import { computed, ref } from 'vue';
-  import { useI18n } from 'vue-i18n'
+  import { useI18n } from 'vue-i18n';
   const { t } = useI18n();
 
   const menuItems = ref([
-    { title:  computed(() => t('menu.admin'))},
-    { title:  computed(() => t('menu.about'))}
+    { 
+      title: computed(() => t('menu.termsAndConditions')),
+      href: computed(() => t('menu.termsUrl')),
+    },
+    { title:  computed(() => t('menu.privacyPolicy')),
+      href: computed(() => t('menu.privacyUrl')),
+    }
   ]);
 </script>
 <template>
@@ -14,14 +19,17 @@
       <v-btn icon="mdi-menu" v-bind="props" size="large" color="white" class="g-bt-menu"></v-btn>
     </template>
   
-    <v-list class="mt-2 text-center">
+    <v-list class="mt-2 text-center" item-type="link">
       <v-list-item
-        v-for="(item, i) in menuItems"
-        :key="i"
-        :value="item"
+      v-for="(item, i) in menuItems"
+      :key="i"
+      :value="item"
+      :href="item.href"
+      link
+      target="_blank"
       >
         <v-list-item-title class="g-menu-item">{{ item.title }}</v-list-item-title>
-      </v-list-item>     
+      </v-list-item> 
     </v-list>
   </v-menu>
 </template>

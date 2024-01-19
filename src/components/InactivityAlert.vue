@@ -21,7 +21,7 @@ watch(idle, (idleValue) => {
   if (idleValue && cardIndex.value != 0) {
     showInactivity.value = true;
     reset();
-    //resume();
+    resume();
   }
 })
 

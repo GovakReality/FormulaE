@@ -13,7 +13,7 @@ import InactivityAlert from './components/InactivityAlert.vue';
   <v-app>
 
     <TopBar />
-    <v-main class="g-main">
+    <v-main>
       <ThreeScene />
       <QuizCards />
       <GenInfo />
@@ -25,7 +25,4 @@ import InactivityAlert from './components/InactivityAlert.vue';
 </template>
 
 <style scoped>
-.g-main {
-  background-color: #b58956;
-}
 </style>

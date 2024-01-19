@@ -27,6 +27,7 @@ const errorMsg = ref('');
 
 const isFormValid = ref(false);
 const terms = ref(false);
+const terms2 = ref(false);
 
 const fullNameRules = [
   value => {
@@ -75,6 +76,7 @@ const submit = async (event) => {
             score: score.value,
             full_name: fullName.value,
             email: email.value,
+            consent: terms2.value,
           }); */
     APIStatus.value = 1; //remove
   }
@@ -135,11 +137,24 @@ const onAfterLeave = (el) => {
               <v-text-field v-model="email" :label="$t('global.email')" type="email" :rules="emailRules" variant="solo"
                 rounded="lg" bg-color="white" class="g-tfield mb-xxl-8" required></v-text-field>
 
-              <v-checkbox v-model="terms" :rules="termsRules" :center-affix=false color="white"
+              <v-checkbox 
+                v-model="terms" 
+                :rules="termsRules" 
+                :center-affix="false" 
+                color="white"
                 false-icon="mdi-checkbox-blank" hide-details class="g-terms"
                 :class="{ 'g-terms-l-def': !isRtl, 'g-terms-l-rtl': isRtl }" :ripple="false"
-                :label="$t('congrats.terms')"></v-checkbox>
+                :label="$t('congrats.terms')">
+              </v-checkbox>
 
+              <v-checkbox 
+                v-model="terms2" 
+                :center-affix="false"
+                color="white"
+                false-icon="mdi-checkbox-blank" hide-details class="g-terms"
+                :class="{ 'g-terms-l-def': !isRtl, 'g-terms-l-rtl': isRtl }" :ripple="false"
+                :label="$t('congrats.terms2')">
+              </v-checkbox>
               <v-btn :loading="loading" type="submit" rounded="xl" variant="tonal" :slim="false" :disabled="!isFormValid"
                 class="g-bt font-weight-black mb-2">{{ $t("global.continue") }}</v-btn>
             </v-form>

@@ -36,6 +36,7 @@ export const useAPIStore = defineStore('API', () => {
       score: val.score,
       full_name: val.full_name,
       email: val.email,
+      consent: val.consent,
     })
     .then((res) => {
       fetchLeaderboard();

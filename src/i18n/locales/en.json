@@ -44,8 +44,9 @@
   "congrats": {
     "title": "Congratulations!",
     "subtitle": "Your score is:",
-    "text": "Enter your information below to register for the prize draw:",
-    "terms": "I confirm that I am over 18 years of age and accept the terms and conditions and the Saudia Airlines Privacy Policy."
+    "text": "Enter your information below to register to win Signed Formula E Merchandise from Stoffle Vandoorne:",
+    "terms": "I confirm that I am over 18 years of age and accept the terms and conditions and the Saudia Airlines Privacy Policy.",
+    "terms2": "By ticking the following box, I consent to Saudia Airlines using my information to keep me up to date with the latest special offers and news via email, social media, digital video and display advertising. I understand I have the right to unsubscribe or update my preferences at any time by contacting Saudia Airlines (see Privacy Policy) or by following the unsubscribe instructions on company’s relevant communication."
   },  
   "leaderboard": {
     "title": "Your score is:",

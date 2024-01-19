@@ -17,13 +17,12 @@
 </template>
 
 <style scoped>
+.v-app-bar.v-toolbar {
+	background: #28673c !important;
+	background: linear-gradient(180deg, rgba(41,41,41,1) 0%, rgba(0,0,0,0.1) 85%, rgba(0,0,0,0) 100%) !important;
+}
 .g-bar {
 	pointer-events: none;
-	background: #28673c;
-	background: linear-gradient(180deg, rgba(41,41,41,1) 0%, rgba(0,0,0,0.1) 85%, rgba(0,0,0,0) 100%);
-}
-:deep(.v-app-bar.v-toolbar) {
-	background: none;
 }
 @media (min-width: 2560px) {
 	:deep(.v-toolbar__content) {

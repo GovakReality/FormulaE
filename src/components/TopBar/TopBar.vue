@@ -5,7 +5,7 @@
 </script>
 
 <template>
-	<v-app-bar flat color="transparent" class="pt-sm-5 pr-sm-5 g-bar">
+	<v-app-bar flat class="py-sm-5 pr-sm-5 g-bar">
 		<template v-slot:prepend>
 			<Lockup />
 		</template>		
@@ -19,6 +19,11 @@
 <style scoped>
 .g-bar {
 	pointer-events: none;
+	background: #28673c;
+	background: linear-gradient(180deg, rgba(41,41,41,1) 0%, rgba(0,0,0,0.1) 85%, rgba(0,0,0,0) 100%);
+}
+:deep(.v-app-bar.v-toolbar) {
+	background: none;
 }
 @media (min-width: 2560px) {
 	:deep(.v-toolbar__content) {

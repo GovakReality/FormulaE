@@ -157,6 +157,7 @@ const showCorrectAnswer = () => {
 }
 
 const showWrongAnswer = (val) => {
+  timeLeft.value = '0000';
   wrongPoints.value = true;
   switch (val) {
     case 1:

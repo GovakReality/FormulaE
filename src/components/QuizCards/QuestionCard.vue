@@ -26,9 +26,9 @@ const wrongAnswer2 = ref(false);
 const wrongAnswer3 = ref(false);
 const wrongAnswer4 = ref(false);
 const neutralAnswers = ref(false);
-const showPoints = ref(false);
 const correctPoints = ref(false);
 const wrongPoints = ref(false);
+const canClick = ref(true);
 const timedScore = ref();
 
 const maxPoints = parseFloat(10000);
@@ -105,7 +105,6 @@ const expandCard = () => {
 
 const contractCard = () => {
   expand.value = false;
-  showPoints.value = false;
   correctAnswer1.value = false;
   correctAnswer2.value = false;
   correctAnswer3.value = false;
@@ -123,19 +122,22 @@ const contractCard = () => {
 };
 
 const onClick = (val, event) => {
-  showCorrectAnswer();
-  neutralAnswers.value = true;
-  cancelAnimationFrame(animFrame);
-  if (val == question.value.correct) {
-    quizStore.addScore(timeLeft.value);
-    correctPoints.value = true;
-  } else {
-    showWrongAnswer(val);
+  if (canClick.value) {
+    canClick.value = false;
+    showCorrectAnswer();
+    neutralAnswers.value = true;
+    cancelAnimationFrame(animFrame);
+    if (val == question.value.correct) {
+      quizStore.addScore(timeLeft.value);
+      correctPoints.value = true;
+    } else {
+      showWrongAnswer(val);
+    }
+    setTimeout(() => {
+      contractCard();
+    }, 1500);
+    //timeBarBgEl.classList.add("timeBarAnimPause");
   }
-  setTimeout(() => {
-    contractCard();
-  }, 1500);
-  //timeBarBgEl.classList.add("timeBarAnimPause");
 };
 
 const showCorrectAnswer = () => {
@@ -182,6 +184,7 @@ const onAfterLeave = (el) => {
   if (!shouldReset.value) {
     cardsStore.incrementCardIndex();
   }  
+  timeBarValue.value = maxPoints;
 }
 
 const onAfterEnter = (el) => {
@@ -191,11 +194,10 @@ const onAfterEnter = (el) => {
 
 const startTimer = () => {
   timeLeft.value = maxPoints;
-  timeBarValue.value = maxPoints;
   prevTime = performance.now();
   correctPoints.value = false;
   wrongPoints.value = false;
-  showPoints.value = true;
+  canClick.value = true;
   timer();
 };
 
@@ -299,7 +301,7 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
     <v-sheet v-if="show" class="g-hud" :class="{ 'g-hud-l-def': !isRtl, 'g-hud-l-rtl': isRtl }">
       <v-slide-y-reverse-transition group>
         <v-sheet v-if="expandHud" class="g-hud-w">
-          <div :class="{ 'g-show-points': showPoints, 'g-correct-points': correctPoints, 'g-wrong-points': wrongPoints, 'g-hud-total-def': !isRtl, 'g-hud-total-rtl': isRtl }" class="g-hud-total py-1">
+          <div :class="{ 'g-correct-points': correctPoints, 'g-wrong-points': wrongPoints, 'g-hud-total-def': !isRtl, 'g-hud-total-rtl': isRtl }" class="g-hud-total g-show-points py-1">
             +{{ timeLeftFixed }} {{ $t("global.pts") }}
           </div>
           <div class="g-hud-round px-4 py-1">{{ $t("global.round") }}
@@ -492,7 +494,7 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
 }
 
 .g-show-points {
-  opacity: 100%;;
+  opacity: 1;
 }
 
 .g-correct-points {
@@ -503,8 +505,8 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
     -1px -1px 0 #F0F0F000,
     1px -1px 0 #F0F0F000;
   transform: translate(0px, -60px);
-  opacity: 0;
-  transition: opacity 3.6s ease 0.1s, text-shadow 0.25s ease 0s, transform 1.25s cubic-bezier(0.165, 0.84, 0.44, 1) 0s;
+  transition: text-shadow 0.25s ease 0s, transform 1.25s cubic-bezier(0.165, 0.84, 0.44, 1) 0s;
+  animation: opacityAnim 3.6s ease 0.1s 1; 
 }
 
 .g-wrong-points {
@@ -515,8 +517,13 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
     -1px -1px 0 #F0F0F000,
     1px -1px 0 #F0F0F000;
   transform: translate(0px, -60px);
-  opacity: 0;
-  transition: opacity 3.6s ease 0.1s, text-shadow 0.25s ease 0s, transform 1.25s cubic-bezier(0.165, 0.84, 0.44, 1) 0s;
+  transition: text-shadow 0.25s ease 0s, transform 1.25s cubic-bezier(0.165, 0.84, 0.44, 1) 0s;
+  animation: opacityAnim 3.6s ease 0.1s 1; 
+}
+
+@keyframes opacityAnim {
+  0%    { opacity: 1; }
+  100%  { opacity: 0; }
 }
 
 :deep(.v-progress-linear__determinate) {

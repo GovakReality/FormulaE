@@ -34,8 +34,7 @@ const timedScore = ref();
 const maxPoints = parseFloat(10000);
 const timeLeft = ref(maxPoints);
 const timeBarValue = ref(maxPoints);
-//const timeBarEl = ref(null);
-//const timeBarBgEl = ref(null);
+const timeBarColor = ref('#28673c');
 
 let animFrame;
 let prevTime;
@@ -66,9 +65,6 @@ watch(cardIndex, () => {
     iniPosMove.value = false;
     shouldCameraMove.value = false;
     show.value = true;
-    //console.log(timeBarBgEl)
-    //timeBarBgEl.value = document.querySelector(".v-progress-linear__determinate");
-    //console.log(timeBarBgEl)
     expandCard();
   } else if (cardIndex.value == 0) {
     shouldReset.value = true;
@@ -136,7 +132,6 @@ const onClick = (val, event) => {
     setTimeout(() => {
       contractCard();
     }, 1500);
-    //timeBarBgEl.classList.add("timeBarAnimPause");
   }
 };
 
@@ -185,10 +180,10 @@ const onAfterLeave = (el) => {
     cardsStore.incrementCardIndex();
   }  
   timeBarValue.value = maxPoints;
+  timeBarColor.value = '#28673c';
 }
 
-const onAfterEnter = (el) => {
-  //timeBarBgEl.classList.remove("timeBarAnimPause");
+const onAfterEnter = (el) => {   
   startTimer();
 }
 
@@ -207,6 +202,20 @@ const timer = () => {
   if (calc > clockStep) {
     timeLeft.value = (timeLeft.value - calc).toFixed(0);
     timeBarValue.value = timeLeft.value;
+    //start bar colors
+    if (timeLeft.value <= 7800) { 
+      timeBarColor.value = '#525c3c';
+    }
+    if (timeLeft.value <= 5800) { 
+      timeBarColor.value = '#8e4d3c';
+    }
+    if (timeLeft.value <= 2800) { 
+      timeBarColor.value = '#b9423b';
+    }  
+    if (timeLeft.value <= 1200) { 
+      timeBarColor.value = '#d73b3b';
+    }      
+    //end bar colors      
     if (timeLeft.value <= 0) {
       timeLeft.value = 0;
       timeBarValue.value = 0;
@@ -248,7 +257,7 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
     <v-slide-y-reverse-transition @after-leave="onAfterLeave" @after-enter="onAfterEnter" group>
       <v-card v-if="expand" class="g-card py-4 px-4 rounded-xl" color="#F0F0F0" variant="flat">
         <template v-slot:loader="{ isActive }">
-          <v-progress-linear ref="timeBarEl" :active="true" :model-value="timeBarValueFixed" color="#28673c" bg-color="#28673c" height="8"></v-progress-linear>
+          <v-progress-linear ref="timeBarEl" :active="true" :model-value="timeBarValueFixed" :color="timeBarColor" bg-color="#28673c" height="8"></v-progress-linear>
         </template>
 
         <v-card-item>
@@ -526,44 +535,6 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
   100%  { opacity: 0; }
 }
 
-:deep(.v-progress-linear__determinate) {
-  -webkit-animation: timerBackgroundAnime 10s ease infinite;
-  -moz-animation: timerBackgroundAnime 10s ease infinite;
-  -o-animation: timerBackgroundAnime 10s ease infinite;
-  animation: timerBackgroundAnime 10s ease infinite; 
-}
-
-.timeBarAnimPause {
-  -webkit-animation-play-state:paused;
-  -moz-animation-play-state:paused;
-  -o-animation-play-state:paused; 
-  animation-play-state:paused;
-}
-
-@-webkit-keyframes timerBackgroundAnime {
-  0%{background-color:#28673c}
-  40%{background-color:#5b5a3c}
-  75%{background-color:#a1493b}
-  100%{background-color:#d73b3b}
-}
-@-moz-keyframes timerBackgroundAnime {
-  0%{background-color:#28673c}
-  40%{background-color:#5b5a3c}
-  75%{background-color:#a1493b}
-  100%{background-color:#d73b3b}
-}
-@-o-keyframes timerBackgroundAnime {
-  0%{background-color:#28673c}
-  40%{background-color:#5b5a3c}
-  75%{background-color:#a1493b}
-  100%{background-color:#d73b3b}
-}
-@keyframes timerBackgroundAnime {
-  0%{background-color:#28673c}
-  40%{background-color:#5b5a3c}
-  75%{background-color:#a1493b}
-  100%{background-color:#d73b3b}
-}
 
 @media (max-width: 599px) {
   .g-card {

@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, onUnmounted, ref, computed, watch } from 'vue';
+import { onMounted, onUnmounted, ref, computed, watch, provide } from 'vue';
 import { PerspectiveCamera, Scene, WebGLRenderer, Vector3, DirectionalLight, LoadingManager, EquirectangularReflectionMapping, CubeTextureLoader, SRGBColorSpace, CineonToneMapping, LightProbe, WebGLCubeRenderTarget, CubeCamera, Fog } from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
@@ -12,6 +12,7 @@ import { useCardsStore } from '/src/stores/CardsStore';
 import { useLoadingStore } from '/src/stores/LoadingStore';
 import { useGraphicsStore } from '/src/stores/GraphicsStore';
 import { useCameraStore } from '/src/stores/CameraStore';
+import UIHint from './UIHint.vue';
 import { storeToRefs } from 'pinia';
 
 import raceTrackGLB from '/models/RaceTrack.glb?url';
@@ -25,7 +26,6 @@ import pyTexture from '/textures/py.jpg';
 import nyTexture from '/textures/ny.jpg';
 import pzTexture from '/textures/pz.jpg';
 import nzTexture from '/textures/nz.jpg';
-import swipeHint from '/images/HorizontalSwipe.svg';
 
 // get stores
 const quizStore = useQuizStore();
@@ -41,13 +41,13 @@ const { cameraTargetX, cameraTargetY, cameraTargetZ } = storeToRefs(cameraStore)
 
 // global variables
 const webGl = ref();
+provide("webGlCanvas", webGl);
 const windowWidth = ref(window.innerWidth);
 const windowHeight = ref(window.innerHeight);
 const aspectRatio = computed(() => {
   return windowWidth.value / windowHeight.value;
 });
 const shouldBlur = ref(false);
-const expandHint = ref(false);
 
 let camera;
 let renderer;
@@ -108,7 +108,6 @@ manager.onStart = function (item, loaded, total) {
 manager.onLoad = function () {
   // console.log('Loading complete');   
   loadComplete.value = true;
-  expandHint.value = true;
 };
 
 manager.onProgress = function (item, loaded, total) {
@@ -128,9 +127,6 @@ watch(cardIndex, () => {
     shouldBlur.value = true;
   } else {
     shouldBlur.value = false;
-  }
-  if (cardIndex.value > 0) {
-    expandHint.value = false;
   }
 });
 
@@ -429,33 +425,23 @@ function handleKeyUp(event) {
 window.addEventListener('keydown', handleKeyDown, false);
 window.addEventListener('keyup', handleKeyUp, false);
 
-const handleTouch = (e) => {
-  expandHint.value = false;
-}
-
 onMounted(() => {
   window.addEventListener('resize', handleResize);
   window.addEventListener('orientationchange', handleResize);
-
-  webGl.value.addEventListener('ontouchstart', handleTouch, false);
-  webGl.value.addEventListener('touchmove', handleTouch, false);
-  webGl.value.addEventListener('mousedown', handleTouch, false); 
-  
   setCanvas();
   animate();
 });
 
 onUnmounted(() => {
   window.removeEventListener('resize', handleResize);
+  window.removeEventListener('orientationchange', handleResize);
 })
 
 </script>
 
 <template>
   <canvas ref="webGl" class="webGl" :class="{ blur: shouldBlur }" />
-  <v-slide-y-reverse-transition>
-    <v-img v-if="expandHint" :src=swipeHint width="90" class="g-hint"></v-img>
-  </v-slide-y-reverse-transition>  
+  <UIHint /> 
 </template>
 
 <style scoped>
@@ -486,29 +472,5 @@ onUnmounted(() => {
   -moz-transition: 0.5s -moz-filter linear;
   -ms-transition: 0.5s -ms-filter linear;
   -o-transition: 0.5s -o-filter linear;
-}
-.g-hint {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;  
-  text-align: center;
-  margin: 0 auto 250px auto;
-  pointer-events: none;
-  animation: myAnim 4s ease-in-out 0s infinite normal forwards;
-}
-
-@keyframes myAnim {
-	0%,
-	50%,
-	100% {
-		transform: translateX(30px) rotate(15deg);
-	}
-
-	25%,
-	75% {
-		transform: translateX(0px) ;
-	}
 }
 </style>

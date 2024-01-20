@@ -143,8 +143,14 @@ const onAfterLeave = (el) => {
                 :center-affix="false" 
                 color="white"
                 false-icon="mdi-checkbox-blank" hide-details class="g-terms"
-                :class="{ 'g-terms-l-def': !isRtl, 'g-terms-l-rtl': isRtl }" :ripple="false"
-                :label="$t('congrats.terms')">
+                :class="{ 'g-terms-l-def': !isRtl, 'g-terms-l-rtl': isRtl }" :ripple="false">
+                <template v-slot:label>
+                  <i18n-t keypath="congrats.terms" tag="span" scope="global">
+                    <template v-slot:url>
+                      <a :href="$t('menu.termsUrl')" target="_blank">{{ $t('menu.termsAndConditions') }}</a>
+                    </template>
+                  </i18n-t>                  
+                </template>                
               </v-checkbox>
 
               <v-checkbox 
@@ -152,8 +158,14 @@ const onAfterLeave = (el) => {
                 :center-affix="false"
                 color="white"
                 false-icon="mdi-checkbox-blank" hide-details class="g-terms"
-                :class="{ 'g-terms-l-def': !isRtl, 'g-terms-l-rtl': isRtl }" :ripple="false"
-                :label="$t('congrats.terms2')">
+                :class="{ 'g-terms-l-def': !isRtl, 'g-terms-l-rtl': isRtl }" :ripple="false">
+                <template v-slot:label>
+                  <i18n-t keypath="congrats.terms2" tag="span" scope="global">
+                    <template v-slot:url>
+                      <a :href="$t('menu.privacyUrl')" target="_blank">{{ $t('menu.privacyPolicy') }}</a>
+                    </template>
+                  </i18n-t>                  
+                </template>                 
               </v-checkbox>
               <v-btn :loading="loading" type="submit" rounded="xl" variant="tonal" :slim="false" :disabled="!isFormValid"
                 class="g-bt font-weight-black mb-2">{{ $t("global.continue") }}</v-btn>

@@ -2,8 +2,10 @@
   import { onMounted, onUnmounted, ref, watch, inject } from 'vue';
   import { useCardsStore } from '/src/stores/CardsStore';
   import { storeToRefs } from 'pinia';
-  import swipeHint from '/images/HorizontalSwipe.svg';
-  
+  import swipeHint from '/images/HandIcon.svg';
+  import swipeRight from '/images/HandArrowRightIcon.svg';
+  import swipeLeft from '/images/HandArrowLeftIcon.svg';
+
   const cardsStore = useCardsStore();
   const { cardIndex } = storeToRefs(cardsStore);
   const expandHint = ref(false);
@@ -92,33 +94,100 @@
 </script>
 <template>
   <v-slide-y-reverse-transition>
-    <v-img v-if="expandHint" :src=swipeHint width="90" class="g-hint"></v-img>
+    <v-sheet v-if="expandHint" class="g-sheet g-hint">
+      <v-sheet class="g-sheet g-arrows-wrapper">
+        <v-img :src=swipeLeft class="g-arrow g-left-arrow"></v-img>
+        <v-img :src=swipeRight class="g-arrow g-right-arrow"></v-img>
+      </v-sheet>      
+      <v-sheet class="g-sheet g-hand-wrapper">
+        <v-img :src=swipeHint class="g-hand"></v-img>
+      </v-sheet>
+    </v-sheet>
   </v-slide-y-reverse-transition>  
 </template>
 
 <style scoped>
+.g-sheet {
+  background-color: transparent;
+}
 .g-hint {
   position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;  
-  text-align: center;
-  margin: 0 auto 250px auto;
+  bottom: 100px;
+  left: 50%;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: -50px;
+  width: 100px;
+  height: 100px;
   pointer-events: none;
-  animation: myAnim 4s ease-in-out 0s infinite normal forwards;
+}
+.g-arrows-wrapper {
+  position: relative;
+}
+.g-hand-wrapper {
+  position: relative;
+}
+.g-arrow {
+  margin: auto;  
+  width: 35px;
+}
+.g-left-arrow {
+  margin-left: -6px;
+  opacity: 0;
+  animation: opacityAnimLeft 4s ease-in-out 0s infinite normal forwards;  
+}
+.g-right-arrow {
+  margin-top: -12px;
+  margin-left: 30px;
+  animation: opacityAnimRight 4s ease-in-out 4s infinite normal forwards; 
+}
+.g-hand {
+  margin-top: 10px;
+  width: 60px;
+  max-width: 100%;
+  pointer-events: none;
+  animation: myAnim 8s ease-in-out 0s infinite normal forwards;
 }
 
 @keyframes myAnim {
 	0%,
 	50%,
 	100% {
-		transform: translateX(30px) rotate(15deg);
+		transform: translateX(20px) rotate(15deg);
 	}
 
 	25%,
 	75% {
 		transform: translateX(0px) ;
 	}
+}
+@keyframes opacityAnimLeft {
+  0%    { opacity: 0; }
+  50%   { opacity: 1; }
+  100%  { opacity: 0; }
+}
+@keyframes opacityAnimRight {
+  0%    { opacity: 1; }
+  50%   { opacity: 0; }
+  100%  { opacity: 1; }
+}
+
+@media (max-width: 669px) {
+  .g-hint {
+    bottom: 200px;
+    left: 30%;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: -75px;
+  }
+}
+@media (max-width: 599px) {
+  .g-hint {
+    bottom: 300px;
+    left: 50%;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: -50px;
+  }
 }
 </style>

@@ -530,11 +530,22 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
   animation: opacityAnim 3.6s ease 0.1s 1; 
 }
 
+@-webkit-keyframes opacityAnim {
+  0%    { opacity: 1; }
+  100%  { opacity: 0; }
+}
+@-moz-keyframes opacityAnim {
+  0%    { opacity: 1; }
+  100%  { opacity: 0; }
+}
+@-o-keyframes opacityAnim {
+  0%    { opacity: 1; }
+  100%  { opacity: 0; }
+}
 @keyframes opacityAnim {
   0%    { opacity: 1; }
   100%  { opacity: 0; }
 }
-
 
 @media (max-width: 599px) {
   .g-card {

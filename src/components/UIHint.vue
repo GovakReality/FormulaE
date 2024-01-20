@@ -148,7 +148,42 @@
   pointer-events: none;
   animation: myAnim 8s ease-in-out 0s infinite normal forwards;
 }
+@-webkit-keyframes myAnim {
+	0%,
+	50%,
+	100% {
+		transform: translateX(20px) rotate(15deg);
+	}
 
+	25%,
+	75% {
+		transform: translateX(0px) ;
+	}
+}
+@-moz-keyframes myAnim {
+	0%,
+	50%,
+	100% {
+		transform: translateX(20px) rotate(15deg);
+	}
+
+	25%,
+	75% {
+		transform: translateX(0px) ;
+	}
+}
+@-o-keyframes myAnim {
+	0%,
+	50%,
+	100% {
+		transform: translateX(20px) rotate(15deg);
+	}
+
+	25%,
+	75% {
+		transform: translateX(0px) ;
+	}
+}
 @keyframes myAnim {
 	0%,
 	50%,
@@ -161,10 +196,41 @@
 		transform: translateX(0px) ;
 	}
 }
+@-webkit-keyframes opacityAnimLeft {
+  0%    { opacity: 0; }
+  50%   { opacity: 1; }
+  100%  { opacity: 0; }
+}
+@-moz-keyframes opacityAnimLeft {
+  0%    { opacity: 0; }
+  50%   { opacity: 1; }
+  100%  { opacity: 0; }
+}
+@-o-keyframes opacityAnimLeft {
+  0%    { opacity: 0; }
+  50%   { opacity: 1; }
+  100%  { opacity: 0; }
+}
 @keyframes opacityAnimLeft {
   0%    { opacity: 0; }
   50%   { opacity: 1; }
   100%  { opacity: 0; }
+}
+
+@-webkit-keyframes opacityAnimRight {
+  0%    { opacity: 1; }
+  50%   { opacity: 0; }
+  100%  { opacity: 1; }
+}
+@-moz-keyframes opacityAnimRight {
+  0%    { opacity: 1; }
+  50%   { opacity: 0; }
+  100%  { opacity: 1; }
+}
+@-o-keyframes opacityAnimRight {
+  0%    { opacity: 1; }
+  50%   { opacity: 0; }
+  100%  { opacity: 1; }
 }
 @keyframes opacityAnimRight {
   0%    { opacity: 1; }

@@ -181,6 +181,8 @@ const onAfterLeave = (el) => {
   }  
   timeBarValue.value = maxPoints;
   timeBarColor.value = '#28673c';
+  wrongPoints.value = false;
+  timeLeft.value = maxPoints;
 }
 
 const onAfterEnter = (el) => {   
@@ -188,10 +190,8 @@ const onAfterEnter = (el) => {
 }
 
 const startTimer = () => {
-  timeLeft.value = maxPoints;
   prevTime = performance.now();
   correctPoints.value = false;
-  wrongPoints.value = false;
   canClick.value = true;
   timer();
 };

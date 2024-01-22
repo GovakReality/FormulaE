@@ -2,6 +2,7 @@
 import { useCardsStore } from '/src/stores/CardsStore';
 import { useQuizStore } from '/src/stores/QuizStore';
 import { useAPIStore } from '/src/stores/APIStore';
+import { useCameraStore } from '/src/stores/CameraStore';
 import { ref, watch, computed, onMounted, onUnmounted } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useLocale } from 'vuetify';
@@ -14,6 +15,7 @@ const { cardIndex } = storeToRefs(cardsStore);
 const quizStore = useQuizStore();
 const { fullName, email, score, scoreFixed } = storeToRefs(quizStore);
 const APIStore = useAPIStore();
+const cameraStore = useCameraStore();
 
 const expand = ref(false);
 const show = ref(false);
@@ -135,6 +137,7 @@ const onAfterLeave = (el) => {
   show.value = false;
   cardsStore.reset();
   quizStore.reset();
+  cameraStore.reset();
   APIStore.reset();
 }
 
@@ -229,6 +232,7 @@ const onAfterLeave = (el) => {
 .g-sheet {
   background-color: transparent;
 }
+
 .g-card {
   color: #F0F0F0;
   background: linear-gradient(68deg, #07361C 9.84%, #28673C 76.17%);

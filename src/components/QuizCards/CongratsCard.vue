@@ -2,6 +2,7 @@
 import { useCardsStore } from '/src/stores/CardsStore';
 import { useQuizStore } from '/src/stores/QuizStore';
 import { useAPIStore } from '/src/stores/APIStore';
+import { useCameraStore } from '/src/stores/CameraStore';
 import { ref, watch } from 'vue';
 import { storeToRefs } from 'pinia';
 import saudiaLogo from '/images/SaudiaLogo.svg';
@@ -17,6 +18,7 @@ const quizStore = useQuizStore();
 const { fullName, email, score, scoreFixed } = storeToRefs(quizStore);
 const APIStore = useAPIStore();
 const { APIStatus } = storeToRefs(APIStore);
+const cameraStore = useCameraStore();
 
 const expand = ref(false);
 const show = ref(false);
@@ -104,6 +106,7 @@ const onAfterLeave = (el) => {
   if (shouldReset.value) {
     cardsStore.reset();
     quizStore.reset();
+    cameraStore.reset();
     APIStore.reset();
   } else {
     cardsStore.incrementCardIndex();

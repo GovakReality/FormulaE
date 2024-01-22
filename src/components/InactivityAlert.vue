@@ -2,6 +2,7 @@
 import { ref, watch, computed, onMounted } from 'vue';
 import { useCardsStore } from '/src/stores/CardsStore';
 import { useQuizStore } from '/src/stores/QuizStore';
+import { useCameraStore } from '/src/stores/CameraStore';
 import { useAPIStore } from '/src/stores/APIStore';
 import { storeToRefs } from 'pinia';
 import { useIdle, useTimestamp, useInterval } from '@vueuse/core'
@@ -10,10 +11,11 @@ const cardsStore = useCardsStore();
 const { cardIndex } = storeToRefs(cardsStore);
 const quizStore = useQuizStore();
 const { shouldCameraMove, iniPosMove } = storeToRefs(quizStore);
+const cameraStore = useCameraStore();
 const APIStore = useAPIStore();
 const { isLoading } = storeToRefs(APIStore);
 
-const { idle, lastActive, reset:idleReset } = useIdle(25000);
+const { idle, lastActive, reset: idleReset } = useIdle(25000);
 const { counter, reset, pause, resume } = useInterval(100, { controls: true });
 
 const showInactivity = ref(false);
@@ -35,7 +37,7 @@ watch(counter, (val) => {
 
 watch(isLoading, (val) => {
   if (val) {
-    idleInterval = setInterval(function () {idleReset();}, 1000);
+    idleInterval = setInterval(function () { idleReset(); }, 1000);
   } else {
     clearInterval(idleInterval);
   }
@@ -53,6 +55,7 @@ const restart = (event) => {
   iniPosMove.value = true;
   cardsStore.reset();
   quizStore.reset();
+  cameraStore.reset();
   APIStore.reset();
   showInactivity.value = false;
 };

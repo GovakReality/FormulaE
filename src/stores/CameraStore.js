@@ -8,5 +8,9 @@ export const useCameraStore = defineStore('camera', () => {
   const cameraTargetZ = ref(2);
   const currentCar = ref(3);
 
-  return { cameraTargetX, cameraTargetY, cameraTargetZ, currentCar };
+  function reset() {
+    currentCar.value = 3;
+  };
+
+  return { cameraTargetX, cameraTargetY, cameraTargetZ, currentCar, reset };
 })

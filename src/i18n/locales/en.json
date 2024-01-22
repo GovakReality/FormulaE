@@ -1,4 +1,4 @@
-{  
+{
   "locale": {
     "en": "English",
     "ar": "عرب"
@@ -12,11 +12,21 @@
     "tryagain": "Try Again",
     "fullname": "Full Name",
     "email": "E-mail",
-    "continue": "Continue"
+    "continue": "Continue",
+    "restart": "Restart",
+    "close": "Close"
+  },
+  "system": {
+    "error": "Error",
+    "still": "Are you still playing?",
+    "restartExperience": "The experience will restart in a few seconds.",
+    "wait": "Please wait a few minutes before you try again."
   },
   "menu": {
-    "admin": "Admin",
-    "about": "About"
+    "termsAndConditions": "Terms and Conditions",
+    "termsUrl": "https://takeyourseat.saudia.com/formula-e/en/termsandconditions",
+    "privacyPolicy": "Privacy Policy",
+    "privacyUrl": "https://www.saudia.com/help/useful-links/legal-and-terms-and-conditions/privacy-policy?sc_lang=en&sc_country=SA"
   },
   "geninfo": {
     "gen3Year": "2023 - present",
@@ -36,9 +46,10 @@
   "congrats": {
     "title": "Congratulations!",
     "subtitle": "Your score is:",
-    "text": "Enter your information below to register for the prize draw:",
-    "terms": "I confirm that I am over 18 years of age and accept the terms and conditions and the Saudia Airlines Privacy Policy."
-  },  
+    "text": "Enter your information below to register to win Signed Formula E Merchandise from Stoffle Vandoorne:",
+    "terms": "I confirm that I am over 18 years of age and accept the {urlTermsAndConditions} and the Saudia Airlines {urlPrivacyPolicy}.",
+    "terms2": "I consent to Saudia Airlines using my information to keep me up to date with the latest special offers and news via email, social media, digital video and display advertising. ({urlPrivacyPolicy})"
+  },
   "leaderboard": {
     "title": "Your score is:",
     "tip": "Tip: answer faster to score more points!",
@@ -47,16 +58,16 @@
     "top10": "TOP 10"
   },
   "rules": {
-    "name":{
+    "name": {
       "required": "You must enter your full name.",
       "length": "Full name must be at least 2 characters."
     },
-    "email":{
+    "email": {
       "required": "E-mail is requred.",
       "format": "E-mail must be valid."
     },
-    "terms":{
+    "terms": {
       "required": "You should agree."
-    }      
+    }
   }
 }

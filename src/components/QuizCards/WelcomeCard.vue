@@ -3,7 +3,7 @@ import { useCardsStore } from '/src/stores/CardsStore';
 import { useLoadingStore } from '/src/stores/LoadingStore';
 import { ref, watch, onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
-import saudiaLogo from '/images/SaudiaLogo.png';
+import saudiaLogo from '/images/SaudiaLogo.svg';
 
 const cardsStore = useCardsStore();
 const { cardIndex } = storeToRefs(cardsStore);
@@ -44,21 +44,21 @@ onMounted(() => {
 </script>
 
 <template>
-  <v-sheet v-if="show" class="d-flex align-center align-sm-end justify-center justify-sm-end h-100 px-2 px-sm-9 pb-sm-10">
+  <v-sheet v-if="show" class="d-flex align-end justify-center justify-sm-end h-100 px-2 px-sm-9 pb-sm-10">
     <v-slide-y-reverse-transition @after-leave="onAfterLeave">
-      <v-card v-if="expand" class="g-card py-4 rounded-xl" variant="flat">
-        <v-card-item class="text-center">
+      <v-card v-if="expand" class="g-card py-1 py-sm-4 rounded-xl" variant="flat">
+        <v-card-item class="text-center g-card-item">
 
-          <v-img :src=saudiaLogo width="128" class="text-center justify-center mx-auto"></v-img>
+          <v-img :src=saudiaLogo width="128" class="text-center justify-center mx-auto g-img"></v-img>
           <h3 class="g-title">
             {{ $t("welcome.title") }}
           </h3>
 
-          <h3 class="g-text">
+          <h3 class="g-text d-none d-sm-block">
             {{ $t("welcome.subtitle") }}
           </h3>
         </v-card-item>
-        <v-card-actions class="text-center justify-center">
+        <v-card-actions class="text-center justify-center g-card-actions">
           <v-btn rounded="xl" variant="tonal" :slim="false" @click="onClick" class="g-bt-start font-weight-black my-2">
             {{ $t("welcome.start") }}
           </v-btn>
@@ -118,6 +118,22 @@ onMounted(() => {
   .g-card {
     width: 333px;
   }
+  .g-card-item {
+    padding: 5px;
+    padding-top: 10px;
+  }
+  .g-card-actions {
+    padding-top: 0px;
+  }
+  .g-img {
+    width: 110px !important;
+  }
+  .g-title {
+    font-size: clamp(18px, 3dvh, 20px);
+    line-height: 26px;
+    padding-top: 18px;
+    padding-bottom: 0px;
+  }  
 }
 
 @media (min-width: 2560px) {

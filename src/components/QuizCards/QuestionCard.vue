@@ -1,7 +1,7 @@
 <script setup>
 import { useCardsStore } from '/src/stores/CardsStore';
 import { useQuizStore } from '/src/stores/QuizStore';
-import { ref, watch, computed } from 'vue';
+import { ref, watch, computed, onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useLocale } from 'vuetify';
 
@@ -10,11 +10,12 @@ const { isRtl, current } = useLocale();
 const cardsStore = useCardsStore();
 const { cardIndex } = storeToRefs(cardsStore);
 const quizStore = useQuizStore();
-const { question, round, scoreFixed, shouldCameraMove, quizEnded } = storeToRefs(quizStore);
+const { question, round, scoreFixed, shouldCameraMove, iniPosMove } = storeToRefs(quizStore);
 
 const expand = ref(false);
 const show = ref(false);
 const expandHud = ref(false);
+const shouldReset = ref(false);
 const genType = ref('');
 const correctAnswer1 = ref(false);
 const correctAnswer2 = ref(false);
@@ -25,12 +26,16 @@ const wrongAnswer2 = ref(false);
 const wrongAnswer3 = ref(false);
 const wrongAnswer4 = ref(false);
 const neutralAnswers = ref(false);
-const showPoints = ref(false);
 const correctPoints = ref(false);
 const wrongPoints = ref(false);
+const canClick = ref(true);
+const timedScore = ref();
 
 const maxPoints = parseFloat(10000);
 const timeLeft = ref(maxPoints);
+const timeBarValue = ref(maxPoints);
+const timeBarColor = ref('#28673c');
+
 let animFrame;
 let prevTime;
 let clockStep = 10;
@@ -56,11 +61,30 @@ watch(cardIndex, () => {
       default:
         genType.value = 'gen3';
     };
+    shouldReset.value = false;
+    iniPosMove.value = false;
+    shouldCameraMove.value = false;
     show.value = true;
     expandCard();
+  } else if (cardIndex.value == 0) {
+    shouldReset.value = true;
+    contractCard();
+    show.value = false;
+    expand.value = false;
+    expandHud.value = false;
   } else {
     show.value = false;
   }
+});
+
+watch(scoreFixed, () => {
+  setTimeout(() => {
+    timedScore.value = scoreFixed.value;
+  }, 850);
+});
+
+onMounted(() => {
+  timedScore.value = scoreFixed.value;
 });
 
 const expandCard = () => {
@@ -77,7 +101,6 @@ const expandCard = () => {
 
 const contractCard = () => {
   expand.value = false;
-  showPoints.value = false;
   correctAnswer1.value = false;
   correctAnswer2.value = false;
   correctAnswer3.value = false;
@@ -89,26 +112,27 @@ const contractCard = () => {
   neutralAnswers.value = false;
   if (cardIndex.value == 10) {
     expandHud.value = false;
-    quizEnded.value = true;
+    iniPosMove.value = true;
     shouldCameraMove.value = true;
   }
 };
 
 const onClick = (val, event) => {
-  let clickedCard = event.target;
-  neutralAnswers.value = true;
-  cancelAnimationFrame(animFrame);
-  if (val == question.value.correct) {
-    quizStore.addScore(timeLeft.value);
-    correctPoints.value = true;
-  } else {
-    showWrongAnswer(val);
-    wrongPoints.value = true;
+  if (canClick.value) {
+    canClick.value = false;
+    showCorrectAnswer();
+    neutralAnswers.value = true;
+    cancelAnimationFrame(animFrame);
+    if (val == question.value.correct) {
+      quizStore.addScore(timeLeft.value);
+      correctPoints.value = true;
+    } else {
+      showWrongAnswer(val);
+    }
+    setTimeout(() => {
+      contractCard();
+    }, 1500);
   }
-  showCorrectAnswer();
-  setTimeout(() => {
-    contractCard();
-  }, 2500);
 };
 
 const showCorrectAnswer = () => {
@@ -131,6 +155,8 @@ const showCorrectAnswer = () => {
 }
 
 const showWrongAnswer = (val) => {
+  timeLeft.value = '0000';
+  wrongPoints.value = true;
   switch (val) {
     case 1:
       wrongAnswer1.value = true;
@@ -150,20 +176,28 @@ const showWrongAnswer = (val) => {
 }
 
 const onAfterLeave = (el) => {
-  cardsStore.incrementCardIndex();
+  if (!shouldReset.value) {
+    cardsStore.incrementCardIndex();
+  }  
 }
 
-const onAfterEnter = (el) => {
+const onBeforeEnter = (el) => {
+  timeBarValue.value = maxPoints;
+  timeBarColor.value = '#28673c';
+  wrongPoints.value = false;
+  timeLeft.value = maxPoints;
+  cancelAnimationFrame(animFrame);
+}
+
+const onAfterEnter = (el) => {   
   startTimer();
 }
 
 const startTimer = () => {
-  timeLeft.value = maxPoints;
   prevTime = performance.now();
   correctPoints.value = false;
-  wrongPoints.value = false;
-  showPoints.value = true;
-  timer(); // COMMENT THIS TO STOP
+  canClick.value = true;
+  timer();
 };
 
 const timer = () => {
@@ -171,10 +205,30 @@ const timer = () => {
   let calc = (aux - prevTime);
   if (calc > clockStep) {
     timeLeft.value = (timeLeft.value - calc).toFixed(0);
+    timeBarValue.value = timeLeft.value;
+    //start bar colors
+    if (timeLeft.value <= 7800) { 
+      timeBarColor.value = '#525c3c';
+    }
+    if (timeLeft.value <= 5800) { 
+      timeBarColor.value = '#8e4d3c';
+    }
+    if (timeLeft.value <= 2800) { 
+      timeBarColor.value = '#b9423b';
+    }  
+    if (timeLeft.value <= 1200) { 
+      timeBarColor.value = '#d73b3b';
+    }      
+    //end bar colors      
     if (timeLeft.value <= 0) {
       timeLeft.value = 0;
+      timeBarValue.value = 0;
       cancelAnimationFrame(animFrame);
-      contractCard(); // COMMENT THIS TO STOP
+      wrongPoints.value = true;
+      neutralAnswers.value = true;
+      setTimeout(() => {
+        contractCard(); // COMMENT THIS TO STOP
+      }, 1500);      
     } else {
       prevTime = aux;
       animFrame = requestAnimationFrame(timer);
@@ -188,8 +242,8 @@ const timeLeftFixed = computed(() => {
   return (timeLeft.value / 1000).toFixed(3).replace(".", ",");
 });
 
-const timeBar = computed(() => {
-  let x = normalizeToRange(timeLeft.value, 0, maxPoints, 0, 100);
+const timeBarValueFixed = computed(() => {
+  let x = normalizeToRange(timeBarValue.value, 0, maxPoints, 0, 100);
   return x.toFixed(0);
 });
 
@@ -198,16 +252,16 @@ const roundWithPrecision = (num, precision) => {
   return Math.round(num * multiplier) / multiplier;
 }
 const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - oldMin) * (newMax - newMin)) / (oldMax - oldMin)) + newMin;
+
 </script>
 
 <template>
   <v-sheet v-if="show"
     class="d-flex flex-column flex-sm-row align-center align-sm-end justify-center h-100 pa-2 pa-sm-10 pb-sm-16 pb-sm-16">
-    <v-slide-y-reverse-transition @after-leave="onAfterLeave" @after-enter="onAfterEnter" group>
+    <v-slide-y-reverse-transition @after-leave="onAfterLeave" @after-enter="onAfterEnter" @before-enter="onBeforeEnter" group>
       <v-card v-if="expand" class="g-card py-4 px-4 rounded-xl" color="#F0F0F0" variant="flat">
         <template v-slot:loader="{ isActive }">
-          <v-progress-linear :active="true" :model-value="timeBar" color="#28673c" bg-color="#28673c"
-            height="5"></v-progress-linear>
+          <v-progress-linear ref="timeBarEl" :active="true" :model-value="timeBarValueFixed" :color="timeBarColor" bg-color="#28673c" height="8"></v-progress-linear>
         </template>
 
         <v-card-item>
@@ -260,17 +314,14 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
     <v-sheet v-if="show" class="g-hud" :class="{ 'g-hud-l-def': !isRtl, 'g-hud-l-rtl': isRtl }">
       <v-slide-y-reverse-transition group>
         <v-sheet v-if="expandHud" class="g-hud-w">
-          <div :class="{ 'g-show-points': showPoints, 'g-correct-points': correctPoints, 'g-wrong-points': wrongPoints }"
-            v-if="!isRtl" class="g-hud-total g-hud-total-def px-4 py-1">
-            +{{
-              timeLeftFixed }} {{ $t("global.pts") }}</div>
-          <div v-if="isRtl" class="g-hud-total g-hud-total-rtl px-4 py-1">+{{
-            timeLeftFixed }} {{ $t("global.pts") }}</div>
-          <div class="g-hud-round px-5 py-1">{{ $t("global.round") }}
+          <div :class="{ 'g-correct-points': correctPoints, 'g-wrong-points': wrongPoints, 'g-hud-total-def': !isRtl, 'g-hud-total-rtl': isRtl }" class="g-hud-total g-show-points py-1">
+            +{{ timeLeftFixed }} {{ $t("global.pts") }}
+          </div>
+          <div class="g-hud-round px-4 py-1">{{ $t("global.round") }}
             <span v-if="!isRtl">0{{ round }}/09</span>
             <span v-if="isRtl">09/0{{ round }}</span>
           </div>
-          <div class="g-hud-score pr-4 pl-1 py-1">{{ scoreFixed }} {{ $t("global.pts") }}</div>
+          <div class="g-hud-score pr-4 pl-1 py-1">{{ timedScore }} {{ $t("global.pts") }}</div>
         </v-sheet>
       </v-slide-y-reverse-transition>
     </v-sheet>
@@ -326,15 +377,39 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
 }
 
 .g-correct-answer {
+  pointer-events: none;
   opacity: 100%;
   background: linear-gradient(94deg, #4bbf70 7.42%, #07361C 166.68%);
-  pointer-events: none;
+  background-size: 250% 250%;
+  -webkit-animation: btBackgroundAnime 2s ease infinite;
+  -moz-animation: btBackgroundAnime 2s ease infinite;
+  -o-animation: btBackgroundAnime 2s ease infinite;
+  animation: btBackgroundAnime 2s ease infinite;  
 }
-
+@-webkit-keyframes btBackgroundAnime {
+  0%{background-position:0% 39%}
+  50%{background-position:100% 62%}
+  100%{background-position:0% 39%}
+}
+@-moz-keyframes btBackgroundAnime {
+  0%{background-position:0% 39%}
+  50%{background-position:100% 62%}
+  100%{background-position:0% 39%}
+}
+@-o-keyframes btBackgroundAnime {
+  0%{background-position:0% 39%}
+  50%{background-position:100% 62%}
+  100%{background-position:0% 39%}
+}
+@keyframes btBackgroundAnime {
+  0%{background-position:0% 39%}
+  50%{background-position:100% 62%}
+  100%{background-position:0% 39%}
+}
 .g-wrong-answer {
-  opacity: 100%;
-  background: linear-gradient(94deg, #9f2e2e 7.42%, #d73b3b 166.68%);
   pointer-events: none;
+  opacity: 100%;
+  background: linear-gradient(94deg, #9f2e2e 7.42%, #d73b3b 166.68%); 
 }
 
 :deep(.v-btn.v-btn--density-default) {
@@ -371,9 +446,9 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
   opacity: 0.9;
   background-color: #F3F5F4;
   font-weight: 700;
-  font-size: 16px;
-  width: 140px;
-  height: 30px;
+  font-size: 19px;
+  width: 150px;
+  height: 35px;
   color: #000000;
   display: inline-block;
   vertical-align: middle;
@@ -382,11 +457,11 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
 .g-hud-score {
   background-color: #28673C;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 19px;
   color: #F0F0F0;
   text-align: right;
-  width: 130px;
-  height: 30px;
+  width: 140px;
+  height: 35px;
   display: inline-block;
   vertical-align: middle;
 }
@@ -396,7 +471,7 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
   transition: opacity 0.25s ease 0s;
   background-color: #28673C00;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 24px;
   color: #F0F0F0;
   text-align: right;
   vertical-align: bottom;
@@ -406,16 +481,16 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
     -1px 1px 0 #28673C,
     -1px -1px 0 #28673C,
     1px -1px 0 #28673C;
+    padding-right: 5px;
+    padding-left: 5px;    
 }
 
 .g-hud-total-def {
-  width: 130px;
-  margin-left: 140px;
+  text-align: right;
 }
 
 .g-hud-total-rtl {
-  width: 130px;
-  margin-right: 140px;
+  text-align: left;
 }
 
 :deep(.v-card__loader) {
@@ -432,8 +507,7 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
 }
 
 .g-show-points {
-  opacity: 100%;
-  transition: opacity 0.25s ease 0s;
+  opacity: 1;
 }
 
 .g-correct-points {
@@ -443,7 +517,9 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
     -1px 1px 0 #F0F0F000,
     -1px -1px 0 #F0F0F000,
     1px -1px 0 #F0F0F000;
-  transition: color 0.25s ease 0s, opacity 0.25s ease 0s, text-shadow 0.25s ease 0s;
+  transform: translate(0px, -60px);
+  transition: text-shadow 0.25s ease 0s, transform 1.25s cubic-bezier(0.165, 0.84, 0.44, 1) 0s;
+  animation: opacityAnim 3.6s ease 0.1s 1; 
 }
 
 .g-wrong-points {
@@ -453,7 +529,26 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
     -1px 1px 0 #F0F0F000,
     -1px -1px 0 #F0F0F000,
     1px -1px 0 #F0F0F000;
-  transition: color 0.25s ease 0s, opacity 0.25s ease 0s, text-shadow 0.25s ease 0s;
+  transform: translate(0px, -60px);
+  transition: text-shadow 0.25s ease 0s, transform 1.25s cubic-bezier(0.165, 0.84, 0.44, 1) 0s;
+  animation: opacityAnim 3.6s ease 0.1s 1; 
+}
+
+@-webkit-keyframes opacityAnim {
+  0%    { opacity: 1; }
+  100%  { opacity: 0; }
+}
+@-moz-keyframes opacityAnim {
+  0%    { opacity: 1; }
+  100%  { opacity: 0; }
+}
+@-o-keyframes opacityAnim {
+  0%    { opacity: 1; }
+  100%  { opacity: 0; }
+}
+@keyframes opacityAnim {
+  0%    { opacity: 1; }
+  100%  { opacity: 0; }
 }
 
 @media (max-width: 599px) {
@@ -505,7 +600,9 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
   }
 
   .g-hud-total {
-    font-size: 16px;
+    font-size: 20px;
+    padding-right: 15px;
+    padding-left: 15px;      
   }
 }
 
@@ -534,17 +631,20 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
     font-size: 24px;
     height: 52px;
     width: 200px;
+    line-height: 42px;
   }
 
   .g-hud-score {
     font-size: 26px;
     width: 200px;
     height: 52px;
+    line-height: 42px;
   }
 
   .g-hud-total {
-    font-size: 26px;
+    font-size: 30px;
     width: 400px;
+    line-height: 42px;
   }
 }
 </style>

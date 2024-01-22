@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, onUnmounted, ref, computed, watch } from 'vue';
+import { onMounted, onUnmounted, ref, computed, watch, provide } from 'vue';
 import { PerspectiveCamera, Scene, WebGLRenderer, Vector3, DirectionalLight, LoadingManager, EquirectangularReflectionMapping, CubeTextureLoader, SRGBColorSpace, CineonToneMapping, LightProbe, WebGLCubeRenderTarget, CubeCamera, Fog } from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
@@ -12,6 +12,7 @@ import { useCardsStore } from '/src/stores/CardsStore';
 import { useLoadingStore } from '/src/stores/LoadingStore';
 import { useGraphicsStore } from '/src/stores/GraphicsStore';
 import { useCameraStore } from '/src/stores/CameraStore';
+import UIHint from './UIHint.vue';
 import { storeToRefs } from 'pinia';
 
 import raceTrackGLB from '/models/RaceTrack.glb?url';
@@ -28,7 +29,7 @@ import nzTexture from '/textures/nz.jpg';
 
 // get stores
 const quizStore = useQuizStore();
-const { shouldCameraMove, question, quizEnded } = storeToRefs(quizStore);
+const { shouldCameraMove, question, iniPosMove } = storeToRefs(quizStore);
 const loadingStore = useLoadingStore();
 const { loadStart, loadComplete, loadError, loadProgress, errorUrl } = storeToRefs(loadingStore);
 const cardsStore = useCardsStore();
@@ -36,10 +37,11 @@ const { cardIndex } = storeToRefs(cardsStore);
 const graphicsStore = useGraphicsStore();
 const { directionalLightIntensity, directionalLightColor, ambientLightIntensity, ambientLightColor, lightProbeIntensity, backgroundIntensity, backgroundBlurriness, fogColor, fogNear, fogFar, toneMapping, toneMappingExposure } = storeToRefs(graphicsStore);
 const cameraStore = useCameraStore();
-const { cameraTargetX, cameraTargetY, cameraTargetZ } = storeToRefs(cameraStore);
+const { cameraTargetX, cameraTargetY, cameraTargetZ, currentCar } = storeToRefs(cameraStore);
 
 // global variables
 const webGl = ref();
+provide("webGlCanvas", webGl);
 const windowWidth = ref(window.innerWidth);
 const windowHeight = ref(window.innerHeight);
 const aspectRatio = computed(() => {
@@ -94,8 +96,8 @@ dracoLoader.preload();
 gltfLoader.setDRACOLoader(dracoLoader);
 
 // set camera positions
-const initialPos = new Vector3(-3.6, 1.4, 5.5); // on intial screen
-const initialTarget = new Vector3(0, 0.46, 0.35); // on intial screen
+const initialPos = ref(new Vector3(-3.6, 1.4, 5.5)); // on intial screen
+const initialTarget = ref(new Vector3(0, 0.46, 0.35)); // on intial screen
 
 // Loader manager functions
 manager.onStart = function (item, loaded, total) {
@@ -203,7 +205,7 @@ const setCanvas = () => {
 
   // Camera
   camera = new PerspectiveCamera(45, aspectRatio.value, 0.1, 300);
-  camera.position.copy(initialPos);
+  camera.position.copy(initialPos.value);
   scene.add(camera);
   updateCamera();
 
@@ -231,6 +233,8 @@ const setCanvas = () => {
   // Controls
   controls = new OrbitControls(camera, canvas);
   controls.enableDamping = true;
+  controls.autoRotate = true;
+  controls.autoRotateSpeed = -0.4;
   // Controls limit
   controls.minDistance = 3.5;
   controls.maxDistance = 7;
@@ -238,7 +242,7 @@ const setCanvas = () => {
   //controls.maxAzimuthAngle = (Math.PI/2); // radians
   controls.enablePan = false;
 
-  controls.target.copy(initialTarget);
+  controls.target.copy(initialTarget.value);
   controls.update();
 };
 
@@ -294,16 +298,36 @@ const animate = () => {
 
 watch(shouldCameraMove, () => {
   if (shouldCameraMove.value) {
-    if (quizEnded.value) {
-      cameraMovement(initialPos, initialTarget);
+    if (iniPosMove.value) {
+      switch (currentCar.value) {
+        case 3:
+          initialPos.value = new Vector3(-3.6, 1.4, 5.5);
+          initialTarget.value = new Vector3(0, 0.46, 0.35);
+          break;
+        case 2:
+          initialPos.value = new Vector3(1.33, 1.4, -1.9);
+          initialTarget.value = new Vector3(6.0, 0.46, -7.0);
+          break;
+        case 1:
+          initialPos.value = new Vector3(-3.6, 1.4, -8.5);
+          initialTarget.value = new Vector3(0, 0.46, -14.5);
+          break;
+        default:
+          initialPos.value = new Vector3(-3.6, 1.4, 5.5);
+          initialTarget.value = new Vector3(0, 0.46, 0.35);
+          break;
+      }
+      cameraMovement(initialPos.value, initialTarget.value);
       controls.minDistance = 3.5;
       controls.maxDistance = 7;
+      controls.autoRotateSpeed = -0.4;
     } else {
       let pos = new Vector3(...question.value.camPosition);
       let tar = new Vector3(...question.value.camTarget)
       cameraMovement(pos, tar);
       controls.maxDistance = question.value.ctrlMaxDist;
       controls.minDistance = question.value.ctrlMinDist;
+      controls.autoRotateSpeed = question.value.ctrlRotateSpeed;
     }
     shouldCameraMove.value = false;
   }
@@ -421,18 +445,21 @@ window.addEventListener('keyup', handleKeyUp, false);
 
 onMounted(() => {
   window.addEventListener('resize', handleResize);
+  window.addEventListener('orientationchange', handleResize);
   setCanvas();
   animate();
 });
 
 onUnmounted(() => {
   window.removeEventListener('resize', handleResize);
+  window.removeEventListener('orientationchange', handleResize);
 })
 
 </script>
 
 <template>
   <canvas ref="webGl" class="webGl" :class="{ blur: shouldBlur }" />
+  <UIHint />
 </template>
 
 <style scoped>

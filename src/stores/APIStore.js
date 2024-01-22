@@ -9,6 +9,7 @@ export const useAPIStore = defineStore('API', () => {
 
   const players = ref([]);
   const APIStatus = ref(0);// 0 = undefined / 1 = ok / 2 = send error / 3 = fetch error  
+  const isLoading = ref(false);
 
   axiosRetry(axios, {
     retries: 2, // number of retries
@@ -28,19 +29,25 @@ export const useAPIStore = defineStore('API', () => {
     .catch((error) => {
       APIStatus.value = 3;
       //console.error(error);
-    });  
+    }).finally(() => {
+      //Perform action in always
+      isLoading.value = false;
+  });  
   }
 
   const sendPlayer = async (val) => {   
+    isLoading.value = true;
     const data = await axios.post(url + 'items', {
       score: val.score,
       full_name: val.full_name,
       email: val.email,
+      consent: val.consent,
     })
     .then((res) => {
       fetchLeaderboard();
     })
     .catch((error) => {
+      isLoading.value = false;
       APIStatus.value = 2;
       //console.error(error);
     }).finally(() => {
@@ -52,5 +59,5 @@ export const useAPIStore = defineStore('API', () => {
     APIStatus.value = 0;
   };
 
-  return { players, APIStatus, fetchLeaderboard, sendPlayer, reset};
+  return { players, APIStatus, isLoading, fetchLeaderboard, sendPlayer, reset};
 })

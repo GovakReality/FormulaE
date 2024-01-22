@@ -2,10 +2,11 @@
 import { useCardsStore } from '/src/stores/CardsStore';
 import { useQuizStore } from '/src/stores/QuizStore';
 import { useAPIStore } from '/src/stores/APIStore';
+import { useCameraStore } from '/src/stores/CameraStore';
 import { ref, watch } from 'vue';
 import { storeToRefs } from 'pinia';
-import saudiaLogo from '/images/SaudiaLogo.png';
-import { useI18n } from 'vue-i18n'
+import saudiaLogo from '/images/SaudiaLogo.svg';
+import { useI18n } from 'vue-i18n';
 import { useLocale } from 'vuetify';
 
 const { t } = useI18n();
@@ -17,6 +18,7 @@ const quizStore = useQuizStore();
 const { fullName, email, score, scoreFixed } = storeToRefs(quizStore);
 const APIStore = useAPIStore();
 const { APIStatus } = storeToRefs(APIStore);
+const cameraStore = useCameraStore();
 
 const expand = ref(false);
 const show = ref(false);
@@ -27,6 +29,7 @@ const errorMsg = ref('');
 
 const isFormValid = ref(false);
 const terms = ref(false);
+const terms2 = ref(false);
 
 const fullNameRules = [
   value => {
@@ -60,6 +63,9 @@ watch(cardIndex, () => {
     shouldReset.value = false;
     show.value = true;
     setTimeout(() => expand.value = true, 100);
+  } else if (cardIndex.value == 0) {
+    show.value = false;
+    expand.value = false;
   } else {
     expand.value = false;
   }
@@ -68,12 +74,13 @@ watch(cardIndex, () => {
 const submit = async (event) => {
   loading.value = true;
   if (isFormValid) {
-    /*       APIStore.sendPlayer({
-            score: score.value,
-            full_name: fullName.value,
-            email: email.value,
-          }); */
-    APIStatus.value = 1; //remove
+    APIStore.sendPlayer({
+      score: score.value,
+      full_name: fullName.value,
+      email: email.value,
+      consent: terms2.value,
+    });
+    //APIStatus.value = 1; //remove
   }
 };
 
@@ -82,7 +89,7 @@ watch(APIStatus, () => {
     loading.value = false;
     expand.value = false;
   } else if (APIStatus.value > 1) {
-    errorMsg.value = 'ERROR ' + APIStatus.value + ': Please wait a few minutes before you try again.';
+    errorMsg.value = t('system.error') + ' ' + APIStatus.value + ': ' + t('system.wait');
     showError.value = true;
     loading.value = false;
     APIStatus.value = 0;
@@ -99,6 +106,7 @@ const onAfterLeave = (el) => {
   if (shouldReset.value) {
     cardsStore.reset();
     quizStore.reset();
+    cameraStore.reset();
     APIStore.reset();
   } else {
     cardsStore.incrementCardIndex();
@@ -107,7 +115,7 @@ const onAfterLeave = (el) => {
 </script>
 
 <template>
-  <v-sheet v-if="show" class="d-flex flex-column align-center justify-center h-95">
+  <v-sheet v-if="show" class="d-flex flex-column align-center justify-center h-100">
     <v-slide-y-reverse-transition @after-leave="onAfterLeave" group>
       <v-sheet v-if="expand" class="g-sheet" position="relative" color="transparent">
         <v-card class="g-card py-4 rounded-xl" variant="flat">
@@ -132,11 +140,34 @@ const onAfterLeave = (el) => {
               <v-text-field v-model="email" :label="$t('global.email')" type="email" :rules="emailRules" variant="solo"
                 rounded="lg" bg-color="white" class="g-tfield mb-xxl-8" required></v-text-field>
 
-              <v-checkbox v-model="terms" :rules="termsRules" :center-affix=false color="white"
+              <v-checkbox v-model="terms" :rules="termsRules" :center-affix="false" color="white"
                 false-icon="mdi-checkbox-blank" hide-details class="g-terms"
-                :class="{ 'g-terms-l-def': !isRtl, 'g-terms-l-rtl': isRtl }" :ripple="false"
-                :label="$t('congrats.terms')"></v-checkbox>
+                :class="{ 'g-terms-l-def': !isRtl, 'g-terms-l-rtl': isRtl }" :ripple="false">
+                <template v-slot:label>
+                  <i18n-t keypath="congrats.terms" tag="span" scope="global">
+                    <template v-slot:urlTermsAndConditions>
+                      <a :href="$t('menu.termsUrl')" class="g-terms-links" target="_blank">{{
+                        $t('menu.termsAndConditions') }}</a>
+                    </template>
+                    <template v-slot:urlPrivacyPolicy>
+                      <a :href="$t('menu.privacyUrl')" class="g-terms-links" target="_blank">{{ $t('menu.privacyPolicy')
+                      }}</a>
+                    </template>
+                  </i18n-t>
+                </template>
+              </v-checkbox>
 
+              <v-checkbox v-model="terms2" :center-affix="false" color="white" false-icon="mdi-checkbox-blank"
+                hide-details class="g-terms" :class="{ 'g-terms-l-def': !isRtl, 'g-terms-l-rtl': isRtl }" :ripple="false">
+                <template v-slot:label>
+                  <i18n-t keypath="congrats.terms2" tag="span" scope="global">
+                    <template v-slot:urlPrivacyPolicy>
+                      <a :href="$t('menu.privacyUrl')" class="g-terms-links" target="_blank">{{ $t('menu.privacyPolicy')
+                      }}</a>
+                    </template>
+                  </i18n-t>
+                </template>
+              </v-checkbox>
               <v-btn :loading="loading" type="submit" rounded="xl" variant="tonal" :slim="false" :disabled="!isFormValid"
                 class="g-bt font-weight-black mb-2">{{ $t("global.continue") }}</v-btn>
             </v-form>
@@ -145,7 +176,7 @@ const onAfterLeave = (el) => {
             {{ errorMsg }}
             <template v-slot:actions>
               <v-btn color="white" variant="text" @click="showError = !showError">
-                Close
+                {{ $t("global.close") }}
               </v-btn>
             </template>
           </v-snackbar>
@@ -169,30 +200,30 @@ const onAfterLeave = (el) => {
 .g-card {
   background: linear-gradient(67deg, #07361C 7.82%, #28673C 75.59%);
   max-width: 100%;
-  width: 413px;
+  width: 515px;
   color: #F0F0F0;
 }
 
 .g-title {
   font-weight: bold;
   font-size: clamp(18px, 3.6dvh, 22px);
-  padding-top: clamp(12px, 3.4dvh, 24px);
-  line-height: clamp(28px, 4.2dvh, 29px);
+  padding-top: clamp(12px, 3.4dvh, 18px);
+  line-height: clamp(25px, 4.2dvh, 25px);
 }
 
 .g-text {
   font-weight: 400;
-  font-size: clamp(16px, 3dvh, 20px);
+  font-size: clamp(16px, 3dvh, 17px);
   line-height: clamp(27px, 3.5dvh, 28px);
-  padding-bottom: clamp(30px, 2.2dvh, 30px);
+  padding-bottom: clamp(20px, 2.2dvh, 20px);
 }
 
 .g-points {
   font-family: IBM Plex Sans;
   line-height: normal;
   font-size: clamp(28px, 5dvh, 32px);
-  padding-top: clamp(6px, 2dvh, 30px);
-  padding-bottom: clamp(8px, 2.4dvh, 32px);
+  padding-top: clamp(6px, 1.5dvh, 20px);
+  padding-bottom: clamp(8px, 1.8dvh, 24px);
 }
 
 .g-form {
@@ -245,6 +276,12 @@ const onAfterLeave = (el) => {
 
 :deep(.g-terms .v-label) {
   font-size: clamp(12px, 1.6dvh, 16px);
+  align-items: start;
+
+}
+
+:deep(.v-checkbox .v-selection-control) {
+  min-height: auto;
 }
 
 .g-terms-l-def {
@@ -253,6 +290,10 @@ const onAfterLeave = (el) => {
 
 .g-terms-l-rtl {
   text-align: right;
+}
+
+.g-terms-links {
+  color: white;
 }
 
 :deep(.v-selection-control__input > .v-icon) {

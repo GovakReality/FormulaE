@@ -2,7 +2,9 @@
   import { ref, watch, onMounted } from 'vue';
   import { useLoadingStore } from '../stores/LoadingStore';
   import { storeToRefs } from 'pinia';
+  import { useI18n } from 'vue-i18n';
 
+  const { t } = useI18n();
   const loadingStore = useLoadingStore();
   const { loadStart, loadComplete, loadError, loadProgress, errorUrl } = storeToRefs(loadingStore);
   const loading = ref(true);
@@ -25,7 +27,7 @@
 
   watch(loadError, (val) => {
     if (loadError.value) {
-      errorMessage.value = 'Please wait a few minutes before you try again.';
+      errorMessage.value = t('system.wait');
       errorDevMessage.value = 'ThreeJS loader manager error. URL: ' + errorUrl.value;      
       onError();
     }
@@ -39,11 +41,11 @@
   onMounted(() => {
     setTimeout(() => {
       if(!showError.value) {
-        errorMessage.value = 'Please wait a few minutes before you try again.';
+        errorMessage.value = t('system.wait');
         errorDevMessage.value = 'Timed out error';
         onError();
       }
-    }, 30000);
+    }, 45000);
   });
 </script>
 
@@ -74,7 +76,7 @@
               variant="tonal"
               color="error"
               title="ERROR"
-            >        
+            > 
               <v-card-text>
                 {{errorMessage}}
               </v-card-text>
@@ -85,7 +87,9 @@
                   @click="expand = !expand"
                   size="x-small"
                   variant="text"
-                >Details</v-btn>
+                >
+                  Details
+                </v-btn>
               </v-card-actions> 
               <v-expand-transition>
                 <div v-show="expand">

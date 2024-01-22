@@ -1,6 +1,7 @@
 <script setup>
 import { useCardsStore } from '/src/stores/CardsStore';
 import { useLoadingStore } from '/src/stores/LoadingStore';
+import { useCameraStore } from '/src/stores/CameraStore';
 import { storeToRefs } from 'pinia';
 import { ref, watch, onMounted, computed } from 'vue';
 import { useI18n } from 'vue-i18n'
@@ -14,6 +15,8 @@ const cardStore = useCardsStore();
 const { cardIndex } = storeToRefs(cardStore);
 const loadingStore = useLoadingStore();
 const { loadStart, loadComplete, loadError, loadProgress } = storeToRefs(loadingStore);
+const cameraStore = useCameraStore();
+const { currentCar, reset } = storeToRefs(cameraStore);
 
 const expand = ref(false);
 const show = ref(false);
@@ -44,10 +47,27 @@ watch(loadComplete, (val) => {
   }
 });
 
+watch(currentCar, () => {
+  if (currentCar.value == 3) {
+    // shouldExpand.value = true;
+    expand.value = false;
+    actualGen.value = gens.value[0];
+  } else if (currentCar.value == 2) {
+    expand.value = false;
+    actualGen.value = gens.value[1];
+  } else if (currentCar.value == 1) {
+    expand.value = false;
+    actualGen.value = gens.value[2];
+  }
+})
+
 watch(cardIndex, () => {
   if (cardIndex.value == 0) {
     shouldExpand.value = true;
     expand.value = true;
+    actualGen.value = gens.value[0];
+  }
+  else if (cardIndex.value == 2) {
     actualGen.value = gens.value[0];
   } else if (cardIndex.value == 5) {
     expand.value = false;

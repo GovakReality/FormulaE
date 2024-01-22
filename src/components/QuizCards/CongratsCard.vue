@@ -77,7 +77,7 @@ const submit = async (event) => {
       full_name: fullName.value,
       email: email.value,
       consent: terms2.value,
-    }); 
+    });
     //APIStatus.value = 1; //remove
   }
 };
@@ -137,35 +137,33 @@ const onAfterLeave = (el) => {
               <v-text-field v-model="email" :label="$t('global.email')" type="email" :rules="emailRules" variant="solo"
                 rounded="lg" bg-color="white" class="g-tfield mb-xxl-8" required></v-text-field>
 
-              <v-checkbox 
-                v-model="terms" 
-                :rules="termsRules" 
-                :center-affix="false" 
-                color="white"
+              <v-checkbox v-model="terms" :rules="termsRules" :center-affix="false" color="white"
                 false-icon="mdi-checkbox-blank" hide-details class="g-terms"
                 :class="{ 'g-terms-l-def': !isRtl, 'g-terms-l-rtl': isRtl }" :ripple="false">
                 <template v-slot:label>
                   <i18n-t keypath="congrats.terms" tag="span" scope="global">
-                    <template v-slot:url>
-                      <a :href="$t('menu.termsUrl')" target="_blank">{{ $t('menu.termsAndConditions') }}</a>
+                    <template v-slot:urlTermsAndConditions>
+                      <a :href="$t('menu.termsUrl')" class="g-terms-links" target="_blank">{{
+                        $t('menu.termsAndConditions') }}</a>
                     </template>
-                  </i18n-t>                  
-                </template>                
+                    <template v-slot:urlPrivacyPolicy>
+                      <a :href="$t('menu.privacyUrl')" class="g-terms-links" target="_blank">{{ $t('menu.privacyPolicy')
+                      }}</a>
+                    </template>
+                  </i18n-t>
+                </template>
               </v-checkbox>
 
-              <v-checkbox 
-                v-model="terms2" 
-                :center-affix="false"
-                color="white"
-                false-icon="mdi-checkbox-blank" hide-details class="g-terms"
-                :class="{ 'g-terms-l-def': !isRtl, 'g-terms-l-rtl': isRtl }" :ripple="false">
+              <v-checkbox v-model="terms2" :center-affix="false" color="white" false-icon="mdi-checkbox-blank"
+                hide-details class="g-terms" :class="{ 'g-terms-l-def': !isRtl, 'g-terms-l-rtl': isRtl }" :ripple="false">
                 <template v-slot:label>
                   <i18n-t keypath="congrats.terms2" tag="span" scope="global">
-                    <template v-slot:url>
-                      <a :href="$t('menu.privacyUrl')" target="_blank">{{ $t('menu.privacyPolicy') }}</a>
+                    <template v-slot:urlPrivacyPolicy>
+                      <a :href="$t('menu.privacyUrl')" class="g-terms-links" target="_blank">{{ $t('menu.privacyPolicy')
+                      }}</a>
                     </template>
-                  </i18n-t>                  
-                </template>                 
+                  </i18n-t>
+                </template>
               </v-checkbox>
               <v-btn :loading="loading" type="submit" rounded="xl" variant="tonal" :slim="false" :disabled="!isFormValid"
                 class="g-bt font-weight-black mb-2">{{ $t("global.continue") }}</v-btn>
@@ -195,6 +193,7 @@ const onAfterLeave = (el) => {
 .g-sheet {
   background-color: transparent;
 }
+
 .g-card {
   background: linear-gradient(67deg, #07361C 7.82%, #28673C 75.59%);
   max-width: 100%;
@@ -282,6 +281,10 @@ const onAfterLeave = (el) => {
 
 .g-terms-l-rtl {
   text-align: right;
+}
+
+.g-terms-links {
+  color: white;
 }
 
 :deep(.v-selection-control__input > .v-icon) {
@@ -441,5 +444,4 @@ const onAfterLeave = (el) => {
     font-size: 22px;
     width: 213px;
   }
-}
-</style>
+}</style>

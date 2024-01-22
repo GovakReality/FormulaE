@@ -125,10 +125,12 @@ const removeEvents = () => {
 
 .g-arrows-wrapper {
   position: relative;
+  direction: ltr;
 }
 
 .g-hand-wrapper {
   position: relative;
+  direction: ltr;
 }
 
 .g-arrow {

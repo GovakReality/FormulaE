@@ -11,11 +11,13 @@ const { cardIndex } = storeToRefs(cardsStore);
 const quizStore = useQuizStore();
 const { shouldCameraMove, iniPosMove } = storeToRefs(quizStore);
 const APIStore = useAPIStore();
+const { isLoading } = storeToRefs(APIStore);
 
-const { idle, lastActive } = useIdle(25000);
+const { idle, lastActive, reset:idleReset } = useIdle(25000);
 const { counter, reset, pause, resume } = useInterval(100, { controls: true });
 
 const showInactivity = ref(false);
+let idleInterval;
 
 watch(idle, (idleValue) => {
   if (idleValue && cardIndex.value != 0) {
@@ -31,11 +33,20 @@ watch(counter, (val) => {
   }
 })
 
+watch(isLoading, (val) => {
+  if (val) {
+    idleInterval = setInterval(function () {idleReset();}, 1000);
+  } else {
+    clearInterval(idleInterval);
+  }
+});
+
 const counterBar = computed(() => {
   return 100 - counter.value;
 });
 
 const restart = (event) => {
+  clearInterval(idleInterval);
   pause();
   reset();
   shouldCameraMove.value = true;

@@ -96,8 +96,9 @@ dracoLoader.preload();
 gltfLoader.setDRACOLoader(dracoLoader);
 
 // set camera positions
-const initialPos = new Vector3(-3.6, 1.4, 5.5); // on intial screen
-const initialTarget = new Vector3(0, 0.46, 0.35); // on intial screen
+const currentCar = ref(2);
+const initialPos = ref(new Vector3(-3.6, 1.4, 5.5)); // on intial screen
+const initialTarget = ref(new Vector3(0, 0.46, 0.35)); // on intial screen
 
 // Loader manager functions
 manager.onStart = function (item, loaded, total) {
@@ -205,7 +206,7 @@ const setCanvas = () => {
 
   // Camera
   camera = new PerspectiveCamera(45, aspectRatio.value, 0.1, 300);
-  camera.position.copy(initialPos);
+  camera.position.copy(initialPos.value);
   scene.add(camera);
   updateCamera();
 
@@ -242,7 +243,7 @@ const setCanvas = () => {
   //controls.maxAzimuthAngle = (Math.PI/2); // radians
   controls.enablePan = false;
 
-  controls.target.copy(initialTarget);
+  controls.target.copy(initialTarget.value);
   controls.update();
 };
 
@@ -299,7 +300,25 @@ const animate = () => {
 watch(shouldCameraMove, () => {
   if (shouldCameraMove.value) {
     if (iniPosMove.value) {
-      cameraMovement(initialPos, initialTarget);
+      switch (currentCar.value) {
+        case 3:
+          initialPos.value = new Vector3(-3.6, 1.4, 5.5);
+          initialTarget.value = new Vector3(0, 0.46, 0.35);
+          break;
+        case 2:
+          initialPos.value = new Vector3(1.33, 1.4, -1.9);
+          initialTarget.value = new Vector3(6.0, 0.46, -7.0);
+          break;
+        case 1:
+          initialPos.value = new Vector3(-3.6, 1.4, -8.5);
+          initialTarget.value = new Vector3(0, 0.46, -14.5);
+          break;
+        default:
+          initialPos.value = new Vector3(-3.6, 1.4, 5.5);
+          initialTarget.value = new Vector3(0, 0.46, 0.35);
+          break;
+      }
+      cameraMovement(initialPos.value, initialTarget.value);
       controls.minDistance = 3.5;
       controls.maxDistance = 7;
       controls.autoRotateSpeed = -0.4;
@@ -441,7 +460,7 @@ onUnmounted(() => {
 
 <template>
   <canvas ref="webGl" class="webGl" :class="{ blur: shouldBlur }" />
-  <UIHint /> 
+  <UIHint />
 </template>
 
 <style scoped>

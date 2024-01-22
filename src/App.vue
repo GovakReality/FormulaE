@@ -24,5 +24,4 @@ import InactivityAlert from './components/InactivityAlert.vue';
   </v-app>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>

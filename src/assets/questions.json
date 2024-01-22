@@ -235,7 +235,7 @@
     ],
     "ctrlMaxDist": 7,
     "ctrlMinDist": 3.5,
-    "ctrlRotateSpeed": -0.4
+    "ctrlRotateSpeed": 0.4
   },
   {
     "en": {
@@ -303,7 +303,7 @@
     ],
     "ctrlMaxDist": 7,
     "ctrlMinDist": 3.5,
-    "ctrlRotateSpeed": -0.4
+    "ctrlRotateSpeed": 0.4
   },
   {
     "en": {
@@ -439,7 +439,7 @@
     ],
     "ctrlMaxDist": 7,
     "ctrlMinDist": 3.5,
-    "ctrlRotateSpeed": -0.4
+    "ctrlRotateSpeed": 0.4
   },
   {
     "en": {
@@ -541,7 +541,7 @@
     ],
     "ctrlMaxDist": 7,
     "ctrlMinDist": 3.5,
-    "ctrlRotateSpeed": -0.4
+    "ctrlRotateSpeed": 0.4
   },
   {
     "en": {
@@ -643,7 +643,7 @@
     ],
     "ctrlMaxDist": 7,
     "ctrlMinDist": 1.2,
-    "ctrlRotateSpeed": -0.4
+    "ctrlRotateSpeed": 0.4
   },
   {
     "en": {
@@ -847,7 +847,7 @@
     ],
     "ctrlMaxDist": 7,
     "ctrlMinDist": 1.2,
-    "ctrlRotateSpeed": -0.4
+    "ctrlRotateSpeed": 0.4
   },
   {
     "en": {

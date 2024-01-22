@@ -179,10 +179,14 @@ const onAfterLeave = (el) => {
   if (!shouldReset.value) {
     cardsStore.incrementCardIndex();
   }  
+}
+
+const onBeforeEnter = (el) => {
   timeBarValue.value = maxPoints;
   timeBarColor.value = '#28673c';
   wrongPoints.value = false;
   timeLeft.value = maxPoints;
+  cancelAnimationFrame(animFrame);
 }
 
 const onAfterEnter = (el) => {   
@@ -254,7 +258,7 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
 <template>
   <v-sheet v-if="show"
     class="d-flex flex-column flex-sm-row align-center align-sm-end justify-center h-100 pa-2 pa-sm-10 pb-sm-16 pb-sm-16">
-    <v-slide-y-reverse-transition @after-leave="onAfterLeave" @after-enter="onAfterEnter" group>
+    <v-slide-y-reverse-transition @after-leave="onAfterLeave" @after-enter="onAfterEnter" @before-enter="onBeforeEnter" group>
       <v-card v-if="expand" class="g-card py-4 px-4 rounded-xl" color="#F0F0F0" variant="flat">
         <template v-slot:loader="{ isActive }">
           <v-progress-linear ref="timeBarEl" :active="true" :model-value="timeBarValueFixed" :color="timeBarColor" bg-color="#28673c" height="8"></v-progress-linear>

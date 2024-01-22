@@ -137,15 +137,15 @@ const removeEvents = () => {
 }
 
 .g-left-arrow {
-  margin-left: -6px;
+  margin-left: 0px;
   opacity: 0;
   animation: opacityAnimLeft 4s ease-in-out 0s infinite normal forwards;
 }
 
 .g-right-arrow {
-  margin-top: -12px;
-  margin-left: 30px;
-  animation: opacityAnimRight 4s ease-in-out 4s infinite normal forwards;
+  margin-top: -15px;
+  margin-left: 15px;
+  animation: opacityAnimRight 4s ease-in-out 0s infinite normal forwards;
 }
 
 .g-hand {
@@ -217,8 +217,16 @@ const removeEvents = () => {
     opacity: 0;
   }
 
+  25% {
+    opacity: 0;
+  }
+
   50% {
     opacity: 1;
+  }
+
+  75% {
+    opacity: 0;
   }
 
   100% {
@@ -231,8 +239,16 @@ const removeEvents = () => {
     opacity: 0;
   }
 
+  25% {
+    opacity: 0;
+  }
+
   50% {
     opacity: 1;
+  }
+
+  75% {
+    opacity: 0;
   }
 
   100% {
@@ -245,8 +261,16 @@ const removeEvents = () => {
     opacity: 0;
   }
 
+  25% {
+    opacity: 0;
+  }
+
   50% {
     opacity: 1;
+  }
+
+  75% {
+    opacity: 0;
   }
 
   100% {
@@ -259,8 +283,16 @@ const removeEvents = () => {
     opacity: 0;
   }
 
+  25% {
+    opacity: 0;
+  }
+
   50% {
     opacity: 1;
+  }
+
+  75% {
+    opacity: 0;
   }
 
   100% {
@@ -273,7 +305,15 @@ const removeEvents = () => {
     opacity: 1;
   }
 
+  25% {
+    opacity: 0;
+  }
+
   50% {
+    opacity: 0;
+  }
+
+  75% {
     opacity: 0;
   }
 
@@ -287,7 +327,15 @@ const removeEvents = () => {
     opacity: 1;
   }
 
+  25% {
+    opacity: 0;
+  }
+
   50% {
+    opacity: 0;
+  }
+
+  75% {
     opacity: 0;
   }
 
@@ -301,7 +349,15 @@ const removeEvents = () => {
     opacity: 1;
   }
 
+  25% {
+    opacity: 0;
+  }
+
   50% {
+    opacity: 0;
+  }
+
+  75% {
     opacity: 0;
   }
 
@@ -315,7 +371,15 @@ const removeEvents = () => {
     opacity: 1;
   }
 
+  25% {
+    opacity: 0;
+  }
+
   50% {
+    opacity: 0;
+  }
+
+  75% {
     opacity: 0;
   }
 

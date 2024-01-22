@@ -50,7 +50,7 @@ onMounted(() => {
 
 const CycleCar = () => {
     shouldCameraMove.value = true;
-    console.log(currentCar);
+    // console.log(currentCar);
     currentCar.value--;
     if (currentCar.value < 1) {
         currentCar.value = 3;
@@ -91,15 +91,12 @@ const CycleCar = () => {
 
 .g-switch-def {
     left: 38px;
+    transform: rotate(0deg);
 }
 
 .g-switch-rtl {
     right: 38px;
-}
-
-.g-title {
-    font-size: 48px;
-    font-weight: 700;
+    transform: rotate(180deg);
 }
 
 @media (min-width: 2560px) {

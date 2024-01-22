@@ -197,30 +197,30 @@ const onAfterLeave = (el) => {
 .g-card {
   background: linear-gradient(67deg, #07361C 7.82%, #28673C 75.59%);
   max-width: 100%;
-  width: 413px;
+  width: 515px;
   color: #F0F0F0;
 }
 
 .g-title {
   font-weight: bold;
   font-size: clamp(18px, 3.6dvh, 22px);
-  padding-top: clamp(12px, 3.4dvh, 24px);
-  line-height: clamp(28px, 4.2dvh, 29px);
+  padding-top: clamp(12px, 3.4dvh, 18px);
+  line-height: clamp(25px, 4.2dvh, 25px);
 }
 
 .g-text {
   font-weight: 400;
-  font-size: clamp(16px, 3dvh, 20px);
+  font-size: clamp(16px, 3dvh, 17px);
   line-height: clamp(27px, 3.5dvh, 28px);
-  padding-bottom: clamp(30px, 2.2dvh, 30px);
+  padding-bottom: clamp(20px, 2.2dvh, 20px);
 }
 
 .g-points {
   font-family: IBM Plex Sans;
   line-height: normal;
   font-size: clamp(28px, 5dvh, 32px);
-  padding-top: clamp(6px, 2dvh, 30px);
-  padding-bottom: clamp(8px, 2.4dvh, 32px);
+  padding-top: clamp(6px, 1.5dvh, 20px);
+  padding-bottom: clamp(8px, 1.8dvh, 24px);
 }
 
 .g-form {
@@ -273,6 +273,12 @@ const onAfterLeave = (el) => {
 
 :deep(.g-terms .v-label) {
   font-size: clamp(12px, 1.6dvh, 16px);
+  align-items: start;
+
+}
+
+:deep(.v-checkbox .v-selection-control) {
+  min-height: auto;
 }
 
 .g-terms-l-def {
@@ -444,4 +450,5 @@ const onAfterLeave = (el) => {
     font-size: 22px;
     width: 213px;
   }
-}</style>
+}
+</style>

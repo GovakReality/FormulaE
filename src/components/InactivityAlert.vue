@@ -19,9 +19,9 @@ const showInactivity = ref(false);
 
 watch(idle, (idleValue) => {
   if (idleValue && cardIndex.value != 0) {
-    showInactivity.value = true;
-    reset();
-    resume();
+    showInactivity.value = true;  // COMMENT THIS TO STOP
+    reset();   // COMMENT THIS TO STOP
+    resume();  // COMMENT THIS TO STOP
   }
 })
 
@@ -68,8 +68,9 @@ onMounted(() => {
   <v-dialog v-model="showInactivity" persistent class="align-center justify-center">
     <v-card class="g-in-card rounded-xl align-center justify-center">
       <template v-slot:loader>
-        <v-progress-linear :active="true" :model-value="counterBar" color="#28673C" bg-color="#28673c" height="5"></v-progress-linear>
-      </template>    
+        <v-progress-linear :active="true" :model-value="counterBar" color="#28673C" bg-color="#28673c"
+          height="5"></v-progress-linear>
+      </template>
       <v-card-item class="text-center">
         <h3 class="g-in-title">
           {{ $t("system.still") }}
@@ -77,9 +78,10 @@ onMounted(() => {
         <h3 class="g-in-text">
           {{ $t("system.restartExperience") }}
         </h3>
-      </v-card-item>      
-      <v-card-actions>       
-        <v-btn color="#F0F0F0" variant="tonal" rounded="xl" :slim="false" class="g-bt font-weight-bold" @click="keepPlaying">
+      </v-card-item>
+      <v-card-actions>
+        <v-btn color="#F0F0F0" variant="tonal" rounded="xl" :slim="false" class="g-bt font-weight-bold"
+          @click="keepPlaying">
           {{ $t("global.continue") }}
         </v-btn>
         <v-btn color="#F0F0F0" variant="tonal" rounded="xl" :slim="false" class="g-bt font-weight-bold" @click="restart">
@@ -97,6 +99,7 @@ onMounted(() => {
   margin: auto;
   padding: 20px 5px;
 }
+
 .g-in-title {
   color: #28673C;
   font-weight: bold;
@@ -104,6 +107,7 @@ onMounted(() => {
   margin-top: 10px;
   margin-bottom: 20px;
 }
+
 .g-in-text {
   color: #28673C;
   font-weight: 400;
@@ -111,6 +115,7 @@ onMounted(() => {
   line-height: 28px;
   margin-bottom: 25px;
 }
+
 .g-bt {
   font-size: 15px;
   width: 140px;

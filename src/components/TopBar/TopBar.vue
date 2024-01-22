@@ -5,7 +5,7 @@ import Lockup from './Lockup.vue';
 </script>
 
 <template>
-	<v-app-bar flat class="py-sm-5 pr-sm-5 g-bar">
+	<v-app-bar flat class="py-sm-5 px-sm-5 g-bar">
 		<template v-slot:prepend>
 			<Lockup />
 		</template>

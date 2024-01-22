@@ -16,7 +16,7 @@ const { isRtl } = useLocale();
 .g-lockup {
   z-index: 90;
   max-width: 100%;
-  width: 360px;
+  width: 260px;
   filter: drop-shadow(0px 1px 2px #00000022);
 }
 

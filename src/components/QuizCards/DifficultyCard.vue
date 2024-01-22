@@ -3,19 +3,24 @@ import { useCardsStore } from '/src/stores/CardsStore';
 import { useQuizStore } from '/src/stores/QuizStore';
 import { ref, watch, onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
-import saudiaLogo from '/images/SaudiaLogo.png';
+import saudiaLogo from '/images/SaudiaLogo.svg';
 
 const cardsStore = useCardsStore();
 const { cardIndex } = storeToRefs(cardsStore);
 const quizStore = useQuizStore();
-
+const shouldReset = ref(false);
 const expand = ref(false);
 const show = ref(false);
 
 watch(cardIndex, () => {
   if (cardIndex.value == 1) {
     show.value = true;
+    shouldReset.value = false;
     setTimeout(() => expand.value = true, 100);
+  } else if (cardIndex.value == 0) {
+    shouldReset.value = true;
+    show.value = false;
+    expand.value = false;
   } else {
     expand.value = false;
   }
@@ -40,7 +45,9 @@ const onClick = (val, event) => {
 
 const onAfterLeave = (el) => {
   show.value = false;
-  cardsStore.incrementCardIndex();
+  if (!shouldReset.value) {
+    cardsStore.incrementCardIndex();
+  }
 }
 
 /*   const handleHeight = () => {

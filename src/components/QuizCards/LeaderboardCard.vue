@@ -2,10 +2,11 @@
 import { useCardsStore } from '/src/stores/CardsStore';
 import { useQuizStore } from '/src/stores/QuizStore';
 import { useAPIStore } from '/src/stores/APIStore';
+import { useCameraStore } from '/src/stores/CameraStore';
 import { ref, watch, computed, onMounted, onUnmounted } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useLocale } from 'vuetify';
-import saudiaLogo from '/images/SaudiaLogo.png';
+import saudiaLogo from '/images/SaudiaLogo.svg';
 
 const { isRtl } = useLocale();
 
@@ -14,14 +15,15 @@ const { cardIndex } = storeToRefs(cardsStore);
 const quizStore = useQuizStore();
 const { fullName, email, score, scoreFixed } = storeToRefs(quizStore);
 const APIStore = useAPIStore();
+const cameraStore = useCameraStore();
 
 const expand = ref(false);
 const show = ref(false);
 const isTopTen = ref(false);
 const formattedPlayers = ref([]);
 
-//const { players } = storeToRefs(APIStore);
-const players = ref([
+const { players } = storeToRefs(APIStore);
+/* const players = ref([
   {
     full_name: 'JORDAN Mitchell',
     score: '82546',
@@ -69,15 +71,17 @@ const players = ref([
   {
     full_name: 'Chloe Bennett',
     score: '2312',
-  },
-
-]);
+  }
+]); */
 
 watch(cardIndex, () => {
   if (cardIndex.value == 12) {
     show.value = true;
     formatLeaderboard();
     setTimeout(() => expand.value = true, 100);
+  } else if (cardIndex.value == 0) {
+    expand.value = false;
+    show.value = false;
   } else {
     expand.value = false;
   }
@@ -133,6 +137,7 @@ const onAfterLeave = (el) => {
   show.value = false;
   cardsStore.reset();
   quizStore.reset();
+  cameraStore.reset();
   APIStore.reset();
 }
 
@@ -380,7 +385,7 @@ const onAfterLeave = (el) => {
 
 .g-flag {
   display: inline-block;
-  background-image: url('/images/LeaderboardFlags.png');
+  background-image: url('/images/LeaderboardFlags.svg');
   background-size: 100% 100%;
   width: 17px;
   height: 100%;

@@ -12,11 +12,21 @@
     "tryagain": "حاول ثانية",
     "fullname": "الاسم الكامل",
     "email": "الايميل",
-    "continue": "يكمل"
+    "continue": "يكمل",
+    "restart": "إعادة تشغيل",
+    "close": "يغلق"
+  },
+  "system": {
+    "error": "خطأ",
+    "still": "هل ما زلت تلعب؟",
+    "restartExperience": "ستتم إعادة تشغيل التجربة خلال ثوانٍ قليلة.",
+    "wait": "يرجى الانتظار بضع دقائق قبل المحاولة مرة أخرى."
   },
   "menu": {
-    "admin": "مسؤل",
-    "about": "عن"
+    "termsAndConditions": "الأحكام والشروط",
+    "termsUrl": "https://takeyourseat.saudia.com/formula-e/sa/termsandconditions",
+    "privacyPolicy": "سياسة الخصوصية",
+    "privacyUrl": "https://www.saudia.com/help/useful-links/legal-and-terms-and-conditions/privacy-policy?sc_lang=ar-SA&sc_country=SA"
   },
   "geninfo": {
     "gen3Year": "2023 - الحالي",
@@ -36,8 +46,9 @@
   "congrats": {
     "title": "مبروك!",
     "subtitle": "نتيجتك هي:",
-    "text": "قم بإدخال معلوماتك للتسجيل في السحب على الجائزة:",
-    "terms": "أؤكد أن عمري فوق 18 عاماً وأوافق على الشروط والأحكام وسياسة الخصوصية للخطوط السعودية*"
+    "text": "قم بإكمال بياناتك لفرصة الفوز بهدايا موقعة من بطل سباقات فورمولا إي، ستوفيل فاندورن",
+    "terms": "أؤكد أن عمري فوق 18 عاماً وأوافق على {urlTermsAndConditions} {urlPrivacyPolicy} للخطوط السعودية",
+    "terms2": "أوافق على استخدام الخطوط السعودية لمعلوماتي لإبقائي على اطلاع بأحدث العروض والأخبار الخاصة عبر البريد الإلكتروني ووسائل التواصل الاجتماعي والفيديو الرقمي والإعلانات المعروضة. {urlPrivacyPolicy}"
   },
   "leaderboard": {
     "title": "نتيجتك هي:",

@@ -31,7 +31,7 @@ watch(loadComplete, (val) => {
 });
 
 watch(cardIndex, () => {
-    if (cardIndex.value == 0) {
+    if (cardIndex.value == 0 || cardIndex.value == 1) {
         show.value = true;
         setTimeout(() => expand.value = true, 100);
     }

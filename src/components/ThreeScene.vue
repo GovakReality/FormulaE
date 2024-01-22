@@ -37,7 +37,7 @@ const { cardIndex } = storeToRefs(cardsStore);
 const graphicsStore = useGraphicsStore();
 const { directionalLightIntensity, directionalLightColor, ambientLightIntensity, ambientLightColor, lightProbeIntensity, backgroundIntensity, backgroundBlurriness, fogColor, fogNear, fogFar, toneMapping, toneMappingExposure } = storeToRefs(graphicsStore);
 const cameraStore = useCameraStore();
-const { cameraTargetX, cameraTargetY, cameraTargetZ } = storeToRefs(cameraStore);
+const { cameraTargetX, cameraTargetY, cameraTargetZ, currentCar } = storeToRefs(cameraStore);
 
 // global variables
 const webGl = ref();
@@ -96,7 +96,6 @@ dracoLoader.preload();
 gltfLoader.setDRACOLoader(dracoLoader);
 
 // set camera positions
-const currentCar = ref(2);
 const initialPos = ref(new Vector3(-3.6, 1.4, 5.5)); // on intial screen
 const initialTarget = ref(new Vector3(0, 0.46, 0.35)); // on intial screen
 

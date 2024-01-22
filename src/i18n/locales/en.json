@@ -23,6 +23,7 @@
     "wait": "Please wait a few minutes before you try again."
   },
   "menu": {
+    "toggleFullScreen": "Toggle Full Screen",
     "termsAndConditions": "Terms and Conditions",
     "termsUrl": "https://takeyourseat.saudia.com/formula-e/en/termsandconditions",
     "privacyPolicy": "Privacy Policy",

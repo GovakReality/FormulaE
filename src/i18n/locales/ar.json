@@ -23,6 +23,7 @@
     "wait": "يرجى الانتظار بضع دقائق قبل المحاولة مرة أخرى."
   },
   "menu": {
+    "toggleFullScreen": "ملء الشاشة تبديل",
     "termsAndConditions": "الأحكام والشروط",
     "termsUrl": "https://takeyourseat.saudia.com/formula-e/sa/termsandconditions",
     "privacyPolicy": "سياسة الخصوصية",

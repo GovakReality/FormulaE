@@ -618,7 +618,7 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
 @media (max-width: 599px) {
   .g-card {
     width: 420px;
-    margin-bottom: 20px;
+    margin-bottom: 60px;
   }
 
   .g-round {
@@ -639,8 +639,8 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
   }
 
   .g-hud {
-    position: relative;
-    bottom: auto;
+    position: absolute;
+    bottom: 15px;
     right: auto;
     left: auto;
   }
@@ -654,11 +654,11 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
   }
 
   .g-correct-points {
-    transform: translate(0px, -20px);
+    transform: translate(0px, -15px);
   }
 
   .g-wrong-points {
-    transform: translate(0px, -20px);
+    transform: translate(0px, -15px);
   }
 
 }

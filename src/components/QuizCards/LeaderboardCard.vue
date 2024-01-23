@@ -47,30 +47,6 @@ const { players } = storeToRefs(APIStore);
   {
     full_name: 'Chloe Bennett',
     score: '56777',
-  },
-  {
-    full_name: 'Desmond Thompson',
-    score: '55418',
-  },
-  {
-    full_name: 'Morgan Foster',
-    score: '40011',
-  },
-  {
-    full_name: 'Lily Morgan',
-    score: '39318',
-  },
-  {
-    full_name: 'Adrian Sanchez',
-    score: '25224',
-  },
-  {
-    full_name: 'Victor Reynolds',
-    score: '18257',
-  },
-  {
-    full_name: 'Chloe Bennett',
-    score: '2312',
   }
 ]); */
 
@@ -93,13 +69,19 @@ const formatLeaderboard = () => {
       if (index == place.value) {
         item = { ...item, 'current': true };
       }
+      if (index < 1) {
+        item = { ...item, 'finalist': true };
+      }
+      item = { ...item, 'scoreFixed': (item.score / 1000).toFixed(3).replace(".", ",") };
+      formattedPlayers.value.push(item);
     }
-    if (index < 1) {
-      item = { ...item, 'finalist': true };
-    }
-    item = { ...item, 'scoreFixed': (item.score / 1000).toFixed(3).replace(".", ",") };
-    formattedPlayers.value.push(item);
   });
+  let blank = 10 - formattedPlayers.value.length;
+  if (blank > 0) {
+    for (let i = 0; i < blank; i++) {
+      formattedPlayers.value.push('');
+    }
+  }
 };
 
 const placeComp = computed(() => {

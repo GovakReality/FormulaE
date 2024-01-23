@@ -50,7 +50,7 @@ onMounted(() => {
 
 const CycleCar = () => {
     shouldCameraMove.value = true;
-    showHints = false;
+    showHints.value = false;
     // console.log(currentCar);
     currentCar.value--;
     if (currentCar.value < 1) {

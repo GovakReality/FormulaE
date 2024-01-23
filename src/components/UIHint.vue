@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted, onUnmounted, ref, watch, inject } from 'vue';
 import { useCardsStore } from '/src/stores/CardsStore';
+import { useCameraStore } from '/src/stores/CameraStore';
 import { storeToRefs } from 'pinia';
 import swipeHint from '/images/HandIcon.svg';
 import swipeRight from '/images/HandArrowRightIcon.svg';
@@ -8,9 +9,12 @@ import swipeLeft from '/images/HandArrowLeftIcon.svg';
 
 const cardsStore = useCardsStore();
 const { cardIndex, showHints } = storeToRefs(cardsStore);
+const cameraStore = useCameraStore();
+const { currentCar } = storeToRefs(cameraStore);
+
 const webGlCanvas = inject("webGlCanvas");
 let myInterval;
-let time = 4;
+let time = 2;
 let timeLeft = time;
 let hasStarted = false;
 
@@ -24,6 +28,14 @@ watch(cardIndex, () => {
     clearInterval(myInterval);
     hasStarted = false;
   }
+});
+
+watch(currentCar, (val) => {
+  if (cardIndex.value == 0) {
+    hasStarted = false;
+    clearInterval(myInterval);
+    if (!hasStarted) startTimer();
+  }  
 });
 
 function myTimer() {

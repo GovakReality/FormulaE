@@ -12,6 +12,7 @@ export const useCardsStore = defineStore('cards', () => {
 
   function reset() {
     cardIndex.value = 0;
+    showHints.value = true;
   };
 
   return { cardIndex, incrementCardIndex, reset, showHints };

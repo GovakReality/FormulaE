@@ -49,6 +49,9 @@ watch(loadComplete, (val) => {
 
 watch(currentCar, () => {
   if (currentCar.value == 3) {
+    if (expand.value == false) {
+      expand.value = true;
+    }
     shouldExpand.value = true;
     expand.value = false;
     actualGen.value = gens.value[0];

@@ -26,6 +26,12 @@ import Lockup from './Lockup.vue';
 	pointer-events: none;
 }
 
+@media (max-width: 599px) {
+	:deep(.v-toolbar__content) {
+		height: 80px !important;
+	}
+}
+
 @media (min-width: 2560px) {
 	:deep(.v-toolbar__content) {
 		height: 100px !important;

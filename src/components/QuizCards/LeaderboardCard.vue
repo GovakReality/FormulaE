@@ -5,10 +5,11 @@ import { useAPIStore } from '/src/stores/APIStore';
 import { useCameraStore } from '/src/stores/CameraStore';
 import { ref, watch, computed, onMounted, onUnmounted } from 'vue';
 import { storeToRefs } from 'pinia';
-import { useLocale } from 'vuetify';
+import { useLocale, useDisplay } from 'vuetify';
 import saudiaLogo from '/images/SaudiaLogo.svg';
 
 const { isRtl } = useLocale();
+const { xs } = useDisplay();
 
 const cardsStore = useCardsStore();
 const { cardIndex } = storeToRefs(cardsStore);
@@ -151,7 +152,7 @@ const onAfterLeave = (el) => {
           :class="{ 'g-card-l-def': !isRtl, 'g-card-l-rtl': isRtl }" variant="flat" color="transparent">
           <v-sheet class="text-center" color="transparent">
             <div class="g-wrapper">
-              <v-img :src="saudiaLogo" width="128" class="text-center justify-center mx-auto g-img"></v-img>
+              <v-img v-if="!xs" :src="saudiaLogo" width="128" class="text-center justify-center mx-auto g-img"></v-img>
 
               <!-- <h3 class="g-title font-weight-bold pt-8">
                 You are currently in:
@@ -513,11 +514,12 @@ const onAfterLeave = (el) => {
 
 @media (max-width: 959px) {
   .g-img {
-    display: none;
+    display: flex;
+    right: 7px;
   }
 
   .g-card {
-    width: 513px;
+    width: 550px;
     height: auto;
     border-top-left-radius: 24px !important;
     border-bottom-left-radius: 0px !important;
@@ -525,18 +527,15 @@ const onAfterLeave = (el) => {
     border-bottom-right-radius: 0px !important;
     padding-top: 26px;
     padding-bottom: 20px;
-
   }
 
   .g-points {
-    display: inline;
     padding-top: 0px;
     padding-bottom: clamp(6px, 3dvh, 12px);
   }
 
   .g-title {
-    padding-top: 0px;
-    display: inline;
+    padding-top: 10px;
     font-size: 18px;
   }
 
@@ -550,7 +549,7 @@ const onAfterLeave = (el) => {
   }
 
   .g-names-list {
-    width: 513px;
+    width: 550px;
     height: auto;
   }
 
@@ -568,37 +567,69 @@ const onAfterLeave = (el) => {
     font-size: 17px;
     width: 120px;
   }
+
+  :deep(.v-table--density-default > .v-table__wrapper > table > tbody > tr > td, .v-table--density-default > .v-table__wrapper > table > thead > tr > td, .v-table--density-default > .v-table__wrapper > table > tfoot > tr > td) {
+    height: 42px;
+    font-size: 15px;
+  }
+
+  :deep(.v-table--density-default > .v-table__wrapper) {
+    border-radius: 0px 0px 15px 15px;
+  }
 }
 
 @media (max-width: 599px) {
   .g-card {
-    padding-top: 32px;
-    padding-bottom: 28px;
+    padding-top: 0px !important;
+    padding-bottom: 2px !important;
   }
 
   .g-img {
-    display: flex;
+    display: none;
   }
 
   .g-points {
-    padding-top: clamp(16px, 3dvh, 32px);
-    padding-bottom: clamp(16px, 3dvh, 32px);
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+    font-size: 22px !important;
     display: block;
   }
 
   .g-title {
     padding-top: clamp(16px, 3dvh, 32px);
     display: block;
-    font-size: clamp(22px, 3.2dvh, 26px);
+    font-size: clamp(17px, 3dvh, 17px);
+    line-height: 20px;
+    padding-top: 12px;
+    padding-bottom: 0px;
+
   }
 
   .g-text {
-    font-size: clamp(18px, 3.2dvh, 24px);
+    padding-left: 12px;
+    padding-right: 12px;
+    font-size: clamp(15px, 3dvh, 15px);
+    line-height: 22px;
+    padding-top: 5px;
+    padding-bottom: 10px;
   }
 
   .g-text2 {
-    padding-top: clamp(18px, 3dvh, 36px);
-    margin-bottom: 20px;
+    padding-left: 12px;
+    padding-right: 12px;
+    font-size: clamp(12px, 3dvh, 12px);
+    line-height: 18px;
+    padding-top: 0px;
+    padding-bottom: 10px;
+  }
+
+  :deep(.v-table--density-default > .v-table__wrapper > table > tbody > tr > td, .v-table--density-default > .v-table__wrapper > table > thead > tr > td, .v-table--density-default > .v-table__wrapper > table > tfoot > tr > td) {
+    height: 30px;
+    font-size: 12px;
+  }
+
+  :deep(.v-table--density-default > .v-table__wrapper) {
+    border-radius: 0px 0px 15px 15px;
   }
 }
 
@@ -607,18 +638,6 @@ const onAfterLeave = (el) => {
     width: auto;
     margin-left: 16px;
     margin-right: 16px;
-  }
-
-  .g-points {
-    font-size: 40px;
-  }
-
-  .g-title {
-    font-size: 24px;
-  }
-
-  .g-text2 {
-    font-size: 16px;
   }
 
   .g-sheet-l {
@@ -646,31 +665,17 @@ const onAfterLeave = (el) => {
     font-size: 16px;
     width: auto;
   }
-
-  :deep(.v-table--density-default > .v-table__wrapper > table > tbody > tr > td, .v-table--density-default > .v-table__wrapper > table > thead > tr > td, .v-table--density-default > .v-table__wrapper > table > tfoot > tr > td) {
-    height: 52px;
-  }
 }
 
 @media (max-width: 529px) {
   .g-card {
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: 12px;
+    margin-right: 12px;
   }
 
   .g-names-list {
-    margin-left: 10px;
-    margin-right: 10px;
-  }
-
-  .g-title {
-    padding-left: 16px !important;
-    padding-right: 16px !important;
-  }
-
-  .g-text2 {
-    padding-left: 28px !important;
-    padding-right: 28px !important;
+    margin-left: 12px;
+    margin-right: 12px;
   }
 
   .g-name {
@@ -691,18 +696,13 @@ const onAfterLeave = (el) => {
 
 @media (max-width: 399px) {
   .g-card {
-    margin-left: 6px;
-    margin-right: 6px;
+    margin-left: 10px;
+    margin-right: 10px;
   }
 
   .g-names-list {
-    margin-left: 6px;
-    margin-right: 6px;
-  }
-
-  .g-title {
-    padding-left: 20px !important;
-    padding-right: 20px !important;
+    margin-left: 10px;
+    margin-right: 10px;
   }
 
   .g-pos {

@@ -50,7 +50,7 @@ onMounted(() => {
 
 const CycleCar = () => {
     shouldCameraMove.value = true;
-    console.log(currentCar);
+    // console.log(currentCar);
     currentCar.value--;
     if (currentCar.value < 1) {
         currentCar.value = 3;
@@ -60,7 +60,8 @@ const CycleCar = () => {
 </script>
 
 <template>
-    <v-sheet v-if="show && !xs" class="g-switch-car" :class="{ 'g-switch-def': !isRtl, 'g-switch-rtl': isRtl }">
+    <v-sheet v-if="(show && !xs) || (show && xs && cardIndex == 0)" class="g-switch-car"
+        :class="{ 'g-switch-def': !isRtl, 'g-switch-rtl': isRtl }">
         <v-slide-y-reverse-transition @after-leave="onAfterLeave" group>
             <div v-if="expand" class="g-title">
                 <v-btn icon="mdi-chevron-left" variant="flat" color="#28673C" size="x-large" class="g-switch-btn"
@@ -91,15 +92,40 @@ const CycleCar = () => {
 
 .g-switch-def {
     left: 38px;
+    transform: rotate(0deg);
 }
 
 .g-switch-rtl {
     right: 38px;
+    transform: rotate(180deg);
 }
 
-.g-title {
-    font-size: 48px;
-    font-weight: 700;
+@media (max-width: 599px) {
+    .g-switch-car {
+        z-index: 20;
+        max-width: 100%;
+        top: 43%;
+        transform: translateY(-50%);
+        height: fit-content;
+        font-family: Saudia Sans;
+        line-height: 44px;
+    }
+
+    .g-switch-btn {
+        font-size: 20px;
+        height: 46px !important;
+        width: 46px !important;
+    }
+
+    .g-switch-def {
+        right: 20px !important;
+        transform: rotate(180deg);
+    }
+
+    .g-switch-rtl {
+        right: 20px !important;
+        transform: rotate(180deg);
+    }
 }
 
 @media (min-width: 2560px) {

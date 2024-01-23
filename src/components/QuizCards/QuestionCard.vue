@@ -178,7 +178,7 @@ const showWrongAnswer = (val) => {
 const onAfterLeave = (el) => {
   if (!shouldReset.value) {
     cardsStore.incrementCardIndex();
-  }  
+  }
 }
 
 const onBeforeEnter = (el) => {
@@ -189,7 +189,7 @@ const onBeforeEnter = (el) => {
   cancelAnimationFrame(animFrame);
 }
 
-const onAfterEnter = (el) => {   
+const onAfterEnter = (el) => {
   startTimer();
 }
 
@@ -207,18 +207,18 @@ const timer = () => {
     timeLeft.value = (timeLeft.value - calc).toFixed(0);
     timeBarValue.value = timeLeft.value;
     //start bar colors
-    if (timeLeft.value <= 7800) { 
+    if (timeLeft.value <= 7800) {
       timeBarColor.value = '#525c3c';
     }
-    if (timeLeft.value <= 5800) { 
+    if (timeLeft.value <= 5800) {
       timeBarColor.value = '#8e4d3c';
     }
-    if (timeLeft.value <= 2800) { 
+    if (timeLeft.value <= 2800) {
       timeBarColor.value = '#b9423b';
-    }  
-    if (timeLeft.value <= 1200) { 
+    }
+    if (timeLeft.value <= 1200) {
       timeBarColor.value = '#d73b3b';
-    }      
+    }
     //end bar colors      
     if (timeLeft.value <= 0) {
       timeLeft.value = 0;
@@ -228,7 +228,7 @@ const timer = () => {
       neutralAnswers.value = true;
       setTimeout(() => {
         contractCard(); // COMMENT THIS TO STOP
-      }, 1500);      
+      }, 1500);
     } else {
       prevTime = aux;
       animFrame = requestAnimationFrame(timer);
@@ -258,10 +258,12 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
 <template>
   <v-sheet v-if="show"
     class="d-flex flex-column flex-sm-row align-center align-sm-end justify-center h-100 pa-2 pa-sm-10 pb-sm-16 pb-sm-16">
-    <v-slide-y-reverse-transition @after-leave="onAfterLeave" @after-enter="onAfterEnter" @before-enter="onBeforeEnter" group>
+    <v-slide-y-reverse-transition @after-leave="onAfterLeave" @after-enter="onAfterEnter" @before-enter="onBeforeEnter"
+      group>
       <v-card v-if="expand" class="g-card py-4 px-4 rounded-xl" color="#F0F0F0" variant="flat">
         <template v-slot:loader="{ isActive }">
-          <v-progress-linear ref="timeBarEl" :active="true" :model-value="timeBarValueFixed" :color="timeBarColor" bg-color="#28673c" height="8"></v-progress-linear>
+          <v-progress-linear ref="timeBarEl" :active="true" :model-value="timeBarValueFixed" :color="timeBarColor"
+            bg-color="#28673c" height="8"></v-progress-linear>
         </template>
 
         <v-card-item>
@@ -314,7 +316,9 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
     <v-sheet v-if="show" class="g-hud" :class="{ 'g-hud-l-def': !isRtl, 'g-hud-l-rtl': isRtl }">
       <v-slide-y-reverse-transition group>
         <v-sheet v-if="expandHud" class="g-hud-w">
-          <div :class="{ 'g-correct-points': correctPoints, 'g-wrong-points': wrongPoints, 'g-hud-total-def': !isRtl, 'g-hud-total-rtl': isRtl }" class="g-hud-total g-show-points py-1">
+          <div
+            :class="{ 'g-correct-points': correctPoints, 'g-wrong-points': wrongPoints, 'g-hud-total-def': !isRtl, 'g-hud-total-rtl': isRtl }"
+            class="g-hud-total g-show-points py-1">
             +{{ timeLeftFixed }} {{ $t("global.pts") }}
           </div>
           <div class="g-hud-round px-4 py-1">{{ $t("global.round") }}
@@ -384,32 +388,69 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
   -webkit-animation: btBackgroundAnime 2s ease infinite;
   -moz-animation: btBackgroundAnime 2s ease infinite;
   -o-animation: btBackgroundAnime 2s ease infinite;
-  animation: btBackgroundAnime 2s ease infinite;  
+  animation: btBackgroundAnime 2s ease infinite;
 }
+
 @-webkit-keyframes btBackgroundAnime {
-  0%{background-position:0% 39%}
-  50%{background-position:100% 62%}
-  100%{background-position:0% 39%}
+  0% {
+    background-position: 0% 39%
+  }
+
+  50% {
+    background-position: 100% 62%
+  }
+
+  100% {
+    background-position: 0% 39%
+  }
 }
+
 @-moz-keyframes btBackgroundAnime {
-  0%{background-position:0% 39%}
-  50%{background-position:100% 62%}
-  100%{background-position:0% 39%}
+  0% {
+    background-position: 0% 39%
+  }
+
+  50% {
+    background-position: 100% 62%
+  }
+
+  100% {
+    background-position: 0% 39%
+  }
 }
+
 @-o-keyframes btBackgroundAnime {
-  0%{background-position:0% 39%}
-  50%{background-position:100% 62%}
-  100%{background-position:0% 39%}
+  0% {
+    background-position: 0% 39%
+  }
+
+  50% {
+    background-position: 100% 62%
+  }
+
+  100% {
+    background-position: 0% 39%
+  }
 }
+
 @keyframes btBackgroundAnime {
-  0%{background-position:0% 39%}
-  50%{background-position:100% 62%}
-  100%{background-position:0% 39%}
+  0% {
+    background-position: 0% 39%
+  }
+
+  50% {
+    background-position: 100% 62%
+  }
+
+  100% {
+    background-position: 0% 39%
+  }
 }
+
 .g-wrong-answer {
   pointer-events: none;
   opacity: 100%;
-  background: linear-gradient(94deg, #9f2e2e 7.42%, #d73b3b 166.68%); 
+  background: linear-gradient(94deg, #9f2e2e 7.42%, #d73b3b 166.68%);
 }
 
 :deep(.v-btn.v-btn--density-default) {
@@ -481,8 +522,8 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
     -1px 1px 0 #28673C,
     -1px -1px 0 #28673C,
     1px -1px 0 #28673C;
-    padding-right: 5px;
-    padding-left: 5px;    
+  padding-right: 5px;
+  padding-left: 5px;
 }
 
 .g-hud-total-def {
@@ -517,9 +558,9 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
     -1px 1px 0 #F0F0F000,
     -1px -1px 0 #F0F0F000,
     1px -1px 0 #F0F0F000;
-  transform: translate(0px, -60px);
+  transform: translate(0px, -50px);
   transition: text-shadow 0.25s ease 0s, transform 1.25s cubic-bezier(0.165, 0.84, 0.44, 1) 0s;
-  animation: opacityAnim 3.6s ease 0.1s 1; 
+  animation: opacityAnim 3.6s ease 0.1s 1;
 }
 
 .g-wrong-points {
@@ -529,36 +570,59 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
     -1px 1px 0 #F0F0F000,
     -1px -1px 0 #F0F0F000,
     1px -1px 0 #F0F0F000;
-  transform: translate(0px, -60px);
+  transform: translate(0px, -50px);
   transition: text-shadow 0.25s ease 0s, transform 1.25s cubic-bezier(0.165, 0.84, 0.44, 1) 0s;
-  animation: opacityAnim 3.6s ease 0.1s 1; 
+  animation: opacityAnim 3.6s ease 0.1s 1;
 }
 
 @-webkit-keyframes opacityAnim {
-  0%    { opacity: 1; }
-  100%  { opacity: 0; }
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
 }
+
 @-moz-keyframes opacityAnim {
-  0%    { opacity: 1; }
-  100%  { opacity: 0; }
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
 }
+
 @-o-keyframes opacityAnim {
-  0%    { opacity: 1; }
-  100%  { opacity: 0; }
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
 }
+
 @keyframes opacityAnim {
-  0%    { opacity: 1; }
-  100%  { opacity: 0; }
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
 }
 
 @media (max-width: 599px) {
   .g-card {
     width: 420px;
-    margin-bottom: 20px;
+    margin-bottom: 60px;
   }
 
   .g-round {
-    font-size: 18px;
+    font-size: 19px;
   }
 
   .g-text {
@@ -575,8 +639,8 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
   }
 
   .g-hud {
-    position: relative;
-    bottom: auto;
+    position: absolute;
+    bottom: 15px;
     right: auto;
     left: auto;
   }
@@ -588,21 +652,32 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
   .g-hud-score {
     width: 150px;
   }
+
+  .g-correct-points {
+    transform: translate(0px, -12px);
+  }
+
+  .g-wrong-points {
+    transform: translate(0px, -12px);
+  }
+
 }
 
 @media (max-width: 446px) {
   .g-hud-round {
-    font-size: 16px;
+    font-size: 17px;
+    width: 140px;
   }
 
   .g-hud-score {
-    font-size: 16px;
+    font-size: 17px;
+    width: 140px;
   }
 
   .g-hud-total {
-    font-size: 20px;
+    font-size: 19px;
     padding-right: 15px;
-    padding-left: 15px;      
+    padding-left: 15px;
   }
 }
 

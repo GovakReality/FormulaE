@@ -15,7 +15,7 @@ const cameraStore = useCameraStore();
 const APIStore = useAPIStore();
 const { isLoading } = storeToRefs(APIStore);
 
-const { idle, lastActive, reset: idleReset } = useIdle(25000);
+const { idle, lastActive, reset: idleReset } = useIdle(20000);
 const { counter, reset, pause, resume } = useInterval(100, { controls: true });
 
 const showInactivity = ref(false);

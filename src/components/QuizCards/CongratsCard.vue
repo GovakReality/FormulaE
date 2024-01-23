@@ -7,15 +7,16 @@ import { ref, watch } from 'vue';
 import { storeToRefs } from 'pinia';
 import saudiaLogo from '/images/SaudiaLogo.svg';
 import { useI18n } from 'vue-i18n';
-import { useLocale } from 'vuetify';
+import { useLocale, useDisplay } from 'vuetify';
 
 const { t } = useI18n();
 const { isRtl } = useLocale();
+const { xs } = useDisplay();
 
 const cardsStore = useCardsStore();
 const { cardIndex } = storeToRefs(cardsStore);
 const quizStore = useQuizStore();
-const { fullName, email, score, scoreFixed } = storeToRefs(quizStore);
+const { fullName, email, score, terms, terms2, scoreFixed } = storeToRefs(quizStore);
 const APIStore = useAPIStore();
 const { APIStatus } = storeToRefs(APIStore);
 const cameraStore = useCameraStore();
@@ -28,8 +29,6 @@ const showError = ref(false);
 const errorMsg = ref('');
 
 const isFormValid = ref(false);
-const terms = ref(false);
-const terms2 = ref(false);
 
 const fullNameRules = [
   value => {
@@ -79,7 +78,7 @@ const submit = async (event) => {
       full_name: fullName.value,
       email: email.value,
       consent: terms2.value,
-    });
+    })
     //APIStatus.value = 1; //remove
   }
 };
@@ -120,7 +119,7 @@ const onAfterLeave = (el) => {
       <v-sheet v-if="expand" class="g-sheet" position="relative" color="transparent">
         <v-card class="g-card py-4 rounded-xl" variant="flat">
           <v-card-item class="text-center">
-            <v-img :src="saudiaLogo" width="128" class="text-center justify-center mx-auto"></v-img>
+            <v-img v-if="!xs" :src="saudiaLogo" width="128" class="text-center justify-center mx-auto"></v-img>
             <h3 class="g-title pt-xxl-8">
               {{ $t("congrats.title") }}
             </h3>
@@ -236,9 +235,14 @@ const onAfterLeave = (el) => {
 }
 
 :deep(.v-messages) {
-  font-size: clamp(12px, 1.6dvh, 16px);
+  font-size: clamp(10px, 1.5dvh, 16px);
   padding-top: 3px;
-  padding-bottom: 1px
+  padding-bottom: 1px;
+}
+
+:deep(.v-input__details) {
+  padding-top: 2px;
+  align-items: start;
 }
 
 :deep(.v-field__input) {
@@ -247,15 +251,15 @@ const onAfterLeave = (el) => {
 }
 
 :deep(.v-field) {
-  font-size: clamp(12px, 2dvh, 16px);
+  font-size: clamp(12px, 1.5dvh, 16px);
 }
 
 .g-bt {
-  font-size: clamp(16px, 2.3dvh, 18px);
+  font-size: clamp(15px, 2.3dvh, 18px);
   width: 183px;
   max-width: 100%;
   line-height: normal;
-  margin-top: clamp(16px, 2.4dvh, 32px);
+  margin-top: clamp(14px, 2.4dvh, 32px);
 
 }
 
@@ -315,7 +319,7 @@ const onAfterLeave = (el) => {
 :deep(.v-messages__message) {
   color: #F0F0F0;
   opacity: 0.6;
-  line-height: 15px;
+  line-height: 14px;
 }
 
 .g-ripple {
@@ -341,11 +345,11 @@ const onAfterLeave = (el) => {
 .g-try-bt {
   font-family: Saudia Sans;
   line-height: normal;
-  font-size: 18px;
   text-transform: uppercase;
   color: #28673C;
   background-color: white;
   width: 183px;
+  font-size: clamp(15px, 2.3dvh, 18px);
 }
 
 :deep(.v-selection-control__input:hover::before) {
@@ -362,10 +366,38 @@ const onAfterLeave = (el) => {
 }
 
 @media (max-width: 599px) {
+  .g-card {
+    width: 440px;
+    padding-top: 0px !important;
+    padding-bottom: 2px !important;
+  }
+
+  .g-title {
+    font-size: clamp(17px, 3dvh, 17px);
+    line-height: 20px;
+    padding-top: 11px;
+    padding-bottom: 0px;
+  }
+
+  .g-text {
+    padding-left: 12px;
+    padding-right: 12px;
+    font-size: clamp(15px, 3dvh, 15px);
+    line-height: 22px;
+    padding-top: 5px;
+    padding-bottom: 10px;
+  }
+
   .g-points {
-    padding-top: 16px !important;
-    padding-bottom: 18px !important;
-    font-size: 34px;
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+    font-size: 22px;
+  }
+
+  :deep(.g-terms .v-label) {
+    font-size: clamp(11px, 1.6dvh, 11px);
+    align-items: start;
+    margin-top: clamp(0px, 1.6dvh, 0px);
   }
 
   .g-try {
@@ -383,13 +415,13 @@ const onAfterLeave = (el) => {
 
 @media (max-width: 449px) {
   .g-card {
-    width: 380px;
+    width: 400px;
   }
 }
 
 @media (max-width: 399px) {
   .g-card {
-    width: 320px;
+    width: 370px;
   }
 
   .g-points {
@@ -428,7 +460,7 @@ const onAfterLeave = (el) => {
   }
 
   :deep(.v-field__input) {
-    min-height: clamp(50px, 5dvh, 70px);
+    min-height: clamp(40px, 5dvh, 70px);
   }
 
   :deep(.v-field) {

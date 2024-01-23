@@ -14,7 +14,7 @@ const { currentCar } = storeToRefs(cameraStore);
 
 const webGlCanvas = inject("webGlCanvas");
 let myInterval;
-let time = 2;
+let time = 4;
 let timeLeft = time;
 let hasStarted = false;
 

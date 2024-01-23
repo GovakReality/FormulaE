@@ -4,6 +4,7 @@ import { ref } from 'vue';
 export const useCardsStore = defineStore('cards', () => {
 
   const cardIndex = ref(0);
+  const showHints = ref(true);
 
   function incrementCardIndex() {
     cardIndex.value++;
@@ -13,5 +14,5 @@ export const useCardsStore = defineStore('cards', () => {
     cardIndex.value = 0;
   };
 
-  return { cardIndex, incrementCardIndex, reset };
+  return { cardIndex, incrementCardIndex, reset, showHints };
 })

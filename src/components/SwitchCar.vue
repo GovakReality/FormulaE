@@ -12,8 +12,8 @@ const { t } = useI18n();
 const { isRtl } = useLocale();
 const { xs } = useDisplay();
 
-const cardStore = useCardsStore();
-const { cardIndex } = storeToRefs(cardStore);
+const cardsStore = useCardsStore();
+const { cardIndex, showHints } = storeToRefs(cardsStore);
 const loadingStore = useLoadingStore();
 const { loadStart, loadComplete, loadError, loadProgress } = storeToRefs(loadingStore);
 const quizStore = useQuizStore();
@@ -50,6 +50,7 @@ onMounted(() => {
 
 const CycleCar = () => {
     shouldCameraMove.value = true;
+    showHints = false;
     // console.log(currentCar);
     currentCar.value--;
     if (currentCar.value < 1) {
@@ -64,6 +65,11 @@ const CycleCar = () => {
         :class="{ 'g-switch-def': !isRtl, 'g-switch-rtl': isRtl }">
         <v-slide-y-reverse-transition @after-leave="onAfterLeave" group>
             <div v-if="expand" class="g-title">
+                <v-sheet class="g-hint-wrapper">
+                    <v-fade-transition>
+                        <div v-if="showHints" class="g-hint-text">Explore More</div>
+                    </v-fade-transition>
+                </v-sheet>
                 <v-btn icon="mdi-chevron-left" variant="flat" color="#28673C" size="x-large" class="g-switch-btn"
                     @click="CycleCar"></v-btn>
             </div>
@@ -91,13 +97,33 @@ const CycleCar = () => {
 }
 
 .g-switch-def {
-    left: 38px;
+    left: 50px;
     transform: rotate(0deg);
 }
 
 .g-switch-rtl {
-    right: 38px;
+    right: 50px;
     transform: rotate(180deg);
+}
+
+.g-hint-wrapper {
+    background-color: transparent;
+    position: absolute;
+    margin-top: -38px;
+    margin-left: -57px;
+    text-transform: capitalize;
+    width: max-content;
+    white-space: nowrap;
+}
+
+.g-hint-text {
+    font-weight: 700;
+    font-size: clamp(16px, 3dvh, 20px);
+    line-height: clamp(27px, 3.5dvh, 28px);
+    padding-bottom: 4px;
+    padding-left: 28px;
+    padding-right: 28px;
+    color: white;
 }
 
 @media (max-width: 599px) {

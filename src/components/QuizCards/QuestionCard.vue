@@ -654,11 +654,11 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
   }
 
   .g-correct-points {
-    transform: translate(0px, -15px);
+    transform: translate(0px, -12px);
   }
 
   .g-wrong-points {
-    transform: translate(0px, -15px);
+    transform: translate(0px, -12px);
   }
 
 }

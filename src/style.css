@@ -85,8 +85,8 @@ body {
 html {
   overflow: hidden;
 }
-@media (max-width: 599px) {
+/* @media (max-width: 599px) {
   html {
     overflow: auto;
   }
-}
+} */

@@ -27,7 +27,9 @@
     "termsAndConditions": "الأحكام والشروط",
     "termsUrl": "https://takeyourseat.saudia.com/formula-e/sa/termsandconditions",
     "privacyPolicy": "سياسة الخصوصية",
-    "privacyUrl": "https://www.saudia.com/help/useful-links/legal-and-terms-and-conditions/privacy-policy?sc_lang=ar-SA&sc_country=SA"
+    "privacyUrl": "https://www.saudia.com/help/useful-links/legal-and-terms-and-conditions/privacy-policy?sc_lang=ar-SA&sc_country=SA",
+    "eventModeOn": "eventModeOnX",
+    "eventModeOff": "eventModeOffX"
   },
   "geninfo": {
     "gen3Year": "2023 - الحالي",

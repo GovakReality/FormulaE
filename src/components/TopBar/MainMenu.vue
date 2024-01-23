@@ -1,7 +1,12 @@
 <script setup>
   import { computed, ref } from 'vue';
   import { useI18n } from 'vue-i18n';
+  import { useQuizStore } from '/src/stores/QuizStore';
+  import { storeToRefs } from 'pinia';
+
   const { t } = useI18n();
+  const quizStore = useQuizStore();
+  const { eventMode } = storeToRefs(quizStore);
 
   const menuItems = ref([
     { 
@@ -12,6 +17,18 @@
       href: computed(() => t('menu.privacyUrl')),
     }
   ]);
+
+  const toggleEventMode = (event) => {
+    eventMode.value = !eventMode.value;
+  };  
+
+  const eventBtnText = computed(() => {
+    if (eventMode.value) {
+      return t('menu.eventModeOn');
+    } else {
+      return t('menu.eventModeOff');
+    }
+  });
 </script>
 <template>
   <v-menu transition="scroll-y-transition">
@@ -20,6 +37,7 @@
     </template>
   
     <v-list class="mt-2 text-center" item-type="link">
+      <v-list-item-title class="g-menu-item" @click="toggleEventMode">{{ eventBtnText }}</v-list-item-title>
       <v-list-item
       v-for="(item, i) in menuItems"
       :key="i"

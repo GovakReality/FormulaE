@@ -115,6 +115,10 @@ onMounted(() => {
 }
 
 @media (max-width: 599px) {
+  .g-img {
+    width: 100px !important;
+  }
+
   .g-card {
     width: 345px;
     margin-bottom: 17px;
@@ -128,17 +132,12 @@ onMounted(() => {
     padding-top: 0px;
   }
 
-  .g-img {
-    width: 100px !important;
-  }
-
   .g-title {
     font-size: clamp(17px, 3dvh, 17px);
     line-height: 26px;
     padding-top: 11px;
     padding-bottom: 0px;
   }
-
 }
 
 @media (min-width: 2560px) {

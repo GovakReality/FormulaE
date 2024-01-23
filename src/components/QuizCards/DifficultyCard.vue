@@ -143,7 +143,7 @@ const onAfterLeave = (el) => {
 }
 
 .g-bt-diff {
-  font-size: clamp(16px, 2.3dvh, 18px);
+  font-size: clamp(15px, 2.3dvh, 18px);
   width: 183px;
   max-width: 100%;
   line-height: normal;
@@ -162,9 +162,24 @@ const onAfterLeave = (el) => {
 }
 
 @media (max-width: 599px) {
+  .g-img {
+    width: 100px !important;
+  }
+
   .g-text {
     padding-left: 12px;
     padding-right: 12px;
+    font-size: clamp(16px, 3dvh, 16px);
+    line-height: 26px;
+    padding-top: 11px;
+    padding-bottom: 0px;
+  }
+
+  .g-title {
+    font-size: clamp(17px, 3dvh, 17px);
+    line-height: 26px;
+    padding-top: 11px;
+    padding-bottom: 0px;
   }
 }
 

@@ -284,6 +284,7 @@ const cameraMovement = (toPos, toTarget) => {
 };
 
 const handleResize = () => {
+  window.scroll(0, -100);
   windowWidth.value = window.innerWidth;
   windowHeight.value = window.innerHeight;
   updateCamera();

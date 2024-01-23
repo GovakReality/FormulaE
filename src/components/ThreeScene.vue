@@ -284,6 +284,7 @@ const cameraMovement = (toPos, toTarget) => {
 };
 
 const handleResize = () => {
+  window.scroll(0, -100);
   windowWidth.value = window.innerWidth;
   windowHeight.value = window.innerHeight;
   updateCamera();
@@ -422,30 +423,33 @@ watch(cameraTargetZ, () => {
 });
 
 // Press "B" to print camera and target positions
-function handleKeyDown(event) {
-  if (event.keyCode === 66) { //66 is "b"
-    window.isBDown = true;
-    console.log("Camera X: " + camera.position.x);
-    console.log("Camera Y: " + camera.position.y);
-    console.log("Camera Z: " + camera.position.z);
-    console.log("Target X: " + controls.target.x);
-    console.log("Target Y: " + controls.target.y);
-    console.log("Target Z: " + controls.target.z);
-  }
-}
+// function handleKeyDown(event) {
+//   if (event.keyCode === 66) { //66 is "b"
+//     window.isBDown = true;
+//     console.log("Camera X: " + camera.position.x);
+//     console.log("Camera Y: " + camera.position.y);
+//     console.log("Camera Z: " + camera.position.z);
+//     console.log("Target X: " + controls.target.x);
+//     console.log("Target Y: " + controls.target.y);
+//     console.log("Target Z: " + controls.target.z);
+//   }
+// }
 
-function handleKeyUp(event) {
-  if (event.keyCode === 66) {
-    window.isBDown = false;
-  }
-}
+// function handleKeyUp(event) {
+//   if (event.keyCode === 66) {
+//     window.isBDown = false;
+//   }
+// }
 
-window.addEventListener('keydown', handleKeyDown, false);
-window.addEventListener('keyup', handleKeyUp, false);
+// window.addEventListener('keydown', handleKeyDown, false);
+// window.addEventListener('keyup', handleKeyUp, false);
 
 onMounted(() => {
   window.addEventListener('resize', handleResize);
   window.addEventListener('orientationchange', handleResize);
+  window.visualViewport.addEventListener('resize', handleResize);
+  // window.visualViewport.addEventListener('orientationchange', handleResize);
+  document.addEventListener('focusout', handleResize);
   setCanvas();
   animate();
 });
@@ -453,6 +457,9 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('resize', handleResize);
   window.removeEventListener('orientationchange', handleResize);
+  window.visualViewport.removeEventListener('resize', handleResize);
+  // window.visualViewport.removeEventListener('orientationchange', handleResize);
+  document.removeEventListener('focusout', handleResize);
 })
 
 </script>

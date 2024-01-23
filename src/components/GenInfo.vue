@@ -16,7 +16,7 @@ const { cardIndex } = storeToRefs(cardStore);
 const loadingStore = useLoadingStore();
 const { loadStart, loadComplete, loadError, loadProgress } = storeToRefs(loadingStore);
 const cameraStore = useCameraStore();
-const { currentCar, reset } = storeToRefs(cameraStore);
+const { currentCar } = storeToRefs(cameraStore);
 
 const expand = ref(false);
 const show = ref(false);
@@ -49,7 +49,10 @@ watch(loadComplete, (val) => {
 
 watch(currentCar, () => {
   if (currentCar.value == 3) {
-    // shouldExpand.value = true;
+    if (expand.value == false) {
+      expand.value = true;
+    }
+    shouldExpand.value = true;
     expand.value = false;
     actualGen.value = gens.value[0];
   } else if (currentCar.value == 2) {

@@ -52,9 +52,10 @@ watch(locale, () => {
 
 @media (max-width: 599px) {
   .g-lang {
-    padding-right: 0px;
+    padding-right: 2px;
   }
 }
+
 @media (max-width: 399px) {
   :deep(.v-field.v-field--appended) {
     padding-left: 2px;

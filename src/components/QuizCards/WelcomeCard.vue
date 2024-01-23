@@ -96,7 +96,7 @@ onMounted(() => {
 }
 
 .g-bt-start {
-  font-size: clamp(16px, 2.3dvh, 18px);
+  font-size: clamp(15px, 2.3dvh, 18px);
   width: 183px;
   max-width: 100%;
   line-height: normal;
@@ -115,25 +115,29 @@ onMounted(() => {
 }
 
 @media (max-width: 599px) {
+  .g-img {
+    width: 100px !important;
+  }
+
   .g-card {
-    width: 333px;
+    width: 345px;
+    margin-bottom: 17px;
   }
+
   .g-card-item {
-    padding: 5px;
-    padding-top: 10px;
+    padding: 9px 5px 11px 5px;
   }
+
   .g-card-actions {
     padding-top: 0px;
   }
-  .g-img {
-    width: 110px !important;
-  }
+
   .g-title {
-    font-size: clamp(18px, 3dvh, 20px);
+    font-size: clamp(17px, 3dvh, 17px);
     line-height: 26px;
-    padding-top: 18px;
+    padding-top: 11px;
     padding-bottom: 0px;
-  }  
+  }
 }
 
 @media (min-width: 2560px) {

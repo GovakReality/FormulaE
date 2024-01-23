@@ -60,7 +60,8 @@ const CycleCar = () => {
 </script>
 
 <template>
-    <v-sheet v-if="show" class="g-switch-car" :class="{ 'g-switch-def': !isRtl, 'g-switch-rtl': isRtl }">
+    <v-sheet v-if="(show && !xs) || (show && xs && cardIndex == 0)" class="g-switch-car"
+        :class="{ 'g-switch-def': !isRtl, 'g-switch-rtl': isRtl }">
         <v-slide-y-reverse-transition @after-leave="onAfterLeave" group>
             <div v-if="expand" class="g-title">
                 <v-btn icon="mdi-chevron-left" variant="flat" color="#28673C" size="x-large" class="g-switch-btn"

@@ -514,7 +514,8 @@ const onAfterLeave = (el) => {
 
 @media (max-width: 959px) {
   .g-img {
-    display: none;
+    display: flex;
+    right: 7px;
   }
 
   .g-card {
@@ -534,7 +535,7 @@ const onAfterLeave = (el) => {
   }
 
   .g-title {
-    padding-top: 0px;
+    padding-top: 10px;
     font-size: 18px;
   }
 
@@ -584,7 +585,7 @@ const onAfterLeave = (el) => {
   }
 
   .g-img {
-    display: flex;
+    display: none;
   }
 
   .g-points {

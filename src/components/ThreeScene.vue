@@ -447,6 +447,9 @@ watch(cameraTargetZ, () => {
 onMounted(() => {
   window.addEventListener('resize', handleResize);
   window.addEventListener('orientationchange', handleResize);
+  window.visualViewport.addEventListener('resize', handleResize);
+  // window.visualViewport.addEventListener('orientationchange', handleResize);
+  document.addEventListener('focusout', handleResize);
   setCanvas();
   animate();
 });
@@ -454,6 +457,9 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('resize', handleResize);
   window.removeEventListener('orientationchange', handleResize);
+  window.visualViewport.removeEventListener('resize', handleResize);
+  // window.visualViewport.removeEventListener('orientationchange', handleResize);
+  document.removeEventListener('focusout', handleResize);
 })
 
 </script>

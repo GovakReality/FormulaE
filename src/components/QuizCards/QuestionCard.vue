@@ -558,7 +558,7 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
     -1px 1px 0 #F0F0F000,
     -1px -1px 0 #F0F0F000,
     1px -1px 0 #F0F0F000;
-  transform: translate(0px, -60px);
+  transform: translate(0px, -50px);
   transition: text-shadow 0.25s ease 0s, transform 1.25s cubic-bezier(0.165, 0.84, 0.44, 1) 0s;
   animation: opacityAnim 3.6s ease 0.1s 1;
 }
@@ -570,7 +570,7 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
     -1px 1px 0 #F0F0F000,
     -1px -1px 0 #F0F0F000,
     1px -1px 0 #F0F0F000;
-  transform: translate(0px, -60px);
+  transform: translate(0px, -50px);
   transition: text-shadow 0.25s ease 0s, transform 1.25s cubic-bezier(0.165, 0.84, 0.44, 1) 0s;
   animation: opacityAnim 3.6s ease 0.1s 1;
 }

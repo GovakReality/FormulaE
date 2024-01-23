@@ -16,7 +16,7 @@ const { xs } = useDisplay();
 const cardsStore = useCardsStore();
 const { cardIndex } = storeToRefs(cardsStore);
 const quizStore = useQuizStore();
-const { fullName, email, score, scoreFixed } = storeToRefs(quizStore);
+const { fullName, email, score, terms, terms2, scoreFixed } = storeToRefs(quizStore);
 const APIStore = useAPIStore();
 const { APIStatus } = storeToRefs(APIStore);
 const cameraStore = useCameraStore();
@@ -29,8 +29,6 @@ const showError = ref(false);
 const errorMsg = ref('');
 
 const isFormValid = ref(false);
-const terms = ref(false);
-const terms2 = ref(false);
 
 const fullNameRules = [
   value => {
@@ -80,7 +78,7 @@ const submit = async (event) => {
       full_name: fullName.value,
       email: email.value,
       consent: terms2.value,
-    });
+    })
     //APIStatus.value = 1; //remove
   }
 };

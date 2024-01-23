@@ -67,7 +67,7 @@ const CycleCar = () => {
             <div v-if="expand" class="g-title">
                 <v-sheet class="g-hint-wrapper">
                     <v-fade-transition>
-                        <div v-if="showHints" class="g-hint-text">Explore More</div>
+                        <div v-if="showHints" class="g-hint-text">{{ $t("global.exploreMore") }}</div>
                     </v-fade-transition>
                 </v-sheet>
                 <v-btn icon="mdi-chevron-left" variant="flat" color="#28673C" size="x-large" class="g-switch-btn"

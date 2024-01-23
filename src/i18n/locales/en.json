@@ -14,7 +14,8 @@
     "email": "E-mail",
     "continue": "Continue",
     "restart": "Restart",
-    "close": "Close"
+    "close": "Close",
+    "exploreMore": "Explore More"
   },
   "system": {
     "error": "Error",

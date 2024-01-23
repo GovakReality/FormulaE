@@ -55,7 +55,10 @@
     "tip": "احصل على المزيد من النقاط من خلال الإجابة بشكل أسرع",
     "text": "سيتم التواصل معكم من خلال البريد الالكتروني بنهاية المسابقة في حال ترشحكم",
     "finalist": "النهائي",
-    "top10": "على 10"
+    "placeHintEqual": "placeHintEqual",
+    "placeHintWorse": "placeHintWorse",
+    "placeText": "placeText",
+    "placeSuffix": "placeSuffix"
   },
   "rules": {
     "name": {

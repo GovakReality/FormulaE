@@ -55,7 +55,10 @@
     "tip": "Tip: answer faster to score more points!",
     "text": "If you're among the finalists by the end of the contest, you will be notified via email about your prize.",
     "finalist": "finalist",
-    "top10": "TOP 10"
+    "placeHintEqual": "placeHintEqual",
+    "placeHintWorse": "placeHintWorse",
+    "placeText": "placeText",
+    "placeSuffix": "placeSuffix"
   },
   "rules": {
     "name": {

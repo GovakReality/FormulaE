@@ -6,11 +6,12 @@ import { useCameraStore } from '/src/stores/CameraStore';
 import { ref, watch, computed, onMounted, onUnmounted } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useLocale, useDisplay } from 'vuetify';
+import { useI18n } from 'vue-i18n';
 import saudiaLogo from '/images/SaudiaLogo.svg';
 
 const { isRtl } = useLocale();
 const { xs } = useDisplay();
-
+const { t } = useI18n();
 const cardsStore = useCardsStore();
 const { cardIndex } = storeToRefs(cardsStore);
 const quizStore = useQuizStore();
@@ -90,9 +91,9 @@ const placeComp = computed(() => {
 
 const conditionalTextComp = computed(() => {
   if (scorePlace.value == score.value) {
-    return 'Essa é a sua pontuaçao'
+    return t('leaderboard.placeHintEqual');
   } else {
-    return 'Você tem um lugar melhor, esse aqui:'
+    return t('leaderboard.placeHintWorse');
   }
 });
 
@@ -133,10 +134,10 @@ const onAfterLeave = (el) => {
               <v-img v-if="!xs" :src="saudiaLogo" width="128" class="text-center justify-center mx-auto g-img"></v-img>
 
               <h3 class="g-title">
-                You are currently in:
+                {{ $t("leaderboard.placeText") }}
               </h3>          
               <div class="g-place">
-                {{placeComp}}<small>th</small>
+                {{placeComp}}<small>{{ $t("leaderboard.placeSuffix") }}</small>
               </div>
 
               <h3 class="g-title">

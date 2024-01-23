@@ -1,14 +1,19 @@
-import { defineStore } from 'pinia';
+import { defineStore, storeToRefs } from 'pinia';
 import { computed, ref, toRaw } from 'vue';
+import { useQuizStore } from '/src/stores/QuizStore';
 import axios from "axios";
 import axiosRetry from 'axios-retry';
 
 export const useAPIStore = defineStore('API', () => {
 
+  const quizStore = useQuizStore();
+  const { place, scorePlace } = storeToRefs(quizStore);
+
   const url = import.meta.env.VITE_API_URL;
 
   const players = ref([]);
-  const APIStatus = ref(0);// 0 = undefined / 1 = ok / 2 = send error / 3 = fetch error  
+
+  const APIStatus = ref(0);// 0 = undefined / 1 = ok / 2 = send error / 3 = fetch error / 4 = fetch place error
   const isLoading = ref(false);
 
   axiosRetry(axios, {
@@ -44,7 +49,7 @@ export const useAPIStore = defineStore('API', () => {
       consent: val.consent,
     })
     .then((res) => {
-      fetchLeaderboard();
+      getPlayer(val);
     })
     .catch((error) => {
       isLoading.value = false;
@@ -55,9 +60,24 @@ export const useAPIStore = defineStore('API', () => {
     });
   }
 
+  const getPlayer = async (val) => {
+    const data = await axios.get(url + 'items/' + val.email)
+    .then((res) => {
+      place.value = res.data.place;
+      scorePlace.value = res.data.score;
+      fetchLeaderboard();
+    })
+    .catch((error) => {
+      isLoading.value = false;
+      APIStatus.value = 4;
+    }).finally(() => {
+      //Perform action in always
+  });  
+  }
+
   function reset() {
     APIStatus.value = 0;
   };
 
-  return { players, APIStatus, isLoading, fetchLeaderboard, sendPlayer, reset};
+  return { players, place, scorePlace, APIStatus, isLoading, fetchLeaderboard, sendPlayer, reset};
 })

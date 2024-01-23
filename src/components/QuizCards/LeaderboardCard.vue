@@ -14,13 +14,12 @@ const { xs } = useDisplay();
 const cardsStore = useCardsStore();
 const { cardIndex } = storeToRefs(cardsStore);
 const quizStore = useQuizStore();
-const { fullName, email, score, scoreFixed } = storeToRefs(quizStore);
+const { fullName, email, score, scoreFixed, place, scorePlace, scorePlaceFixed } = storeToRefs(quizStore);
 const APIStore = useAPIStore();
 const cameraStore = useCameraStore();
 
 const expand = ref(false);
 const show = ref(false);
-const isTopTen = ref(false);
 const formattedPlayers = ref([]);
 
 const { players } = storeToRefs(APIStore);
@@ -91,9 +90,8 @@ watch(cardIndex, () => {
 const formatLeaderboard = () => {
   players.value.forEach((item, index) => {
     if (index < 10) {
-      if (item.full_name == fullName.value && item.score == score.value) {
+      if (index == place.value) {
         item = { ...item, 'current': true };
-        isTopTen.value = true;
       }
     }
     if (index < 1) {
@@ -102,21 +100,19 @@ const formatLeaderboard = () => {
     item = { ...item, 'scoreFixed': (item.score / 1000).toFixed(3).replace(".", ",") };
     formattedPlayers.value.push(item);
   });
-  let rows = 10;
-  if (isTopTen.value) {
-    rows = 12;
-  }
-  let blank = rows - formattedPlayers.value.length;
-  if (blank > 0) {
-    for (let i = 0; i < blank; i++) {
-      formattedPlayers.value.push('');
-    }
-  } else if (blank < 0) {
-    for (let i = 0; i > blank; i--) {
-      formattedPlayers.value.pop();
-    }
-  }
 };
+
+const placeComp = computed(() => {
+  return place.value + 1;
+});
+
+const conditionalTextComp = computed(() => {
+  if (scorePlace.value == score.value) {
+    return 'Essa é a sua pontuaçao'
+  } else {
+    return 'Você tem um lugar melhor, esse aqui:'
+  }
+});
 
 /*   const playersFinalists = computed(() => {
     return players.value.map((el, index) => {
@@ -154,22 +150,22 @@ const onAfterLeave = (el) => {
             <div class="g-wrapper">
               <v-img v-if="!xs" :src="saudiaLogo" width="128" class="text-center justify-center mx-auto g-img"></v-img>
 
-              <!-- <h3 class="g-title font-weight-bold pt-8">
+              <h3 class="g-title">
                 You are currently in:
               </h3>          
-              <div class="g-place font-weight-bold py-8 px-5">
-                27<small>th</small>
-              </div> -->
+              <div class="g-place">
+                {{placeComp}}<small>th</small>
+              </div>
 
               <h3 class="g-title">
                 {{ $t("leaderboard.title") }}
               </h3>
               <div class="g-points px-5">
-                {{ scoreFixed }} {{ $t("global.pts") }}
+                {{ scorePlaceFixed }} {{ $t("global.pts") }}
               </div>
 
               <h3 class="g-text px-8">
-                {{ $t("leaderboard.tip") }}
+                {{ conditionalTextComp }}
               </h3>
               <div class="g-text2 px-8">
                 {{ $t("leaderboard.text") }}
@@ -190,7 +186,7 @@ const onAfterLeave = (el) => {
           <v-table class="g-table">
             <tbody>
               <tr v-for="(item, index) in formattedPlayers" :key="item.full_name" class="py-4">
-                <td class="g-pos px-1" :class="{ 'g-pos-l-def': !isRtl, 'g-pos-l-rtl': isRtl }">
+                <td class="g-pos px-1" :class="{ current: item.current, 'g-pos-l-def': !isRtl, 'g-pos-l-rtl': isRtl }">
                   <span v-if="item.full_name">{{ index + 1 }}</span>
                 </td>
                 <td class="g-name" :class="{ current: item.current, 'g-name-l-def': !isRtl, 'g-name-l-rtl': isRtl }">
@@ -198,22 +194,10 @@ const onAfterLeave = (el) => {
                   <span v-if="item.finalist" class="g-flag"
                     :class="{ 'g-flag-l-def': !isRtl, 'g-flag-l-rtl': isRtl }"></span>
                 </td>
-                <td class="g-score">{{ item.scoreFixed }} <span v-if="item.score">{{ $t("global.pts") }}</span></td>
+                <td class="g-score" :class="{current: item.current}">{{ item.scoreFixed }} <span v-if="item.score">{{ $t("global.pts") }}</span></td>
                 <td v-if="item.finalist" class="g-final px-0 d-none d-sm-none d-md-inline">
                   <div class="px-3 py-2">{{ $t("leaderboard.finalist") }}</div>
                 </td>
-              </tr>
-              <tr v-if="!isTopTen">
-                <td colspan="3" class="g-top">
-                  <v-icon icon="mdi-chevron-up" :class="{ 'g-lefticon-def': !isRtl, 'g-lefticon-rtl': isRtl }"></v-icon>
-                  <span>{{ $t("leaderboard.top10") }}</span>
-                  <v-icon icon="mdi-chevron-up" :class="{ 'g-righticon-def': !isRtl, 'g-righticon-rtl': isRtl }"></v-icon>
-                </td>
-              </tr>
-              <tr v-if="!isTopTen">
-                <td class="g-pos current px-1"></td>
-                <td class="g-name current" :class="{ 'g-name-l-def': !isRtl, 'g-name-l-rtl': isRtl }">{{ fullName }}</td>
-                <td class="g-score current">{{ scoreFixed }} {{ $t("global.pts") }}</td>
               </tr>
             </tbody>
           </v-table>

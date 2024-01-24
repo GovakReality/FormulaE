@@ -95,4 +95,9 @@ onMounted(() => {
   background-color: white !important;
   position: relative;
 }
+
+:deep(.v-progress-circular__underlay) {
+  stroke: rgb(48, 48, 48);
+  z-index: 1;
+}
 </style>

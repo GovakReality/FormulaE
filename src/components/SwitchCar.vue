@@ -67,7 +67,8 @@ const CycleCar = () => {
             <div v-if="expand" class="g-title">
                 <v-sheet class="g-hint-wrapper">
                     <v-fade-transition>
-                        <div v-if="showHints" class="g-hint-text">{{ $t("global.exploreMore") }}</div>
+                        <div v-if="showHints" class="g-hint-text" :class="{ 'g-hint-def': !isRtl, 'g-hint-rtl': isRtl }">{{
+                            $t("global.exploreMore") }}</div>
                     </v-fade-transition>
                 </v-sheet>
                 <v-btn icon="mdi-chevron-left" variant="flat" color="#28673C" size="x-large" class="g-switch-btn"
@@ -107,26 +108,41 @@ const CycleCar = () => {
 }
 
 .g-hint-wrapper {
+    display: block;
     background-color: transparent;
     position: absolute;
-    margin-top: -38px;
-    margin-left: -57px;
     text-transform: capitalize;
-    width: max-content;
+    /* width: max-content; */
     white-space: nowrap;
+    text-align: center;
+}
+
+.g-hint-def {
+    margin-top: 76px;
+    margin-left: -50px;
+}
+
+.g-hint-rtl {
+    margin-top: -40px;
+    margin-right: -54px;
 }
 
 .g-hint-text {
     font-weight: 700;
-    font-size: clamp(16px, 3dvh, 20px);
+    font-size: clamp(14px, 3dvh, 17px);
     line-height: clamp(27px, 3.5dvh, 28px);
     padding-bottom: 4px;
     padding-left: 28px;
     padding-right: 28px;
     color: white;
+    text-shadow: 1px 1px 0 #28673c34, -1px 1px 0 #28673c34, -1px -1px 0 #28673c34, 1px -1px 0 #28673c34;
 }
 
 @media (max-width: 599px) {
+    .g-hint-wrapper {
+        display: none;
+    }
+
     .g-switch-car {
         z-index: 20;
         max-width: 100%;

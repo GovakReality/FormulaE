@@ -134,22 +134,21 @@ const onAfterLeave = (el) => {
               <v-img v-if="!xs" :src="saudiaLogo" width="128" class="text-center justify-center mx-auto g-img"></v-img>
 
               <h3 class="g-title">
-                {{ $t("leaderboard.placeText") }}
+                {{ $t("leaderboard.title") }}
               </h3>
+
               <div class="g-place">
                 {{ placeComp }}<small>{{ $t("leaderboard.placeSuffix") }}</small>
               </div>
 
-              <h3 class="g-title">
-                {{ $t("leaderboard.title") }}
-              </h3>
               <div class="g-points px-5">
-                {{ scorePlaceFixed }} {{ $t("global.pts") }}
+                <small>{{ $t("leaderboard.beforeScore") }}</small>{{ scorePlaceFixed }} {{ $t("global.pts") }}
               </div>
 
               <h3 class="g-text px-8">
                 {{ conditionalTextComp }}
               </h3>
+
               <div class="g-text2 px-8">
                 {{ $t("leaderboard.text") }}
               </div>
@@ -248,31 +247,36 @@ const onAfterLeave = (el) => {
 
 .g-text2 {
   font-family: Saudia Sans;
-  line-height: normal;
+  line-height: 1.4em;
   font-weight: 400;
   font-size: clamp(12px, 3dvh, 16px);
   padding-top: clamp(18px, 3dvh, 36px);
   margin-bottom: 20px;
-  opacity: 0.6;
+  opacity: 0.4;
 }
 
 .g-place {
   font-family: IBM Plex Sans;
   line-height: normal;
-  font-size: 56px;
+  font-size: 48px;
+  font-weight: 700;
+  padding-top: 4px;
 }
 
 .g-points {
   font-weight: bold;
   font-family: IBM Plex Sans;
   line-height: normal;
-  font-size: clamp(28px, 5dvh, 32px);
-  padding-top: clamp(6px, 2dvh, 30px);
-  padding-bottom: clamp(8px, 2.4dvh, 32px);
+  font-size: clamp(18px, 4dvh, 25px);
+  padding-top: clamp(0px, 2dvh, 0px);
+  padding-bottom: clamp(14px, 2.4dvh, 38px);
+  opacity: 40%;
 }
 
 .g-place small {
-  font-size: 42px;
+  font-size: 36px;
+  font-family: 'Saudia Sans';
+  font-weight: 700;
 }
 
 .g-bt {

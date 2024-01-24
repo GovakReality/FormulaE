@@ -23,9 +23,9 @@ let idleInterval;
 
 watch(idle, (idleValue) => {
   if (idleValue && cardIndex.value != 0) {
-    showInactivity.value = true;  // COMMENT THIS TO STOP
-    reset();   // COMMENT THIS TO STOP
-    resume();  // COMMENT THIS TO STOP
+    // showInactivity.value = true;  // COMMENT THIS TO STOP
+    // reset();   // COMMENT THIS TO STOP
+    // resume();  // COMMENT THIS TO STOP
   }
 })
 

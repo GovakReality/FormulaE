@@ -4,7 +4,7 @@
     "ar": "عرب"
   },
   "global": {
-    "pts": "pts",
+    "pts": "PTS",
     "easy": "Easy",
     "medium": "Medium",
     "hard": "Hard",
@@ -54,14 +54,14 @@
     "terms2": "I consent to Saudia Airlines using my information to keep me up to date with the latest special offers and news via email, social media, digital video and display advertising. ({urlPrivacyPolicy})"
   },
   "leaderboard": {
-    "title": "Your score is:",
+    "title": "You are currently in:",
     "tip": "Tip: answer faster to score more points!",
     "text": "If you're among the finalists by the end of the contest, you will be notified via email about your prize.",
     "finalist": "Finalist",
     "placeHintEqualOrGreater": "This is your new top score!",
     "placeHintWorse": "You kept your top score from previous rounds!",
-    "placeText": "You are currently in:",
-    "placeSuffix": "th"
+    "placeSuffix": "th",
+    "beforeScore": "with "
   },
   "rules": {
     "name": {

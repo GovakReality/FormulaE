@@ -1,14 +1,17 @@
 <script setup>
 import { onMounted, onUnmounted, ref, watch, inject } from 'vue';
 import { useCardsStore } from '/src/stores/CardsStore';
+import { useCameraStore } from '/src/stores/CameraStore';
 import { storeToRefs } from 'pinia';
 import swipeHint from '/images/HandIcon.svg';
 import swipeRight from '/images/HandArrowRightIcon.svg';
 import swipeLeft from '/images/HandArrowLeftIcon.svg';
 
 const cardsStore = useCardsStore();
-const { cardIndex } = storeToRefs(cardsStore);
-const expandHint = ref(false);
+const { cardIndex, showHints } = storeToRefs(cardsStore);
+const cameraStore = useCameraStore();
+const { currentCar } = storeToRefs(cameraStore);
+
 const webGlCanvas = inject("webGlCanvas");
 let myInterval;
 let time = 4;
@@ -25,6 +28,14 @@ watch(cardIndex, () => {
     clearInterval(myInterval);
     hasStarted = false;
   }
+});
+
+watch(currentCar, (val) => {
+  if (cardIndex.value == 0) {
+    hasStarted = false;
+    clearInterval(myInterval);
+    if (!hasStarted) startTimer();
+  }  
 });
 
 function myTimer() {
@@ -45,11 +56,11 @@ const startTimer = () => {
 }
 
 const show = () => {
-  expandHint.value = true;
+  showHints.value = true;
 }
 
 const hide = () => {
-  expandHint.value = false;
+  showHints.value = false;
 }
 
 const handleStartTouch = (e) => {
@@ -94,7 +105,7 @@ const removeEvents = () => {
 </script>
 <template>
   <v-slide-y-reverse-transition>
-    <v-sheet v-if="expandHint" class="g-sheet g-hint">
+    <v-sheet v-if="showHints" class="g-sheet g-hint">
       <v-sheet class="g-sheet g-arrows-wrapper">
         <v-img :src=swipeLeft class="g-arrow g-left-arrow"></v-img>
         <v-img :src=swipeRight class="g-arrow g-right-arrow"></v-img>

@@ -4,7 +4,7 @@
     "ar": "عرب"
   },
   "global": {
-    "pts": "pts",
+    "pts": "PTS",
     "easy": "Easy",
     "medium": "Medium",
     "hard": "Hard",
@@ -14,7 +14,8 @@
     "email": "E-mail",
     "continue": "Continue",
     "restart": "Restart",
-    "close": "Close"
+    "close": "Close",
+    "exploreMore": "Explore More"
   },
   "system": {
     "error": "Error",
@@ -26,7 +27,9 @@
     "termsAndConditions": "Terms and Conditions",
     "termsUrl": "https://takeyourseat.saudia.com/formula-e/en/termsandconditions",
     "privacyPolicy": "Privacy Policy",
-    "privacyUrl": "https://www.saudia.com/help/useful-links/legal-and-terms-and-conditions/privacy-policy?sc_lang=en&sc_country=SA"
+    "privacyUrl": "https://www.saudia.com/help/useful-links/legal-and-terms-and-conditions/privacy-policy?sc_lang=en&sc_country=SA",
+    "eventModeOn": "Event Mode: ON",
+    "eventModeOff": "Event Mode: OFF"
   },
   "geninfo": {
     "gen3Year": "2023 - present",
@@ -51,11 +54,14 @@
     "terms2": "I consent to Saudia Airlines using my information to keep me up to date with the latest special offers and news via email, social media, digital video and display advertising. ({urlPrivacyPolicy})"
   },
   "leaderboard": {
-    "title": "Your score is:",
+    "title": "You are currently in:",
     "tip": "Tip: answer faster to score more points!",
     "text": "If you're among the finalists by the end of the contest, you will be notified via email about your prize.",
-    "finalist": "finalist",
-    "top10": "TOP 10"
+    "finalist": "Finalist",
+    "placeHintEqualOrGreater": "This is your new top score!",
+    "placeHintWorse": "You kept your top score from previous rounds!",
+    "placeSuffix": "th",
+    "beforeScore": "with "
   },
   "rules": {
     "name": {

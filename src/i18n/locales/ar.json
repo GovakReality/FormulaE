@@ -14,7 +14,8 @@
     "email": "الايميل",
     "continue": "يكمل",
     "restart": "إعادة تشغيل",
-    "close": "يغلق"
+    "close": "يغلق",
+    "exploreMore": "اكتشف المزيد"
   },
   "system": {
     "error": "خطأ",
@@ -26,7 +27,9 @@
     "termsAndConditions": "الأحكام والشروط",
     "termsUrl": "https://takeyourseat.saudia.com/formula-e/sa/termsandconditions",
     "privacyPolicy": "سياسة الخصوصية",
-    "privacyUrl": "https://www.saudia.com/help/useful-links/legal-and-terms-and-conditions/privacy-policy?sc_lang=ar-SA&sc_country=SA"
+    "privacyUrl": "https://www.saudia.com/help/useful-links/legal-and-terms-and-conditions/privacy-policy?sc_lang=ar-SA&sc_country=SA",
+    "eventModeOn": "وضع الحدث: تشغيل",
+    "eventModeOff": "وضع الحدث: إيقاف"
   },
   "geninfo": {
     "gen3Year": "2023 - الحالي",
@@ -51,11 +54,14 @@
     "terms2": "أوافق على استخدام الخطوط السعودية لمعلوماتي لإبقائي على اطلاع بأحدث العروض والأخبار الخاصة عبر البريد الإلكتروني ووسائل التواصل الاجتماعي والفيديو الرقمي والإعلانات المعروضة. {urlPrivacyPolicy}"
   },
   "leaderboard": {
-    "title": "نتيجتك هي:",
+    "title": "أنت حاليا في:",
     "tip": "احصل على المزيد من النقاط من خلال الإجابة بشكل أسرع",
     "text": "سيتم التواصل معكم من خلال البريد الالكتروني بنهاية المسابقة في حال ترشحكم",
     "finalist": "النهائي",
-    "top10": "على 10"
+    "placeHintEqualOrGreater": "هذه هي أعلى درجاتك الجديدة!",
+    "placeHintWorse": "لقد حافظت على أعلى درجاتك من الجولات السابقة!",
+    "placeSuffix": "",
+    "beforeScore": " مع"
   },
   "rules": {
     "name": {

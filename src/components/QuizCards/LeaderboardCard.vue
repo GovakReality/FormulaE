@@ -6,21 +6,21 @@ import { useCameraStore } from '/src/stores/CameraStore';
 import { ref, watch, computed, onMounted, onUnmounted } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useLocale, useDisplay } from 'vuetify';
+import { useI18n } from 'vue-i18n';
 import saudiaLogo from '/images/SaudiaLogo.svg';
 
 const { isRtl } = useLocale();
 const { xs } = useDisplay();
-
+const { t } = useI18n();
 const cardsStore = useCardsStore();
 const { cardIndex } = storeToRefs(cardsStore);
 const quizStore = useQuizStore();
-const { fullName, email, score, scoreFixed } = storeToRefs(quizStore);
+const { fullName, email, score, scoreFixed, place, scorePlace, scorePlaceFixed } = storeToRefs(quizStore);
 const APIStore = useAPIStore();
 const cameraStore = useCameraStore();
 
 const expand = ref(false);
 const show = ref(false);
-const isTopTen = ref(false);
 const formattedPlayers = ref([]);
 
 const { players } = storeToRefs(APIStore);
@@ -48,30 +48,6 @@ const { players } = storeToRefs(APIStore);
   {
     full_name: 'Chloe Bennett',
     score: '56777',
-  },
-  {
-    full_name: 'Desmond Thompson',
-    score: '55418',
-  },
-  {
-    full_name: 'Morgan Foster',
-    score: '40011',
-  },
-  {
-    full_name: 'Lily Morgan',
-    score: '39318',
-  },
-  {
-    full_name: 'Adrian Sanchez',
-    score: '25224',
-  },
-  {
-    full_name: 'Victor Reynolds',
-    score: '18257',
-  },
-  {
-    full_name: 'Chloe Bennett',
-    score: '2312',
   }
 ]); */
 
@@ -89,34 +65,39 @@ watch(cardIndex, () => {
 });
 
 const formatLeaderboard = () => {
+  formattedPlayers.value = [];
+
   players.value.forEach((item, index) => {
     if (index < 10) {
-      if (item.full_name == fullName.value && item.score == score.value) {
+      if (index == place.value) {
         item = { ...item, 'current': true };
-        isTopTen.value = true;
       }
+      if (index < 1) {
+        item = { ...item, 'finalist': true };
+      }
+      item = { ...item, 'scoreFixed': (item.score / 1000).toFixed(3).replace(".", ",") };
+      formattedPlayers.value.push(item);
     }
-    if (index < 1) {
-      item = { ...item, 'finalist': true };
-    }
-    item = { ...item, 'scoreFixed': (item.score / 1000).toFixed(3).replace(".", ",") };
-    formattedPlayers.value.push(item);
   });
-  let rows = 10;
-  if (isTopTen.value) {
-    rows = 12;
-  }
-  let blank = rows - formattedPlayers.value.length;
+  let blank = 10 - formattedPlayers.value.length;
   if (blank > 0) {
     for (let i = 0; i < blank; i++) {
       formattedPlayers.value.push('');
     }
-  } else if (blank < 0) {
-    for (let i = 0; i > blank; i--) {
-      formattedPlayers.value.pop();
-    }
   }
 };
+
+const placeComp = computed(() => {
+  return place.value + 1;
+});
+
+const conditionalTextComp = computed(() => {
+  if (scorePlace.value == score.value) {
+    return t('leaderboard.placeHintEqualOrGreater');
+  } else {
+    return t('leaderboard.placeHintWorse');
+  }
+});
 
 /*   const playersFinalists = computed(() => {
     return players.value.map((el, index) => {
@@ -154,23 +135,22 @@ const onAfterLeave = (el) => {
             <div class="g-wrapper">
               <v-img v-if="!xs" :src="saudiaLogo" width="128" class="text-center justify-center mx-auto g-img"></v-img>
 
-              <!-- <h3 class="g-title font-weight-bold pt-8">
-                You are currently in:
-              </h3>          
-              <div class="g-place font-weight-bold py-8 px-5">
-                27<small>th</small>
-              </div> -->
-
               <h3 class="g-title">
                 {{ $t("leaderboard.title") }}
               </h3>
+
+              <div class="g-place">
+                {{ placeComp }}<small>{{ $t("leaderboard.placeSuffix") }}</small>
+              </div>
+
               <div class="g-points px-5">
-                {{ scoreFixed }} {{ $t("global.pts") }}
+                <small>{{ $t("leaderboard.beforeScore") }}</small>{{ scorePlaceFixed }} {{ $t("global.pts") }}
               </div>
 
               <h3 class="g-text px-8">
-                {{ $t("leaderboard.tip") }}
+                {{ conditionalTextComp }}
               </h3>
+
               <div class="g-text2 px-8">
                 {{ $t("leaderboard.text") }}
               </div>
@@ -190,7 +170,7 @@ const onAfterLeave = (el) => {
           <v-table class="g-table">
             <tbody>
               <tr v-for="(item, index) in formattedPlayers" :key="item.full_name" class="py-4">
-                <td class="g-pos px-1" :class="{ 'g-pos-l-def': !isRtl, 'g-pos-l-rtl': isRtl }">
+                <td class="g-pos px-1" :class="{ current: item.current, 'g-pos-l-def': !isRtl, 'g-pos-l-rtl': isRtl }">
                   <span v-if="item.full_name">{{ index + 1 }}</span>
                 </td>
                 <td class="g-name" :class="{ current: item.current, 'g-name-l-def': !isRtl, 'g-name-l-rtl': isRtl }">
@@ -198,22 +178,11 @@ const onAfterLeave = (el) => {
                   <span v-if="item.finalist" class="g-flag"
                     :class="{ 'g-flag-l-def': !isRtl, 'g-flag-l-rtl': isRtl }"></span>
                 </td>
-                <td class="g-score">{{ item.scoreFixed }} <span v-if="item.score">{{ $t("global.pts") }}</span></td>
+                <td class="g-score" :class="{ current: item.current }">{{ item.scoreFixed }} <span v-if="item.score">{{
+                  $t("global.pts") }}</span></td>
                 <td v-if="item.finalist" class="g-final px-0 d-none d-sm-none d-md-inline">
-                  <div class="px-3 py-2">{{ $t("leaderboard.finalist") }}</div>
+                  <div class="py-2">{{ $t("leaderboard.finalist") }}</div>
                 </td>
-              </tr>
-              <tr v-if="!isTopTen">
-                <td colspan="3" class="g-top">
-                  <v-icon icon="mdi-chevron-up" :class="{ 'g-lefticon-def': !isRtl, 'g-lefticon-rtl': isRtl }"></v-icon>
-                  <span>{{ $t("leaderboard.top10") }}</span>
-                  <v-icon icon="mdi-chevron-up" :class="{ 'g-righticon-def': !isRtl, 'g-righticon-rtl': isRtl }"></v-icon>
-                </td>
-              </tr>
-              <tr v-if="!isTopTen">
-                <td class="g-pos current px-1"></td>
-                <td class="g-name current" :class="{ 'g-name-l-def': !isRtl, 'g-name-l-rtl': isRtl }">{{ fullName }}</td>
-                <td class="g-score current">{{ scoreFixed }} {{ $t("global.pts") }}</td>
               </tr>
             </tbody>
           </v-table>
@@ -239,7 +208,7 @@ const onAfterLeave = (el) => {
   background: linear-gradient(68deg, #07361C 9.84%, #28673C 76.17%);
   max-width: 100%;
   width: 413px;
-  height: clamp(456px, 65dvh, 624px);
+  height: clamp(450px, 65dvh, 480px);
   padding-top: 32px;
   padding-bottom: 28px;
 }
@@ -265,54 +234,64 @@ const onAfterLeave = (el) => {
 .g-title {
   font-weight: bold;
   font-size: clamp(18px, 3.6dvh, 22px);
-  line-height: clamp(28px, 4.2dvh, 29px);
-  padding-top: clamp(16px, 3dvh, 32px);
+  padding-top: clamp(12px, 3.4dvh, 18px);
+  line-height: clamp(25px, 4.2dvh, 25px);
 }
 
 .g-text {
   font-weight: 400;
-  font-size: clamp(16px, 3dvh, 20px);
+  font-size: clamp(17px, 3dvh, 19px);
   line-height: clamp(27px, 3.5dvh, 28px);
   padding-bottom: 4px;
   padding-left: 28px;
   padding-right: 28px;
+  text-wrap: balance;
 }
 
 .g-text2 {
   font-family: Saudia Sans;
-  line-height: normal;
+  line-height: 1.4em;
   font-weight: 400;
-  font-size: clamp(12px, 3dvh, 16px);
+  font-size: clamp(12px, 3dvh, 14px);
   padding-top: clamp(18px, 3dvh, 36px);
-  margin-bottom: 20px;
-  opacity: 0.6;
+  margin-bottom: 10px;
+  opacity: 0.4;
 }
 
 .g-place {
   font-family: IBM Plex Sans;
   line-height: normal;
-  font-size: 56px;
+  font-size: clamp(30px, 5dvh, 36px);
+  padding-top: clamp(4px, 1.5dvh, 8px);
+  font-weight: 700;
+}
+
+.g-place small {
+  font-size: clamp(28px, 5dvh, 32px);
+  font-family: 'Saudia Sans';
+  font-weight: 700;
 }
 
 .g-points {
   font-weight: bold;
   font-family: IBM Plex Sans;
   line-height: normal;
-  font-size: clamp(28px, 5dvh, 32px);
-  padding-top: clamp(6px, 2dvh, 30px);
-  padding-bottom: clamp(8px, 2.4dvh, 32px);
+  font-size: clamp(17px, 4dvh, 21px);
+  padding-bottom: clamp(14px, 2.4dvh, 38px);
+  opacity: 0.35;
 }
 
-.g-place small {
-  font-size: 42px;
+.g-points small {
+  font-size: 85%;
+  padding-right: 1px;
 }
 
 .g-bt {
-  font-size: clamp(16px, 2.3dvh, 18px);
+  font-size: clamp(15px, 2.3dvh, 18px);
   width: 183px;
   max-width: 100%;
   line-height: normal;
-  margin-top: clamp(16px, 2.4dvh, 32px);
+  margin-top: clamp(14px, 2.4dvh, 32px);
 }
 
 :deep(.v-btn--variant-tonal .v-btn__underlay) {
@@ -334,11 +313,11 @@ const onAfterLeave = (el) => {
 .g-names-list {
   max-width: 100%;
   width: 642px;
-  height: clamp(456px, 65dvh, 624px);
+  height: clamp(450px, 65dvh, 480px);
 }
 
 :deep(.v-table--density-default > .v-table__wrapper > table > tbody > tr > td, .v-table--density-default > .v-table__wrapper > table > thead > tr > td, .v-table--density-default > .v-table__wrapper > table > tfoot > tr > td) {
-  height: clamp(38px, 5.416dvh, 52px);
+  height: clamp(45px, 6.525dvh, 48px);
 }
 
 .g-pos {
@@ -373,7 +352,8 @@ const onAfterLeave = (el) => {
   white-space: nowrap;
   text-overflow: ellipsis;
   word-break: normal;
-  word-wrap: break-word
+  word-wrap: break-word;
+  height: 100% !important;
 }
 
 .g-name-l-def {
@@ -476,6 +456,8 @@ const onAfterLeave = (el) => {
   background-color: #28673C;
   color: #F0F0F0;
   width: 100%;
+  padding-left: 1px;
+  padding-right: 1px;
 }
 
 :deep(.v-btn__content) {
@@ -588,6 +570,19 @@ const onAfterLeave = (el) => {
     display: none;
   }
 
+  .g-place {
+    padding-top: 10px !important;
+    padding-bottom: 0px !important;
+    font-size: 26px !important;
+    line-height: 24px !important;
+  }
+
+  .g-place small {
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+    font-size: 24px !important;
+  }
+
   .g-points {
     padding-top: 5px !important;
     padding-bottom: 5px !important;
@@ -602,13 +597,22 @@ const onAfterLeave = (el) => {
     line-height: 20px;
     padding-top: 12px;
     padding-bottom: 0px;
+  }
 
+  .g-points {
+    font-size: clamp(14px, 4dvh, 18px) !important;
+    padding-bottom: clamp(4px, 2.4dvh, 4px) !important;
+  }
+
+  .g-points small {
+    font-size: 100%;
+    padding-right: 1px;
   }
 
   .g-text {
     padding-left: 12px;
     padding-right: 12px;
-    font-size: clamp(15px, 3dvh, 15px);
+    font-size: clamp(12px, 3dvh, 14px);
     line-height: 22px;
     padding-top: 5px;
     padding-bottom: 10px;

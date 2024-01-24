@@ -12,8 +12,8 @@ const { t } = useI18n();
 const { isRtl } = useLocale();
 const { xs } = useDisplay();
 
-const cardStore = useCardsStore();
-const { cardIndex } = storeToRefs(cardStore);
+const cardsStore = useCardsStore();
+const { cardIndex, showHints } = storeToRefs(cardsStore);
 const loadingStore = useLoadingStore();
 const { loadStart, loadComplete, loadError, loadProgress } = storeToRefs(loadingStore);
 const quizStore = useQuizStore();
@@ -50,6 +50,7 @@ onMounted(() => {
 
 const CycleCar = () => {
     shouldCameraMove.value = true;
+    showHints.value = false;
     // console.log(currentCar);
     currentCar.value--;
     if (currentCar.value < 1) {
@@ -64,6 +65,12 @@ const CycleCar = () => {
         :class="{ 'g-switch-def': !isRtl, 'g-switch-rtl': isRtl }">
         <v-slide-y-reverse-transition @after-leave="onAfterLeave" group>
             <div v-if="expand" class="g-title">
+                <v-sheet class="g-hint-wrapper">
+                    <v-fade-transition>
+                        <div v-if="showHints" class="g-hint-text" :class="{ 'g-hint-def': !isRtl, 'g-hint-rtl': isRtl }">{{
+                            $t("global.exploreMore") }}</div>
+                    </v-fade-transition>
+                </v-sheet>
                 <v-btn icon="mdi-chevron-left" variant="flat" color="#28673C" size="x-large" class="g-switch-btn"
                     @click="CycleCar"></v-btn>
             </div>
@@ -91,16 +98,52 @@ const CycleCar = () => {
 }
 
 .g-switch-def {
-    left: 38px;
+    left: 50px;
     transform: rotate(0deg);
 }
 
 .g-switch-rtl {
-    right: 38px;
+    right: 50px;
     transform: rotate(180deg);
 }
 
+.g-hint-wrapper {
+    display: block;
+    background-color: transparent;
+    position: absolute;
+    text-transform: capitalize;
+    /* width: max-content; */
+    white-space: nowrap;
+    text-align: center;
+}
+
+.g-hint-def {
+    margin-top: 76px;
+    margin-left: -50px;
+}
+
+.g-hint-rtl {
+    margin-top: -40px;
+    margin-right: -54px;
+}
+
+.g-hint-text {
+    font-weight: 700;
+    font-size: clamp(14px, 3dvh, 17px);
+    line-height: clamp(27px, 3.5dvh, 28px);
+    padding-bottom: 4px;
+    padding-left: 28px;
+    padding-right: 28px;
+    color: white;
+    text-shadow: 1px 1px 0 #28673c34, -1px 1px 0 #28673c34, -1px -1px 0 #28673c34, 1px -1px 0 #28673c34;
+    opacity: 0.75;
+}
+
 @media (max-width: 599px) {
+    .g-hint-wrapper {
+        display: none;
+    }
+
     .g-switch-car {
         z-index: 20;
         max-width: 100%;

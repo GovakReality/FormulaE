@@ -518,10 +518,10 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
   vertical-align: bottom;
   max-width: 100%;
   text-shadow:
-    1px 1px 0 #28673C,
-    -1px 1px 0 #28673C,
-    -1px -1px 0 #28673C,
-    1px -1px 0 #28673C;
+    1px 1px 0 #28673c34,
+    -1px 1px 0 #28673c34,
+    -1px -1px 0 #28673c34,
+    1px -1px 0 #28673c34;
   padding-right: 5px;
   padding-left: 5px;
 }

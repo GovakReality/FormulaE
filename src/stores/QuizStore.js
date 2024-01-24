@@ -14,6 +14,9 @@ export const useQuizStore = defineStore('quiz', () => {
   const actualGenType = ref('');
   const shouldCameraMove = ref(false);
   const iniPosMove = ref(true);
+  const eventMode = ref(false);
+  const place = ref(0);
+  const scorePlace = ref(0);
 
   let gen1QuestionsList = [];
   let gen2QuestionsList = [];
@@ -33,11 +36,14 @@ export const useQuizStore = defineStore('quiz', () => {
     score.value = 0;
     shouldCameraMove.value = true;
     iniPosMove.value = true;
-    score.value = 0;
-    fullName.value = '';
-    email.value = '';
-    terms.value = false;
-    terms2.value = false;
+    scorePlace.value = 0;
+    place.value = 0;
+    if (eventMode.value) {
+      fullName.value = '';
+      email.value = '';
+      terms.value = false;
+      terms2.value = false;
+    }
   };
 
   function setDificulty(val) {
@@ -50,6 +56,10 @@ export const useQuizStore = defineStore('quiz', () => {
 
   const scoreFixed = computed(() => {
     return (score.value / 1000).toFixed(3).replace(".",",");
+  });
+
+  const scorePlaceFixed = computed(() => {
+    return (scorePlace.value / 1000).toFixed(3).replace(".",",");
   });
 
   const setQuestionsList = (dif) => {
@@ -104,5 +114,5 @@ export const useQuizStore = defineStore('quiz', () => {
     return shuffledInput;
   }; */
 
-  return { question, round, fullName, email, score, terms, terms2, scoreFixed, shouldCameraMove, iniPosMove, incrementRound, reset, setDificulty, newQuestion, addScore };
+  return { question, round, fullName, email, score, place, scorePlace, terms, terms2, eventMode, scoreFixed, scorePlaceFixed, shouldCameraMove, iniPosMove, incrementRound, reset, setDificulty, newQuestion, addScore };
 })

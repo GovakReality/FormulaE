@@ -136,6 +136,7 @@ const CycleCar = () => {
     padding-right: 28px;
     color: white;
     text-shadow: 1px 1px 0 #28673c34, -1px 1px 0 #28673c34, -1px -1px 0 #28673c34, 1px -1px 0 #28673c34;
+    opacity: 0.75;
 }
 
 @media (max-width: 599px) {

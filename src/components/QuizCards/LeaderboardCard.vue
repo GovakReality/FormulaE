@@ -206,7 +206,7 @@ const onAfterLeave = (el) => {
   background: linear-gradient(68deg, #07361C 9.84%, #28673C 76.17%);
   max-width: 100%;
   width: 413px;
-  height: clamp(456px, 65dvh, 624px);
+  height: clamp(450px, 65dvh, 480px);
   padding-top: 32px;
   padding-bottom: 28px;
 }
@@ -232,59 +232,65 @@ const onAfterLeave = (el) => {
 .g-title {
   font-weight: bold;
   font-size: clamp(18px, 3.6dvh, 22px);
-  line-height: clamp(28px, 4.2dvh, 29px);
-  padding-top: clamp(16px, 3dvh, 32px);
+  padding-top: clamp(12px, 3.4dvh, 18px);
+  line-height: clamp(25px, 4.2dvh, 25px);
 }
 
 .g-text {
   font-weight: 400;
-  font-size: clamp(16px, 3dvh, 20px);
+  font-size: clamp(17px, 3dvh, 19px);
   line-height: clamp(27px, 3.5dvh, 28px);
   padding-bottom: 4px;
   padding-left: 28px;
   padding-right: 28px;
+  text-wrap: balance;
 }
 
 .g-text2 {
   font-family: Saudia Sans;
   line-height: 1.4em;
   font-weight: 400;
-  font-size: clamp(12px, 3dvh, 16px);
+  font-size: clamp(12px, 3dvh, 14px);
   padding-top: clamp(18px, 3dvh, 36px);
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   opacity: 0.4;
 }
 
 .g-place {
   font-family: IBM Plex Sans;
   line-height: normal;
-  font-size: 48px;
+  font-size: clamp(30px, 5dvh, 36px);
+  padding-top: clamp(4px, 1.5dvh, 16px);
   font-weight: 700;
-  padding-top: 4px;
+}
+
+.g-place small {
+  font-size: clamp(28px, 5dvh, 32px);
+  font-family: 'Saudia Sans';
+  font-weight: 700;
 }
 
 .g-points {
   font-weight: bold;
   font-family: IBM Plex Sans;
   line-height: normal;
-  font-size: clamp(18px, 4dvh, 25px);
-  padding-top: clamp(0px, 2dvh, 0px);
+  font-size: clamp(17px, 4dvh, 21px);
   padding-bottom: clamp(14px, 2.4dvh, 38px);
-  opacity: 40%;
+  opacity: 0.35;
 }
 
-.g-place small {
-  font-size: 36px;
-  font-family: 'Saudia Sans';
-  font-weight: 700;
+.g-points small {
+  font-size: 80%;
+  padding-right: 1px;
+  font-size: clamp(14px, 2.4dvh, 38px);
 }
 
 .g-bt {
-  font-size: clamp(16px, 2.3dvh, 18px);
+  font-size: clamp(15px, 2.3dvh, 18px);
   width: 183px;
   max-width: 100%;
   line-height: normal;
-  margin-top: clamp(16px, 2.4dvh, 32px);
+  margin-top: clamp(14px, 2.4dvh, 32px);
 }
 
 :deep(.v-btn--variant-tonal .v-btn__underlay) {
@@ -306,11 +312,11 @@ const onAfterLeave = (el) => {
 .g-names-list {
   max-width: 100%;
   width: 642px;
-  height: clamp(456px, 65dvh, 624px);
+  height: clamp(450px, 65dvh, 480px);
 }
 
 :deep(.v-table--density-default > .v-table__wrapper > table > tbody > tr > td, .v-table--density-default > .v-table__wrapper > table > thead > tr > td, .v-table--density-default > .v-table__wrapper > table > tfoot > tr > td) {
-  height: clamp(38px, 5.416dvh, 52px);
+  height: clamp(45px, 6.525dvh, 48px);
 }
 
 .g-pos {

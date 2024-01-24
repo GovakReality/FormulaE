@@ -260,7 +260,6 @@ const onAfterLeave = (el) => {
   max-width: 100%;
   line-height: normal;
   margin-top: clamp(14px, 2.4dvh, 32px);
-
 }
 
 :deep(.v-btn--variant-tonal .v-btn__underlay) {

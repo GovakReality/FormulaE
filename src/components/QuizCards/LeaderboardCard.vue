@@ -65,6 +65,8 @@ watch(cardIndex, () => {
 });
 
 const formatLeaderboard = () => {
+  formattedPlayers.value = [];
+
   players.value.forEach((item, index) => {
     if (index < 10) {
       if (index == place.value) {
@@ -179,7 +181,7 @@ const onAfterLeave = (el) => {
                 <td class="g-score" :class="{ current: item.current }">{{ item.scoreFixed }} <span v-if="item.score">{{
                   $t("global.pts") }}</span></td>
                 <td v-if="item.finalist" class="g-final px-0 d-none d-sm-none d-md-inline">
-                  <div class="px-3 py-2">{{ $t("leaderboard.finalist") }}</div>
+                  <div class="py-2">{{ $t("leaderboard.finalist") }}</div>
                 </td>
               </tr>
             </tbody>
@@ -454,6 +456,8 @@ const onAfterLeave = (el) => {
   background-color: #28673C;
   color: #F0F0F0;
   width: 100%;
+  padding-left: 1px;
+  padding-right: 1px;
 }
 
 :deep(.v-btn__content) {

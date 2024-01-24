@@ -350,7 +350,8 @@ const onAfterLeave = (el) => {
   white-space: nowrap;
   text-overflow: ellipsis;
   word-break: normal;
-  word-wrap: break-word
+  word-wrap: break-word;
+  height: 100% !important;
 }
 
 .g-name-l-def {

@@ -260,7 +260,7 @@ const onAfterLeave = (el) => {
   font-family: IBM Plex Sans;
   line-height: normal;
   font-size: clamp(30px, 5dvh, 36px);
-  padding-top: clamp(4px, 1.5dvh, 16px);
+  padding-top: clamp(4px, 1.5dvh, 8px);
   font-weight: 700;
 }
 
@@ -280,9 +280,8 @@ const onAfterLeave = (el) => {
 }
 
 .g-points small {
-  font-size: 80%;
+  font-size: 85%;
   padding-right: 1px;
-  font-size: clamp(14px, 2.4dvh, 38px);
 }
 
 .g-bt {
@@ -566,6 +565,19 @@ const onAfterLeave = (el) => {
     display: none;
   }
 
+  .g-place {
+    padding-top: 10px !important;
+    padding-bottom: 0px !important;
+    font-size: 26px !important;
+    line-height: 24px !important;
+  }
+
+  .g-place small {
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+    font-size: 24px !important;
+  }
+
   .g-points {
     padding-top: 5px !important;
     padding-bottom: 5px !important;
@@ -580,13 +592,22 @@ const onAfterLeave = (el) => {
     line-height: 20px;
     padding-top: 12px;
     padding-bottom: 0px;
+  }
 
+  .g-points {
+    font-size: clamp(14px, 4dvh, 18px) !important;
+    padding-bottom: clamp(4px, 2.4dvh, 4px) !important;
+  }
+
+  .g-points small {
+    font-size: 100%;
+    padding-right: 1px;
   }
 
   .g-text {
     padding-left: 12px;
     padding-right: 12px;
-    font-size: clamp(15px, 3dvh, 15px);
+    font-size: clamp(12px, 3dvh, 14px);
     line-height: 22px;
     padding-top: 5px;
     padding-bottom: 10px;

@@ -28,8 +28,8 @@
     "termsUrl": "https://takeyourseat.saudia.com/formula-e/en/termsandconditions",
     "privacyPolicy": "Privacy Policy",
     "privacyUrl": "https://www.saudia.com/help/useful-links/legal-and-terms-and-conditions/privacy-policy?sc_lang=en&sc_country=SA",
-    "eventModeOn": "eventModeOn",
-    "eventModeOff": "eventModeOff"
+    "eventModeOn": "Event Mode: ON",
+    "eventModeOff": "Event Mode: OFF"
   },
   "geninfo": {
     "gen3Year": "2023 - present",
@@ -57,11 +57,11 @@
     "title": "Your score is:",
     "tip": "Tip: answer faster to score more points!",
     "text": "If you're among the finalists by the end of the contest, you will be notified via email about your prize.",
-    "finalist": "finalist",
-    "placeHintEqual": "placeHintEqual",
-    "placeHintWorse": "placeHintWorse",
-    "placeText": "placeText",
-    "placeSuffix": "placeSuffix"
+    "finalist": "Finalist",
+    "placeHintEqualOrGreater": "This is your new top score!",
+    "placeHintWorse": "You kept your top score from previous rounds!",
+    "placeText": "You are currently in:",
+    "placeSuffix": "th"
   },
   "rules": {
     "name": {

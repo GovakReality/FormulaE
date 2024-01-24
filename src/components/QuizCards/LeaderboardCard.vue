@@ -91,7 +91,7 @@ const placeComp = computed(() => {
 
 const conditionalTextComp = computed(() => {
   if (scorePlace.value == score.value) {
-    return t('leaderboard.placeHintEqual');
+    return t('leaderboard.placeHintEqualOrGreater');
   } else {
     return t('leaderboard.placeHintWorse');
   }
@@ -135,9 +135,9 @@ const onAfterLeave = (el) => {
 
               <h3 class="g-title">
                 {{ $t("leaderboard.placeText") }}
-              </h3>          
+              </h3>
               <div class="g-place">
-                {{placeComp}}<small>{{ $t("leaderboard.placeSuffix") }}</small>
+                {{ placeComp }}<small>{{ $t("leaderboard.placeSuffix") }}</small>
               </div>
 
               <h3 class="g-title">
@@ -177,7 +177,8 @@ const onAfterLeave = (el) => {
                   <span v-if="item.finalist" class="g-flag"
                     :class="{ 'g-flag-l-def': !isRtl, 'g-flag-l-rtl': isRtl }"></span>
                 </td>
-                <td class="g-score" :class="{current: item.current}">{{ item.scoreFixed }} <span v-if="item.score">{{ $t("global.pts") }}</span></td>
+                <td class="g-score" :class="{ current: item.current }">{{ item.scoreFixed }} <span v-if="item.score">{{
+                  $t("global.pts") }}</span></td>
                 <td v-if="item.finalist" class="g-final px-0 d-none d-sm-none d-md-inline">
                   <div class="px-3 py-2">{{ $t("leaderboard.finalist") }}</div>
                 </td>

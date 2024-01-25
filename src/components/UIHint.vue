@@ -14,7 +14,7 @@ const { currentCar } = storeToRefs(cameraStore);
 
 const webGlCanvas = inject("webGlCanvas");
 let myInterval;
-let time = 4;
+let time = 4; // Default: 4
 let timeLeft = time;
 let hasStarted = false;
 
@@ -35,7 +35,7 @@ watch(currentCar, (val) => {
     hasStarted = false;
     clearInterval(myInterval);
     if (!hasStarted) startTimer();
-  }  
+  }
 });
 
 function myTimer() {
@@ -70,6 +70,9 @@ const handleStartTouch = (e) => {
 
 const handleStopTouch = (e) => {
   if (!hasStarted) startTimer();
+  // hasStarted = false;
+  // clearInterval(myInterval);
+  // if (!hasStarted) startTimer();
 }
 
 onMounted(() => {
@@ -90,7 +93,7 @@ const addEvents = () => {
 
   webGlCanvas.value.addEventListener('touchend', handleStopTouch, false);
   webGlCanvas.value.addEventListener('touchcancel', handleStopTouch, false);
-  webGlCanvas.value.addEventListener('onmouseup', handleStopTouch, false);
+  webGlCanvas.value.addEventListener('mouseup', handleStopTouch, false);
 }
 
 const removeEvents = () => {
@@ -100,7 +103,7 @@ const removeEvents = () => {
 
   webGlCanvas.value.removeEventListener('touchend', handleStopTouch, false);
   webGlCanvas.value.removeEventListener('touchcancel', handleStopTouch, false);
-  webGlCanvas.value.removeEventListener('onmouseup', handleStopTouch, false);
+  webGlCanvas.value.removeEventListener('mouseup', handleStopTouch, false);
 }  
 </script>
 <template>
@@ -418,6 +421,33 @@ const removeEvents = () => {
     margin-top: auto;
     margin-bottom: auto;
     margin-left: -30px;
+  }
+}
+
+@media (min-width: 2560px) {
+  .g-hint {
+    bottom: 200px;
+    width: 150px;
+    height: 150px;
+  }
+
+  .g-hand {
+    margin-top: 30px;
+    width: 90px;
+  }
+
+  .g-arrow {
+    margin: auto;
+    width: 65px;
+  }
+
+  .g-left-arrow {
+    margin-left: 0px;
+  }
+
+  .g-right-arrow {
+    margin-top: -15px;
+    margin-left: 15px;
   }
 }
 </style>

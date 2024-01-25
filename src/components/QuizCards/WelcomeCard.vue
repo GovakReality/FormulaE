@@ -141,13 +141,22 @@ onMounted(() => {
 }
 
 @media (min-width: 2560px) {
+  .g-img {
+    width: 200px !important;
+  }
+
   .g-card {
     width: 513px;
   }
 
   .g-title {
     font-size: 32px;
-    line-height: 38px;
+    line-height: 42px;
+  }
+
+  .g-text {
+    font-size: 26px;
+    line-height: 36px;
   }
 
   .g-bt-start {

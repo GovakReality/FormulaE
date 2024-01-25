@@ -44,7 +44,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <v-sheet v-if="show" class="d-flex align-end justify-center justify-sm-end h-100 px-2 px-sm-9 pb-sm-10">
+  <v-sheet v-if="show" class="d-flex align-end justify-center justify-sm-end h-100 px-2 px-sm-9 pb-sm-10 g-sheet-main">
     <v-slide-y-reverse-transition @after-leave="onAfterLeave">
       <v-card v-if="expand" class="g-card py-1 py-sm-4 rounded-xl" variant="flat">
         <v-card-item class="text-center g-card-item">
@@ -69,6 +69,13 @@ onMounted(() => {
 </template>
 
 <style scoped>
+@media (min-width: 600px) {
+  .g-sheet-main {
+    padding-right: 36px !important;
+    padding-left: 66px !important;
+  }
+}
+
 .g-card {
   background: linear-gradient(69deg, #07361C 9.61%, #07361C 9.61%, #026536 80.85%);
   max-width: 100%;

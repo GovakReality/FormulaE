@@ -98,7 +98,7 @@ const CycleCar = () => {
 }
 
 .g-switch-def {
-    left: 50px;
+    left: 90px;
     transform: rotate(0deg);
 }
 

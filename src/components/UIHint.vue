@@ -35,7 +35,7 @@ watch(currentCar, (val) => {
     hasStarted = false;
     clearInterval(myInterval);
     if (!hasStarted) startTimer();
-  }  
+  }
 });
 
 function myTimer() {

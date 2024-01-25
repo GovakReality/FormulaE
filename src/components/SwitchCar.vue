@@ -172,16 +172,43 @@ const CycleCar = () => {
 }
 
 @media (min-width: 2560px) {
+    .g-switch-btn {
+        font-size: 46px;
+        height: 86px !important;
+        width: 86px !important;
+    }
+
     .g-switch-car {
         bottom: 70px;
     }
 
     .g-switch-def {
-        left: 50px;
+        left: 75px;
     }
 
     .g-switch-rtl {
-        right: 50px;
+        right: 75px;
     }
+
+    .g-hint-def {
+        margin-top: 76px;
+        margin-left: -55px;
+        line-height: 80px;
+    }
+
+    .g-hint-rtl {
+        margin-top: -40px;
+        margin-right: -60px;
+        line-height: 0px;
+    }
+
+    .g-hint-text {
+        font-size: 26px;
+
+        padding-bottom: 4px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
 }
 </style>

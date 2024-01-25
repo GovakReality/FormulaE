@@ -734,29 +734,42 @@ const onAfterLeave = (el) => {
 }
 
 @media (min-width: 2560px) {
+  .g-img {
+    display: flex;
+    width: 190px !important;
+    right: 7px;
+  }
+
   .g-card {
     width: 513px;
     height: 684px;
   }
 
   .g-title {
-    font-size: 30px;
+    font-size: 28px;
+    padding-top: 42px;
+    padding-bottom: 17px;
+  }
+
+  .g-text {
+    font-size: 26px;
   }
 
   .g-text2 {
     font-size: 22px;
+    line-height: 34px;
   }
 
   .g-place {
-    font-size: 60px;
-  }
-
-  .g-points {
     font-size: 50px;
   }
 
+  .g-points {
+    font-size: 36px;
+  }
+
   .g-place small {
-    font-size: 46px;
+    font-size: 44px;
   }
 
   .g-bt {
@@ -799,16 +812,18 @@ const onAfterLeave = (el) => {
   }
 
   .g-final {
-    font-size: 18px;
+    font-size: 20px;
     width: 90px;
   }
 
   .g-final div {
     width: 100%;
+    height: 60px;
+    padding-top: 20px !important;
   }
 
   :deep(.v-table--density-default > .v-table__wrapper > table > tbody > tr > td, .v-table--density-default > .v-table__wrapper > table > thead > tr > td, .v-table--density-default > .v-table__wrapper > table > tfoot > tr > td) {
-    height: 57px;
+    height: 69px;
   }
 }
 </style>

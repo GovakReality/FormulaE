@@ -446,28 +446,30 @@ const onAfterLeave = (el) => {
 
   .g-title {
     font-size: 32px;
+    line-height: 36px;
   }
 
   .g-text {
-    font-size: 30px;
+    font-size: 26px;
+    line-height: 36px;
   }
 
   .g-points {
-    font-size: clamp(34px, 5.2dvh, 54px);
-    padding-top: clamp(28px, 3dvh, 40px);
-    padding-bottom: clamp(28px, 3dvh, 40px);
+    font-size: clamp(34px, 5.2dvh, 46px);
+    padding-top: clamp(18px, 3dvh, 28px);
+    padding-bottom: clamp(18px, 3dvh, 28px);
   }
 
   :deep(.v-field__input) {
-    min-height: clamp(40px, 5dvh, 70px);
+    min-height: clamp(50px, 5dvh, 55px);
   }
 
   :deep(.v-field) {
-    font-size: 18px;
+    font-size: 16px;
   }
 
   :deep(.v-messages) {
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .g-bt {

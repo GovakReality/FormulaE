@@ -63,7 +63,7 @@ const eventBtnText = computed(() => {
   }
 
   .g-menu-item {
-    font-size: 30px;
+    font-size: 24px;
     padding: 20px 40px;
   }
 }

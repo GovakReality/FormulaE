@@ -152,4 +152,35 @@ onMounted(() => {
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
 }
+
+@media (min-width: 2560px) {
+  .g-in-card {
+    width: 455px;
+  }
+
+  .g-in-title {
+    font-size: 28px;
+    margin-top: 10px;
+    margin-bottom: 24px;
+  }
+
+  .g-in-text {
+    font-size: 28px;
+    line-height: 32px;
+    margin-bottom: 25px;
+  }
+
+  .g-bt {
+    font-size: 20px;
+    width: 180px;
+  }
+
+  :deep(.v-btn.v-btn--density-default) {
+    height: clamp(32px, 6.4dvh, 44px);
+  }
+
+  :deep(.v-btn__content) {
+    padding-top: 2px;
+  }
+}
 </style>

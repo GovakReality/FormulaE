@@ -69,11 +69,11 @@ watch(locale, () => {
   }
 
   :deep(.v-field) {
-    font-size: 30px;
+    font-size: 26px;
   }
 
   :deep(.v-list-item-title) {
-    font-size: 30px;
+    font-size: 26px;
     padding: 20px 0px;
   }
 }

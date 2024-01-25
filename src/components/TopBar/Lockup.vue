@@ -45,7 +45,7 @@ const { isRtl } = useLocale();
 
 @media (min-width: 2560px) {
   .g-lockup {
-    width: 580px;
+    width: 430px;
     margin-top: 25px;
   }
 

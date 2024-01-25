@@ -155,11 +155,12 @@ onMounted(() => {
   }
 
   .g-title {
-    font-size: 64px;
+    font-size: 72px;
+    line-height: 82px;
   }
 
   .g-subtitle {
-    font-size: 34px;
+    font-size: 38px;
   }
 }
 </style>

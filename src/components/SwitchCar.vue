@@ -84,7 +84,7 @@ const CycleCar = () => {
     position: absolute;
     z-index: 20;
     max-width: 100%;
-    top: 50%;
+    top: 45%;
     transform: translateY(-50%);
     height: fit-content;
     font-family: Saudia Sans;

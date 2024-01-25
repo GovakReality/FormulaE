@@ -467,7 +467,7 @@ onUnmounted(() => {
 <template>
   <canvas ref="webGl" class="webGl" :class="{ blur: shouldBlur }" />
   <UIHint />
-  <div class="g-saudia-overlay" :class="{ 'g-saudia-overlay-def': !isRtl, 'g-saudia-overlay-rtl': isRtl }"></div>
+  <!-- <div class="g-saudia-overlay" :class="{ 'g-saudia-overlay-def': !isRtl, 'g-saudia-overlay-rtl': isRtl }"></div> -->
 </template>
 
 <style scoped>
@@ -502,7 +502,7 @@ onUnmounted(() => {
 
 .g-saudia-overlay {
   position: absolute;
-  top: 45%;
+  top: 40%;
   width: 57px;
   height: 155px;
   background-color: black;

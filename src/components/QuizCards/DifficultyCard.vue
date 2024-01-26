@@ -115,7 +115,7 @@ const onAfterLeave = (el) => {
 @media (min-width: 600px) {
   .g-sheet-difficulty {
     padding-right: 36px !important;
-    padding-left: 66px !important;
+    padding-left: 76px !important;
   }
 }
 

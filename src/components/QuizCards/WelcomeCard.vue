@@ -72,7 +72,7 @@ onMounted(() => {
 @media (min-width: 600px) {
   .g-sheet-main {
     padding-right: 36px !important;
-    padding-left: 66px !important;
+    padding-left: 76px !important;
   }
 }
 

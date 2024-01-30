@@ -618,11 +618,12 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
 @media (max-width: 599px) {
   .g-sheet-questions {
     justify-content: end !important;
+    flex-direction: column-reverse !important;
   }
 
   .g-card {
     width: 420px;
-    margin-bottom: 8px !important;
+    margin-bottom: 10px !important;
     padding: 7px 6px !important;
   }
 
@@ -645,16 +646,17 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
   }
 
   :deep(.v-btn.v-btn--density-default) {
-    height: 42px;
+    height: 44px;
     font-size: 11px !important;
     line-height: 14px !important;
   }
 
   :deep(.v-row--dense > .v-col, .v-row--dense > [class*=v-col-]) {
-    padding: 5px 4px !important;
+    padding: 6px 4px !important;
   }
 
   :deep(.v-card-actions) {
+    padding-top: 12px !important;
     padding-bottom: 15px !important;
     padding-left: 5px !important;
     padding-right: 5px !important;
@@ -665,11 +667,15 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
   }
 
   .g-hud {
-    position: absolute;
-    top: 60px;
+    position: static;
     right: auto;
     left: auto;
+    margin-bottom: 16px !important;
   }
+
+  .g-hud-l-def {}
+
+  .g-hud-l-rtl {}
 
   .g-hud-round {
     width: 100px !important;

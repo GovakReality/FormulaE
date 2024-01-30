@@ -227,7 +227,7 @@ const timer = () => {
       wrongPoints.value = true;
       neutralAnswers.value = true;
       setTimeout(() => {
-        contractCard(); // COMMENT THIS TO STOP
+        // contractCard(); // COMMENT THIS TO STOP
       }, 1500);
     } else {
       prevTime = aux;
@@ -257,7 +257,7 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
 
 <template>
   <v-sheet v-if="show"
-    class="d-flex flex-column flex-sm-row align-center align-sm-end justify-center h-100 pa-2 pa-sm-10 pb-sm-16 pb-sm-16">
+    class="g-sheet-questions d-flex flex-column flex-sm-row align-center align-sm-end justify-center h-100 pa-2 pa-sm-10 pb-sm-16 pb-sm-16">
     <v-slide-y-reverse-transition @after-leave="onAfterLeave" @after-enter="onAfterEnter" @before-enter="onBeforeEnter"
       group>
       <v-card v-if="expand" class="g-card py-4 px-4 rounded-xl" color="#F0F0F0" variant="flat">
@@ -616,17 +616,27 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
 }
 
 @media (max-width: 599px) {
+  .g-sheet-questions {
+    justify-content: end !important;
+  }
+
   .g-card {
     width: 420px;
-    margin-bottom: 60px;
+    margin-bottom: 12px !important;
+    padding: 7px 8px !important;
+  }
+
+  :deep(.v-card-item) {
+    padding-bottom: 0px !important;
   }
 
   .g-round {
-    font-size: 19px;
+    font-size: 14px;
   }
 
   .g-text {
-    font-size: 19px;
+    font-size: 16px;
+    line-height: 20px;
   }
 
   .g-bt {
@@ -635,30 +645,53 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
   }
 
   :deep(.v-btn.v-btn--density-default) {
-    height: 50px;
+    height: 42px;
+    font-size: 14px !important;
+  }
+
+  :deep(.v-row--dense > .v-col, .v-row--dense > [class*=v-col-]) {
+    padding: 5px 4px !important;
+  }
+
+  :deep(.v-card-actions) {
+    padding-bottom: 15px !important;
   }
 
   .g-hud {
     position: absolute;
-    bottom: 15px;
+    top: 60px;
     right: auto;
     left: auto;
   }
 
   .g-hud-round {
-    width: 150px;
+    width: 100px !important;
+    font-size: 14px !important;
+    padding: 4px 6px !important;
+    height: 26px !important;
   }
 
   .g-hud-score {
-    width: 150px;
+    width: 100px !important;
+    font-size: 14px !important;
+    padding: 4px 6px !important;
+    height: 26px !important;
+  }
+
+  .g-hud-total {
+    font-size: 15px !important;
+  }
+
+  .g-show-points {
+    transform: translate(12px, 0px);
   }
 
   .g-correct-points {
-    transform: translate(0px, -12px);
+    transform: translate(12px, -2px);
   }
 
   .g-wrong-points {
-    transform: translate(0px, -12px);
+    transform: translate(12px, -2px);
   }
 
 }

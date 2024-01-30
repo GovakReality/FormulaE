@@ -677,15 +677,17 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
     position: static;
     right: auto;
     left: auto;
+    width: 420px;
+    padding: 0px 10px;
     margin-bottom: 18px !important;
   }
 
   .g-hud-l-def {
-    margin-left: 30%;
+    text-align: right;
   }
 
   .g-hud-l-rtl {
-    margin-right: 30%;
+    text-align: left;
   }
 
   .g-hud-round {

@@ -4,8 +4,10 @@ import { useQuizStore } from '/src/stores/QuizStore';
 import { ref, watch, computed, onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useLocale } from 'vuetify';
+import { useDisplay } from 'vuetify'
 
 const { isRtl, current } = useLocale();
+const { xs, sm, md, width } = useDisplay();
 
 const cardsStore = useCardsStore();
 const { cardIndex } = storeToRefs(cardsStore);
@@ -93,9 +95,9 @@ const expandCard = () => {
   shouldCameraMove.value = true;
   setTimeout(() => {
     expand.value = true;
-    // if ("is breakpoint mobile") {
-    //   expandHud.value = true;
-    // }
+    if (xs.value) {
+      expandHud.value = true;
+    }
     if (cardIndex.value == 2) {
       expandHud.value = true;
     }
@@ -113,9 +115,9 @@ const contractCard = () => {
   wrongAnswer3.value = false;
   wrongAnswer4.value = false;
   neutralAnswers.value = false;
-  // if ("is breakpoint mobile") {
-  //   expandHud.value = false;
-  // }
+  if (xs.value) {
+    expandHud.value = false;
+  }
   if (cardIndex.value == 10) {
     expandHud.value = false;
     iniPosMove.value = true;

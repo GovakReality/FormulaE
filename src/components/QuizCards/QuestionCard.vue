@@ -622,12 +622,12 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
 
   .g-card {
     width: 420px;
-    margin-bottom: 12px !important;
-    padding: 7px 8px !important;
+    margin-bottom: 8px !important;
+    padding: 7px 6px !important;
   }
 
   :deep(.v-card-item) {
-    padding-bottom: 0px !important;
+    padding-bottom: 2px !important;
   }
 
   .g-round {
@@ -646,7 +646,8 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
 
   :deep(.v-btn.v-btn--density-default) {
     height: 42px;
-    font-size: 14px !important;
+    font-size: 11px !important;
+    line-height: 14px !important;
   }
 
   :deep(.v-row--dense > .v-col, .v-row--dense > [class*=v-col-]) {
@@ -655,6 +656,12 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
 
   :deep(.v-card-actions) {
     padding-bottom: 15px !important;
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+  }
+
+  :deep(.v-col) {
+    max-width: 50% !important;
   }
 
   .g-hud {
@@ -697,21 +704,11 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
 }
 
 @media (max-width: 446px) {
-  .g-hud-round {
-    font-size: 17px;
-    width: 140px;
-  }
+  .g-hud-round {}
 
-  .g-hud-score {
-    font-size: 17px;
-    width: 140px;
-  }
+  .g-hud-score {}
 
-  .g-hud-total {
-    font-size: 19px;
-    padding-right: 15px;
-    padding-left: 15px;
-  }
+  .g-hud-total {}
 }
 
 @media (min-width: 2560px) {

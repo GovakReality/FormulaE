@@ -72,8 +72,7 @@ const CycleCar = () => {
                     </v-fade-transition>
                 </v-sheet>
                 <v-btn icon="mdi-chevron-left" variant="flat" color="#28673C" size="x-large" class="g-switch-btn"
-                :class="{'g-switch-btn-def': !isRtl, 'g-switch-btn-rtl': isRtl }"
-                    @click="CycleCar"></v-btn>
+                    :class="{ 'g-switch-btn-def': !isRtl, 'g-switch-btn-rtl': isRtl }" @click="CycleCar"></v-btn>
             </div>
         </v-slide-y-reverse-transition>
     </v-sheet>
@@ -85,7 +84,7 @@ const CycleCar = () => {
     position: absolute;
     z-index: 20;
     max-width: 100%;
-    top: 50%;
+    top: 45%;
     transform: translateY(-50%);
     height: fit-content;
     font-family: Saudia Sans;
@@ -99,18 +98,22 @@ const CycleCar = () => {
 }
 
 .g-switch-def {
-    left: 50px;
+    left: 90px;
+    transform: rotate(0deg);
 }
 
 .g-switch-rtl {
     right: 50px;
 }
+
 .g-switch-btn-rtl {
     transform: rotate(180deg);
 }
+
 .g-switch-btn-def {
     transform: rotate(0deg);
 }
+
 .g-hint-wrapper {
     display: block;
     background-color: transparent;

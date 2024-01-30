@@ -93,6 +93,9 @@ const expandCard = () => {
   shouldCameraMove.value = true;
   setTimeout(() => {
     expand.value = true;
+    // if ("is breakpoint mobile") {
+    //   expandHud.value = true;
+    // }
     if (cardIndex.value == 2) {
       expandHud.value = true;
     }
@@ -110,6 +113,9 @@ const contractCard = () => {
   wrongAnswer3.value = false;
   wrongAnswer4.value = false;
   neutralAnswers.value = false;
+  // if ("is breakpoint mobile") {
+  //   expandHud.value = false;
+  // }
   if (cardIndex.value == 10) {
     expandHud.value = false;
     iniPosMove.value = true;
@@ -227,7 +233,7 @@ const timer = () => {
       wrongPoints.value = true;
       neutralAnswers.value = true;
       setTimeout(() => {
-        // contractCard(); // COMMENT THIS TO STOP
+        contractCard(); // COMMENT THIS TO STOP
       }, 1500);
     } else {
       prevTime = aux;
@@ -619,6 +625,7 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
   .g-sheet-questions {
     justify-content: end !important;
     flex-direction: column-reverse !important;
+    z-index: 50;
   }
 
   .g-card {
@@ -670,12 +677,16 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
     position: static;
     right: auto;
     left: auto;
-    margin-bottom: 16px !important;
+    margin-bottom: 18px !important;
   }
 
-  .g-hud-l-def {}
+  .g-hud-l-def {
+    margin-left: 30%;
+  }
 
-  .g-hud-l-rtl {}
+  .g-hud-l-rtl {
+    margin-right: 30%;
+  }
 
   .g-hud-round {
     width: 100px !important;
@@ -696,15 +707,15 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
   }
 
   .g-show-points {
-    transform: translate(12px, 0px);
+    transform: translate(0px, 0px);
   }
 
   .g-correct-points {
-    transform: translate(12px, -2px);
+    transform: translate(0px, -4px);
   }
 
   .g-wrong-points {
-    transform: translate(12px, -2px);
+    transform: translate(0px, -4px);
   }
 
 }

@@ -4,8 +4,10 @@ import { useQuizStore } from '/src/stores/QuizStore';
 import { ref, watch, computed, onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useLocale } from 'vuetify';
+import { useDisplay } from 'vuetify'
 
 const { isRtl, current } = useLocale();
+const { xs, sm, md, width } = useDisplay();
 
 const cardsStore = useCardsStore();
 const { cardIndex } = storeToRefs(cardsStore);
@@ -93,6 +95,9 @@ const expandCard = () => {
   shouldCameraMove.value = true;
   setTimeout(() => {
     expand.value = true;
+    if (xs.value) {
+      expandHud.value = true;
+    }
     if (cardIndex.value == 2) {
       expandHud.value = true;
     }
@@ -110,6 +115,9 @@ const contractCard = () => {
   wrongAnswer3.value = false;
   wrongAnswer4.value = false;
   neutralAnswers.value = false;
+  if (xs.value) {
+    expandHud.value = false;
+  }
   if (cardIndex.value == 10) {
     expandHud.value = false;
     iniPosMove.value = true;
@@ -257,7 +265,7 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
 
 <template>
   <v-sheet v-if="show"
-    class="d-flex flex-column flex-sm-row align-center align-sm-end justify-center h-100 pa-2 pa-sm-10 pb-sm-16 pb-sm-16">
+    class="g-sheet-questions d-flex flex-column flex-sm-row align-center align-sm-end justify-center h-100 pa-2 pa-sm-10 pb-sm-16 pb-sm-16">
     <v-slide-y-reverse-transition @after-leave="onAfterLeave" @after-enter="onAfterEnter" @before-enter="onBeforeEnter"
       group>
       <v-card v-if="expand" class="g-card py-4 px-4 rounded-xl" color="#F0F0F0" variant="flat">
@@ -616,17 +624,29 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
 }
 
 @media (max-width: 599px) {
+  .g-sheet-questions {
+    justify-content: end !important;
+    flex-direction: column-reverse !important;
+    z-index: 50;
+  }
+
   .g-card {
     width: 420px;
-    margin-bottom: 60px;
+    margin-bottom: 10px !important;
+    padding: 7px 6px !important;
+  }
+
+  :deep(.v-card-item) {
+    padding-bottom: 2px !important;
   }
 
   .g-round {
-    font-size: 19px;
+    font-size: 14px;
   }
 
   .g-text {
-    font-size: 19px;
+    font-size: 16px;
+    line-height: 20px;
   }
 
   .g-bt {
@@ -635,50 +655,81 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
   }
 
   :deep(.v-btn.v-btn--density-default) {
-    height: 50px;
+    height: 44px;
+    font-size: 11px !important;
+    line-height: 14px !important;
+  }
+
+  :deep(.v-row--dense > .v-col, .v-row--dense > [class*=v-col-]) {
+    padding: 6px 4px !important;
+  }
+
+  :deep(.v-card-actions) {
+    padding-top: 12px !important;
+    padding-bottom: 15px !important;
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+  }
+
+  :deep(.v-col) {
+    max-width: 50% !important;
   }
 
   .g-hud {
-    position: absolute;
-    bottom: 15px;
+    position: static;
     right: auto;
     left: auto;
+    width: 420px;
+    padding: 0px 10px;
+    margin-bottom: 18px !important;
+  }
+
+  .g-hud-l-def {
+    text-align: right;
+  }
+
+  .g-hud-l-rtl {
+    text-align: left;
   }
 
   .g-hud-round {
-    width: 150px;
+    width: 100px !important;
+    font-size: 14px !important;
+    padding: 4px 6px !important;
+    height: 26px !important;
   }
 
   .g-hud-score {
-    width: 150px;
+    width: 100px !important;
+    font-size: 14px !important;
+    padding: 4px 6px !important;
+    height: 26px !important;
+  }
+
+  .g-hud-total {
+    font-size: 15px !important;
+  }
+
+  .g-show-points {
+    transform: translate(0px, 0px);
   }
 
   .g-correct-points {
-    transform: translate(0px, -12px);
+    transform: translate(0px, -4px);
   }
 
   .g-wrong-points {
-    transform: translate(0px, -12px);
+    transform: translate(0px, -4px);
   }
 
 }
 
 @media (max-width: 446px) {
-  .g-hud-round {
-    font-size: 17px;
-    width: 140px;
-  }
+  .g-hud-round {}
 
-  .g-hud-score {
-    font-size: 17px;
-    width: 140px;
-  }
+  .g-hud-score {}
 
-  .g-hud-total {
-    font-size: 19px;
-    padding-right: 15px;
-    padding-left: 15px;
-  }
+  .g-hud-total {}
 }
 
 @media (min-width: 2560px) {

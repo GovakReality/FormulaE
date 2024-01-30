@@ -406,7 +406,7 @@ const removeEvents = () => {
 
 @media (max-width: 669px) {
   .g-hint {
-    bottom: 220px;
+    bottom: 300px;
     left: 30%;
     margin-top: auto;
     margin-bottom: auto;
@@ -416,7 +416,7 @@ const removeEvents = () => {
 
 @media (max-width: 599px) {
   .g-hint {
-    bottom: 220px;
+    bottom: 300px;
     left: 50%;
     margin-top: auto;
     margin-bottom: auto;

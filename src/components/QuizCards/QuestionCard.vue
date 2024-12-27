@@ -43,25 +43,30 @@ let prevTime;
 let clockStep = 10;
 
 watch(cardIndex, () => {
-  if (cardIndex.value >= 2 && cardIndex.value < 11) {
+  if (cardIndex.value >= 2 && cardIndex.value < 14) {
     switch (cardIndex.value) {
       case (2):
       case (3):
       case (4):
-        genType.value = 'gen3';
+        genType.value = 'gen3evo';
         break;
       case (5):
       case (6):
       case (7):
-        genType.value = 'gen2';
+        genType.value = 'gen3';
         break;
       case (8):
       case (9):
       case (10):
+        genType.value = 'gen2';
+        break;
+      case (11):
+      case (12):
+      case (13):
         genType.value = 'gen1';
         break;
       default:
-        genType.value = 'gen3';
+        genType.value = 'gen3evo';
     };
     shouldReset.value = false;
     iniPosMove.value = false;
@@ -275,7 +280,8 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
         </template>
 
         <v-card-item>
-          <div class="g-round mb-0 mb-sm-1 font-weight-bold" :class="{ 'g-round-l-def': !isRtl, 'g-round-l-rtl': isRtl }">
+          <div class="g-round mb-0 mb-sm-1 font-weight-bold"
+            :class="{ 'g-round-l-def': !isRtl, 'g-round-l-rtl': isRtl }">
             {{ $t("global.round") }} {{ round }}
           </div>
           <div class="g-text">

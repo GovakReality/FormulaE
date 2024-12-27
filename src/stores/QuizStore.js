@@ -68,7 +68,7 @@ export const useQuizStore = defineStore('quiz', () => {
     gen1QuestionsList = questionsData.filter(v => v.difficulty.includes(dif) && v.type == 'gen1');
     gen2QuestionsList = questionsData.filter(v => v.difficulty.includes(dif) && v.type == 'gen2');
     gen3QuestionsList = questionsData.filter(v => v.difficulty.includes(dif) && v.type == 'gen3');
-    gen3EvoQuestionsList = questionsData.filter(v => v.difficulty.includes(dif) && v.type == 'gen3Evo');
+    gen3EvoQuestionsList = questionsData.filter(v => v.difficulty.includes(dif) && v.type == 'gen3evo');
   }
 
   const newQuestion = (type) => {
@@ -89,7 +89,7 @@ export const useQuizStore = defineStore('quiz', () => {
         let i3 = generateRandIndex(0, gen3QuestionsList.length - 1);
         question.value = gen3QuestionsList[i3];
         break;
-      case 'gen3Evo':
+      case 'gen3evo':
         let i4 = generateRandIndex(0, gen3EvoQuestionsList.length - 1);
         question.value = gen3EvoQuestionsList[i4];
         break;

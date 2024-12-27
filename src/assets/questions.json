@@ -916,5 +916,311 @@
     "ctrlMaxDist": 7,
     "ctrlMinDist": 1.2,
     "ctrlRotateSpeed": -0.4
+  },
+  {
+    "en": {
+      "question": "What is the top speed of the Gen3 EVO car?",
+      "answer1": "300 km/h",
+      "answer2": "320 km/h",
+      "answer3": "350 km/h",
+      "answer4": "350 km/h"
+    },
+    "ar": {
+      "question": "ما هي السرعة القصوى لسيارة Gen3 EVO؟",
+      "answer1": "300 كم/ساعة",
+      "answer2": "320 كم/ساعة",
+      "answer3": "350 كم/ساعة",
+      "answer4": "310 كم/ساعة"
+    },
+    "correct": 2,
+    "difficulty": [
+      "easy"
+    ],
+    "type": "gen3evo",
+    "camPosition": [
+      0.00,
+      1.08,
+      5.95
+    ],
+    "camTarget": [
+      -0.02,
+      0.04,
+      2.99
+    ],
+    "ctrlMaxDist": 7,
+    "ctrlMinDist": 1.2,
+    "ctrlRotateSpeed": 0.4
+  },
+  {
+    "en": {
+      "question": "What is the acceleration capability of the new all-electric GEN3 Evo race car revealed by Formula E and the FIA?",
+      "answer1": "0-60mph in 2.0s",
+      "answer2": "0-60mph in 2.3s",
+      "answer3": "0-60mph in 1.82s",
+      "answer4": "0-60mph in 3.5s"
+    },
+    "ar": {
+      "question": "ما هي قدرة التسارع لسيارة السباق الكهربائية بالكامل GEN3 EVO الجديدة التي تم الكشف عنها من قبل فورمولا إي والاتحاد الدولي للسيارات؟",
+      "answer1": "من 0 إلى 60 ميل في الساعة في 2.0 ثانية",
+      "answer2": "من 0 إلى 60 ميل في الساعة في 2.3 ثانية",
+      "answer3": "من 0 إلى 60 ميل في الساعة في 1.82 ثانية",
+      "answer4": "من 0 إلى 60 ميل في الساعة في 3.5 ثانية"
+    },
+    "correct": 3,
+    "difficulty": [
+      "medium"
+    ],
+    "type": "gen3evo",
+    "camPosition": [
+      -2.10,
+      0.37,
+      -4.17
+    ],
+    "camTarget": [
+      0,
+      0.1,
+      -1.19
+    ],
+    "ctrlMaxDist": 7,
+    "ctrlMinDist": 1.2,
+    "ctrlRotateSpeed": -0.4
+  },
+  {
+    "en": {
+      "question": "How many motors does the Gen3 EVO car use, and what is their combined power output?",
+      "answer1": "Two motors, 600 kW",
+      "answer2": "One motor, 250 kW",
+      "answer3": "Two motors, 500 kW",
+      "answer4": "Three motors, 750 kW"
+    },
+    "ar": {
+      "question": "كم عدد المحركات التي تستخدمها سيارة Gen3 EVO، وما هي قوتها الإجمالية؟",
+      "answer1": "محركان، 600 كيلوواط",
+      "answer2": "محرك واحد، 250 كيلوواط",
+      "answer3": "محركان، 500 كيلوواط",
+      "answer4": "ثلاثة محركات، 750 كيلوواط"
+    },
+    "correct": 1,
+    "difficulty": [
+      "hard"
+    ],
+    "type": "gen3evo",
+    "camPosition": [
+      1.78,
+      0.79,
+      -5.09
+    ],
+    "camTarget": [
+      0,
+      0.1,
+      -2.00
+    ],
+    "ctrlMaxDist": 7,
+    "ctrlMinDist": 1.2,
+    "ctrlRotateSpeed": -0.4
+  },
+  {
+    "en": {
+      "question": "How is the Gen3 EVO car powered?",
+      "answer1": "Hydrogen fuel",
+      "answer2": "Internal combustion engine",
+      "answer3": "All-electric drivetrain",
+      "answer4": "Hybrid system"
+    },
+    "ar": {
+      "question": " كيف يتم تشغيل سيارة Gen3 EVO؟",
+      "answer1": "وقود الهيدروجين",
+      "answer2": "محرك احتراق داخلي",
+      "answer3": "نظام دفع كهربائي بالكامل",
+      "answer4": "نظام هجين"
+    },
+    "correct": 3,
+    "difficulty": [
+      "easy"
+    ],
+    "type": "gen3evo",
+    "camPosition": [
+      2.53,
+      0.23,
+      3.07
+    ],
+    "camTarget": [
+      0.8,
+      0.16,
+      1.6
+    ],
+    "ctrlMaxDist": 7,
+    "ctrlMinDist": 1.2,
+    "ctrlRotateSpeed": -0.4
+  },
+  {
+    "en": {
+      "question": "What is a standout design element introduced in the Gen3 EVO car?",
+      "answer1": "Revised aerodynamic wheel covers",
+      "answer2": "Hybrid powertrains",
+      "answer3": "Open-cockpit design",
+      "answer4": "Detach15 movable rear wing"
+    },
+    "ar": {
+      "question": "ما هو عنصر التصميم المميز الذي تم إدخاله في سيارة Gen3 EVO؟",
+      "answer1": "أغطية العجلات الديناميكي الهوائي المُعدلة",
+      "answer2": "أنظمة نقل الحركة الهجينة",
+      "answer3": "تصميم قمرة القيادة المفتوحة",
+      "answer4": "الجناح الخلفي قابل للفصل "
+    },
+    "correct": 1,
+    "difficulty": [
+      "medium"
+    ],
+    "type": "gen3evo",
+    "camPosition": [
+      -2.30,
+      0.52,
+      -0.33
+    ],
+    "camTarget": [
+      -0.92,
+      0.09,
+      1.42
+    ],
+    "ctrlMaxDist": 7,
+    "ctrlMinDist": 1.2,
+    "ctrlRotateSpeed": -0.4
+  },
+  {
+    "en": {
+      "question": "·  Which component of the Gen3 EVO car ensures it is the most efficient Formula E car to date?",
+      "answer1": "Advanced aero design",
+      "answer2": "High-capacity battery",
+      "answer3": "Dual powertrains",
+      "answer4": "Regenerative braking system"
+    },
+    "ar": {
+      "question": "ما هو العنصر الذي يجعل سيارة Gen3 EVO أكثر سيارات الفورمولا إي كفاءة حتى الآن؟",
+      "answer1": "تصميم ديناميكي هوائي متقدم",
+      "answer2": "بطارية عالية السعة",
+      "answer3": "أنظمة نقل الحركة المزدوجة",
+      "answer4": "نظام الكبح المتجدد"
+    },
+    "correct": 3,
+    "difficulty": [
+      "hard"
+    ],
+    "type": "gen3evo",
+    "camPosition": [
+      -2.65,
+      0.56,
+      3.91
+    ],
+    "camTarget": [
+      -0.33,
+      0,
+      0.84
+    ],
+    "ctrlMaxDist": 7,
+    "ctrlMinDist": 1.2,
+    "ctrlRotateSpeed": -0.4
+  },
+  {
+    "en": {
+      "question": "What is the primary function of regenerative braking in the Gen3 EVO car?",
+      "answer1": "Improve tyre wear",
+      "answer2": "Recover energy to charge the battery",
+      "answer3": "Enhance braking performance",
+      "answer4": "Increase race speed"
+    },
+    "ar": {
+      "question": "ما هي الوظيفة الرئيسية لنظام الكبح المتجدد في سيارة Gen3 EVO؟",
+      "answer1": "تقليل تآكل الإطارات",
+      "answer2": "استرجاع الطاقة لشحن البطارية",
+      "answer3": "تعزيز أداء الكبح",
+      "answer4": "زيادة السرعة القصوى في السباق"
+    },
+    "correct": 2,
+    "difficulty": [
+      "easy"
+    ],
+    "type": "gen3evo",
+    "camPosition": [
+      -2.85,
+      1.96,
+      -1.49
+    ],
+    "camTarget": [
+      0,
+      0.3,
+      -1.5
+    ],
+    "ctrlMaxDist": 7,
+    "ctrlMinDist": 1.2,
+    "ctrlRotateSpeed": 0.4
+  },
+  {
+    "en": {
+      "question": "Which new safety technology is introduced in the Gen3 EVO car to improve driver protection?",
+      "answer1": "Advanced crash structure",
+      "answer2": "Halo device",
+      "answer3": "AI-powered telemetry",
+      "answer4": "Carbon-neutral airbags"
+    },
+    "ar": {
+      "question": "ما هي تقنية السلامة الجديدة التي تم إدخالها في سيارة Gen3 EVO لتعزيز حماية السائق؟",
+      "answer1": "هيكل اصطدام متقدم",
+      "answer2": "جهاز هالو",
+      "answer3": "القياس عن بعد بتقنيات الذكاء الاصطناعي",
+      "answer4": "وسائد هوائية محايدة للكربون"
+    },
+    "correct": 1,
+    "difficulty": [
+      "medium"
+    ],
+    "type": "gen3evo",
+    "camPosition": [
+      6.17,
+      1.35,
+      -0.26
+    ],
+    "camTarget": [
+      1.99,
+      0.1,
+      -0.1
+    ],
+    "ctrlMaxDist": 7,
+    "ctrlMinDist": 1.2,
+    "ctrlRotateSpeed": 0.4
+  },
+  {
+    "en": {
+      "question": "The Gen3 EVO car is designed to be net zero carbon. What certification does it comply with to achieve this?",
+      "answer1": "ISO 14000",
+      "answer2": "LEED Certification",
+      "answer3": "FIA Environmental Accreditation",
+      "answer4": "Carbon Trust Standard"
+    },
+    "ar": {
+      "question": "تم تصميم سيارة Gen3 EVO لتكون صفرية الانبعاثات الكربونية. ما هي الشهادة التي تمتثل لها لتحقيق ذلك؟",
+      "answer1": "إيزو 14000 ",
+      "answer2": "شهادة القيادة في الطاقة والتصميم البيئي ",
+      "answer3": "الاعتماد البيئي من الاتحاد الدولي للسيارات",
+      "answer4": "شهادة كاربن ترست"
+    },
+    "correct": 3,
+    "difficulty": [
+      "hard"
+    ],
+    "type": "gen3evo",
+    "camPosition": [
+      -1.42,
+      1.15,
+      -1.34
+    ],
+    "camTarget": [
+      0.02,
+      0.5,
+      0.24
+    ],
+    "ctrlMaxDist": 7,
+    "ctrlMinDist": 1.2,
+    "ctrlRotateSpeed": -0.4
   }
 ]

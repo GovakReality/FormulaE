@@ -21,9 +21,11 @@ const { currentCar } = storeToRefs(cameraStore);
 const expand = ref(false);
 const show = ref(false);
 
-
-
 const gens = ref([
+  {
+    title: 'GEN3 EVO',
+    subtitle: computed(() => t('geninfo.gen3EvoYear')),
+  },
   {
     title: 'GEN3',
     subtitle: computed(() => t('geninfo.gen3Year')),
@@ -48,19 +50,22 @@ watch(loadComplete, (val) => {
 });
 
 watch(currentCar, () => {
-  if (currentCar.value == 3) {
+  if (currentCar.value == 4) {
     if (expand.value == false) {
       expand.value = true;
     }
     shouldExpand.value = true;
     expand.value = false;
     actualGen.value = gens.value[0];
-  } else if (currentCar.value == 2) {
+  } else if (currentCar.value == 3) {
     expand.value = false;
     actualGen.value = gens.value[1];
-  } else if (currentCar.value == 1) {
+  } else if (currentCar.value == 2) {
     expand.value = false;
     actualGen.value = gens.value[2];
+  } else if (currentCar.value == 1) {
+    expand.value = false;
+    actualGen.value = gens.value[3];
   }
 })
 
@@ -79,6 +84,9 @@ watch(cardIndex, () => {
     expand.value = false;
     actualGen.value = gens.value[2];
   } else if (cardIndex.value == 11) {
+    expand.value = false;
+    actualGen.value = gens.value[3];
+  } else if (cardIndex.value == 14) {
     expand.value = false;
     shouldExpand.value = false;
     actualGen.value = gens.value[0];

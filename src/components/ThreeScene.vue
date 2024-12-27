@@ -16,7 +16,7 @@ import UIHint from './UIHint.vue';
 import { storeToRefs } from 'pinia';
 
 import raceTrackGLB from '/models/RaceTrack.glb?url';
-import gen3GLB from '/models/Gen3.glb?url';
+import gen3BothGLB from '/models/Gen3Both.glb?url';
 import gen2GLB from '/models/Gen2.glb?url';
 import gen1GLB from '/models/Gen1.glb?url';
 import raceTrackHDR from '/textures/RaceTrack.hdr?url';
@@ -166,7 +166,7 @@ const setCanvas = () => {
   });
 
   // Car 1 (with Draco)
-  gltfLoader.load(gen3GLB, function (gltf) {
+  gltfLoader.load(gen3BothGLB, function (gltf) {
     const car1Obj = gltf.scene;
     scene.add(car1Obj);
   }, undefined, function (error) {

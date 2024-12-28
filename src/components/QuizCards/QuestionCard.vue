@@ -251,6 +251,10 @@ const timer = () => {
   }
 };
 
+const formattedRound = computed(() => {
+  return round.value < 10 ? `0${round.value}` : round.value;
+});
+
 const timeLeftFixed = computed(() => {
   return (timeLeft.value / 1000).toFixed(3).replace(".", ",");
 });
@@ -336,8 +340,8 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
             +{{ timeLeftFixed }} {{ $t("global.pts") }}
           </div>
           <div class="g-hud-round px-4 py-1">{{ $t("global.round") }}
-            <span v-if="!isRtl">0{{ round }}/12</span>
-            <span v-if="isRtl">12/0{{ round }}</span>
+            <span v-if="!isRtl">{{ formattedRound }}/12</span>
+            <span v-if="isRtl">12/{{ formattedRound }}</span>
           </div>
           <div class="g-hud-score pr-4 pl-1 py-1">{{ timedScore }} {{ $t("global.pts") }}</div>
         </v-sheet>

@@ -58,7 +58,6 @@ const termsRules = [
 ];
 
 watch(cardIndex, () => {
-  console.log(cardIndex.value); // DELETAR
   if (cardIndex.value == 14) {
     shouldReset.value = false;
     show.value = true;

@@ -123,7 +123,7 @@ manager.onError = function (url) {
 };
 
 watch(cardIndex, () => {
-  if (cardIndex.value >= 11) {
+  if (cardIndex.value >= 14) {
     shouldBlur.value = true;
   } else {
     shouldBlur.value = false;

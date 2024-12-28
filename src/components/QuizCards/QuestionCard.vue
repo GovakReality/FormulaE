@@ -123,7 +123,7 @@ const contractCard = () => {
   if (xs.value) {
     expandHud.value = false;
   }
-  if (cardIndex.value == 10) {
+  if (cardIndex.value == 14) {
     expandHud.value = false;
     iniPosMove.value = true;
     shouldCameraMove.value = true;
@@ -336,8 +336,8 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
             +{{ timeLeftFixed }} {{ $t("global.pts") }}
           </div>
           <div class="g-hud-round px-4 py-1">{{ $t("global.round") }}
-            <span v-if="!isRtl">0{{ round }}/09</span>
-            <span v-if="isRtl">09/0{{ round }}</span>
+            <span v-if="!isRtl">0{{ round }}/12</span>
+            <span v-if="isRtl">12/0{{ round }}</span>
           </div>
           <div class="g-hud-score pr-4 pl-1 py-1">{{ timedScore }} {{ $t("global.pts") }}</div>
         </v-sheet>

@@ -58,7 +58,7 @@ const termsRules = [
 ];
 
 watch(cardIndex, () => {
-  if (cardIndex.value == 11) {
+  if (cardIndex.value == 14) {
     shouldReset.value = false;
     show.value = true;
     setTimeout(() => expand.value = true, 100);
@@ -150,25 +150,26 @@ const onAfterLeave = (el) => {
                     </template>
                     <template v-slot:urlPrivacyPolicy>
                       <a :href="$t('menu.privacyUrl')" class="g-terms-links" target="_blank">{{ $t('menu.privacyPolicy')
-                      }}</a>
+                        }}</a>
                     </template>
                   </i18n-t>
                 </template>
               </v-checkbox>
 
               <v-checkbox v-model="terms2" :center-affix="false" color="white" false-icon="mdi-checkbox-blank"
-                hide-details class="g-terms" :class="{ 'g-terms-l-def': !isRtl, 'g-terms-l-rtl': isRtl }" :ripple="false">
+                hide-details class="g-terms" :class="{ 'g-terms-l-def': !isRtl, 'g-terms-l-rtl': isRtl }"
+                :ripple="false">
                 <template v-slot:label>
                   <i18n-t keypath="congrats.terms2" tag="span" scope="global">
                     <template v-slot:urlPrivacyPolicy>
                       <a :href="$t('menu.privacyUrl')" class="g-terms-links" target="_blank">{{ $t('menu.privacyPolicy')
-                      }}</a>
+                        }}</a>
                     </template>
                   </i18n-t>
                 </template>
               </v-checkbox>
-              <v-btn :loading="loading" type="submit" rounded="xl" variant="tonal" :slim="false" :disabled="!isFormValid"
-                class="g-bt font-weight-black mb-2">{{ $t("global.continue") }}</v-btn>
+              <v-btn :loading="loading" type="submit" rounded="xl" variant="tonal" :slim="false"
+                :disabled="!isFormValid" class="g-bt font-weight-black mb-2">{{ $t("global.continue") }}</v-btn>
             </v-form>
           </v-card-item>
           <v-snackbar v-model="showError" multi-line color="error" elevation="16" timeout="10000">

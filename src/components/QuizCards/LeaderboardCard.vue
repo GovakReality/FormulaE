@@ -52,7 +52,7 @@ const { players } = storeToRefs(APIStore);
 ]); */
 
 watch(cardIndex, () => {
-  if (cardIndex.value == 12) {
+  if (cardIndex.value == 16) {
     show.value = true;
     formatLeaderboard();
     setTimeout(() => expand.value = true, 100);

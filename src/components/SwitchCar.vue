@@ -54,7 +54,7 @@ const CycleCar = () => {
     // console.log(currentCar);
     currentCar.value--;
     if (currentCar.value < 1) {
-        currentCar.value = 3;
+        currentCar.value = 4;
     }
 }
 
@@ -67,8 +67,9 @@ const CycleCar = () => {
             <div v-if="expand" class="g-title">
                 <v-sheet class="g-hint-wrapper">
                     <v-fade-transition>
-                        <div v-if="showHints" class="g-hint-text" :class="{ 'g-hint-def': !isRtl, 'g-hint-rtl': isRtl }">{{
-                            $t("global.exploreMore") }}</div>
+                        <div v-if="showHints" class="g-hint-text"
+                            :class="{ 'g-hint-def': !isRtl, 'g-hint-rtl': isRtl }">{{
+                                $t("global.exploreMore") }}</div>
                     </v-fade-transition>
                 </v-sheet>
                 <v-btn icon="mdi-chevron-left" variant="flat" color="#28673C" size="x-large" class="g-switch-btn"

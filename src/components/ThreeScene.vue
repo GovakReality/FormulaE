@@ -16,7 +16,7 @@ import UIHint from './UIHint.vue';
 import { storeToRefs } from 'pinia';
 
 import raceTrackGLB from '/models/RaceTrack.glb?url';
-import gen3GLB from '/models/Gen3.glb?url';
+import gen3BothGLB from '/models/Gen3Both.glb?url';
 import gen2GLB from '/models/Gen2.glb?url';
 import gen1GLB from '/models/Gen1.glb?url';
 import raceTrackHDR from '/textures/RaceTrack.hdr?url';
@@ -165,8 +165,8 @@ const setCanvas = () => {
     console.error('raceTrackObj gltfLoader error' + error);
   });
 
-  // Car 1 (with Draco)
-  gltfLoader.load(gen3GLB, function (gltf) {
+  // Car 1 + Evo (with Draco)
+  gltfLoader.load(gen3BothGLB, function (gltf) {
     const car1Obj = gltf.scene;
     scene.add(car1Obj);
   }, undefined, function (error) {
@@ -181,7 +181,7 @@ const setCanvas = () => {
     console.error('car2 gltfLoader error' + error);
   });
 
-  // Car 3 (with Draco)
+  // Car 3 wi (with Draco)
   gltfLoader.load(gen1GLB, function (gltf) {
     const car3Obj = gltf.scene;
     scene.add(car3Obj);
@@ -301,17 +301,21 @@ watch(shouldCameraMove, () => {
   if (shouldCameraMove.value) {
     if (iniPosMove.value) {
       switch (currentCar.value) {
-        case 3:
+        case 4:
           initialPos.value = new Vector3(-3.6, 1.4, 5.5);
           initialTarget.value = new Vector3(0, 0.46, 0.35);
           break;
-        case 2:
+        case 3:
           initialPos.value = new Vector3(1.33, 1.4, -1.9);
           initialTarget.value = new Vector3(6.0, 0.46, -7.0);
           break;
-        case 1:
+        case 2:
           initialPos.value = new Vector3(-3.6, 1.4, -8.5);
           initialTarget.value = new Vector3(0, 0.46, -14.5);
+          break;
+        case 1:
+          initialPos.value = new Vector3(1.33, 1.4, -15.1);
+          initialTarget.value = new Vector3(6.0, 0.46, -22.0);
           break;
         default:
           initialPos.value = new Vector3(-3.6, 1.4, 5.5);

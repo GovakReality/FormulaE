@@ -923,7 +923,7 @@
         "answer1": "300 km/h",
         "answer2": "320 km/h",
         "answer3": "350 km/h",
-        "answer4": "350 km/h"
+        "answer4": "310 km/h"
       },
       "ar": {
         "question": "ما هي السرعة القصوى لسيارة Gen3 EVO؟",
@@ -960,7 +960,7 @@
         "answer4": "0-60mph in 3.5s"
       },
       "ar": {
-        "question": "ما هي قدرة التسارع لسيارة السباق الكهربائية بالكامل GEN3 EVO الجديدة التي تم الكشف عنها من قبل فورمولا إي والاتحاد الدولي للسيارات؟",
+        "question": "ما هي قدرة التسارع لسيارة GEN3 EVO الجديدة التي تم الكشف عنها من قبل فورمولا إي والاتحاد الدولي للسيارات؟",
         "answer1": "من 0 إلى 60 ميل في الساعة في 2.0 ثانية",
         "answer2": "من 0 إلى 60 ميل في الساعة في 2.3 ثانية",
         "answer3": "من 0 إلى 60 ميل في الساعة في 1.82 ثانية",
@@ -1089,14 +1089,14 @@
     },
     {
       "en": {
-        "question": "·  Which component of the Gen3 EVO car ensures it is the most efficient Formula E car to date?",
+        "question": "Which component of the Gen3 EVO car ensures it is the most efficient Formula E car to date?",
         "answer1": "Advanced aero design",
         "answer2": "High-capacity battery",
         "answer3": "Dual powertrains",
         "answer4": "Regenerative braking system"
       },
       "ar": {
-        "question": "ما هو العنصر الذي يجعل سيارة Gen3 EVO أكثر سيارات الفورمولا إي كفاءة حتى الآن؟",
+        "question": "ما هو العنصر الذي يجعل سيارة Gen3 EVO  أكثر سيارات سباقات فورمولا إي كفاءة حتى الآن؟",
         "answer1": "تصميم ديناميكي هوائي متقدم",
         "answer2": "بطارية عالية السعة",
         "answer3": "أنظمة نقل الحركة المزدوجة",
@@ -1132,7 +1132,7 @@
       "ar": {
         "question": "ما هي الوظيفة الرئيسية لنظام الكبح المتجدد في سيارة Gen3 EVO؟",
         "answer1": "تقليل تآكل الإطارات",
-        "answer2": "استرجاع الطاقة لشحن البطارية",
+        "answer2": "شحن بطارية السيارة",
         "answer3": "تعزيز أداء الكبح",
         "answer4": "زيادة السرعة القصوى في السباق"
       },

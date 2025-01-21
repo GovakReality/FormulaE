@@ -1,920 +1,1226 @@
-[
-  {
-    "en": {
-      "question": "What was the diameter, in inches, of the wheels used on Gen1 cars?",
-      "answer1": "18",
-      "answer2": "20",
-      "answer3": "22",
-      "answer4": "24"
+  [
+    {
+      "en": {
+        "question": "What was the diameter, in inches, of the wheels used on Gen1 cars?",
+        "answer1": "18",
+        "answer2": "20",
+        "answer3": "22",
+        "answer4": "24"
+      },
+      "ar": {
+        "question": "ماهو مقاس قطر إطارات سيارة فورمولا إي الجيل الأول؟",
+        "answer1": "18",
+        "answer2": "20",
+        "answer3": "22",
+        "answer4": "24"
+      },
+      "correct": 2,
+      "difficulty": [
+        "easy"
+      ],
+      "type": "gen1",
+      "camPosition": [
+        7.91,
+        1.26,
+        -22.82
+      ],
+      "camTarget": [
+        6.09,
+        0.30,
+        -21.00
+      ],
+      "ctrlMaxDist": 7,
+      "ctrlMinDist": 3.5,
+      "ctrlRotateSpeed": -0.4
     },
-    "ar": {
-      "question": "ماهو مقاس قطر إطارات سيارة فورمولا إي الجيل الأول؟",
-      "answer1": "18",
-      "answer2": "20",
-      "answer3": "22",
-      "answer4": "24"
+    {
+      "en": {
+        "question": "What was the primary composition material of Gen1 tyres?",
+        "answer1": "Rubber",
+        "answer2": "Synthetic",
+        "answer3": "Bio-based",
+        "answer4": "Recycled"
+      },
+      "ar": {
+        "question": "ما هي المادة الأساسية التي تم صنع إطارات سيارة فورمولا إي الجيل الأول باستخدامها؟",
+        "answer1": "المطاط",
+        "answer2": "مواد اصطناعية",
+        "answer3": "مواد حيوية",
+        "answer4": "مواد معاد تدويرها"
+      },
+      "correct": 1,
+      "difficulty": [
+        "medium"
+      ],
+      "type": "gen1",
+      "camPosition": [
+        3.09,
+        0.37,
+        -18.50
+      ],
+      "camTarget": [
+        6.0,
+        0,
+        -20.76
+      ],
+      "ctrlMaxDist": 6,
+      "ctrlMinDist": 2.5,
+      "ctrlRotateSpeed": 0.4
     },
-    "correct": 2,
-    "difficulty": [
-      "easy"
-    ],
-    "type": "gen1",
-    "camPosition": [
-      -3.11,
-      0.14,
-      -11.55
-    ],
-    "camTarget": [
-      0,
-      0.09,
-      -14.35
-    ],
-    "ctrlMaxDist": 7,
-    "ctrlMinDist": 3.5,
-    "ctrlRotateSpeed": -0.4
-  },
-  {
-    "en": {
-      "question": "What was the primary composition material of Gen1 tyres?",
-      "answer1": "Rubber",
-      "answer2": "Synthetic",
-      "answer3": "Bio-based",
-      "answer4": "Recycled"
+    {
+      "en": {
+        "question": "What was the average lifespan, in kilometers, of a set of tires used in a race by Gen1 Formula E cars?",
+        "answer1": "20",
+        "answer2": "40",
+        "answer3": "60",
+        "answer4": "80"
+      },
+      "ar": {
+        "question": "ما هو متوسط العمر الافتراضي بالكيلومترات لإطارات سيارة فورمولا إي الجيل الأول،؟",
+        "answer1": "20",
+        "answer2": "40",
+        "answer3": "60",
+        "answer4": "80"
+      },
+      "correct": 3,
+      "difficulty": [
+        "hard"
+      ],
+      "type": "gen1",
+      "camPosition": [
+        9.40,
+        1.30,
+        -16.83
+      ],
+      "camTarget": [
+        7.49,
+        0.19,
+        -19.60
+      ],
+      "ctrlMaxDist": 7,
+      "ctrlMinDist": 3.5,
+      "ctrlRotateSpeed": -0.4
     },
-    "ar": {
-      "question": "ما هي المادة الأساسية التي تم صنع إطارات سيارة فورمولا إي الجيل الأول باستخدامها؟",
-      "answer1": "المطاط",
-      "answer2": "مواد اصطناعية",
-      "answer3": "مواد حيوية",
-      "answer4": "مواد معاد تدويرها"
+    {
+      "en": {
+        "question": "What was the battery capacity of Gen1 cars?",
+        "answer1": "28 kWh",
+        "answer2": "32 kWh",
+        "answer3": "54 kWh",
+        "answer4": "70 kWh"
+      },
+      "ar": {
+        "question": "ما هي سعة بطارية سيارات فورمولا إي الجيل الأول؟",
+        "answer1": "28 كيلوواط ساعة",
+        "answer2": "32 كيلوواط ساعة",
+        "answer3": "54 كيلوواط ساعة",
+        "answer4": "70 كيلوواط ساعة"
+      },
+      "correct": 1,
+      "difficulty": [
+        "easy"
+      ],
+      "type": "gen1",
+      "camPosition": [
+        7.66,
+        1.91,
+        -24.92
+      ],
+      "camTarget": [
+        6.09,
+        0.25,
+        -22.28
+      ],
+      "ctrlMaxDist": 7,
+      "ctrlMinDist": 3.5,
+      "ctrlRotateSpeed": -0.4
     },
-    "correct": 1,
-    "difficulty": [
-      "medium"
-    ],
-    "type": "gen1",
-    "camPosition": [
-      -3.32,
-      0.52,
-      -11.35
-    ],
-    "camTarget": [
-      -0.6,
-      0.05,
-      -13.5
-    ],
-    "ctrlMaxDist": 6,
-    "ctrlMinDist": 2.5,
-    "ctrlRotateSpeed": 0.4
-  },
-  {
-    "en": {
-      "question": "What was the average lifespan, in kilometers, of a set of tires used in a race by Gen1 Formula E cars?",
-      "answer1": "20",
-      "answer2": "40",
-      "answer3": "60",
-      "answer4": "80"
+    {
+      "en": {
+        "question": "How many laps could a Gen1 car typically complete on a single battery charge?",
+        "answer1": "10-15",
+        "answer2": "20-25",
+        "answer3": "30-35",
+        "answer4": "40-45"
+      },
+      "ar": {
+        "question": "كم عدد اللفات التي يمكن لسيارة فورمولا إي الجيل الأول إكمالها بشحنة بطارية واحدة؟",
+        "answer1": "10-15",
+        "answer2": "20-25",
+        "answer3": "30-35",
+        "answer4": "40-45"
+      },
+      "correct": 2,
+      "difficulty": [
+        "medium"
+      ],
+      "type": "gen1",
+      "camPosition": [
+        8.94,
+        1.45,
+        -19.97
+      ],
+      "camTarget": [
+        6,
+        0.24,
+        -22.5
+      ],
+      "ctrlMaxDist": 7,
+      "ctrlMinDist": 3.5,
+      "ctrlRotateSpeed": -0.4
     },
-    "ar": {
-      "question": "ما هو متوسط العمر الافتراضي بالكيلومترات لإطارات سيارة فورمولا إي الجيل الأول،؟",
-      "answer1": "20",
-      "answer2": "40",
-      "answer3": "60",
-      "answer4": "80"
+    {
+      "en": {
+        "question": "What technology was used in the battery cells of Gen1 cars?",
+        "answer1": "Lithium-ion",
+        "answer2": "Nickel-metal hydride",
+        "answer3": "Lithium-polymer",
+        "answer4": "Lead-acid"
+      },
+      "ar": {
+        "question": "ما هي التكنولوجيا المستخدمة في خلايا البطاريات لسيارات فورمولا إي الجيل الأول؟",
+        "answer1": "ايون الليثيوم",
+        "answer2": "هيدريد النيكل المعدني",
+        "answer3": "بوليمر الليثيوم ",
+        "answer4": "حمض الرصاص"
+      },
+      "correct": 1,
+      "difficulty": [
+        "hard"
+      ],
+      "type": "gen1",
+      "camPosition": [
+        0.39,
+        1.25,
+        -21.73
+      ],
+      "camTarget": [
+        5.00,
+        0.1,
+        -21.80
+      ],
+      "ctrlMaxDist": 7,
+      "ctrlMinDist": 3.5,
+      "ctrlRotateSpeed": 0.4
     },
-    "correct": 3,
-    "difficulty": [
-      "hard"
-    ],
-    "type": "gen1",
-    "camPosition": [
-      0.0,
-      2.02,
-      -24.27
-    ],
-    "camTarget": [
-      0,
-      0.1,
-      -18.19
-    ],
-    "ctrlMaxDist": 7,
-    "ctrlMinDist": 3.5,
-    "ctrlRotateSpeed": -0.4
-  },
-  {
-    "en": {
-      "question": "What was the battery capacity of Gen1 cars?",
-      "answer1": "28 kWh",
-      "answer2": "32 kWh",
-      "answer3": "54 kWh",
-      "answer4": "70 kWh"
+    {
+      "en": {
+        "question": "What was the top speed of Gen1 cars?",
+        "answer1": "140 km/h",
+        "answer2": "150 km/h",
+        "answer3": "225 km/h",
+        "answer4": "250 km/h"
+      },
+      "ar": {
+        "question": "ما هي السرعة القصوى لسيارات فورمولا إي الجيل الأول؟",
+        "answer1": "140 كم/ساعة",
+        "answer2": "150 كم/ساعة",
+        "answer3": "225 كم/ساعة",
+        "answer4": "250 كم/ساعة"
+      },
+      "correct": 3,
+      "difficulty": [
+        "easy"
+      ],
+      "type": "gen1",
+      "camPosition": [
+        8.81,
+        0.22,
+        -24.82
+      ],
+      "camTarget": [
+        6.09,
+        0.10,
+        -24.28
+      ],
+      "ctrlMaxDist": 7,
+      "ctrlMinDist": 3.5,
+      "ctrlRotateSpeed": 0.4
     },
-    "ar": {
-      "question": "ما هي سعة بطارية سيارات فورمولا إي الجيل الأول؟",
-      "answer1": "28 كيلوواط ساعة",
-      "answer2": "32 كيلوواط ساعة",
-      "answer3": "54 كيلوواط ساعة",
-      "answer4": "70 كيلوواط ساعة"
+    {
+      "en": {
+        "question": "How long in seconds did it take for Gen1 cars to go from 0 to 100 km/h?",
+        "answer1": "2.8",
+        "answer2": "3.0",
+        "answer3": "4.0",
+        "answer4": "5.5"
+      },
+      "ar": {
+        "question": "كم ثانية تستغرق سيارة فورمولا إي الجيل الأول للوصول من سرعة 0 إلى 100 كم/ساعة؟",
+        "answer1": "2.8",
+        "answer2": "3.0",
+        "answer3": "4.0",
+        "answer4": "5.5"
+      },
+      "correct": 1,
+      "difficulty": [
+        "medium"
+      ],
+      "type": "gen1",
+      "camPosition": [
+        1.72,
+        1.55,
+        -16.31
+      ],
+      "camTarget": [
+        5,
+        0,
+        -20
+      ],
+      "ctrlMaxDist": 7,
+      "ctrlMinDist": 3.5,
+      "ctrlRotateSpeed": -0.4
     },
-    "correct": 1,
-    "difficulty": [
-      "easy"
-    ],
-    "type": "gen1",
-    "camPosition": [
-      0.00,
-      1.26,
-      -20.46
-    ],
-    "camTarget": [
-      0,
-      0,
-      -16.50
-    ],
-    "ctrlMaxDist": 7,
-    "ctrlMinDist": 3.5,
-    "ctrlRotateSpeed": -0.4
-  },
-  {
-    "en": {
-      "question": "How many laps could a Gen1 car typically complete on a single battery charge?",
-      "answer1": "10-15",
-      "answer2": "20-25",
-      "answer3": "30-35",
-      "answer4": "40-45"
+    {
+      "en": {
+        "question": "What factor primarily limited the top speed of Gen1 cars?",
+        "answer1": "Aerodynamics",
+        "answer2": "Gearbox design",
+        "answer3": "Battery capacity",
+        "answer4": "Motor power"
+      },
+      "ar": {
+        "question": "ما العامل الأساسي الذي يحد من السرعة القصوى لسيارات فورمولا إي الجيل الأول؟",
+        "answer1": "الديناميكا الهوائية",
+        "answer2": "تصميم علبة التروس",
+        "answer3": "قدرة البطارية",
+        "answer4": "قوة المحرك"
+      },
+      "correct": 3,
+      "difficulty": [
+        "hard"
+      ],
+      "type": "gen1",
+      "camPosition": [
+        12.58,
+        3.54,
+        -21.81
+      ],
+      "camTarget": [
+        8,
+        0.35,
+        -21.79
+      ],
+      "ctrlMaxDist": 7,
+      "ctrlMinDist": 3.5,
+      "ctrlRotateSpeed": -0.4
     },
-    "ar": {
-      "question": "كم عدد اللفات التي يمكن لسيارة فورمولا إي الجيل الأول إكمالها بشحنة بطارية واحدة؟",
-      "answer1": "10-15",
-      "answer2": "20-25",
-      "answer3": "30-35",
-      "answer4": "40-45"
+    {
+      "en": {
+        "question": "How many gears do Gen2 cars typically have in their gearbox?",
+        "answer1": "1",
+        "answer2": "2",
+        "answer3": "3",
+        "answer4": "4"
+      },
+      "ar": {
+        "question": "ما هو عدد تغيرات تروس السرعة الموجودة في سيارات فورمولا إي الجيل الثاني في علبة التروس الخاصة بها (جير بوكس)؟",
+        "answer1": "1",
+        "answer2": "2",
+        "answer3": "3",
+        "answer4": "4"
+      },
+      "correct": 1,
+      "difficulty": [
+        "easy"
+      ],
+      "type": "gen2",
+      "camPosition": [
+        -3.11,
+        0.14,
+        -11.55
+      ],
+      "camTarget": [
+        0,
+        0.09,
+        -14.35
+      ],
+      "ctrlMaxDist": 7,
+      "ctrlMinDist": 2.5,
+      "ctrlRotateSpeed": -0.4
     },
-    "correct": 2,
-    "difficulty": [
-      "medium"
-    ],
-    "type": "gen1",
-    "camPosition": [
-      -2.30,
-      1.88,
-      -8.89
-    ],
-    "camTarget": [
-      -0.39,
-      0.1,
-      -13
-    ],
-    "ctrlMaxDist": 7,
-    "ctrlMinDist": 3.5,
-    "ctrlRotateSpeed": -0.4
-  },
-  {
-    "en": {
-      "question": "What technology was used in the battery cells of Gen1 cars?",
-      "answer1": "Lithium-ion",
-      "answer2": "Nickel-metal hydride",
-      "answer3": "Lithium-polymer",
-      "answer4": "Lead-acid"
+    {
+      "en": {
+        "question": "Which company supplied the tyres for Gen2 cars?",
+        "answer1": "Michelin",
+        "answer2": "Pirelli",
+        "answer3": "Bridgestone",
+        "answer4": "Goodyear"
+      },
+      "ar": {
+        "question": "ما هي الشركة التي زودت الإطارات لسيارات فورمولا إي الجيل الثاني؟",
+        "answer1": "ميشلان",
+        "answer2": "بيريللي",
+        "answer3": "بريدجستون",
+        "answer4": "جود يير"
+      },
+      "correct": 1,
+      "difficulty": [
+        "medium"
+      ],
+      "type": "gen2",
+      "camPosition": [
+        -3.32,
+        0.52,
+        -11.35
+      ],
+      "camTarget": [
+        -0.6,
+        0.05,
+        -13.5
+      ],
+      "ctrlMaxDist": 7,
+      "ctrlMinDist": 3.5,
+      "ctrlRotateSpeed": -0.4
     },
-    "ar": {
-      "question": "ما هي التكنولوجيا المستخدمة في خلايا البطاريات لسيارات فورمولا إي الجيل الأول؟",
-      "answer1": "ايون الليثيوم",
-      "answer2": "هيدريد النيكل المعدني",
-      "answer3": "بوليمر الليثيوم ",
-      "answer4": "حمض الرصاص"
+    {
+      "en": {
+        "question": "What technical feature did Gen2 tires introduce to improve energy efficiency?",
+        "answer1": "Low rolling resistance",
+        "answer2": "ReGenerative braking",
+        "answer3": "Aerodynamic tread",
+        "answer4": "Weight reduction"
+      },
+      "ar": {
+        "question": "ما هي الميزة التقنية التي قدمتها إطارات سيارات فورمولا إي الجيل الثاني لتحسين كفاءة استخدام الطاقة؟",
+        "answer1": "مقاومة منخفضة للدوران",
+        "answer2": "المكابح المتجددة ",
+        "answer3": "الديناميكية الهوائية",
+        "answer4": "تخفيض الوزن"
+      },
+      "correct": 1,
+      "difficulty": [
+        "hard"
+      ],
+      "type": "gen2",
+      "camPosition": [
+        0.0,
+        2.02,
+        -24.27
+      ],
+      "camTarget": [
+        0,
+        0.1,
+        -18.19
+      ],
+      "ctrlMaxDist": 7,
+      "ctrlMinDist": 3.5,
+      "ctrlRotateSpeed": -0.4
     },
-    "correct": 1,
-    "difficulty": [
-      "hard"
-    ],
-    "type": "gen1",
-    "camPosition": [
-      2.58,
-      1.15,
-      -17.54
-    ],
-    "camTarget": [
-      0,
-      0.4,
-      -15.3
-    ],
-    "ctrlMaxDist": 7,
-    "ctrlMinDist": 3.5,
-    "ctrlRotateSpeed": 0.4
-  },
-  {
-    "en": {
-      "question": "What was the top speed of Gen1 cars?",
-      "answer1": "140 km/h",
-      "answer2": "150 km/h",
-      "answer3": "225 km/h",
-      "answer4": "250 km/h"
+    {
+      "en": {
+        "question": "Who was the battery manufacturer for the Gen2 cars?",
+        "answer1": "Panasonic",
+        "answer2": "McLaren",
+        "answer3": "Williams",
+        "answer4": "LG Chem"
+      },
+      "ar": {
+        "question": "من هو صانع البطاريات لسيارات فورمولا إي الجيل الثاني؟",
+        "answer1": "باناسونيك",
+        "answer2": "ماكلارين",
+        "answer3": "ويليامز",
+        "answer4": "إل جي كيم"
+      },
+      "correct": 3,
+      "difficulty": [
+        "easy"
+      ],
+      "type": "gen2",
+      "camPosition": [
+        0.00,
+        1.26,
+        -20.46
+      ],
+      "camTarget": [
+        0,
+        0,
+        -16.50
+      ],
+      "ctrlMaxDist": 7,
+      "ctrlMinDist": 3.5,
+      "ctrlRotateSpeed": 0.4
     },
-    "ar": {
-      "question": "ما هي السرعة القصوى لسيارات فورمولا إي الجيل الأول؟",
-      "answer1": "140 كم/ساعة",
-      "answer2": "150 كم/ساعة",
-      "answer3": "225 كم/ساعة",
-      "answer4": "250 كم/ساعة"
+    {
+      "en": {
+        "question": "What was a significant improvement in the Gen2 car's battery compared to Gen1?",
+        "answer1": "Faster charging",
+        "answer2": "Higher energy density",
+        "answer3": "Lower weight",
+        "answer4": "Longer lifespan"
+      },
+      "ar": {
+        "question": "ما هو التحسن الكبير في بطارية سيارة فورمولا إي الجيل الثاني مقارنة بـالجيل الأول؟",
+        "answer1": "شحن أسرع",
+        "answer2": "كثافة طاقة أعلى",
+        "answer3": "وزن أقل",
+        "answer4": "عمر أطول"
+      },
+      "correct": 2,
+      "difficulty": [
+        "medium"
+      ],
+      "type": "gen2",
+      "camPosition": [
+        -2.30,
+        1.88,
+        -8.89
+      ],
+      "camTarget": [
+        -0.39,
+        0.1,
+        -13
+      ],
+      "ctrlMaxDist": 7,
+      "ctrlMinDist": 3.5,
+      "ctrlRotateSpeed": -0.4
     },
-    "correct": 3,
-    "difficulty": [
-      "easy"
-    ],
-    "type": "gen1",
-    "camPosition": [
-      1.17,
-      6.99,
-      -14.89
-    ],
-    "camTarget": [
-      0.60,
-      0.35,
-      -14.89
-    ],
-    "ctrlMaxDist": 7,
-    "ctrlMinDist": 3.5,
-    "ctrlRotateSpeed": 0.4
-  },
-  {
-    "en": {
-      "question": "How long in seconds did it take for Gen1 cars to go from 0 to 100 km/h?",
-      "answer1": "2.8",
-      "answer2": "3.0",
-      "answer3": "4.0",
-      "answer4": "5.5"
+    {
+      "en": {
+        "question": "What specific challenge did teams face with the increased battery capacity of Gen2 cars?",
+        "answer1": "Overheating",
+        "answer2": "Energy management",
+        "answer3": "Reduced speed",
+        "answer4": "Increased weight"
+      },
+      "ar": {
+        "question": "ما هو التحدي الذي واجهته فرق السباق مع زيادة سعة البطارية لسيارات فورمولا إي الجيل الثاني؟",
+        "answer1": "ارتفاع درجة الحرارة",
+        "answer2": "إدارة الطاقة",
+        "answer3": "انخفاض السرعة",
+        "answer4": "زيادة الوزن"
+      },
+      "correct": 2,
+      "difficulty": [
+        "hard"
+      ],
+      "type": "gen2",
+      "camPosition": [
+        2.58,
+        1.15,
+        -17.54
+      ],
+      "camTarget": [
+        0,
+        0.4,
+        -15.3
+      ],
+      "ctrlMaxDist": 7,
+      "ctrlMinDist": 3.5,
+      "ctrlRotateSpeed": -0.4
     },
-    "ar": {
-      "question": "كم ثانية تستغرق سيارة فورمولا إي الجيل الأول للوصول من سرعة 0 إلى 100 كم/ساعة؟",
-      "answer1": "2.8",
-      "answer2": "3.0",
-      "answer3": "4.0",
-      "answer4": "5.5"
+    {
+      "en": {
+        "question": "What type of main brakes did Gen2 cars use?",
+        "answer1": "Disc",
+        "answer2": "Drum",
+        "answer3": "ReGenerative",
+        "answer4": "Air"
+      },
+      "ar": {
+        "question": "ما نوع الفرامل الرئيسية التي استخدمتها سيارات فورمولا إي الجيل الثاني؟",
+        "answer1": "الفرامل القرصية",
+        "answer2": "الفرامل الطبلية",
+        "answer3": "الفرامل المتجددة",
+        "answer4": "الفرامل الهوائية"
+      },
+      "correct": 1,
+      "difficulty": [
+        "easy"
+      ],
+      "type": "gen2",
+      "camPosition": [
+        1.17,
+        6.99,
+        -14.89
+      ],
+      "camTarget": [
+        0.60,
+        0.35,
+        -14.89
+      ],
+      "ctrlMaxDist": 7,
+      "ctrlMinDist": 3.5,
+      "ctrlRotateSpeed": 0.4
     },
-    "correct": 1,
-    "difficulty": [
-      "medium"
-    ],
-    "type": "gen1",
-    "camPosition": [
-      -2.15,
-      1.52,
-      -20.87
-    ],
-    "camTarget": [
-      0,
-      -0.34,
-      -14.9
-    ],
-    "ctrlMaxDist": 7,
-    "ctrlMinDist": 3.5,
-    "ctrlRotateSpeed": -0.4
-  },
-  {
-    "en": {
-      "question": "What factor primarily limited the top speed of Gen1 cars?",
-      "answer1": "Aerodynamics",
-      "answer2": "Gearbox design",
-      "answer3": "Battery capacity",
-      "answer4": "Motor power"
+    {
+      "en": {
+        "question": "What was a key challenge for drivers when adapting to the braking system of Gen2 cars?",
+        "answer1": "Brake overheating",
+        "answer2": "Inconsistent feel",
+        "answer3": "Tire wear",
+        "answer4": "High sensitivity"
+      },
+      "ar": {
+        "question": "ما هو التحدي الرئيسي الذي واجه سائقي السباق مع نظام الفرامل في سيارات فورمولا إي الجيل الثاني؟",
+        "answer1": "ارتفاع درجة حرارة الفرامل",
+        "answer2": "شعور غير متناسق",
+        "answer3": "تآكل الإطارات",
+        "answer4": "حساسية عالية"
+      },
+      "correct": 2,
+      "difficulty": [
+        "medium"
+      ],
+      "type": "gen2",
+      "camPosition": [
+        -2.15,
+        1.52,
+        -20.87
+      ],
+      "camTarget": [
+        0,
+        -0.34,
+        -14.9
+      ],
+      "ctrlMaxDist": 7,
+      "ctrlMinDist": 3.5,
+      "ctrlRotateSpeed": 0.4
     },
-    "ar": {
-      "question": "ما العامل الأساسي الذي يحد من السرعة القصوى لسيارات فورمولا إي الجيل الأول؟",
-      "answer1": "الديناميكا الهوائية",
-      "answer2": "تصميم علبة التروس",
-      "answer3": "قدرة البطارية",
-      "answer4": "قوة المحرك"
+    {
+      "en": {
+        "question": "What specific feature of the Gen2 car's braking system allowed for more precise energy management?",
+        "answer1": "Advanced ABS",
+        "answer2": "Improved reGen levels",
+        "answer3": "Dynamic brake bias",
+        "answer4": "Enhanced brake pads"
+      },
+      "ar": {
+        "question": "ما هي الميزة المحددة لنظام فرامل سيارات فورمولا إي الجيل الثاني التي تسمح بإدارة الطاقة بشكل أكثر دقة؟",
+        "answer1": "نظام ABS المتقدم",
+        "answer2": "تحسين مستويات التجديد",
+        "answer3": "انحياز الفرامل الديناميكي",
+        "answer4": "وسادات الفرامل المحسنة"
+      },
+      "correct": 2,
+      "difficulty": [
+        "hard"
+      ],
+      "type": "gen2",
+      "camPosition": [
+        6.38,
+        1.75,
+        -14.67
+      ],
+      "camTarget": [
+        1.6,
+        0.19,
+        -14.92
+      ],
+      "ctrlMaxDist": 7,
+      "ctrlMinDist": 3.5,
+      "ctrlRotateSpeed": -0.4
     },
-    "correct": 3,
-    "difficulty": [
-      "hard"
-    ],
-    "type": "gen1",
-    "camPosition": [
-      6.38,
-      1.75,
-      -14.67
-    ],
-    "camTarget": [
-      1.6,
-      0.19,
-      -14.92
-    ],
-    "ctrlMaxDist": 7,
-    "ctrlMinDist": 3.5,
-    "ctrlRotateSpeed": -0.4
-  },
-  {
-    "en": {
-      "question": "How many gears do Gen2 cars typically have in their gearbox?",
-      "answer1": "1",
-      "answer2": "2",
-      "answer3": "3",
-      "answer4": "4"
+    {
+      "en": {
+        "question": "What is the approximate top speed of Gen3 cars?",
+        "answer1": "200 km/h",
+        "answer2": "240 km/h",
+        "answer3": "280 km/h",
+        "answer4": "320 km/h"
+      },
+      "ar": {
+        "question": "ما هي السرعة القصوى لسيارات فورمولا إي الجيل الثالث؟",
+        "answer1": "200 كم/ساعة",
+        "answer2": "240 كم/ساعة",
+        "answer3": "280 كم/ساعة",
+        "answer4": "320 كم/ساعة"
+      },
+      "correct": 3,
+      "difficulty": [
+        "easy"
+      ],
+      "type": "gen3",
+      "camPosition": [
+        7.91,
+        1.26,
+        -8.82
+      ],
+      "camTarget": [
+        6.09,
+        0.30,
+        -7.00
+      ],
+      "ctrlMaxDist": 7,
+      "ctrlMinDist": 1.2,
+      "ctrlRotateSpeed": 0.4
     },
-    "ar": {
-      "question": "ما هو عدد تغيرات تروس السرعة الموجودة في سيارات فورمولا إي الجيل الثاني في علبة التروس الخاصة بها (جير بوكس)؟",
-      "answer1": "1",
-      "answer2": "2",
-      "answer3": "3",
-      "answer4": "4"
+    {
+      "en": {
+        "question": "What is the maximum reGeneration power of the Gen3 car's braking system?",
+        "answer1": "100 KW",
+        "answer2": "200 kW",
+        "answer3": "250 kW",
+        "answer4": "350 kW"
+      },
+      "ar": {
+        "question": "ما هي قوة التجديد القصوى لنظام مكابح سيارات فورمولا إي الجيل الثالث؟",
+        "answer1": "100 كيلوواط",
+        "answer2": "200 كيلوواط",
+        "answer3": "250 كيلوواط",
+        "answer4": "350 كيلوواط"
+      },
+      "correct": 3,
+      "difficulty": [
+        "medium"
+      ],
+      "type": "gen3",
+      "camPosition": [
+        3.09,
+        0.37,
+        -4.50
+      ],
+      "camTarget": [
+        6.0,
+        0,
+        -6.76
+      ],
+      "ctrlMaxDist": 7,
+      "ctrlMinDist": 1.2,
+      "ctrlRotateSpeed": -0.4
     },
-    "correct": 1,
-    "difficulty": [
-      "easy"
-    ],
-    "type": "gen2",
-    "camPosition": [
-      7.91,
-      1.26,
-      -8.82
-    ],
-    "camTarget": [
-      6.09,
-      0.30,
-      -7.00
-    ],
-    "ctrlMaxDist": 7,
-    "ctrlMinDist": 2.5,
-    "ctrlRotateSpeed": -0.4
-  },
-  {
-    "en": {
-      "question": "Which company supplied the tyres for Gen2 cars?",
-      "answer1": "Michelin",
-      "answer2": "Pirelli",
-      "answer3": "Bridgestone",
-      "answer4": "Goodyear"
+    {
+      "en": {
+        "question": "At what speed does the Drag Reduction System (DRS) in Gen3 cars become most effective?",
+        "answer1": "150 km/h",
+        "answer2": "180 km/h",
+        "answer3": "210 km/h",
+        "answer4": "240 km/h"
+      },
+      "ar": {
+        "question": "ما هي السرعة التي يصبح بها نظام تقليل السحب (DRS) في سيارات فورمولا إي الجيل الثالث أكثر فعالية؟",
+        "answer1": "150 كم/ساعة",
+        "answer2": "180 كم/ساعة",
+        "answer3": "210 كم/ساعة",
+        "answer4": "240 كم/ساعة"
+      },
+      "correct": 2,
+      "difficulty": [
+        "hard"
+      ],
+      "type": "gen3",
+      "camPosition": [
+        9.40,
+        1.30,
+        -2.83
+      ],
+      "camTarget": [
+        7.49,
+        0.19,
+        -5.60
+      ],
+      "ctrlMaxDist": 7,
+      "ctrlMinDist": 1.2,
+      "ctrlRotateSpeed": -0.4
     },
-    "ar": {
-      "question": "ما هي الشركة التي زودت الإطارات لسيارات فورمولا إي الجيل الثاني؟",
-      "answer1": "ميشلان",
-      "answer2": "بيريللي",
-      "answer3": "بريدجستون",
-      "answer4": "جود يير"
+    {
+      "en": {
+        "question": "What is the diameter (in inches) of the tires used on Gen3 cars?",
+        "answer1": "18",
+        "answer2": "20",
+        "answer3": "22",
+        "answer4": "24"
+      },
+      "ar": {
+        "question": "ماهو مقاس قطر إطارات سيارة فورمولا إي الجيل الثالث؟",
+        "answer1": "18",
+        "answer2": "20",
+        "answer3": "22",
+        "answer4": "24"
+      },
+      "correct": 2,
+      "difficulty": [
+        "easy"
+      ],
+      "type": "gen3",
+      "camPosition": [
+        7.66,
+        1.91,
+        -10.92
+      ],
+      "camTarget": [
+        6.09,
+        0.25,
+        -8.28
+      ],
+      "ctrlMaxDist": 7,
+      "ctrlMinDist": 1.2,
+      "ctrlRotateSpeed": -0.4
     },
-    "correct": 1,
-    "difficulty": [
-      "medium"
-    ],
-    "type": "gen2",
-    "camPosition": [
-      3.09,
-      0.37,
-      -4.50
-    ],
-    "camTarget": [
-      6.0,
-      0,
-      -6.76
-    ],
-    "ctrlMaxDist": 7,
-    "ctrlMinDist": 3.5,
-    "ctrlRotateSpeed": -0.4
-  },
-  {
-    "en": {
-      "question": "What technical feature did Gen2 tires introduce to improve energy efficiency?",
-      "answer1": "Low rolling resistance",
-      "answer2": "ReGenerative braking",
-      "answer3": "Aerodynamic tread",
-      "answer4": "Weight reduction"
+    {
+      "en": {
+        "question": "What is the tread depth of the tires used on Gen3 Formula E cars?",
+        "answer1": "2 mm",
+        "answer2": "3 mm",
+        "answer3": "4 mm",
+        "answer4": "5 mm"
+      },
+      "ar": {
+        "question": "ما هو عمق  مسام الإطارات المستخدمة في سيارات فورمولا إي الجيل الثالث؟",
+        "answer1": "2 ملم",
+        "answer2": "3 ملم",
+        "answer3": "4 ملم",
+        "answer4": "5 ملم"
+      },
+      "correct": 2,
+      "difficulty": [
+        "medium"
+      ],
+      "type": "gen3",
+      "camPosition": [
+        8.94,
+        1.45,
+        -5.97
+      ],
+      "camTarget": [
+        6,
+        0.24,
+        -8.5
+      ],
+      "ctrlMaxDist": 7,
+      "ctrlMinDist": 1.2,
+      "ctrlRotateSpeed": -0.4
     },
-    "ar": {
-      "question": "ما هي الميزة التقنية التي قدمتها إطارات سيارات فورمولا إي الجيل الثاني لتحسين كفاءة استخدام الطاقة؟",
-      "answer1": "مقاومة منخفضة للدوران",
-      "answer2": "المكابح المتجددة ",
-      "answer3": "الديناميكية الهوائية",
-      "answer4": "تخفيض الوزن"
+    {
+      "en": {
+        "question": "What percentage of sustainable materials is used in the composition of Gen3 tyres?",
+        "answer1": "20%",
+        "answer2": "30%",
+        "answer3": "40%",
+        "answer4": "50%"
+      },
+      "ar": {
+        "question": "ما هي نسبة المواد المستدامة المستخدمة في تركيب إطارات فورمولا إي الجيل الثالث؟",
+        "answer1": "20%",
+        "answer2": "30%",
+        "answer3": "40%",
+        "answer4": "50%"
+      },
+      "correct": 2,
+      "difficulty": [
+        "hard"
+      ],
+      "type": "gen3",
+      "camPosition": [
+        0.39,
+        1.25,
+        -7.73
+      ],
+      "camTarget": [
+        5.00,
+        0.1,
+        -7.80
+      ],
+      "ctrlMaxDist": 7,
+      "ctrlMinDist": 1.2,
+      "ctrlRotateSpeed": -0.4
     },
-    "correct": 1,
-    "difficulty": [
-      "hard"
-    ],
-    "type": "gen2",
-    "camPosition": [
-      9.40,
-      1.30,
-      -2.83
-    ],
-    "camTarget": [
-      7.49,
-      0.19,
-      -5.60
-    ],
-    "ctrlMaxDist": 7,
-    "ctrlMinDist": 3.5,
-    "ctrlRotateSpeed": -0.4
-  },
-  {
-    "en": {
-      "question": "Who was the battery manufacturer for the Gen2 cars?",
-      "answer1": "Panasonic",
-      "answer2": "McLaren",
-      "answer3": "Williams",
-      "answer4": "LG Chem"
+    {
+      "en": {
+        "question": "How many kW is the maximum power output of a Gen3 car?",
+        "answer1": "250 kW",
+        "answer2": "300 kW",
+        "answer3": "350 kW",
+        "answer4": "400 kW"
+      },
+      "ar": {
+        "question": "ما هو اقصى حد بالكيلو واط لإنتاج الطاقة في سيارات فورمولا إي الجيل الثالث؟",
+        "answer1": "250 كيلوواط",
+        "answer2": "300 كيلوواط",
+        "answer3": "350 كيلوواط",
+        "answer4": "400 كيلوواط"
+      },
+      "correct": 3,
+      "difficulty": [
+        "easy"
+      ],
+      "type": "gen3",
+      "camPosition": [
+        8.81,
+        0.22,
+        -10.82
+      ],
+      "camTarget": [
+        6.09,
+        0.10,
+        -8.28
+      ],
+      "ctrlMaxDist": 7,
+      "ctrlMinDist": 1.2,
+      "ctrlRotateSpeed": 0.4
     },
-    "ar": {
-      "question": "من هو صانع البطاريات لسيارات فورمولا إي الجيل الثاني؟",
-      "answer1": "باناسونيك",
-      "answer2": "ماكلارين",
-      "answer3": "ويليامز",
-      "answer4": "إل جي كيم"
+    {
+      "en": {
+        "question": "What is the charging power capacity of Gen3 cars' fast-charging system?",
+        "answer1": "200 kW",
+        "answer2": "250 kW",
+        "answer3": "300 kW",
+        "answer4": "350 kW"
+      },
+      "ar": {
+        "question": "ما هي سعة طاقة الشحن السريع في سيارات فورمولا إي الجيل الثالث؟",
+        "answer1": "200 كيلوواط",
+        "answer2": "250 كيلوواط",
+        "answer3": "300 كيلوواط",
+        "answer4": "350 كيلوواط"
+      },
+      "correct": 4,
+      "difficulty": [
+        "medium"
+      ],
+      "type": "gen3",
+      "camPosition": [
+        1.72,
+        1.55,
+        -2.31
+      ],
+      "camTarget": [
+        5,
+        0,
+        -6
+      ],
+      "ctrlMaxDist": 7,
+      "ctrlMinDist": 1.2,
+      "ctrlRotateSpeed": 0.4
     },
-    "correct": 3,
-    "difficulty": [
-      "easy"
-    ],
-    "type": "gen2",
-    "camPosition": [
-      7.66,
-      1.91,
-      -10.92
-    ],
-    "camTarget": [
-      6.09,
-      0.25,
-      -8.28
-    ],
-    "ctrlMaxDist": 7,
-    "ctrlMinDist": 3.5,
-    "ctrlRotateSpeed": 0.4
-  },
-  {
-    "en": {
-      "question": "What was a significant improvement in the Gen2 car's battery compared to Gen1?",
-      "answer1": "Faster charging",
-      "answer2": "Higher energy density",
-      "answer3": "Lower weight",
-      "answer4": "Longer lifespan"
+    {
+      "en": {
+        "question": "How many gear ratios does the transmission system in Gen3 cars have?",
+        "answer1": "1",
+        "answer2": "2",
+        "answer3": "3",
+        "answer4": "4"
+      },
+      "ar": {
+        "question": "ما عدد عدد التروس الموجودة في نظام النقل في سيارات فورمولا إي الجيل الثالث؟",
+        "answer1": "1",
+        "answer2": "2",
+        "answer3": "3",
+        "answer4": "4"
+      },
+      "correct": 2,
+      "difficulty": [
+        "hard"
+      ],
+      "type": "gen3",
+      "camPosition": [
+        12.58,
+        3.54,
+        -7.81
+      ],
+      "camTarget": [
+        8,
+        0.35,
+        -7.79
+      ],
+      "ctrlMaxDist": 7,
+      "ctrlMinDist": 1.2,
+      "ctrlRotateSpeed": -0.4
     },
-    "ar": {
-      "question": "ما هو التحسن الكبير في بطارية سيارة فورمولا إي الجيل الثاني مقارنة بـالجيل الأول؟",
-      "answer1": "شحن أسرع",
-      "answer2": "كثافة طاقة أعلى",
-      "answer3": "وزن أقل",
-      "answer4": "عمر أطول"
+    {
+      "en": {
+        "question": "What is the top speed of the Gen3 EVO car?",
+        "answer1": "300 km/h",
+        "answer2": "320 km/h",
+        "answer3": "350 km/h",
+        "answer4": "310 km/h"
+      },
+      "ar": {
+        "question": "ما هي السرعة القصوى لسيارة Gen3 EVO؟",
+        "answer1": "300 كم/ساعة",
+        "answer2": "320 كم/ساعة",
+        "answer3": "350 كم/ساعة",
+        "answer4": "310 كم/ساعة"
+      },
+      "correct": 2,
+      "difficulty": [
+        "easy"
+      ],
+      "type": "gen3evo",
+      "camPosition": [
+        0.00,
+        1.08,
+        5.95
+      ],
+      "camTarget": [
+        -0.02,
+        0.04,
+        2.99
+      ],
+      "ctrlMaxDist": 7,
+      "ctrlMinDist": 1.2,
+      "ctrlRotateSpeed": 0.4
     },
-    "correct": 2,
-    "difficulty": [
-      "medium"
-    ],
-    "type": "gen2",
-    "camPosition": [
-      8.94,
-      1.45,
-      -5.97
-    ],
-    "camTarget": [
-      6,
-      0.24,
-      -8.5
-    ],
-    "ctrlMaxDist": 7,
-    "ctrlMinDist": 3.5,
-    "ctrlRotateSpeed": -0.4
-  },
-  {
-    "en": {
-      "question": "What specific challenge did teams face with the increased battery capacity of Gen2 cars?",
-      "answer1": "Overheating",
-      "answer2": "Energy management",
-      "answer3": "Reduced speed",
-      "answer4": "Increased weight"
+    {
+      "en": {
+        "question": "What is the acceleration capability of the new all-electric GEN3 Evo race car revealed by Formula E and the FIA?",
+        "answer1": "0-60mph in 2.0s",
+        "answer2": "0-60mph in 2.3s",
+        "answer3": "0-60mph in 1.82s",
+        "answer4": "0-60mph in 3.5s"
+      },
+      "ar": {
+        "question": "ما هي قدرة التسارع لسيارة GEN3 EVO الجديدة التي تم الكشف عنها من قبل فورمولا إي والاتحاد الدولي للسيارات؟",
+        "answer1": "من 0 إلى 60 ميل في الساعة في 2.0 ثانية",
+        "answer2": "من 0 إلى 60 ميل في الساعة في 2.3 ثانية",
+        "answer3": "من 0 إلى 60 ميل في الساعة في 1.82 ثانية",
+        "answer4": "من 0 إلى 60 ميل في الساعة في 3.5 ثانية"
+      },
+      "correct": 3,
+      "difficulty": [
+        "medium"
+      ],
+      "type": "gen3evo",
+      "camPosition": [
+        -2.10,
+        0.37,
+        -4.17
+      ],
+      "camTarget": [
+        0,
+        0.1,
+        -1.19
+      ],
+      "ctrlMaxDist": 7,
+      "ctrlMinDist": 1.2,
+      "ctrlRotateSpeed": -0.4
     },
-    "ar": {
-      "question": "ما هو التحدي الذي واجهته فرق السباق مع زيادة سعة البطارية لسيارات فورمولا إي الجيل الثاني؟",
-      "answer1": "ارتفاع درجة الحرارة",
-      "answer2": "إدارة الطاقة",
-      "answer3": "انخفاض السرعة",
-      "answer4": "زيادة الوزن"
+    {
+      "en": {
+        "question": "How many motors does the Gen3 EVO car use, and what is their combined power output?",
+        "answer1": "Two motors, 600 kW",
+        "answer2": "One motor, 250 kW",
+        "answer3": "Two motors, 500 kW",
+        "answer4": "Three motors, 750 kW"
+      },
+      "ar": {
+        "question": "كم عدد المحركات التي تستخدمها سيارة Gen3 EVO، وما هي قوتها الإجمالية؟",
+        "answer1": "محركان، 600 كيلوواط",
+        "answer2": "محرك واحد، 250 كيلوواط",
+        "answer3": "محركان، 500 كيلوواط",
+        "answer4": "ثلاثة محركات، 750 كيلوواط"
+      },
+      "correct": 1,
+      "difficulty": [
+        "hard"
+      ],
+      "type": "gen3evo",
+      "camPosition": [
+        1.78,
+        0.79,
+        -5.09
+      ],
+      "camTarget": [
+        0,
+        0.1,
+        -2.00
+      ],
+      "ctrlMaxDist": 7,
+      "ctrlMinDist": 1.2,
+      "ctrlRotateSpeed": -0.4
     },
-    "correct": 2,
-    "difficulty": [
-      "hard"
-    ],
-    "type": "gen2",
-    "camPosition": [
-      0.39,
-      1.25,
-      -7.73
-    ],
-    "camTarget": [
-      5.00,
-      0.1,
-      -7.80
-    ],
-    "ctrlMaxDist": 7,
-    "ctrlMinDist": 3.5,
-    "ctrlRotateSpeed": -0.4
-  },
-  {
-    "en": {
-      "question": "What type of main brakes did Gen2 cars use?",
-      "answer1": "Disc",
-      "answer2": "Drum",
-      "answer3": "ReGenerative",
-      "answer4": "Air"
+    {
+      "en": {
+        "question": "How is the Gen3 EVO car powered?",
+        "answer1": "Hydrogen fuel",
+        "answer2": "Internal combustion engine",
+        "answer3": "All-electric drivetrain",
+        "answer4": "Hybrid system"
+      },
+      "ar": {
+        "question": " كيف يتم تشغيل سيارة Gen3 EVO؟",
+        "answer1": "وقود الهيدروجين",
+        "answer2": "محرك احتراق داخلي",
+        "answer3": "نظام دفع كهربائي بالكامل",
+        "answer4": "نظام هجين"
+      },
+      "correct": 3,
+      "difficulty": [
+        "easy"
+      ],
+      "type": "gen3evo",
+      "camPosition": [
+        2.53,
+        0.23,
+        3.07
+      ],
+      "camTarget": [
+        0.8,
+        0.16,
+        1.6
+      ],
+      "ctrlMaxDist": 7,
+      "ctrlMinDist": 1.2,
+      "ctrlRotateSpeed": -0.4
     },
-    "ar": {
-      "question": "ما نوع الفرامل الرئيسية التي استخدمتها سيارات فورمولا إي الجيل الثاني؟",
-      "answer1": "الفرامل القرصية",
-      "answer2": "الفرامل الطبلية",
-      "answer3": "الفرامل المتجددة",
-      "answer4": "الفرامل الهوائية"
+    {
+      "en": {
+        "question": "What is a standout design element introduced in the Gen3 EVO car?",
+        "answer1": "Revised aerodynamic wheel covers",
+        "answer2": "Hybrid powertrains",
+        "answer3": "Open-cockpit design",
+        "answer4": "Detach15 movable rear wing"
+      },
+      "ar": {
+        "question": "ما هو عنصر التصميم المميز الذي تم إدخاله في سيارة Gen3 EVO؟",
+        "answer1": "أغطية العجلات الديناميكي الهوائي المُعدلة",
+        "answer2": "أنظمة نقل الحركة الهجينة",
+        "answer3": "تصميم قمرة القيادة المفتوحة",
+        "answer4": "الجناح الخلفي قابل للفصل "
+      },
+      "correct": 1,
+      "difficulty": [
+        "medium"
+      ],
+      "type": "gen3evo",
+      "camPosition": [
+        -2.30,
+        0.52,
+        -0.33
+      ],
+      "camTarget": [
+        -0.92,
+        0.09,
+        1.42
+      ],
+      "ctrlMaxDist": 7,
+      "ctrlMinDist": 1.2,
+      "ctrlRotateSpeed": -0.4
     },
-    "correct": 1,
-    "difficulty": [
-      "easy"
-    ],
-    "type": "gen2",
-    "camPosition": [
-      8.81,
-      0.22,
-      -10.82
-    ],
-    "camTarget": [
-      6.09,
-      0.10,
-      -8.28
-    ],
-    "ctrlMaxDist": 7,
-    "ctrlMinDist": 3.5,
-    "ctrlRotateSpeed": 0.4
-  },
-  {
-    "en": {
-      "question": "What was a key challenge for drivers when adapting to the braking system of Gen2 cars?",
-      "answer1": "Brake overheating",
-      "answer2": "Inconsistent feel",
-      "answer3": "Tire wear",
-      "answer4": "High sensitivity"
+    {
+      "en": {
+        "question": "Which component of the Gen3 EVO car ensures it is the most efficient Formula E car to date?",
+        "answer1": "Advanced aero design",
+        "answer2": "High-capacity battery",
+        "answer3": "Dual powertrains",
+        "answer4": "Regenerative braking system"
+      },
+      "ar": {
+        "question": "ما هو العنصر الذي يجعل سيارة Gen3 EVO  أكثر سيارات سباقات فورمولا إي كفاءة حتى الآن؟",
+        "answer1": "تصميم ديناميكي هوائي متقدم",
+        "answer2": "بطارية عالية السعة",
+        "answer3": "أنظمة نقل الحركة المزدوجة",
+        "answer4": "نظام الكبح المتجدد"
+      },
+      "correct": 3,
+      "difficulty": [
+        "hard"
+      ],
+      "type": "gen3evo",
+      "camPosition": [
+        -2.65,
+        0.56,
+        3.91
+      ],
+      "camTarget": [
+        -0.33,
+        0,
+        0.84
+      ],
+      "ctrlMaxDist": 7,
+      "ctrlMinDist": 1.2,
+      "ctrlRotateSpeed": -0.4
     },
-    "ar": {
-      "question": "ما هو التحدي الرئيسي الذي واجه سائقي السباق مع نظام الفرامل في سيارات فورمولا إي الجيل الثاني؟",
-      "answer1": "ارتفاع درجة حرارة الفرامل",
-      "answer2": "شعور غير متناسق",
-      "answer3": "تآكل الإطارات",
-      "answer4": "حساسية عالية"
+    {
+      "en": {
+        "question": "What is the primary function of regenerative braking in the Gen3 EVO car?",
+        "answer1": "Improve tyre wear",
+        "answer2": "Recover energy to charge the battery",
+        "answer3": "Enhance braking performance",
+        "answer4": "Increase race speed"
+      },
+      "ar": {
+        "question": "ما هي الوظيفة الرئيسية لنظام الكبح المتجدد في سيارة Gen3 EVO؟",
+        "answer1": "تقليل تآكل الإطارات",
+        "answer2": "شحن بطارية السيارة",
+        "answer3": "تعزيز أداء الكبح",
+        "answer4": "زيادة السرعة القصوى في السباق"
+      },
+      "correct": 2,
+      "difficulty": [
+        "easy"
+      ],
+      "type": "gen3evo",
+      "camPosition": [
+        -2.85,
+        1.96,
+        -1.49
+      ],
+      "camTarget": [
+        0,
+        0.3,
+        -1.5
+      ],
+      "ctrlMaxDist": 7,
+      "ctrlMinDist": 1.2,
+      "ctrlRotateSpeed": 0.4
     },
-    "correct": 2,
-    "difficulty": [
-      "medium"
-    ],
-    "type": "gen2",
-    "camPosition": [
-      1.72,
-      1.55,
-      -2.31
-    ],
-    "camTarget": [
-      5,
-      0,
-      -6
-    ],
-    "ctrlMaxDist": 7,
-    "ctrlMinDist": 3.5,
-    "ctrlRotateSpeed": 0.4
-  },
-  {
-    "en": {
-      "question": "What specific feature of the Gen2 car's braking system allowed for more precise energy management?",
-      "answer1": "Advanced ABS",
-      "answer2": "Improved reGen levels",
-      "answer3": "Dynamic brake bias",
-      "answer4": "Enhanced brake pads"
+    {
+      "en": {
+        "question": "Which new safety technology is introduced in the Gen3 EVO car to improve driver protection?",
+        "answer1": "Advanced crash structure",
+        "answer2": "Halo device",
+        "answer3": "AI-powered telemetry",
+        "answer4": "Carbon-neutral airbags"
+      },
+      "ar": {
+        "question": "ما هي تقنية السلامة الجديدة التي تم إدخالها في سيارة Gen3 EVO لتعزيز حماية السائق؟",
+        "answer1": "هيكل اصطدام متقدم",
+        "answer2": "جهاز هالو",
+        "answer3": "القياس عن بعد بتقنيات الذكاء الاصطناعي",
+        "answer4": "وسائد هوائية محايدة للكربون"
+      },
+      "correct": 1,
+      "difficulty": [
+        "medium"
+      ],
+      "type": "gen3evo",
+      "camPosition": [
+        6.17,
+        1.35,
+        -0.26
+      ],
+      "camTarget": [
+        1.99,
+        0.1,
+        -0.1
+      ],
+      "ctrlMaxDist": 7,
+      "ctrlMinDist": 1.2,
+      "ctrlRotateSpeed": 0.4
     },
-    "ar": {
-      "question": "ما هي الميزة المحددة لنظام فرامل سيارات فورمولا إي الجيل الثاني التي تسمح بإدارة الطاقة بشكل أكثر دقة؟",
-      "answer1": "نظام ABS المتقدم",
-      "answer2": "تحسين مستويات التجديد",
-      "answer3": "انحياز الفرامل الديناميكي",
-      "answer4": "وسادات الفرامل المحسنة"
-    },
-    "correct": 2,
-    "difficulty": [
-      "hard"
-    ],
-    "type": "gen2",
-    "camPosition": [
-      12.58,
-      3.54,
-      -7.81
-    ],
-    "camTarget": [
-      8,
-      0.35,
-      -7.79
-    ],
-    "ctrlMaxDist": 7,
-    "ctrlMinDist": 3.5,
-    "ctrlRotateSpeed": -0.4
-  },
-  {
-    "en": {
-      "question": "What is the approximate top speed of Gen3 cars?",
-      "answer1": "200 km/h",
-      "answer2": "240 km/h",
-      "answer3": "280 km/h",
-      "answer4": "320 km/h"
-    },
-    "ar": {
-      "question": "ما هي السرعة القصوى لسيارات فورمولا إي الجيل الثالث؟",
-      "answer1": "200 كم/ساعة",
-      "answer2": "240 كم/ساعة",
-      "answer3": "280 كم/ساعة",
-      "answer4": "320 كم/ساعة"
-    },
-    "correct": 3,
-    "difficulty": [
-      "easy"
-    ],
-    "type": "gen3",
-    "camPosition": [
-      0.00,
-      1.08,
-      5.95
-    ],
-    "camTarget": [
-      -0.02,
-      0.04,
-      2.99
-    ],
-    "ctrlMaxDist": 7,
-    "ctrlMinDist": 1.2,
-    "ctrlRotateSpeed": 0.4
-  },
-  {
-    "en": {
-      "question": "What is the maximum reGeneration power of the Gen3 car's braking system?",
-      "answer1": "100 KW",
-      "answer2": "200 kW",
-      "answer3": "250 kW",
-      "answer4": "350 kW"
-    },
-    "ar": {
-      "question": "ما هي قوة التجديد القصوى لنظام مكابح سيارات فورمولا إي الجيل الثالث؟",
-      "answer1": "100 كيلوواط",
-      "answer2": "200 كيلوواط",
-      "answer3": "250 كيلوواط",
-      "answer4": "350 كيلوواط"
-    },
-    "correct": 3,
-    "difficulty": [
-      "medium"
-    ],
-    "type": "gen3",
-    "camPosition": [
-      -2.10,
-      0.37,
-      -4.17
-    ],
-    "camTarget": [
-      0,
-      0.1,
-      -1.19
-    ],
-    "ctrlMaxDist": 7,
-    "ctrlMinDist": 1.2,
-    "ctrlRotateSpeed": -0.4
-  },
-  {
-    "en": {
-      "question": "At what speed does the Drag Reduction System (DRS) in Gen3 cars become most effective?",
-      "answer1": "150 km/h",
-      "answer2": "180 km/h",
-      "answer3": "210 km/h",
-      "answer4": "240 km/h"
-    },
-    "ar": {
-      "question": "ما هي السرعة التي يصبح بها نظام تقليل السحب (DRS) في سيارات فورمولا إي الجيل الثالث أكثر فعالية؟",
-      "answer1": "150 كم/ساعة",
-      "answer2": "180 كم/ساعة",
-      "answer3": "210 كم/ساعة",
-      "answer4": "240 كم/ساعة"
-    },
-    "correct": 2,
-    "difficulty": [
-      "hard"
-    ],
-    "type": "gen3",
-    "camPosition": [
-      1.78,
-      0.79,
-      -5.09
-    ],
-    "camTarget": [
-      0,
-      0.1,
-      -2.00
-    ],
-    "ctrlMaxDist": 7,
-    "ctrlMinDist": 1.2,
-    "ctrlRotateSpeed": -0.4
-  },
-  {
-    "en": {
-      "question": "What is the diameter (in inches) of the tires used on Gen3 cars?",
-      "answer1": "18",
-      "answer2": "20",
-      "answer3": "22",
-      "answer4": "24"
-    },
-    "ar": {
-      "question": "ماهو مقاس قطر إطارات سيارة فورمولا إي الجيل الثالث؟",
-      "answer1": "18",
-      "answer2": "20",
-      "answer3": "22",
-      "answer4": "24"
-    },
-    "correct": 2,
-    "difficulty": [
-      "easy"
-    ],
-    "type": "gen3",
-    "camPosition": [
-      2.53,
-      0.23,
-      3.07
-    ],
-    "camTarget": [
-      0.8,
-      0.16,
-      1.6
-    ],
-    "ctrlMaxDist": 7,
-    "ctrlMinDist": 1.2,
-    "ctrlRotateSpeed": -0.4
-  },
-  {
-    "en": {
-      "question": "What is the tread depth of the tires used on Gen3 Formula E cars?",
-      "answer1": "2 mm",
-      "answer2": "3 mm",
-      "answer3": "4 mm",
-      "answer4": "5 mm"
-    },
-    "ar": {
-      "question": "ما هو عمق  مسام الإطارات المستخدمة في سيارات فورمولا إي الجيل الثالث؟",
-      "answer1": "2 ملم",
-      "answer2": "3 ملم",
-      "answer3": "4 ملم",
-      "answer4": "5 ملم"
-    },
-    "correct": 2,
-    "difficulty": [
-      "medium"
-    ],
-    "type": "gen3",
-    "camPosition": [
-      -2.30,
-      0.52,
-      -0.33
-    ],
-    "camTarget": [
-      -0.92,
-      0.09,
-      1.42
-    ],
-    "ctrlMaxDist": 7,
-    "ctrlMinDist": 1.2,
-    "ctrlRotateSpeed": -0.4
-  },
-  {
-    "en": {
-      "question": "What percentage of sustainable materials is used in the composition of Gen3 tyres?",
-      "answer1": "20%",
-      "answer2": "30%",
-      "answer3": "40%",
-      "answer4": "50%"
-    },
-    "ar": {
-      "question": "ما هي نسبة المواد المستدامة المستخدمة في تركيب إطارات فورمولا إي الجيل الثالث؟",
-      "answer1": "20%",
-      "answer2": "30%",
-      "answer3": "40%",
-      "answer4": "50%"
-    },
-    "correct": 2,
-    "difficulty": [
-      "hard"
-    ],
-    "type": "gen3",
-    "camPosition": [
-      -2.65,
-      0.56,
-      3.91
-    ],
-    "camTarget": [
-      -0.33,
-      0,
-      0.84
-    ],
-    "ctrlMaxDist": 7,
-    "ctrlMinDist": 1.2,
-    "ctrlRotateSpeed": -0.4
-  },
-  {
-    "en": {
-      "question": "How many kW is the maximum power output of a Gen3 car?",
-      "answer1": "250 kW",
-      "answer2": "300 kW",
-      "answer3": "350 kW",
-      "answer4": "400 kW"
-    },
-    "ar": {
-      "question": "ما هو اقصى حد بالكيلو واط لإنتاج الطاقة في سيارات فورمولا إي الجيل الثالث؟",
-      "answer1": "250 كيلوواط",
-      "answer2": "300 كيلوواط",
-      "answer3": "350 كيلوواط",
-      "answer4": "400 كيلوواط"
-    },
-    "correct": 3,
-    "difficulty": [
-      "easy"
-    ],
-    "type": "gen3",
-    "camPosition": [
-      -2.85,
-      1.96,
-      -1.49
-    ],
-    "camTarget": [
-      0,
-      0.3,
-      -1.5
-    ],
-    "ctrlMaxDist": 7,
-    "ctrlMinDist": 1.2,
-    "ctrlRotateSpeed": 0.4
-  },
-  {
-    "en": {
-      "question": "What is the charging power capacity of Gen3 cars' fast-charging system?",
-      "answer1": "200 kW",
-      "answer2": "250 kW",
-      "answer3": "300 kW",
-      "answer4": "350 kW"
-    },
-    "ar": {
-      "question": "ما هي سعة طاقة الشحن السريع في سيارات فورمولا إي الجيل الثالث؟",
-      "answer1": "200 كيلوواط",
-      "answer2": "250 كيلوواط",
-      "answer3": "300 كيلوواط",
-      "answer4": "350 كيلوواط"
-    },
-    "correct": 4,
-    "difficulty": [
-      "medium"
-    ],
-    "type": "gen3",
-    "camPosition": [
-      6.17,
-      1.35,
-      -0.26
-    ],
-    "camTarget": [
-      1.99,
-      0.1,
-      -0.1
-    ],
-    "ctrlMaxDist": 7,
-    "ctrlMinDist": 1.2,
-    "ctrlRotateSpeed": 0.4
-  },
-  {
-    "en": {
-      "question": "How many gear ratios does the transmission system in Gen3 cars have?",
-      "answer1": "1",
-      "answer2": "2",
-      "answer3": "3",
-      "answer4": "4"
-    },
-    "ar": {
-      "question": "ما عدد عدد التروس الموجودة في نظام النقل في سيارات فورمولا إي الجيل الثالث؟",
-      "answer1": "1",
-      "answer2": "2",
-      "answer3": "3",
-      "answer4": "4"
-    },
-    "correct": 2,
-    "difficulty": [
-      "hard"
-    ],
-    "type": "gen3",
-    "camPosition": [
-      -1.42,
-      1.15,
-      -1.34
-    ],
-    "camTarget": [
-      0.02,
-      0.5,
-      0.24
-    ],
-    "ctrlMaxDist": 7,
-    "ctrlMinDist": 1.2,
-    "ctrlRotateSpeed": -0.4
-  }
-]
+    {
+      "en": {
+        "question": "The Gen3 EVO car is designed to be net zero carbon. What certification does it comply with to achieve this?",
+        "answer1": "ISO 14000",
+        "answer2": "LEED Certification",
+        "answer3": "FIA Environmental Accreditation",
+        "answer4": "Carbon Trust Standard"
+      },
+      "ar": {
+        "question": "تم تصميم سيارة Gen3 EVO لتكون صفرية الانبعاثات الكربونية. ما هي الشهادة التي تمتثل لها لتحقيق ذلك؟",
+        "answer1": "إيزو 14000 ",
+        "answer2": "شهادة القيادة في الطاقة والتصميم البيئي ",
+        "answer3": "الاعتماد البيئي من الاتحاد الدولي للسيارات",
+        "answer4": "شهادة كاربن ترست"
+      },
+      "correct": 3,
+      "difficulty": [
+        "hard"
+      ],
+      "type": "gen3evo",
+      "camPosition": [
+        -1.42,
+        1.15,
+        -1.34
+      ],
+      "camTarget": [
+        0.02,
+        0.5,
+        0.24
+      ],
+      "ctrlMaxDist": 7,
+      "ctrlMinDist": 1.2,
+      "ctrlRotateSpeed": -0.4
+    }
+  ]

@@ -43,25 +43,30 @@ let prevTime;
 let clockStep = 10;
 
 watch(cardIndex, () => {
-  if (cardIndex.value >= 2 && cardIndex.value < 11) {
+  if (cardIndex.value >= 2 && cardIndex.value < 14) {
     switch (cardIndex.value) {
       case (2):
       case (3):
       case (4):
-        genType.value = 'gen3';
+        genType.value = 'gen3evo';
         break;
       case (5):
       case (6):
       case (7):
-        genType.value = 'gen2';
+        genType.value = 'gen3';
         break;
       case (8):
       case (9):
       case (10):
+        genType.value = 'gen2';
+        break;
+      case (11):
+      case (12):
+      case (13):
         genType.value = 'gen1';
         break;
       default:
-        genType.value = 'gen3';
+        genType.value = 'gen3evo';
     };
     shouldReset.value = false;
     iniPosMove.value = false;
@@ -118,7 +123,7 @@ const contractCard = () => {
   if (xs.value) {
     expandHud.value = false;
   }
-  if (cardIndex.value == 10) {
+  if (cardIndex.value == 14) {
     expandHud.value = false;
     iniPosMove.value = true;
     shouldCameraMove.value = true;
@@ -246,6 +251,10 @@ const timer = () => {
   }
 };
 
+const formattedRound = computed(() => {
+  return round.value < 10 ? `0${round.value}` : round.value;
+});
+
 const timeLeftFixed = computed(() => {
   return (timeLeft.value / 1000).toFixed(3).replace(".", ",");
 });
@@ -275,7 +284,8 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
         </template>
 
         <v-card-item>
-          <div class="g-round mb-0 mb-sm-1 font-weight-bold" :class="{ 'g-round-l-def': !isRtl, 'g-round-l-rtl': isRtl }">
+          <div class="g-round mb-0 mb-sm-1 font-weight-bold"
+            :class="{ 'g-round-l-def': !isRtl, 'g-round-l-rtl': isRtl }">
             {{ $t("global.round") }} {{ round }}
           </div>
           <div class="g-text">
@@ -330,8 +340,8 @@ const normalizeToRange = (value, oldMin, oldMax, newMin, newMax) => (((value - o
             +{{ timeLeftFixed }} {{ $t("global.pts") }}
           </div>
           <div class="g-hud-round px-4 py-1">{{ $t("global.round") }}
-            <span v-if="!isRtl">0{{ round }}/09</span>
-            <span v-if="isRtl">09/0{{ round }}</span>
+            <span v-if="!isRtl">{{ formattedRound }}/12</span>
+            <span v-if="isRtl">12/{{ formattedRound }}</span>
           </div>
           <div class="g-hud-score pr-4 pl-1 py-1">{{ timedScore }} {{ $t("global.pts") }}</div>
         </v-sheet>

@@ -50,9 +50,9 @@
   "congrats": {
     "title": "Congratulations!",
     "subtitle": "Your score is:",
-    "text": "Enter your information below to register to win Signed Formula E Merchandise from Stoffle Vandoorne:",
-    "terms": "I confirm that I am over 18 years of age and accept the {urlTermsAndConditions} and the Saudia Airlines {urlPrivacyPolicy}.",
-    "terms2": "I consent to Saudia Airlines using my information to keep me up to date with the latest special offers and news via email, social media, digital video and display advertising. ({urlPrivacyPolicy})"
+    "text": "Enter your information below to register to win Signed Formula E Merchandise from Stoffel Vandoorne:",
+    "terms": "I confirm that I am over 18 years of age and accept the {urlTermsAndConditions} and the Saudia {urlPrivacyPolicy}.",
+    "terms2": "I consent to Saudia using my information to keep me up to date with the latest special offers and news via email, social media, digital video and display advertising. ({urlPrivacyPolicy})"
   },
   "leaderboard": {
     "title": "You are currently in:",
